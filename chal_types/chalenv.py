@@ -7,8 +7,8 @@ from jinja2.environment import Template
 from slugify import slugify
 from shutil import copy, copytree, rmtree
 
-from .challenge import GeneratedChallenge, ChalDir, fwrite
-from .utils import FixMinikube, load_chal_from_config
+from .challenge import GeneratedChallenge
+from .utils import FixMinikube, load_chal_from_config, WorkDir, fwrite
 from distutils.dir_util import copy_tree
 import ruamel.yaml
 
@@ -147,7 +147,7 @@ class StaticSite(ChallengeEnvironment):
             make.write(template_make.read().format(
                 chal_name=self.container_id, chal_run_options=f'-p 8080:{self.target_port}'))
 
-        with ChalDir(chal_dir):
+        with WorkDir(chal_dir):
             os.system('make build')
 
 
@@ -202,7 +202,7 @@ class ShellServer(ChallengeEnvironment):
             make.write(template_make.read().format(
                 chal_name=self.container_id, chal_run_options=f'-p 8080:{self.target_port}'))
 
-        with ChalDir(chal_dir):
+        with WorkDir(chal_dir):
             os.system('make build')
 
 
@@ -248,7 +248,7 @@ class FileshareFlask(ChallengeEnvironment):
             chal_paths = None
             if hasattr(chal, 'display'):
                 chal_path = join(chal_path, 'chal')
-                with ChalDir(chal_dir), open(chal_path, 'w') as out:
+                with WorkDir(chal_dir), open(chal_path, 'w') as out:
                     out.write(chal.display)
             elif hasattr(chal, 'chal_file'):
                 if type(chal.chal_file) is list:
@@ -280,7 +280,7 @@ class FileshareFlask(ChallengeEnvironment):
                 chal_name=self.container_id, chal_run_options=f'-p 8081:{self.target_port}'))
 
         # TODO (cthompson) be able to skip building of challenge environment
-        with ChalDir(chal_out_dir):
+        with WorkDir(chal_out_dir):
             os.system('make build')
 
 
@@ -301,7 +301,7 @@ class VirtualMachine(ChallengeEnvironment):
             chal_paths = None
             if hasattr(chal, 'display'):
                 chal_path = join(chal_path, 'chal')
-                with ChalDir(chal_dir), open(chal_path, 'w') as out:
+                with WorkDir(chal_dir), open(chal_path, 'w') as out:
                     out.write(chal.display)
             elif hasattr(chal, 'chal_file'):
                 if type(chal.chal_file) is list:
@@ -340,7 +340,7 @@ class VirtualMachine(ChallengeEnvironment):
             make.write(template_make.read().format(
                 chal_run_options=f'-p 8081:{self.target_port}', chal_name=container_id))
 
-        with ChalDir(chal_dir):
+        with WorkDir(chal_dir):
             os.system('make build')
             os.system('make generate-img')
 
@@ -426,14 +426,14 @@ class TwitterFlask(ChallengeEnvironment):
             make.write(template_make.read().format(
                 chal_run_options=f'-p 8081:{self.target_port}', chal_name=self.container_id))
 
-        with ChalDir(chal_out_dir):
+        with WorkDir(chal_out_dir):
             os.system(f'virtualenv -p /usr/bin/python2.7 env')
             os.system(
                 '/bin/bash -c "source env/bin/activate && pip install -r requirements.txt"')
             os.system(
                 '/bin/bash -c "source env/bin/activate && python db_create.py"')
 
-        with ChalDir(chal_out_dir):
+        with WorkDir(chal_out_dir):
             os.system('make build')
 
 
@@ -609,7 +609,7 @@ class FacebookDjango(ChallengeEnvironment):
             make.write(make_template.format(
                 chal_run_options=f'-p 8081:{self.target_port}', chal_name=self.container_id))
 
-        with ChalDir(os.path.join(chal_out_dir, 'app')):
+        with WorkDir(os.path.join(chal_out_dir, 'app')):
             os.system(f'virtualenv -p /usr/bin/python2.7 env')
             os.system(
                 '/bin/bash -c "source env/bin/activate && pip install -r requirements.txt"')
@@ -618,7 +618,7 @@ class FacebookDjango(ChallengeEnvironment):
             os.system(
                 '/bin/bash -c "source env/bin/activate && python manage.py loaddata fixture.yaml"')
 
-        with ChalDir(chal_out_dir):
+        with WorkDir(chal_out_dir):
             os.system('make build')
 
 
@@ -706,5 +706,5 @@ class JekyllBlog(ChallengeEnvironment):
                 chal_run_options=f'-p 8081:{self.target_port}', chal_name=self.container_id))
         with FixMinikube():
             os.system(f'docker run --rm --volume="{chal_out_dir}:/srv/jekyll" -it jekyll/builder:3.8 jekyll build')
-        with ChalDir(chal_out_dir):
+        with WorkDir(chal_out_dir):
             os.system('make build')
