@@ -1,8 +1,47 @@
 Chalgen Docs
 ==============
+## Concepts explained
 
+### Challenges
+A challenge is represented by a YAML file like the following:
 
-## Available Commands
+```yaml
+- !ext4_file_recovery
+  name: "Ext4 File Recovery"
+  flag: "flag{this_is_a_test}"
+  config:
+    deleted_evidence: evidence
+    fluff: fluff
+```
+
+The type of challenge is determined by the YAML tag (starts with a !). Values passed in the `config` field allow you customize the challenge to your competition.
+
+### Challenge environments
+Challenge environments host other challenges and can also be configured to fit the competition. They have the same fields as Challenges but also "link" to other challenges through the `chals` field. An example is show below.
+
+```yaml
+- !jekyll_blog
+  name: Jekyll Blog
+  flag: "flag{test}"
+  config:
+    meta:
+      title: Chance's Cooking Blog!
+    posts:
+    - 2014-06-08-post1.md
+    - 2014-06-08-post2.md
+    chals:
+      - Vigenere
+      - Docx Carving
+```
+
+Challenge environments can't be made/run through the `python chalgen.py gen` command, so you must use `python chalgen.py competitiongen`
+
+### Competition structure
+Competitions are structured in a tree-like fashion, with some Challenge Environments serving as entrypoints. An example structure is shown below. 
+
+![image](../evidence_graph.png)
+
+## Available commands
 ***
 ### Run the Competion Creator GUI
 
@@ -35,7 +74,7 @@ This command runs the docker image for local testing. You must run `python chalg
 python chalgen.py competitiongen --competition-folder=<relative path of the competition> --reg-url=<registry to push images to>
 ```
 
-This command builds all of the Kubernetes files needed to deploy to a Kubernetes cluster. 
+This command builds all of the Kubernetes files needed to deploy to a Kubernetes cluster. Upon completion, a graph of the challenges will be generated.
 ***
 ### Build and run a competition locally
 
