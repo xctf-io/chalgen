@@ -161,7 +161,7 @@ def no_reg_url(ctx, param, value):
 def competitiongen(ctx, competition_folder, reg_url, local):
     if local:
         if shutil.which('minikube') is None:
-            print("minikube not installed!")
+            logger.error("minikube not installed!")
             return
         else:
             os.system('minikube start')
@@ -180,7 +180,7 @@ def competitiongen(ctx, competition_folder, reg_url, local):
             os.environ['DOCKER_CERT_PATH'] = home_path
             os.environ['MINIKUBE_ACTIVE_DOCKERD'] = 'minikube'
     else:
-        print("Please set up your kubernete cluster before running!")
+        logger.info("Please set up your kubernete cluster before running!")
     os.system('kubectl delete namespace challenges')
     os.system('kubectl create namespace challenges')
     competition_folder = os.path.join(os.path.dirname(
@@ -225,12 +225,12 @@ def competitiongen(ctx, competition_folder, reg_url, local):
             if type(chal_files) is not list:
                 chal_files = [chal_files]
 
-            print(chal_files)
+            logger.info(chal_files)
             for chal_file in chal_files:
                 chal_path = os.path.join(
                     chal_path_lookup[chal_gen.name], chal_file)
                 chal_url = chal_host.add_chal(chal_path)
-                print(f"Generated challenge URL: {chal_url}")
+                logger.info(f"Generated challenge URL: {chal_url}")
 
     chal_host.create()
     chal_tree['host'] = chal_host
@@ -254,7 +254,7 @@ def competitiongen(ctx, competition_folder, reg_url, local):
                 os.environ.pop(env_var, None)
             os.system(
                 f'docker run --name dnsserver -dp 53:53/udp -p 53:53/tcp -v {zones_path}:/zones/zones.txt samuelcolvin/dnserver')
-            print("\nPlease add 127.0.0.1 as a DNS client https://minikube.sigs.k8s.io/docs/handbook/addons/ingress-dns/")
+            logger.info("\nPlease add 127.0.0.1 as a DNS client https://minikube.sigs.k8s.io/docs/handbook/addons/ingress-dns/")
             os.system('minikube tunnel')
 
 

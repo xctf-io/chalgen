@@ -2,6 +2,5 @@ env
 *.pyc
 .vscode/
 .pytest_cache/
-chal_types/templates/docker_make
 workspace.code-workspace
 .idea/
