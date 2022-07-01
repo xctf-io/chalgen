@@ -83,10 +83,10 @@ class QRCodeChallenge(GeneratedChallenge):
             background = Image.open(filepath, 'r')
             offset = (x_pos, y_pos)
             background.paste(img, offset)
-            background.save('out.png')
+            background.save(os.path.join(chal_dir, out_file))
             img = background
             out_file = filename
-
-        img.save(os.path.join(chal_dir, out_file))
+        else:
+            img.save(os.path.join(chal_dir, out_file))
 
         self.chal_file = out_file

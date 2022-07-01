@@ -180,7 +180,7 @@ def competitiongen(ctx, competition_folder, reg_url, local):
             os.environ['DOCKER_CERT_PATH'] = home_path
             os.environ['MINIKUBE_ACTIVE_DOCKERD'] = 'minikube'
     else:
-        logger.info("Please set up your kubernete cluster before running!")
+        logger.info("Please set up your kubernetes cluster before running!")
     os.system('kubectl delete namespace challenges')
     os.system('kubectl create namespace challenges')
     competition_folder = os.path.join(os.path.dirname(

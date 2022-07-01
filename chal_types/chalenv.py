@@ -426,12 +426,12 @@ class TwitterFlask(ChallengeEnvironment):
             make.write(template_make.read().format(
                 chal_run_options=f'-p 8081:{self.target_port}', chal_name=self.container_id))
 
-        with WorkDir(chal_out_dir):
-            os.system(f'virtualenv -p /usr/bin/python2.7 env')
-            os.system(
-                '/bin/bash -c "source env/bin/activate && pip install -r requirements.txt"')
-            os.system(
-                '/bin/bash -c "source env/bin/activate && python db_create.py"')
+        # with WorkDir(chal_out_dir):
+        #     os.system(f'virtualenv -p /usr/bin/python2.7 env')
+        #     os.system(
+        #         '/bin/bash -c "source env/bin/activate && pip install -r requirements.txt"')
+        #     os.system(
+        #         '/bin/bash -c "source env/bin/activate && python db_create.py"')
 
         with WorkDir(chal_out_dir):
             os.system('make build')
@@ -609,14 +609,14 @@ class FacebookDjango(ChallengeEnvironment):
             make.write(make_template.format(
                 chal_run_options=f'-p 8081:{self.target_port}', chal_name=self.container_id))
 
-        with WorkDir(os.path.join(chal_out_dir, 'app')):
-            os.system(f'virtualenv -p /usr/bin/python2.7 env')
-            os.system(
-                '/bin/bash -c "source env/bin/activate && pip install -r requirements.txt"')
-            os.system(
-                '/bin/bash -c "source env/bin/activate && echo no | python manage.py syncdb"')
-            os.system(
-                '/bin/bash -c "source env/bin/activate && python manage.py loaddata fixture.yaml"')
+        # with WorkDir(join(chal_out_dir, 'app')):
+        #     os.system(f'virtualenv -p /usr/bin/python2.7 env')
+        #     os.system(
+        #         '/bin/bash -c "source env/bin/activate && pip install -r requirements.txt"')
+        #     os.system(
+        #         '/bin/bash -c "source env/bin/activate && echo no | python manage.py syncdb"')
+        #     os.system(
+        #         '/bin/bash -c "source env/bin/activate && python manage.py loaddata fixture.yaml"')
 
         with WorkDir(chal_out_dir):
             os.system('make build')

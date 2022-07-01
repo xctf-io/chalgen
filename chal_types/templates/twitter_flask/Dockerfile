@@ -1,4 +1,11 @@
-from python:2.7.17-buster
+FROM python:2.7.17-buster as builder
+ADD project /project
+ADD requirements.txt /
+ADD db_create.py /
+RUN pip install -r requirements.txt
+RUN python db_create.py
+
+FROM python:2.7.17-buster
 
 WORKDIR /twitter
 
@@ -18,7 +25,7 @@ ADD project/models.py /twitter/project/models.py
 ENV READ_ONLY true
 
 # NON-CACHED CHANGES
-ADD project/database.db /twitter/project/database.db
+COPY --from=builder project/database.db project/database.db
 
 EXPOSE 5000
 CMD ["python", "run.py"]
