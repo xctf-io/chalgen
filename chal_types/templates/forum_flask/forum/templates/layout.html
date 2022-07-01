@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename="bootstrap.min.css")}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename="style.css")}}">
+	<title>{{ config.SITE_NAME }}</title>
+</head>
+<body>
+<div class="page">
+	<div class="header">
+		{% include 'header.html' %}
+	</div>
+	{% if errors %}
+	<div class="errors">
+	{% for error in errors %}
+		<p class="error">
+			{{ error }}
+		</p>
+
+	{% endfor %}
+	</div>
+{% endif %}
+	<div class="content">
+		{% block body %}{% endblock %}
+	</div>
+</div>
+</body>
+
+
+</html>

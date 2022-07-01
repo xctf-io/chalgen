@@ -1,0 +1,121 @@
+# Default values for ctfd.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: ctfd/ctfd
+  tag: mark-3.1.1
+  pullPolicy: IfNotPresent
+
+env:
+  open:
+    SECRET_KEY: ""
+    # Amount of CTFd workers
+    WORKERS: 5
+    # SQL Database URI. Example: mysql+pymysql://root:ctfd@db/ctfd
+    DATABASE_URL:
+    # Redis URI. Example: redis://cache:6379
+    REDIS_URL:
+    REVERSE_PROXY: True 
+  secret:
+    # SQL Database URI. Example: mysql+pymysql://root:ctfd@db/ctfd
+    DATABASE_URL:
+    # Redis URI. Example: redis://cache:6379
+    REDIS_URL:
+  existingSecret:
+  # Stores Environment Variable to secret key name mappings
+  existingSecretMappings:
+    DATABASE_URL:
+    REDIS_URL:
+
+persistence:
+  uploads:
+    enabled: false
+    accessMode: ReadWriteOnce
+    size: 1Gi
+    labels: {}
+    # name: value
+    # existingClaim:
+    # storageClass: "-"
+
+
+service:
+  type: NodePort
+  port: 80
+  targetPort: 8000
+  #if service.type = loadbalancer
+  # loadBalancerSourceRanges: []
+  # loadBalancerIP: ""
+  
+probes:
+  liveness:
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    timeoutSeconds: 1
+    successThreshold: 1
+    failureThreshold: 3
+  readiness:
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    timeoutSeconds: 1
+    successThreshold: 1
+    failureThreshold: 3
+
+ingress:
+  enabled: false
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths: []
+
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: {}
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+nameOverride: ""
+fullnameOverride: ""
+
+metrics:
+  enabled: false
+  image:
+    registry: docker.io
+    repository: bitnami/mysqld-exporter
+    tag: 0.12.1-debian-10-r27
+    pullPolicy: IfNotPresent
+  resources: {}
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "9104"
+
+  # Enable this if you're using https://github.com/coreos/prometheus-operator
+  serviceMonitor:
+    enabled: false
+    ## Specify a namespace if needed
+    # namespace: monitoring
+    # fallback to the prometheus default unless specified
+    # interval: 10s
+    # scrapeTimeout: 10s
+    ## Defaults to what's used if you follow CoreOS [Prometheus Install Instructions](https://github.com/helm/charts/tree/master/stable/prometheus-operator#tldr)
+    ## [Prometheus Selector Label](https://github.com/helm/charts/tree/master/stable/prometheus-operator#prometheus-operator-1)
+    ## [Kube Prometheus Selector Label](https://github.com/helm/charts/tree/master/stable/prometheus-operator#exporters)
+    selector:
+      prometheus: kube-prometheus

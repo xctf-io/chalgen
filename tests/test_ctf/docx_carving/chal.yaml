@@ -1,0 +1,7 @@
+- !docx_carving
+  name: "Docx Carving"
+  flag: "flag{this_is_a_test}"
+  config:
+    main_file: test_evidence.docx
+    hidden_file: hidden.txt
+    dest_path: word/hidden.txt

@@ -1,0 +1,121 @@
+- fields:
+    username: alex
+    password: pbkdf2_sha256$12000$AAAAAAAAA$/SBu63jWGObuj7raEEcMxi8Kzh9i9l3lxWdnI7Z0C6E=
+  model: auth.user
+  pk: 0
+- fields:
+    username: bill
+    password: pbkdf2_sha256$12000$AAAAAAAAA$FJlY6cWwQi79dordvpvRc/3GzUA/DJpfk50qyQggUz0=
+  model: auth.user
+  pk: 1
+- fields:
+    username: carmen
+    password: pbkdf2_sha256$12000$AAAAAAAAA$FJlY6cWwQi79dordvpvRc/3GzUA/DJpfk50qyQggUz0=
+  model: auth.user
+  pk: 2
+- fields:
+    username: daisy
+    password: pbkdf2_sha256$12000$AAAAAAAAA$FJlY6cWwQi79dordvpvRc/3GzUA/DJpfk50qyQggUz0=
+  model: auth.user
+  pk: 3
+- fields:
+    username: ethan
+    password: pbkdf2_sha256$12000$AAAAAAAAA$FJlY6cWwQi79dordvpvRc/3GzUA/DJpfk50qyQggUz0=
+  model: auth.user
+  pk: 4
+- fields:
+    username: fred
+    password: pbkdf2_sha256$12000$AAAAAAAAA$FJlY6cWwQi79dordvpvRc/3GzUA/DJpfk50qyQggUz0=
+  model: auth.user
+  pk: 5
+- fields:
+    username: news9
+    password: pbkdf2_sha256$12000$AAAAAAAAA$FJlY6cWwQi79dordvpvRc/3GzUA/DJpfk50qyQggUz0=
+  model: auth.user
+  pk: 6
+- fields:
+    username: highlyfe
+    password: pbkdf2_sha256$12000$AAAAAAAAA$FJlY6cWwQi79dordvpvRc/3GzUA/DJpfk50qyQggUz0=
+  model: auth.user
+  pk: 7
+- fields:
+    text: Come stay at the Last Place on Earth! You will fall in love with how dark
+      it gets here! No one is around for miles :) http://chal-host.chals.mcpshsf.com/chal_img.jpeg
+    author: 2
+    likers:
+    - 0
+    - 1
+    date_added: '2020-03-06 00:00:00+00:00'
+  model: fb.userpost
+  pk: 0
+- fields:
+    text: '***WEATHER ALERT*** A severe winter storm has hit Albany and the surrounding
+      area. Seek shelter immediately.'
+    author: 6
+    likers:
+    - 0
+    date_added: '2020-03-06 00:00:00+00:00'
+  model: fb.userpost
+  pk: 1
+- fields:
+    text: All planes are grounded until further notice. Please stay safe.
+    author: 7
+    likers:
+    - 0
+    date_added: '2020-03-06 00:00:00+00:00'
+  model: fb.userpost
+  pk: 2
+- fields:
+    text: 9 out of 10 people can't solve this. Do you know enough Computer Science
+      to get this one? If you are struggling, I provide tutoring ... for a price.
+      s mkx dokmr iye wybo sp iye gyevn vsuo, led iye kbo qysxq dy rkfo dy zki...pvkq{coowc_vsuo_iye_uxyg_iyeb_mc}
+    author: 5
+    date_added: '2020-03-06 00:00:00+00:00'
+  model: fb.userpost
+  pk: 3
+- fields:
+    text: Going into town to pick up some furniture. Husband is driving me insane!
+    author: 3
+    likers:
+    - 4
+    date_added: '2020-03-06 00:00:00+00:00'
+  model: fb.userpost
+  pk: 4
+- fields:
+    text: I love my wife! I love going on errands with her.
+    author: 4
+    date_added: '2020-03-06 00:00:00+00:00'
+  model: fb.userpost
+  pk: 5
+- fields:
+    author: 1
+    date_added: 2020-01-21 00:00:00+00:00
+    post: 2
+    text: when will my flight be boarding then? I have my boarding pass attached here.
+      http://chal-host.chals.mcpshsf.com/BoardingPass.png
+  model: fb.userpostcomment
+  pk: 0
+- fields:
+    author: 7
+    date_added: 2020-01-21 00:00:00+00:00
+    post: 2
+    text: we unfortunately do not know when flights will be departing, please keep
+      watching this account for updates regarding all HighLyfe flights.
+  model: fb.userpostcomment
+  pk: 1
+- fields:
+    author: 1
+    date_added: 2020-01-21 00:00:00+00:00
+    post: 2
+    text: I really need to get out of here! I used every penny I had to get this ticket
+      and need a well deserved break from this place. I don't get that many chances
+      during the year.
+  model: fb.userpostcomment
+  pk: 2
+- fields:
+    author: 7
+    date_added: 2020-01-21 00:00:00+00:00
+    post: 2
+    text: we are sorry sir, there is nothing that we can do sir
+  model: fb.userpostcomment
+  pk: 3

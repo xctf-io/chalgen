@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+{% block body%}
+<div class="toplevelinfo">
+	Top level subforums:
+</div>
+{% for subforum in subforums %}
+<div class="subforumlisting">
+<div class="subforumtitle">
+<a href="/subforum?sub={{ subforum.id }}">
+{{ subforum.title}}
+</a>
+</div>
+<div class="subforumdesc">
+{{ subforum.description }}
+</div>
+</div>
+{% endfor %}
+{% endblock %}

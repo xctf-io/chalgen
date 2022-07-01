@@ -1,0 +1,6 @@
+- !phishing_defense
+  name: Phishing Defense
+  flag: "flag{y0u_d1dnt_g3t_ph1sh3d_gg}"
+  config:
+    None
+        

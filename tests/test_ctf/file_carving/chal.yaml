@@ -1,0 +1,6 @@
+- !file_carving
+  name: "File Carving"
+  flag: "flag{this_is_a_test}"
+  config:
+    main_file: main.tar
+    hidden_file: hidden.elf

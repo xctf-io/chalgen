@@ -1,0 +1,7 @@
+- !temp_inj
+  name: "Template Injection"
+  flag: "flag{th1s_1s_a_t3mp14t3_f0r_inj3ct1on5_4nd_fl4sk5}"
+  config:
+    author: "Bad Programmer"
+    blacklist: ["__class__"]
+    files: ['logincred.txt']

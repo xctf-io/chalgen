@@ -1,0 +1,6 @@
+- !spectrogram
+  name: "Spectrogram"
+  flag: "flag{this_is_a_test}"
+  config:
+    orig_img: "test_flag.PNG"
+    output_wav: "output.wav"

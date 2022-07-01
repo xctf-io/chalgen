@@ -1,0 +1,6 @@
+- !static_site
+  name: "Inn Website"
+  config:
+    webroot: root
+    chal_to_path: {}
+    chals: []

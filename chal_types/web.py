@@ -1,0 +1,96 @@
+import os
+from os.path import join, abspath, dirname
+from shutil import copyfile
+from distutils.dir_util import copy_tree
+from .challenge import GeneratedChallenge, ChalDir, fwrite
+
+robots_format = '''User-agent: *
+Disallow: {flag}
+'''
+robots_setup = """ADD robots.txt $webroot/robots.txt
+ADD index.html $webroot/index.html
+"""
+
+
+class RobotsTxtChallenge(GeneratedChallenge):
+    yaml_tag = u'!robots_txt'
+    __doc__ = """Flag is located in the robots file
+
+    Config:
+        index: Custom index.html page
+        text: Optional additional information
+    """
+
+    def gen(self, chal_dir):
+        """
+        TODO (breadchris) cleanup here
+        - this is mostly just for getting down ideals, please refactor
+        - Ideally we should be using docker compose
+        - Docker templates and makefile templates should exist as helper functions
+        """
+        template_dir = join(dirname(abspath(__file__)),
+                            'templates/static_site')
+        makefile_dir = join(dirname(abspath(__file__)),
+                            'templates/docker_make')
+        index_page = self.get_value('index', required=False)
+        text = self.get_value('text', required=False)
+
+        # if an index.html page has not been configured, add the default one
+        if index_page is None:
+            copyfile(join(template_dir, 'index.html'),
+                     join(chal_dir, 'index.html'))
+
+        with open(join(chal_dir, 'robots.txt'), 'w') as f:
+            f.write(robots_format.format(flag=self.flag))
+            if text is not None:
+                f.write(text)
+
+        fwrite(template_dir, 'Dockerfile', chal_dir,
+               'Dockerfile', setup=robots_setup)
+        self.container_id = f'robots_txt-{hash(self)}'
+        fwrite(makefile_dir, 'Makefile', chal_dir, 'Makefile',
+               chal_name=self.container_id, chal_run_options=f'-p 8080:{self.target_port}')
+
+        with ChalDir(chal_dir):
+            os.system('make build')
+
+
+class TemplateInjection(GeneratedChallenge):
+    yaml_tag = u'!temp_inj'
+    __doc__ = """Flag is located in flag.txt
+
+    Config:
+        author: author of mad lib generator
+        blacklist: blackist for disallowed words(leave as [] for a blank blacklist)
+        files: optional additional files to add to webroot
+
+    """
+
+    def gen(self, chal_dir):
+        cur_file_path = dirname(abspath(__file__))
+        temp_dir = join(cur_file_path, 'templates/temp_inj')
+        nsjail_dir = join(cur_file_path, 'templates/nsjail_flask')
+        files = self.get_value("files", required=False)
+        blacklist = self.get_value("blacklist")
+        author = self.get_value("author")
+
+        app_dir = join(chal_dir, 'app')
+        copy_tree(temp_dir, app_dir)
+        copy_tree(nsjail_dir, chal_dir)
+        if files is not None:
+            for file in files:
+                copyfile(join(chal_dir, file), join(app_dir, file))
+
+        self.container_id = f'temp_inj-{hash(self)}'
+        self.target_port = '8080'
+        fwrite(cur_file_path, 'templates/docker_make/Makefile', chal_dir, 'Makefile', chal_name=self.container_id,
+               chal_run_options=f'-p 8080:{self.target_port} --cap-drop all --cap-add chown --cap-add setuid --cap-add setgid \
+        --cap-add sys_admin --security-opt apparmor=unconfined --security-opt seccomp=unconfined')
+        fwrite(temp_dir, 'flag.txt', app_dir, 'flag.txt', flag=self.flag)
+        fwrite(temp_dir, 'main.py', app_dir, 'main.py',
+               jinja=True, blacklist=blacklist)
+        fwrite(temp_dir, 'templates/base.html', app_dir, 'templates/base.html', jinja=True,
+               author=author, content="{% block content %}{% endblock %}")
+
+        with ChalDir(chal_dir):
+            os.system('make build')

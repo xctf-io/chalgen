@@ -1,0 +1,64 @@
+- !facebook_django
+  name: Fesbuc
+  flag: "flag{facebook_is_a_great_way_to_talk}"
+  config:
+    script: index.js
+    users:
+      - username: alex
+        password: flag{facebook_is_a_great_way_to_talk}
+      - username: bill
+        password: password138823892389127120password
+      - username: carmen
+        password: password138823892389127120password
+      - username: daisy
+        password: password138823892389127120password
+      - username: ethan
+        password: password138823892389127120password
+      - username: fred
+        password: password138823892389127120password
+      - username: news9
+        password: password138823892389127120password
+      - username: highlyfe
+        password: password138823892389127120password
+    posts:
+      - text: Come stay at the Last Place on Earth! You will fall in love with how dark it gets here! No one is around for miles :)
+        author: carmen
+        chal: CabinImageExif
+        likers: [alex, bill]
+      - text: "***WEATHER ALERT*** A severe winter storm has hit Albany and the surrounding area. Seek shelter immediately."
+        author: news9
+        likers: [alex]
+      - text: "All planes are grounded until further notice. Please stay safe."
+        author: highlyfe
+        likers: [alex]
+      - text: "9 out of 10 people can't solve this. Do you know enough Computer Science to get this one? If you are struggling, I provide tutoring ... for a price."
+        author: fred
+        chal: CodingChallengeCaserCipher
+      - text: Going into town to pick up some furniture. Husband is driving me insane!
+        author: daisy
+        likers: [ethan]
+      - text: I love my wife! I love going on errands with her.
+        author: ethan
+    profiles:
+    comments:
+      - author: bill
+        date_added: 2020-01-21 00:00:00.000000+00:00
+        post: 2
+        chal: Boarding Pass
+        text: when will my flight be boarding then? I have my boarding pass attached here.
+      - author: highlyfe
+        date_added: 2020-01-21 00:00:00.000000+00:00
+        post: 2
+        text: we unfortunately do not know when flights will be departing, please keep watching this account for updates regarding all HighLyfe flights.
+      - author: bill
+        date_added: 2020-01-21 00:00:00.000000+00:00
+        post: 2
+        text: I really need to get out of here! I used every penny I had to get this ticket and need a well deserved break from this place. I don't get that many chances during the year.
+      - author: highlyfe
+        date_added: 2020-01-21 00:00:00.000000+00:00
+        post: 2
+        text: we are sorry sir, there is nothing that we can do sir
+    chals:
+      - Boarding Pass 
+      - CabinImageExif
+      - CodingChallengeCaserCipher

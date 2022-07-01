@@ -1,0 +1,11 @@
+- !virtual_machine
+  name: Virtual Machine
+  flag: "flag{this_is_a_test}"
+  config:
+    chals:
+    - !hex
+      name: Hex Decoding
+      flag: flag{this_is_a_test}
+      config:
+        None
+      dest_path: /something

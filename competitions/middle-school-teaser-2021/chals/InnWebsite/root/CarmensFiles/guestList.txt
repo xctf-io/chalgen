@@ -1,0 +1,72 @@
+2020		Little Ailey Inn	
+			
+Date	Room	Guest	Notes
+			
+6-Mar			
+	1	Alex Lessgan	
+	2		
+	3	Bill Doors	
+	4		
+	5	Fred Savage	
+	6		
+	7	Ethan and Daisy Duke	
+			
+			
+5-Mar			
+	1	Chantel Kramer	
+	2		
+	3		
+	4	Nicole Doherty	
+	5	Husna Kumar	
+	6		
+	7	Ariana Knowles	
+			
+			
+4-Mar			
+	1	Yasemin Watson	
+	2	Josephine Webber	
+	3	Amanah Oakley	
+	4	Ewan Cassidy	
+	5	Fred Savage	
+	6		
+	7	Marc Vo	
+			
+			
+3-Mar			
+	1	Tiago Salazar	
+	2		
+	3	Bill Doors	
+	4	Usaamah Kouma	
+	5	Harrison Lyon	
+	6		
+	7	Beau Bernard	
+			
+			
+2-Mar			
+	1	Kadie Leon	
+	2	Amelia-Lily Pickett	
+	3	Aiesha Kim	
+	4	Shana O'Doherty	
+	5	Melinda Potter	
+	6		
+	7		
+			
+			
+1-Mar			
+	1	Emilie Riggs	
+	2		
+	3	Miley Ireland	
+	4		
+	5	Conah Evans	
+	6	Gloria Huber	
+	7	Amiyah Joseph	
+			
+			
+29-Feb			
+	1	Louise Newman	
+	2	Lennox Freeman	
+	3	Safiyyah Regan	
+	4	Bethanie Dalton	
+	5	flag{guestlist}	
+	6	Harriette Findlay	
+	7	Trent Harrington	

@@ -1,0 +1,5 @@
+- !md5
+  name: "A reverse MD5 hash challenge"
+  flag: "flag"
+  config:
+    None

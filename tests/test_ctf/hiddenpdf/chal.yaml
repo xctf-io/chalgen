@@ -1,0 +1,5 @@
+- !hidden_stuff_in_pdf
+  name: Hidden Stuff in PDF
+  flag: "flag{test}"
+  config:
+    file: totally_legit_forknite_tournament.pdf

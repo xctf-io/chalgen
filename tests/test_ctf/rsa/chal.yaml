@@ -1,0 +1,5 @@
+- !RSA
+  name: "RSA Challenge"
+  flag: "flag{test}"
+  config:
+      None

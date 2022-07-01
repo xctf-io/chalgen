@@ -1,0 +1,5 @@
+- !binary
+  name: "A simple binary decoding challenge"
+  flag: "flag{this_is_a_test}"
+  config:
+    None

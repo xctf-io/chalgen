@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+  <h1>Profile</h1>
+  <img width="100px" src="{{ profile.avatar_url }}"/>
+  <table>
+    <tr>
+      <td>Name:</td>
+      <td>{{ profile.user.first_name }} {{ profile.user.last_name }}</td>
+    </tr>
+    <tr>
+      <td>Birthday:</td>
+      <td>{{ profile.date_of_birth }}</td>
+    </tr>
+    <tr>
+      <td>Gender:</td>
+      <td>{{ profile.gender }}</td>
+    </tr>
+  </table>
+
+  {% if user == profile.user %}
+    <a href="{% url 'edit_profile' profile.user.username %}">Edit</a>
+  {% endif %}
+
+{% endblock %}

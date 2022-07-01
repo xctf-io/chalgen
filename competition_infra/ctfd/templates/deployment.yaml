@@ -1,0 +1,99 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "ctfd.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "ctfd.name" . }}
+    helm.sh/chart: {{ include "ctfd.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "ctfd.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "ctfd.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+          {{- range $name, $value := .Values.env.open }}
+            {{- if not (empty $value) }}
+          - name: {{ $name | quote }}
+            value: {{ $value | quote }}
+            {{- end }}
+          {{- end }}
+          {{- if .Values.persistence.uploads.enabled }}
+          - name: UPLOAD_FOLDER
+            value: /var/uploads
+          {{- end }}
+          {{- if .Values.env.existingSecret }}
+            {{- $secret_name := .Values.env.existingSecret }}
+            {{- range $name, $key := .Values.env.existingSecretMappings }}
+              {{- if not ( empty $key) }}
+          - name: {{ $name | quote }}
+            valueFrom:
+              secretKeyRef:
+                name: {{ $secret_name | quote }}
+                key: {{ $key | quote }}
+              {{- end }}
+            {{- end }}
+          {{- else }}
+            {{- $secret_name := include "ctfd.fullname" . }}
+            {{- range $name, $value := .Values.env.secret }}
+              {{- if not ( empty $value) }}
+          - name: {{ $name | quote }}
+            valueFrom:
+              secretKeyRef:
+                name: {{ $secret_name }}
+                key: {{ $name | quote }}
+              {{- end }}
+            {{- end }}
+          {{- end }}
+          ports:
+            - name: http
+              containerPort: 8000
+          volumeMounts:
+          {{- if .Values.persistence.uploads.enabled }}
+          - mountPath: /var/uploads
+            name: uploads
+          {{- end }}
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8000
+{{ toYaml .Values.probes.liveness | indent 12 }}
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8000
+{{ toYaml .Values.probes.readiness | indent 12 }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      volumes:
+      - name: uploads
+    {{- if .Values.persistence.uploads.enabled }}
+        persistentVolumeClaim:
+          claimName: {{ .Values.persistence.uploads.existingClaim | default (include "ctfd.fullname" .) }}
+    {{- else }}
+        emptyDir: {}
+    {{- end }}

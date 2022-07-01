@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+{% block body %}
+
+
+
+<div class="postsubmit">
+	Enter your post here:<br>
+	<div class="postinginfo">
+	You are posting to {{ subforum.title }}
+	</div>
+
+	<form action="action_post?sub={{ subforum.id }}" method="POST">
+
+		<input class="inputbox" size="100" type="text" placeholder="Title" name="title"><br>
+
+		<textarea class="inputbox" rows="25" cols="100"  name="content" placeholder="Enter post here"></textarea><br>
+
+		<input class="inputbox" type="submit" value="Submit Post">
+	</form>
+</div>
+{% endblock %}

@@ -1,0 +1,2 @@
+User-agent: *
+Disallow: flag{this_is_a_test}

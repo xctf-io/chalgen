@@ -1,0 +1,6 @@
+- !static_site
+  name: "Static Site"
+  config:
+    webroot: root
+    chal_to_path: {}
+    chals: []

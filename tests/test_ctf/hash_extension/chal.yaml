@@ -1,0 +1,8 @@
+- !hash_extension
+  name: "Hash Extension"
+  flag: "flag{h4sh_ext3ns1on_att4cks_are_sooo_c0ol!!!!}"
+  config:
+    key: supersecretkeyyoucantguess
+    author: l33t h4ck3r
+    text: In case I forget, here are my login creds to my secret alt account (admin, password)
+    custom_files: ["joke2.txt", "poem2.txt", "manifesto.txt"]

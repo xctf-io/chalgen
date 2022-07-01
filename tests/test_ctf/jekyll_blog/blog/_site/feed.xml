@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>some old blog</title>
+    <description>A simple, beautiful theme for Jekyll that emphasizes content rather than aesthetic fluff.</description>
+    <link>http://pixyll.com/</link>
+    <atom:link href="http://pixyll.com/feed.xml" rel="self" type="application/rss+xml" />
+    
+      <item>
+        <title>Example post</title>
+        <description>&lt;h1 id=&quot;blog-post&quot;&gt;Blog post&lt;/h1&gt;
+&lt;p&gt;Heyo guys, its me Chance again. Things are getting pretty busy at the organization where I work (don’t ask, I can’t tell you where), so that’s why it’s been a while. Here’s one of my favorite latke recipes!&lt;/p&gt;
+</description>
+        <pubDate>Thu, 20 Feb 2020 05:21:29 -0600</pubDate>
+        <link>http://pixyll.com/ctf/2020/02/20/post2/</link>
+        <guid isPermaLink="true">http://pixyll.com/ctf/2020/02/20/post2/</guid>
+      </item>
+    
+      <item>
+        <title>Example post</title>
+        <description>&lt;h1 id=&quot;blog-post&quot;&gt;Blog post&lt;/h1&gt;
+&lt;p&gt;Hi all, and welcome to my blog!! In case you didn’t know, my name is Chance and I am a HUGE latke enthusiast! Here, I’ll be posting some recipes, tips and tricks, and the best places to buy latkes. Enjoy!&lt;/p&gt;
+&lt;laqp tg=&quot;&quot; li=&quot;&quot; csui=&quot;&quot; paf=&quot;&quot;&gt;klsj{k0ld0z_yh3_muq!}
+&lt;/laqp&gt;
+</description>
+        <pubDate>Mon, 03 Feb 2020 05:21:29 -0600</pubDate>
+        <link>http://pixyll.com/ctf/2020/02/03/post1/</link>
+        <guid isPermaLink="true">http://pixyll.com/ctf/2020/02/03/post1/</guid>
+      </item>
+    
+  </channel>
+</rss>

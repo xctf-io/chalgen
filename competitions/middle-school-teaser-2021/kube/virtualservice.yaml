@@ -1,0 +1,25 @@
+apiVersion: gateway.solo.io/v1
+kind: VirtualService
+metadata:
+  name: default
+  namespace: gloo-system
+spec:
+  virtualHost:
+    domains:
+    - 'chal-host.chals.mcpshsf.com'
+    routes:
+    - matchers:
+      # l7-xlb-basic-check-http is using the root path for health checking
+      - exact: /
+      options:
+        # Because the cluster uses spot nodes that can be shut down at any time, having a retry mechanism
+        # is a good idea in case the pod/node shutdown process isn't clean leaving the possibility of request failures
+        retries:
+          retryOn: 'connect-failure,5xx'
+          numRetries: 5
+          perTryTimeout: 1s # Default is 15s
+      routeAction:
+        single:
+          upstream:
+            name: challenges-chal-host-svc-80
+            namespace: challenges

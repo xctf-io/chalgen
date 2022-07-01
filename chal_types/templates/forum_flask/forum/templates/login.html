@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+{% block body %}
+
+
+<div class="loginbox">
+	<h3>Login to Account</h3>
+	<form action="/action_login" method="POST">
+	<input class="loginelement" type="text" placeholder="Username" name="username"><br>
+	<input class="loginelement" type="password" placeholder="Password" name="password"><br>
+	<input class="loginelement" type="submit" value="Login">
+	</form>
+</div>
+<br><br>
+<div class="loginbox">
+	<h3>Create Account</h3>
+	<form action="/action_createaccount" method="POST">
+	<input class="loginelement" type="email" placeholder="Email" name="email"><br>
+	<input class="loginelement" type="text" placeholder="Username" name="username"><br>
+	<input class="loginelement" type="password" placeholder="Password" name="password"><br>
+	<input class="loginelement" type="submit" value="Create">
+	</form>
+
+</div>
+
+
+{% endblock %}

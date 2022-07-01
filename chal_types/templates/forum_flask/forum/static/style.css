@@ -1,0 +1,191 @@
+.page{
+	font-family: Verdana;
+	font-style: normal;
+	font-size: 14pt;
+
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 1%;
+	width: 80%;
+	
+	padding-left: 3%;
+	padding-right: 3%;
+
+}
+.header{
+	border: 1px solid black;
+	overflow: hidden;
+	vertical-align: middle;
+	padding: 0.5%;
+	margin-bottom: none;
+}
+.content{
+	margin-top: 0.5%;
+}
+.login{
+	width: 25%;
+	float: right;
+	text-align: center;
+
+}
+.loginbox{
+	margin-right: auto;
+	margin-left: auto;
+	text-align: center;
+	margin-top: 3%;
+}
+.loginelement{
+	margin-top: 0.5%;
+}
+.logoutlink{
+	padding-left: 0.5%;
+	font-size: 12pt;
+}
+.postsubmit{
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+
+}
+.subforumlisting{
+	border-bottom: 1px solid gray;
+	padding: 1%;
+	margin-bottom: 1%;
+}
+.inputbox{
+	padding: 0.25%;
+	margin-top: 0.5%;
+}
+.errors{
+	border-bottom: 1px solid black;
+	margin-top: 2%;
+}
+.error{
+	color: red;
+	font-weight: bold;
+}
+.subforumtitle{
+	color: blue;
+	font-size: 15pt;
+	font-weight: bold;
+}
+.subforumdesc{
+	font-size: 13pt;
+	font-style: italic;
+}
+.subforumheader{
+	padding: 0.5%;
+	padding-left: 1%;
+	margin-top: none;
+	padding-bottom: none;
+	margin-bottom: 0.5%;
+	border: 1px solid black;
+	font-size: 15pt;
+}
+.subforumheadertitle{
+	display: inline;
+	font-weight: bold;
+}
+.subforumheaderdesc{
+	display: inline;
+}
+.post{
+	padding: 1%;
+	border-bottom: 1px solid gray;
+}
+.postusername{
+	font-style: italic;
+	font-size: 12pt;
+}
+.subforumheaderlink{
+	font-style: italic;
+	font-size: 12pt;
+	margin-top: 0.5%;
+}
+.postinginfo{
+	font-size: 11pt;
+	font-style: italic;
+}
+#nolinks{
+	text-decoration: none;
+}
+.noposts{
+	padding: 1%;
+}
+.subsubforums{
+	border: 1px solid black;
+	padding: 0.5%;
+	margin-top: 0.5%;
+	padding-left: 1%;
+}
+.subsubforumtitle{
+	font-weight: bolder;
+	text-decoration: none;
+	font-size: 14pt;
+}
+.subsubforumdesc{
+	font-style: italic;
+	font-size: 12pt;
+}
+.toplevelinfo{
+	padding: 0.5%;
+	font-weight: bold;
+}
+.actualpost{
+	padding: 1%;
+	border: 1px solid black;
+	border-collapse: collapse;
+	margin-bottom: 1%;
+}
+.actualposttitle{
+	border-collapse: collapse;
+	border-bottom: 1px solid black;
+	padding: 1%;
+	font-size: 16pt;
+	font-weight: bold;
+}
+.postcontent{
+	padding: 1%;
+}
+.postposter{
+	font-size: 12pt;
+	font-style: italic;
+	color: black;
+}
+.posttime{
+	font-style: italic;
+	font-size: 11pt;
+}
+.whitespace{
+	white-space: pre-line;
+}
+.comments{
+	border: 1px solid gray;
+	padding: 1%;
+	margin-top: 1%;
+}
+.comment{
+	border-bottom: 1px solid gray;
+}
+.commentuser{
+	display: inline;
+	font-weight: bold;
+}
+.commentcontent{
+	display: inline;
+}
+.commenttime{
+	font-size: 11pt;
+	font-style: italic;
+}
+
+
+.addcomment{
+	display: none;
+	margin-right: auto;
+	margin-left: auto;
+	text-align: center;
+}
+.varwidth{
+	width: 50%;
+}

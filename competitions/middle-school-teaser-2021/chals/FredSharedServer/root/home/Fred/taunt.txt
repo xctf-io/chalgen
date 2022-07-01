@@ -1,0 +1,3 @@
+Nice work...you must think you are a talented detective. 
+Think all you want - but you won't get to my biggest secret(s).
+flag{freds_directory}

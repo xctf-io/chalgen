@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: fesbuc-svc
+  namespace: challenges
+  labels:
+    app: fesbuc
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8000
+    protocol: TCP
+  selector:
+    app: fesbuc
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fesbuc-svc
+  namespace: challenges
+  labels:
+    app: fesbuc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fesbuc
+  template:
+    metadata:
+      labels:
+        app: fesbuc
+    spec:
+      containers:
+      - name: fesbuc
+        image: ghcr.io/vgcs/fesbuc:latest
+        ports:
+        - containerPort: 80
+        imagePullPolicy: Always
+        securityContext:
+          readOnlyRootFilesystem: false
+      imagePullSecrets:
+      - name: regcred

@@ -1,0 +1,5 @@
+- !broken_qrcode
+  name: Broken QR Code
+  flag: flag{this_is_a_test}
+  config:
+    fluff: some fluff

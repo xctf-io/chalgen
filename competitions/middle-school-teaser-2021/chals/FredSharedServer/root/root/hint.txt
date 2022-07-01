@@ -1,0 +1,2 @@
+I always keep my files password protected.  My problem is that I forget passwords.  So, I keep the password close, but never easily found.
+So you've made it to my root user directory...looks like I may want to get out of the country.  flag{root_directory}

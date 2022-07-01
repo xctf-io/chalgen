@@ -1,0 +1,8 @@
+- !image_exif
+  name: CabinImageExif
+  flag: "flag{great_what_a_creepy_looking_cabin}"
+  config:
+    orig_img: cabin.jpeg
+    metadata_key: 315
+    lat: 42.635291
+    lng: -73.604366

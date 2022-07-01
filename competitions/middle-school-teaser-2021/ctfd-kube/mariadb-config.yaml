@@ -1,0 +1,8 @@
+rootUser:
+  password: ctfd
+db:
+  name: ctfd
+  user: ctfd
+  password: ctfd
+master:
+  extraFlags: "--character-set-server=utf8mb4, --collation-server=utf8mb4_unicode_ci, --wait_timeout=28800, --log-warnings=0"

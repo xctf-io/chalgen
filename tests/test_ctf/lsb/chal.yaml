@@ -1,0 +1,6 @@
+- !lsb
+  name: LSB Encoding
+  flag: "flag{test}"
+  config:
+    orig_img: test.png
+    addl_text: ""

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+    <h5 class = "text-center">Hit refresh to generate a new madlib!</h5>
+    <form action="/madlib" method = "POST" enctype ="application/x-www-form-urlencoded">
+        {% for i in range(blanks| length) %}
+            <div class="form-group row justify-content-center">
+                <label class="control-label col-sm-1" for="{{ 'param-' ~ i }}" style = "text-align: right">{{ blanks[i].capitalize() }}</label>
+                <input type="text" name = "{{ 'param_' ~ i }}" />
+            </div>
+        {% endfor %}
+        <div class="form-group row justify-content-center">
+            <button type="submit" class="btn btn-warning btn-sm">Submit</button>
+        </div>
+    </form>
+{% endblock %}
