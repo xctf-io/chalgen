@@ -14,25 +14,25 @@ chalgen generates challenges which are nodes in an evidence map
 
 Install the requirements:
 
-```console
+```
 pip install -r requirements.txt
 ```
 
 Run the application:
 
-``` console
+```
 python chalgen.py --help
 ```
 
 Example challenge generator command
 
-```console
+```
 python chalgen.py gen --chal-config tests/test_ctf/base64/chal.yaml
 ```
 
 To run the tests:
 
-```console
+```
 pytest
 ```
 
