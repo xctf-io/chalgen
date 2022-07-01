@@ -50,7 +50,7 @@ Config:
 
 Ancestors:
     - chal_types.challenge.GeneratedChallenge   Solve the Caesar cipher challenge
-    ```
+```
 
 `ECBBlockDuplication`
 
