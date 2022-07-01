@@ -17,7 +17,6 @@ pdfrw
 scapy
 stegano
 qrcode
-pygraphviz
 passlib
 python-slugify
 jinja2
