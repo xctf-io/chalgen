@@ -1,12 +1,12 @@
 import errno
 import os
 import sys
-from jinja2 import Template
 import ruamel.yaml
 from logzero import logger
 from shutil import copyfile, copytree, rmtree
 from os.path import join, abspath, dirname
 from slugify import slugify
+from .utils import WorkDir
 
 yaml = ruamel.yaml.YAML()
 
@@ -19,29 +19,6 @@ def mkdir_p(path):
             pass
         else:
             raise
-
-#  * This function does a formatted write, using the src file, dest file, and formatted arguments provided
-
-
-def fwrite(src, src_file, dest, dest_file, jinja=False, **formats):
-    with open(join(src, src_file), 'r') as s, open(join(dest, dest_file), 'w') as d:
-        if jinja:
-            d.write(Template(s.read()).render(**formats))
-        else:
-            d.write(s.read().format(**formats))
-
-
-class ChalDir(object):
-    def __init__(self, chal_dir):
-        self.chal_dir = chal_dir
-        self.cwd = os.getcwd()
-
-    def __enter__(self):
-        os.chdir(self.chal_dir)
-
-    def __exit__(self, *args):
-        os.chdir(self.cwd)
-
 
 def get_kube_service(chal, namespace='challenges'):
     chal_name = chal['name']
@@ -278,7 +255,7 @@ class ChallengeHost(object):
             make.write(template_make.read().format(
                 chal_name=self.container_id, chal_run_options=''))
 
-        with ChalDir(self.host_dir):
+        with WorkDir(self.host_dir):
             os.system('make build')
 
 

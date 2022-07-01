@@ -1,5 +1,6 @@
 import os
-from .challenge import ChalDir, GeneratedChallenge, fwrite
+from .challenge import GeneratedChallenge
+from .utils import WorkDir, fwrite
 from .text_transforms import *
 from os.path import join, abspath, dirname, exists
 from shutil import copytree, rmtree, copyfile
@@ -325,5 +326,5 @@ class HashExtension(GeneratedChallenge):
         fwrite(temp_dir, "templates/index.html", app_dir, "templates/index.html", True,
                hash=sha1, key=key, files=all_files, author=self.get_value("author"), result='{{result}}')
 
-        with ChalDir(chal_dir):
+        with WorkDir(chal_dir):
             os.system('make build')

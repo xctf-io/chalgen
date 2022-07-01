@@ -2,7 +2,8 @@ import os
 from os.path import join, abspath, dirname
 from shutil import copyfile
 from distutils.dir_util import copy_tree
-from .challenge import GeneratedChallenge, ChalDir, fwrite
+from .challenge import GeneratedChallenge
+from .utils import WorkDir, fwrite
 
 robots_format = '''User-agent: *
 Disallow: {flag}
@@ -53,7 +54,7 @@ class RobotsTxtChallenge(GeneratedChallenge):
         fwrite(makefile_dir, 'Makefile', chal_dir, 'Makefile',
                chal_name=self.container_id, chal_run_options=f'-p 8080:{self.target_port}')
 
-        with ChalDir(chal_dir):
+        with WorkDir(chal_dir):
             os.system('make build')
 
 
@@ -95,5 +96,5 @@ class TemplateInjection(GeneratedChallenge):
         fwrite(temp_dir, 'templates/base.html', app_dir, 'templates/base.html', jinja=True,
                author=author, content="{% block content %}{% endblock %}")
 
-        with ChalDir(chal_dir):
+        with WorkDir(chal_dir):
             os.system('make build')
