@@ -34,12 +34,14 @@ Challenge environments host other challenges and can also be configured to fit t
       - Docx Carving
 ```
 
-Challenge environments can't be made/run through the `python chalgen.py gen` command, so you must use `python chalgen.py competitiongen`
+Challenges link through the `name` field. Challenge environments can't be made/run through the `python chalgen.py gen` command, so you must use `python chalgen.py competitiongen`. 
 
 ### Competition structure
 Competitions are structured in a tree-like fashion, with some Challenge Environments serving as entrypoints. An example structure is shown below. 
 
 ![image](../evidence_graph.png)
+
+A competition folder has `config.yaml` that specifies the entrypoints and `chals` folder that contains the challenges. You can look at the example in [/competitions/middle-school-teaser-2021](/competitions/middle-school-teaser-2021/)
 
 ## Available commands
 ***
