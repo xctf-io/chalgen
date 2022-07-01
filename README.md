@@ -7,23 +7,27 @@ chalgen generates challenges which are nodes in an evidence map
 ## Basic setup
 
 Install the requirements:
-```
-$ pip install -r requirements.txt
+
+```console
+pip install -r requirements.txt
 ```
 
 Run the application:
-```
-$ python -m chalgen --help
+
+``` console
+python -m chalgen --help
 ```
 
 Example challenge generator command
-```
-$ python chalgen.py gen --chal-config tests/test_ctf/base64/chal.yaml
+
+```console
+python chalgen.py gen --chal-config tests/test_ctf/base64/chal.yaml
 ```
 
 To run the tests:
-```
-    $ pytest
+
+```console
+pytest
 ```
 
 ## TODO
@@ -44,7 +48,7 @@ To run the tests:
 
 - [ ] netcat into a server
     - [ ] Send ASCII data
-	- [ ] Send non ASCII data
+  - [ ] Send non ASCII data
 - [ ] SSH into server
 - [x] Image metadata
 - [ ] Git
@@ -52,7 +56,7 @@ To run the tests:
 	- [x] Recover files from series of git commits (and git stash?)
 - [ ] PCAP - (use scapy)
 	- [ ] Follow http stream to get username and passwords
-	- [ ] Recording of keyboard input
+	* [ ] Recording of keyboard input
 	- [ ] Recording of bluetooth traffic
 - [x] Encrypted ZIP
 - [ ] PDF [NSA Guide](http://www.itsecure.hu/library/file/Biztons%C3%A1gi%20%C3%BAtmutat%C3%B3k/Alkalmaz%C3%A1sok/Hidden%20Data%20and%20Metadata%20in%20Adobe%20PDF%20Files.pdf)
@@ -163,6 +167,7 @@ Some challenges that use Tinker to reverse hardware components
 * Challenges may specify a way to embed another challenge inside of themselves.
 
 Some questions that should be answered:
+
 * How much perscription do we want to give challenges?
 * If we are creating an sql injection challenge, do we give them website and the vuln code?
 * Need to figure out how the vuln plugs into a website. Have a module system for the website that you drop in views for challenges.
