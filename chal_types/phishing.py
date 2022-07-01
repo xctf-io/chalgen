@@ -13,9 +13,11 @@ from fractions import Fraction
 
 class PhishingDefenseChallenge(GeneratedChallenge):
     yaml_tag = u'!phishing_defense'
-    __doc__ = """Find the phishing emails
+    __doc__ = """
+    Find the phishing emails
     
     Config:
+    
         None
     """
 

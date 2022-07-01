@@ -137,7 +137,7 @@ class App(tk.Tk):
         title_label.config(font=('Segoe UI', 14))
         insert_config("name", chal_name)
         insert_config("flag", flag)
-        lines = chal_class.__doc__.split('\n')[3:-1]
+        lines = chal_class.__doc__.split('\n')[5:-1]
         if 'None' in lines[0]:
             lines = []
         for line in lines:

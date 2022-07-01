@@ -15,9 +15,11 @@ import random
 
 class PCAPLogin(GeneratedChallenge):
     yaml_tag = u'!pcap_login'
-    __doc__ = """Find the login credentials in PCAP
+    __doc__ = """
+    Find the login credentials in PCAP
 
     Config:
+
         username - username to find
         password - password to find
     """
@@ -49,9 +51,11 @@ class PCAPLogin(GeneratedChallenge):
 
 class PingPCAP(GeneratedChallenge):
     yaml_tag = u'!ping_pcap'
-    __doc__ = """Find the data in ping requests
+    __doc__ = """
+    Find the data in ping requests
 
     Config:
+
         text: additional data to add to communication(optional)
     """
 
@@ -98,9 +102,11 @@ class PingPCAP(GeneratedChallenge):
 
 class SQLLog(GeneratedChallenge):
     yaml_tag = u'!sql_log'
-    __doc__ = """Find what the attacker got in a sql injection attack
+    __doc__ = """
+    Find what the attacker got in a sql injection attack
     
     Config:
+
         flag_user: username of attacked user
         other_users: other users in database(at least one)
         file: optional param to add a file through LOADFILE
@@ -173,9 +179,11 @@ class SQLLog(GeneratedChallenge):
 
 class KeyboardInput(GeneratedChallenge):
     yaml_tag = u'!key_input'
-    __doc__ = """Find what someone typed based on usb traffic
+    __doc__ = """
+    Find what someone typed based on usb traffic
     
     Config:
+    
         text: additional text before flag
         rand_backspaces: add random backspaces to increase dificulty(doesn't change message)
     """

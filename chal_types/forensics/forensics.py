@@ -29,10 +29,12 @@ TEMPLATES_DIR = join(dirname(dirname(realpath(__file__))), 'templates')
 
 class FileEvidence(ChallengeEnvironment):
     yaml_tag = u'!file_evidence'
-    __doc__ = """File Evidence
+    __doc__ = """
+    File Evidence
 
     Config:
-        orig_img - The relative path to the image to use
+
+        None
     """
 
     def gen(self, chal_dir):
@@ -42,10 +44,12 @@ class FileEvidence(ChallengeEnvironment):
 
 class LSB(GeneratedChallenge):
     yaml_tag = u'!lsb'
-    __doc__ = """Least Significant Bit Encoding
+    __doc__ = """
+    Least Significant Bit Encoding
 
     Config:
-        orig_img - The relative path to the image to use
+
+        orig_img - The relative path of the image to use
     """
 
     def gen(self, chal_dir):
@@ -58,10 +62,12 @@ class LSB(GeneratedChallenge):
 
 class DiffImages(GeneratedChallenge):
     yaml_tag = u'!diffimages'
-    __doc__ = """Flag is located in the byte difference between two images
+    __doc__ = """
+    Flag is located in the byte difference between two images
 
     Config:
-        orig_img - The relative path to the image to use
+
+        orig_img - The relative path of the image to use
     """
 
     def gen(self, chal_dir):
@@ -98,10 +104,12 @@ class DiffImages(GeneratedChallenge):
 
 class BrokenPNGHeaderChallenge(GeneratedChallenge):
     yaml_tag = u'!brokenpngheader'
-    __doc__ = """Flag is located in the image, whose header is broken
+    __doc__ = """
+    Flag is located in the image, whose header is broken
 
     Config:
-        orig_img - The relative path to the image to use
+
+        orig_img - The relative path of the image to use
     """
 
     def gen(self, chal_dir):
@@ -122,10 +130,12 @@ class BrokenPNGHeaderChallenge(GeneratedChallenge):
 
 class SpectrogramChallenge(GeneratedChallenge):
     yaml_tag = u'!spectrogram'
-    __doc__ = """Flag is located in the spectrum data of the audio file
+    __doc__ = """
+    Flag is located in the spectrum data of the audio file
     
     Config:
-        orig_img - The relative path to the image to use
+
+        orig_img - The relative path of the image to use
         orig_audio - Original audio before the spectogram
         output_wav - The relative path to the wav output file
     """
@@ -145,12 +155,14 @@ class SpectrogramChallenge(GeneratedChallenge):
 
 class ImageExifChallenge(GeneratedChallenge):
     yaml_tag = u'!image_exif'
-    __doc__ = """Flag is located in image meta data
+    __doc__ = """
+    Flag is located in image meta data
 
     Config:
-        orig_img - The relative path to the original image to use
+
+        orig_img - The relative path of the original image to use
         metadata_key - The metadata key to store the flag under
-        flag_transform - The method to use to transform the flag (so you can't just solve it with strings)
+        flag_transform - The method to use to transform the flag (so you can't solve it with strings)
         lat - latitude of gps exif
         lng - longitude of gps exif
     """
@@ -264,9 +276,11 @@ class ImageExifChallenge(GeneratedChallenge):
 
 class GitReassemblyChallenge(GeneratedChallenge):
     yaml_tag = u'!git_reassembly'
-    __doc__ = """Determine flag by reassambling parts from git
+    __doc__ = """
+    Determine flag by reassambling parts from git
 
     Config:
+
         text - extra text to include in git file
         num_parts - number of parts to split the flag into
         git_email - email of user 
@@ -341,9 +355,11 @@ class GitReassemblyChallenge(GeneratedChallenge):
 
 class GitRevertChallenge(GeneratedChallenge):
     yaml_tag = u'!git_revert'
-    __doc__ = """Determine secret information from old commits
+    __doc__ = """
+    Determine secret information from old commits
 
     Config:
+    
         text - extra text to include in git file
         file - non-secret file name
         file_contents - non-secret file contents
@@ -399,9 +415,11 @@ class GitRevertChallenge(GeneratedChallenge):
 
 class EncryptedZipChallenge(GeneratedChallenge):
     yaml_tag = u'!encrypted_zip'
-    __doc__ = """An encrypted zip challenge
+    __doc__ = """
+    An encrypted zip challenge
 
     Config:
+
         files_dir - files to be included with the challenge
         password - the password used to encrypt the files
         word_list - [optional] 
@@ -433,9 +451,11 @@ class EncryptedZipChallenge(GeneratedChallenge):
 
 class FileCarving(GeneratedChallenge):
     yaml_tag = u'!file_carving'
-    __doc__ = """Carve out a file from another file
+    __doc__ = """
+    Carve out a file from another file
 
     Config:
+
         main_file - main file to be released
         hidden_file - file to be hidden in main_file (Note: the contents of this file contain the flag)
     """
@@ -464,9 +484,11 @@ class FileCarving(GeneratedChallenge):
 
 class DocxCarving(GeneratedChallenge):
     yaml_tag = u'!docx_carving'
-    __doc__ = """Carve out files from a docx file
+    __doc__ = """
+    Carve out files from a docx file
 
     Config:
+
         main_file - main file to be released
         hidden_file - file to be hidden in main_file (Note: the contents of this file contain the flag)
         dest_path - path within the docx to put the hidden_file
@@ -501,9 +523,11 @@ class DocxCarving(GeneratedChallenge):
 
 class Ext4FileRecovery(GeneratedChallenge):
     yaml_tag = u'!ext4_file_recovery'
-    __doc__ = """Recover a file 
+    __doc__ = """
+    Recover a file 
 
     Config:
+
         deleted_evidence - A directory containing the evidence that will be deleted
         fluff - A directory containing data to be added to the filesystem
     """
@@ -573,9 +597,11 @@ def scale_pdf(path, output):
 
 class HiddenStuffInPDF(GeneratedChallenge):
     yaml_tag = u'!hidden_stuff_in_pdf'
-    __doc__ = """Find the hidden stuff in the pdf
+    __doc__ = """
+    Find the hidden stuff in the pdf
 
     Config:
+
         file - pdf file to mess with
     """
 
@@ -592,9 +618,11 @@ class HiddenStuffInPDF(GeneratedChallenge):
 
 class ChromiumHistory(GeneratedChallenge):
     yaml_tag = u'!chromium_history'
-    __doc__ = """Do forensic analysis on a chromium cache folder
+    __doc__ = """
+    Do forensic analysis on a chromium cache folder
 
     Config:
+    
         script - puppeteer script to run 
     """
 
@@ -637,9 +665,11 @@ class EditContrast(GeneratedChallenge):
 
 class ChangeExtension(GeneratedChallenge):
     yaml_tag = u'!change_extension'
-    __doc__ = """Change the file extension to access the file
+    __doc__ = """
+    Change the file extension to access the file
 
     Config:
+
         orig_file - txt file
         out_ext - new extension 
     """
@@ -654,9 +684,11 @@ class ChangeExtension(GeneratedChallenge):
 
 class EditNotepad(GeneratedChallenge):
     yaml_tag = u'!edit_notepad'
-    __doc__ = """Open in Notepad to find flag
+    __doc__ = """
+    Open in Notepad to find flag
 
     Config:
+
         orig_img - image file 
     """
 
@@ -676,9 +708,11 @@ class EditNotepad(GeneratedChallenge):
 
 class SteghideChallenge(GeneratedChallenge):
     yaml_tag = u'!steghide'
-    __doc__ = """Open in Notepad to find flag
+    __doc__ = """
+    Hide flag using steghide
 
     Config:
+
         text - addon text
         image - image to hide information in
         password - add password (optional)
@@ -722,12 +756,13 @@ class SteghideChallenge(GeneratedChallenge):
 
 class ReverseAudio(GeneratedChallenge):
     yaml_tag = u'!rev_audio'
-    __doc__ = """Reverse the audio to hear the flag
+    __doc__ = """
+    Reverse the audio to hear the flag
 
     Config:
+
         text - additional text to say
     """
-    # function to convert ascii symbols to phonetics
 
     def ascii_to_phonetics(self, text):
         phonetics = {
@@ -771,7 +806,6 @@ class ReverseAudio(GeneratedChallenge):
             return text
 
     def gen(self, chal_dir):
-        # TODO: switch Pydub to PyAudio
         out_file = join(chal_dir, 'chal.wav')
         phoentic_flag = [self.ascii_to_phonetics(i) for i in self.flag]
         spoken_flag = ",".join(phoentic_flag)
@@ -785,9 +819,11 @@ class ReverseAudio(GeneratedChallenge):
 
 class BinaryAudio(GeneratedChallenge):
     yaml_tag = u'!binary_audio'
-    __doc__ = """Use binary audio to find flag
+    __doc__ = """
+    Use binary audio to find flag
 
     Config:
+
         text - additional text to say
     """
 
@@ -814,9 +850,11 @@ class BinaryAudio(GeneratedChallenge):
 
 class InvisibleChars(GeneratedChallenge):
     yaml_tag = u'!invisible_chars'
-    __doc__ = """Use invisible characters to hide the flag
+    __doc__ = """
+    Use invisible characters to hide the flag
 
     Config:
+    
         hide_text - text before invisible characters
 
     """
