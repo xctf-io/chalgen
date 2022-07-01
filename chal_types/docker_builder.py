@@ -1,6 +1,3 @@
-from tarfile import FIFOTYPE
-from typing import Any
-
 import os
 
 from chal_types.utils import FixMinikube

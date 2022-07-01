@@ -10,6 +10,7 @@ RUN pip install Flask bjoern --no-cache-dir
 
 COPY app /app
 COPY run.sh run.sh
+RUN sed -i 's/\r//' run.sh
 
 FROM gcr.io/kctf-docker/challenge@sha256:56f7dddff69d08d4d19f4921c724d438cf4d59e434c601f9776fd818368b7107
 
