@@ -37,7 +37,7 @@ Challenge environments host other challenges and can also be configured to fit t
 Challenges link through the `name` field. Challenge environments can't be made/run through the `python chalgen.py gen` command, so you must use `python chalgen.py competitiongen`. 
 
 ### Competition structure
-Competitions are structured in a tree-like fashion, with some Challenge Environments serving as entrypoints. An example structure is shown below. 
+Competitions are structured in a tree-like fashion, with some Challenge Environments serving as entrypoints. An example structure is shown below. In this case, Fesbuc is an entrypoint.
 
 ![image](../evidence_graph.png)
 
