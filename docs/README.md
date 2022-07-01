@@ -1,5 +1,10 @@
 Chalgen Docs
 ==============
+## Links
+  - [All challenges](chal_types/README.md)
+  - [Concepts explained](README.md#concepts-explained)
+  - [Example commands](README.md#available-commands)
+
 ## Concepts explained
 
 ### Challenges
