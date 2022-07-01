@@ -4,6 +4,12 @@
 
 chalgen generates challenges which are nodes in an evidence map
 
+## Prerequisites
+
+- Follow the documentation [here](https://pygraphviz.github.io/documentation/stable/install.html) to install `pygraphviz` for your system
+- Install Docker from [here](https://docs.docker.com/engine/install/)
+- Install kubectl from [here](https://kubernetes.io/docs/tasks/tools/)
+
 ## Basic setup
 
 Install the requirements:
@@ -15,7 +21,7 @@ pip install -r requirements.txt
 Run the application:
 
 ``` console
-python -m chalgen --help
+python chalgen.py --help
 ```
 
 Example challenge generator command
