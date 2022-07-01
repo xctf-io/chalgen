@@ -4,6 +4,16 @@ import ruamel.yaml
 from gtts import gTTS
 import os
 
+class WorkDir(object):
+    def __init__(self, chal_dir):
+        self.chal_dir = chal_dir
+        self.cwd = os.getcwd()
+
+    def __enter__(self):
+        os.chdir(self.chal_dir)
+
+    def __exit__(self, *args):
+        os.chdir(self.cwd)
 
 def load_chal_from_config(challenge_types, chal_config):
     yaml = ruamel.yaml.YAML()
