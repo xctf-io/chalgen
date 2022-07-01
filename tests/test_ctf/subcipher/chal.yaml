@@ -1,0 +1,5 @@
+- !substitution
+  name: "Substitution cipher"
+  flag: "flag{this_is_a_test}"
+  config:
+    key: 'TEST'

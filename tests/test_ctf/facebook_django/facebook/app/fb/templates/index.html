@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+  <h1>News feed</h1>
+
+  
+  <form class="form-horizontal" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+      <div class="col-sm-9">
+        {{ form.text }}
+      </div>
+      <div class="col-sm-3">
+        <button class="btn btn-primary btn-block" type="submit">
+          Post
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <div class="posts">
+  {% for post in posts %}
+    <div class="media">
+      <a class="media-left" href="#">
+        <img src="{{ post.author.profile.avatar_url }}">
+      </a>
+      <div class="media-body">
+        <h4 class="media-heading">
+          <a href="{% url 'post_details' post.pk %}">
+          {{ post.text}}
+          </a>
+        </h4>
+        <a href="{% url 'profile' post.author.username %}">
+            <b><small>{{ post.author.username }}</small></b></a>
+        on <b><small>{{ post.date_added }}</small></b>
+      </div>
+    </div>
+  {% endfor %}
+  </div>
+{% endblock %}

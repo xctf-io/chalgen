@@ -1,0 +1,5 @@
+- !robots_txt
+  name: Robots.txt
+  flag: flag{this_is_a_test}
+  config:
+    asdf: asdf

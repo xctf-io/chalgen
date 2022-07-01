@@ -1,0 +1,5 @@
+- !chromium_history
+  name: "Chromium History"
+  flag: "flag{this_is_a_test}"
+  config:
+    script: index.js

@@ -1,0 +1,7 @@
+- !sql_log
+  name: "SQL Log"
+  flag: "flag{l0gs_4re_v3ry_1mp0rt4nt_f0r_f0r3ns1c5}"
+  config:
+    flag_user: "admin"
+    other_users: {"laura":"super_super_secure_password", "john":"GuESSThiSPaSswORd"}
+    files: ["note.txt"]

@@ -1,0 +1,6 @@
+- !xor
+  name: Single Byte Xor
+  flag: "flag{w04h_l34k3d_cr3ds!}"
+  config:
+    key: n
+    addl_text: "u = ish, pass = 1_l0v3_sm0r3s"

@@ -1,0 +1,6 @@
+- !git_revert
+  name: "Git Revert"
+  flag: "flag{b3_c4r3ful_0f_wh4t_y0u_c0mm1t}"
+  config:
+    text: I DID IT - corncob
+    num_parts: 5

@@ -1,0 +1,28 @@
+{{- if and .Values.persistence.uploads.enabled (not .Values.persistence.uploads.existingClaim) -}}
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: {{ include "ctfd.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "ctfd.name" . }}
+    helm.sh/chart: {{ include "ctfd.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- if .Values.persistence.uploads.labels }}
+{{ toYaml .Values.persistence.labels | indent 4 }}
+{{- end }}
+spec:
+  accessModes:
+    - {{ .Values.persistence.uploads.accessMode | quote }}
+  resources:
+    requests:
+      storage: {{ .Values.persistence.uploads.size | quote }}
+{{- if .Values.persistence.uploads.storageClass }}
+  {{- if (eq "-" .Values.persistence.uploads.storageClass) }}
+  storageClassName: ""
+  {{- else }}
+  storageClassName: "{{ .Values.persistence.uploads.storageClass }}"
+  {{- end }}
+{{- end }}
+{{- end }}
+

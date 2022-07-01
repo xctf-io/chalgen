@@ -1,0 +1,5 @@
+- !rev_audio
+  name: Reverse Audio
+  flag: flag{th1s_is_a_t3st}
+  config:
+    text: "This is a test and your flag is: "

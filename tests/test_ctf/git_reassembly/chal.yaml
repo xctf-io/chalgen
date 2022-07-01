@@ -1,0 +1,6 @@
+- !git_reassembly
+  name: "Git Reassembly"
+  flag: "flag{g1t_r34ss3mbly}"
+  config:
+    text: In case you didn't know, I did it >:) --Long
+    num_parts: 5

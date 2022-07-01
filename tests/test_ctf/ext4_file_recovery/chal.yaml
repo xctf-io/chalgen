@@ -1,0 +1,6 @@
+- !ext4_file_recovery
+  name: "Ext4 File Recovery"
+  flag: "flag{this_is_a_test}"
+  config:
+    deleted_evidence: evidence
+    fluff: fluff

@@ -1,0 +1,40 @@
+{% load staticfiles %}
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>My facebook app</title>
+    <link rel="stylesheet" href="{% static 'css\bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css\main.css' %}">
+  </head>
+  <body>
+
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="{% url 'index' %}">
+            <img src="{% static 'img/logo-fb.svg' %}">
+          </a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav pull-right">
+            <li><a href="{% url 'index' %}">News</a></li>
+          {% if user.is_authenticated %}
+            <li><a href="{% url 'profile' user.username %}">My profile</a></li>
+            <li><a href="{% url 'logout' %}">Log Out</a></li>
+          {% endif %}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      {% block content %}
+      {% endblock %}
+    </div>
+
+    <!-- scripts -->
+    <script src="{% static 'js\jquery-1.11.1.min.js' %}"></script>
+    <script src="{% static 'js\bootstrap.min.js' %}"></script>
+    <script src="{% static 'js\main.js' %}"></script>
+  </body>
+</html>

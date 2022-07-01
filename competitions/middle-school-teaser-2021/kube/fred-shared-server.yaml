@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: fred-shared-server-svc
+  namespace: challenges
+  labels:
+    app: fred-shared-server
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8080
+    protocol: TCP
+  selector:
+    app: fred-shared-server
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fred-shared-server-svc
+  namespace: challenges
+  labels:
+    app: fred-shared-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fred-shared-server
+  template:
+    metadata:
+      labels:
+        app: fred-shared-server
+    spec:
+      containers:
+      - name: fred-shared-server
+        image: ghcr.io/vgcs/fred-shared-server:latest
+        ports:
+        - containerPort: 80
+        imagePullPolicy: Always
+        securityContext:
+          readOnlyRootFilesystem: true
+      imagePullSecrets:
+      - name: regcred

@@ -1,0 +1,146 @@
+users:
+  - name: hrosho
+    desc: Top Forknite player in the world!
+  - name: blubberfish
+  - name: kitchen1250
+  - name: nep
+  - name: carbone11
+  - name: supr3m3lyk00l
+  - name: cody$$$
+subforums:
+  - name: Announcements
+    desc: View Forknite announcements here
+  - name: Bug Reports
+    desc: Report bugs with Forknite here
+  - name: General Discussion
+    desc: Use this subforum to post anything you want
+  - name: Other
+    desc: Discuss other things here
+posts:
+  - title: crypto challenge
+    user: nep
+    text: anyone here good at cracking encryption? ZmxhZ3thbHdheXNfd2l0aF90aGVfYmFzZV9pY3N9
+    subforum: Other
+    comments:
+  - title: New Forknite Update
+    user: supr3m3lyk00l
+    text: A new update has been released! Check it out <a href="https://forknite.herokuapp.com">here</a>.
+    subforum: Announcements
+    comments:
+      - user: cody$$$
+        text: Awesome!
+  - title: blubberfish dox
+    user: nep
+    text: we are going to get to the bottom of this bois. I hacked blubberfish and got his VM. I will post on this thread when I find his address. Lets find our boi hrosho!
+    subforum: General Discussion
+    comments:
+      - user: blubberfish
+        text: DUDE WTF! I HAVEN'T DONE ANYTHING. STOP HACKING ME. @admins can someone please take this down??? this is my stuff 
+      - user: carbone11
+        text: hahahaha nice one dude
+      - user: nep
+        text: I also think hrosho had a <a href="https://www.dropbox.com/s/eojl3dgatgj9e6y/Secret%20Message-o-Matic.pdf?dl=0">Secret Message-o-Matic</a> if anyone is able to find one laying around. He might have left some clues for us.
+  - title: hrosho social media
+    user: nep
+    text: I think that we can gain access to his accounts. From some password dumps it looks like his password pattern is "speedrun$" and then 5 alphanumeric characters which are all lowercase.
+    subforum: General Discussion
+    comments:
+  - title: blubberfish suspect #1
+    user: nep
+    text: I have reason to believe that blubberfish did something to hrosho. he is going to pay 
+    subforum: General Discussion
+    comments:
+      - user: blubberfish
+        text: i have no idea what you are talking about. can you please stop dragging my name through the mud
+  - title: hrosho stream???
+    user: nep
+    text: anyone else notice that hrosho has kind of been silent for a while?
+    subforum: General Discussion
+    comments:
+      - user: blubberfish
+        text: no one cares
+      - user: nep
+        text: yeah of course you wouldn't care. now you have no one to beat you
+      - user: blubberfish
+        text: hrosho is stupid anyways
+      - user: nep
+        text: why do I feel like you have something to do with this
+      - user: blubberfish
+        text: because I literally don't
+      - user: carbone11
+        text: putting money on blubberfish sabotaging hrosho's rig 
+      - user: kitchen1250
+        text: yeah that is one salty boy
+  - title: halp plz
+    user: kitchen1250
+    text: So I think something broke while I was playing a game with my friend <a href="https://bit.ly/2TrZj76">here ya go</a>. admin halp plz
+    subforum: Bug Reports
+    comments:
+      - user: supr3m3lyk00l
+        text: Thank you for reaching out kitchen1250! We will take a look at it when we get a chance, our devs are super busy working on the game at the moment.
+      - user: kitchen1250
+        text: <3
+  - title: anyone else going to showcon?
+    user: hrosho
+    text: would love to meetup with everyone at ShowCon!
+    subforum: General Discussion
+    comments:
+      - user: nep
+        text: ill be there!
+      - user: kitchen1250
+        text: ye
+      - user: supr3m3lyk00l
+        text: Stop by our booth hrosho! we will give you all the swag you want :)
+      - user: carbone11
+        text: <a href="https://forknite-twitter.herokuapp.com/">follow me on twitter!</a>
+      - user: nep
+        text: never saw you there hrosho?
+  - title: Thanks everyone!
+    user: hrosho
+    text: After coming from the speedrunning community, I love how much people support each other here in this non toxic environment! ❤
+    subforum: General Discussion
+    comments:
+      - user: nep
+        text: dude, you are such a god at this game, how did you get so good
+      - user: supr3m3lyk00l
+        text: Thank you for being a great example for the community hrosho!
+      - user: carbone11
+        text: should have stayed with speed running dude :P
+      - user: blubberfish
+        text: 
+  - title: blubberfish v hrosho 1/30 @ 5PM EST
+    user: nep
+    text: don't miss it guys <a href="https://nep-fileshare.herokuapp.com/totally_legit_forknite_tournament.pdf">poster</a>
+    subforum: Announcements
+    comments:
+  - title: hrosho crushing it
+    user: nep
+    text: guys, check out hrosho's streams <a href="https://youtu.be/hkY74xbxZZg">here</a>. This guy is a mad man. literally a god
+    subforum: General Discussion
+    comments:
+      - user: blubberfish
+        text: i mean he is aight. im still much better though
+      - user: nep
+        text: if you are so good, why not have a 1v1?
+      - user: blubberfish
+        text: yeah ill 1v1 that poser any day
+      - user: nep
+        text: awesome, ill set something up
+  - title: why do people like forknite so much???
+    user: carbone11
+    text: this game is so lame! there is literally no skill involved and everyone playing is just a stupid kid!!!
+    subforum: Other
+    comments:
+      - user: nep
+        text: lol chill dawg, it is just a game https://www.youtube.com/watch?v=xzpndHtdl9A
+      - user: carbone11
+        text: get out of here idiot
+      - user: blubberfish
+        text: mmm i taste that salt from here
+  - title: Strats
+    user: nep
+    text: Messing around with some timing strats <a href="https://streamable.com/g7shx">here</a>
+    subforum: Other
+    comments:
+      - user: blubberfish
+        text: ah nice dude, going to have to try these out in my own games

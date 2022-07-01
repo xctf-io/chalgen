@@ -1,0 +1,90 @@
+- fields:
+    username: chance
+    password: pbkdf2_sha256$12000$AAAAAAAAA$03wqIdX2HhtP/9p1ZMTqqWm0cTdeEq7nXJhGg+Vxt5M=
+  model: auth.user
+  pk: 0
+- fields:
+    username: CornCob
+    password: pbkdf2_sha256$12000$AAAAAAAAA$OVLzb5QhfcWzRPLaKYgdtrbpqGxJSUWVm3rzlO0RIHU=
+  model: auth.user
+  pk: 1
+- fields:
+    username: Karst
+    password: pbkdf2_sha256$12000$AAAAAAAAA$+nX+cN0kMjnLh5ELmla2M2cfYJYelS3ODebDAhlxCHU=
+  model: auth.user
+  pk: 2
+- fields:
+    username: Long
+    password: pbkdf2_sha256$12000$AAAAAAAAA$xA7f5YTZZHrxW6K5wLezkKVFCrU8h+jxPrZSYRNLQPQ=
+  model: auth.user
+  pk: 3
+- fields:
+    username: Hubbz
+    password: pbkdf2_sha256$12000$AAAAAAAAA$xA7f5YTZZHrxW6K5wLezkKVFCrU8h+jxPrZSYRNLQPQ=
+  model: auth.user
+  pk: 4
+- fields:
+    username: Sadamana
+    password: pbkdf2_sha256$12000$AAAAAAAAA$xA7f5YTZZHrxW6K5wLezkKVFCrU8h+jxPrZSYRNLQPQ=
+  model: auth.user
+  pk: 5
+- fields:
+    text: here's a memorial for my best friend Chance. RIP. Will miss you always.
+    author: 2
+    likers:
+    - 4
+    - 5
+    date_added: '2020-03-06 00:00:00+00:00'
+  model: fb.userpost
+  pk: 0
+- fields:
+    text: guys i just wanted to say that my boss is an awful human being he never
+      does any of his own work so i do all the dirty work and ngl im lowkey glad he's
+      gone. Here's his office it's so gross and he just left for another party and
+      i'm here cleaning it up. Thanks for listening to my ted talk.
+    author: 1
+    likers:
+    - 3
+    date_added: '2020-03-06 00:00:00+00:00'
+  model: fb.userpost
+  pk: 1
+- fields:
+    text: im having such an amazing time on vacation! if only i had some latkes, that'd
+      be perfect...
+    author: 3
+    likers:
+    - 2
+    - 1
+    - 4
+    - 5
+    date_added: '2020-03-06 00:00:00+00:00'
+  model: fb.userpost
+  pk: 2
+- fields:
+    text: guys look at this Lovely Stupendous Beautiful frying pan i just bought im
+      so excited!
+    author: 4
+    likers:
+    - 3
+    date_added: '2020-03-06 00:00:00+00:00'
+  model: fb.userpost
+  pk: 3
+- fields:
+    text: guys check out this new project im developing! <insert link to fileshare
+      here>
+    author: 2
+    likers:
+    - 3
+    - 1
+    - 4
+    - 5
+    date_added: '2020-03-06 00:00:00+00:00'
+  model: fb.userpost
+  pk: 4
+- fields:
+    author: 0
+    date_added: 2020-03-06 00:00:00+00:00
+    post: 1
+    text: asdf
+  model: fb.userpostcomment
+  pk: 0

@@ -1,0 +1,6 @@
+- !change_extension
+  name: "Change file extension"
+  flag: "flag{test}"
+  config:
+    orig_file: challenge.png
+    out_ext: .txt

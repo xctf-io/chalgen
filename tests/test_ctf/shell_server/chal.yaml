@@ -1,0 +1,13 @@
+- !shell_server
+  name: Shell Server
+  config:
+    username: username
+    password: password
+    users:
+    - test_user
+    filesystem_root: root
+    chal_to_path:
+    - name: Diff Images
+      path: /home/test_user/
+    chals:
+    - Diff Images

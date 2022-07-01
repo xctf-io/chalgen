@@ -1,0 +1,5 @@
+- !brokenpngheader
+  name: "Broken PNG Header"
+  flag: "flag{the_flag_is_in_the_image}"
+  config:
+    orig_img: test.png

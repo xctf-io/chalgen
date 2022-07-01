@@ -1,0 +1,6 @@
+- !caesar_cipher
+  name: CodingChallengeCaserCipher
+  flag: "flag{seems_like_you_know_your_cs}"
+  config:
+    shift: 10
+    addl_text: "I can teach you more if you would like, but you are going to have to pay..."

@@ -1,0 +1,36 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+click = "==7.0"
+py = "==1.8.1"
+pytest = "==5.3.5"
+"ruamel.yaml" = "*"
+piexif = "*"
+logzero = "*"
+pycipher = "*"
+pycryptodome = "*"
+crypto = "*"
+rsa = "*"
+python-jade = "*"
+pdfrw = "*"
+scapy = "*"
+stegano = "*"
+qrcode = "*"
+pygraphviz = "*"
+passlib = "*"
+python-slugify = "*"
+Pillow = "*"
+Jinja2 = "*"
+pexpect = "*"
+wexpect = "*"
+tk = "*"
+gtts = "*"
+
+[dev-packages]
+pylint = "*"
+
+[requires]
+python_version = "3.9"

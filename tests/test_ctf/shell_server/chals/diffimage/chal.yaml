@@ -1,0 +1,6 @@
+- !diffimages
+  name: Diff Images
+  flag: "flag{w0w_y0u_w1n}"
+  config:
+    orig_img: murder.png
+    addl_text: "that's what he gets for stealing my marshmallows"

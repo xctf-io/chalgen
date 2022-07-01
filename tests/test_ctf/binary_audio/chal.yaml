@@ -1,0 +1,5 @@
+- !binary_audio
+  name: Binary Audio
+  flag: "flag{w4ve3_r_s0_c00l}"
+  config:
+    text: "Your flag is:"

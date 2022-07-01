@@ -1,0 +1,12 @@
+- !shell_server
+  name: Fred Shared Server
+  config:
+    username: daisy
+    password: I<3computers
+    users:
+    - fred
+    - daisy
+    workdir: /home/Daisy
+    filesystem_root: root
+    chal_to_path: {}
+    chals: []

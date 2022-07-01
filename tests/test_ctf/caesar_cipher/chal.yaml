@@ -1,0 +1,6 @@
+- !caesar_cipher
+        name: Caesar Cipher
+        flag: "flag{a_very_basic_caesar_cipher}"
+        config:
+          shift: 10
+          addl_text: "i hope he never comes back. (i never liked him anyway)."

@@ -1,0 +1,5 @@
+- !hex
+  name: Hex Decoding
+  flag: flag{this_is_a_test}
+  config:
+    None

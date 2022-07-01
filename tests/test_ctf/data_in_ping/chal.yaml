@@ -1,0 +1,5 @@
+- !ping_pcap
+  name: "Hidden Data in Ping"
+  flag: "flag{p1ng_p1ng_p1ng_w3_h4ve_a_w1nner!}"
+  config:
+    text: "The secret is "

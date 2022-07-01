@@ -1,0 +1,139 @@
+- !facebook_django
+  name: "facebook django"
+  flag: "flag{this_is_a_test}"
+  config:
+    script: index.js
+    users: 
+      - username: chance
+        password: L4tk35_4_3v3r
+      - username: CornCob
+        password: L4tk3_M4f14_L0rd_123
+      - username: Karst
+        password: 3ddy_Curr3nT5
+      - username: Long
+        password: test
+      - username: Hubbz
+        password: test
+      - username: Sadamana
+        password: test
+    posts:
+      - text: here's a memorial for my best friend Chance. RIP. Will miss you always.
+        author: Karst
+        chal: Edit Contrast
+        likers: [Hubbz, Sadamana]
+      - text: guys i just wanted to say that my boss is an awful human being he never does any of his own work so i do all the dirty work and ngl im lowkey glad he's gone. Here's his office it's so gross and he just left for another party and i'm here cleaning it up. Thanks for listening to my ted talk.
+        author: CornCob
+        chal: Open Image in Notepad
+        likers: [Long]
+      - text: im having such an amazing time on vacation! if only i had some latkes, that'd be perfect...
+        author: Long
+        chal: Exif
+        likers: [Karst, CornCob, Hubbz, Sadamana]
+      - text: guys look at this Legendary Stupendous Beautiful frying pan i just bought im so excited!
+        author: Hubbz
+        chal: LSB
+        likers: [Long]
+      - text: guys check out our new robot! isnt it amazing?
+        author: Karst
+        chal: Diff two images
+        likers: [Long, CornCob, Hubbz, Sadamana]
+      - text: here's the link to my new project! (i have some encrypted files from the ongoing murder investigation of chance, so pls dont share)
+        authro: Karst
+        chal: Fileshare Flask
+    profiles:
+    comments:
+      - author: Hubbz
+        date_added: 2020-03-06 00:00:00.000000+00:00
+        post: 1
+        text: ya chance was a pretty cool guy, rip
+      - author: Sadamana
+          date_added: 2020-03-04 00:00:00.000000+00:00
+          post: 3
+          text: Long where are you vacationing?
+      - author: Long
+          date_added: 2020-03-05 00:00:00.000000+00:00
+          post: 3
+          text: Top secret, can't tell you, but see if you can get it from the image
+      - author: Karst
+          date_added: 2020-03-06 00:00:00.000000+00:00
+          post: 3
+          text: why are you on vacation it's not even spring break man
+      - author: Long
+          date_added: 2020-03-07 00:00:00.000000+00:00
+          post: 3
+          text: i had some business that i needed to take care of
+      - author: Karst
+          date_added: 2020-03-06 00:00:00.000000+00:00
+          post: 3
+          text: sounds kinda sus ngl
+    chals:
+      - !change_extension
+        name: Edit Contrast
+        flag: ""
+        config:
+          orig_file: memorial.png
+          out_ext: .txt
+      - !image_exif
+        name: Image Exif
+        flag: flag{wh4t'5_1n_th3_l0c4t10n?}
+        config:
+          orig_img: ../vacation.jpg
+          metadata_key: 315
+          flag_transform: base64
+      - !lsb
+        name: LSB Encoding
+        flag: "flag{l0v3ly_sup3r_b3st_3nc0d1ng}"
+        config:
+          orig_img: ../pan.png
+          addl_text: "username: k4r5t_t0p0gr4phy"
+      - !diffimages
+        name: Diff Images
+        flag: "flag{5uch_4_c00l_pr0j3ct!!}"
+        dest_path: /home/project.png
+        config:
+          orig_img: ../project.png
+          addl_text: "password: y4z00_tr1but4ry"
+      - !fileshare_flask
+        name: Fileshare Flask
+          flag: flag{f1l3sh4r3}
+          config:
+            files:
+              - test.txt
+            chals:
+              - !encrypted_zip
+                  name: "Encrypted Zip"
+                  flag: "flag{this_is_a_test}"
+                  config:
+                    files_dir: "files"
+                    password: "mischance"
+                    wordlist: "wordlist.txt"
+              - !docxs_carving
+                name: Docx Carving
+                flag: "flag{test}"
+                config:
+                  hidden_file: ChanceEssay.pdf
+                  main_file: recipe.docx
+                  dest_path: "/home/recipe.docx"
+              - !spectrogram
+                name: "Spectrogram"
+                flag: "flag{mus1c_m4j0r5_c4n_h4ck_t00}"
+                config:
+                  orig_img: "flag.PNG"
+                  output_wav: "output.wav"
+              - !pcap_login
+                name: "PCAP Login"
+                flag: "flag{t1r3d_0f_ESS_t3rm5_y3t?}"
+                config:
+                  username: "d3t3ct1ve_k4r5t"
+                  password: "t4lw3g flag{t1r3d_0f_ESS_t3rm5_y3t?}"
+              - !virtual_machine
+                name: Virtual Machine
+                flag: "flag{this_is_a_test}"
+                config:
+                  chals:
+                    - !chromium_history
+                      name: Chromium History
+                      flag: flag{this_is_a_test}
+                      config:
+                        None
+                      dest_path: /something

@@ -1,0 +1,44 @@
+- !fileshare_flask
+        name: Fileshare Flask
+          flag: flag{f1l3sh4r3}
+          config:
+            files:
+              - test.txt
+            chals:
+              - !encrypted_zip
+                  name: "Encrypted Zip"
+                  flag: "flag{this_is_a_test}"
+                  config:
+                    files_dir: "files"
+                    password: "mischance"
+                    wordlist: "wordlist.txt"
+              - !docxs_carving
+                name: Docx Carving
+                flag: "flag{test}"
+                config:
+                  hidden_file: ChanceEssay.pdf
+                  main_file: recipe.docx
+                  dest_path: "/home/recipe.docx"
+              - !spectrogram
+                name: "Spectrogram"
+                flag: "flag{mus1c_m4j0r5_c4n_h4ck_t00}"
+                config:
+                  orig_img: "flag.PNG"
+                  output_wav: "output.wav"
+              - !pcap_login
+                name: "PCAP Login"
+                flag: "flag{t1r3d_0f_ESS_t3rm5_y3t?}"
+                config:
+                  username: "d3t3ct1ve_k4r5t"
+                  password: "t4lw3g flag{t1r3d_0f_ESS_t3rm5_y3t?}"
+              - !virtual_machine
+                name: Virtual Machine
+                flag: "flag{this_is_a_test}"
+                config:
+                  chals:
+                    - !chromium_history
+                      name: Chromium History
+                      flag: flag{this_is_a_test}
+                      config:
+                        script: index.js
+                      dest_path: /something

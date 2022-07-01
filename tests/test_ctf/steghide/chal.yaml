@@ -1,0 +1,6 @@
+- !steghide
+  name: Steghide Challenge
+  flag: "flag{din0s4ur}"
+  config:
+    image: cabin.jpeg
+    text: "username: admin"

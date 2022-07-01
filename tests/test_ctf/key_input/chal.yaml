@@ -1,0 +1,6 @@
+- !key_input
+  name: "Keyboard Input"
+  flag: "flag{b3_c4r3ful_0f_wh4t_y0u_typ3}"
+  config:
+    text: Don't tell anyone but the flag is 
+    rand_backspaces: True

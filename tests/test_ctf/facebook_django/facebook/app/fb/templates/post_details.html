@@ -1,0 +1,43 @@
+{% extends 'layout.html' %}
+{% load staticfiles %}
+
+{% block content %}
+  <h3>{{ post.text }}</h3>
+  by <b><small>{{ post.author }}</small></b> on <b><small>{{ post.date_added }}</small></b>
+  <br>
+
+  <a class="btn btn-primary btn-like" href="{% url 'like' post.pk %}">Like</a>
+  
+  {% if post.likers.count %}
+  Who likes this:
+    {% for liker in post.likers.all %}
+     {{ liker.first_name }}
+     {{ liker.last_name }}
+     {% if not forloop.last %}
+       ,
+     {% endif %}
+    {% endfor %}
+  {% endif %}
+
+  <hr>
+
+  <div class="comments">
+  {% for comment in comments %}
+    <div class="media">
+      <a class="media-left" href="#">
+        <img src="{{ comment.author.profile.avatar_url }}">
+      </a>
+      <div class="media-body">
+        <b>{{ comment.author }}</b>: {{ comment.text }}
+      </div>
+    </div>
+  {% endfor %}
+  </div>
+  <br>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.text }}
+    <input type="submit" value="Post"/>
+  </form>
+
+{% endblock %}

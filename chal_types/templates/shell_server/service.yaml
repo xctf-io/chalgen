@@ -1,0 +1,80 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: chal-host-svc
+  namespace: challenges
+  labels:
+    app: chal-host
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: chal-host
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chal-host-svc
+  namespace: challenges
+  labels:
+    app: chal-host
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chal-host
+  template:
+    metadata:
+      labels:
+        app: chal-host
+    spec:
+      containers:
+      - name: chal-host
+        image: registry.mcpshsf.com/mcpshsf/chal-host:latest
+        ports:
+        - containerPort: 80
+        imagePullPolicy: Always
+        securityContext:
+        privileged: false
+        # Required to prevent escalations to root.
+        allowPrivilegeEscalation: false
+        # This is redundant with non-root + disallow privilege escalation,
+        # but we can provide it for defense in depth.
+        requiredDropCapabilities:
+          - ALL
+        # Allow core volume types.
+        volumes:
+          - 'configMap'
+          - 'emptyDir'
+          - 'projected'
+          - 'secret'
+          - 'downwardAPI'
+          # Assume that persistentVolumes set up by the cluster admin are safe to use.
+          - 'persistentVolumeClaim'
+        hostNetwork: false
+        hostIPC: false
+        hostPID: false
+        runAsUser:
+          # Require the container to run without root privileges.
+          rule: 'MustRunAsNonRoot'
+        seLinux:
+          # This policy assumes the nodes are using AppArmor rather than SELinux.
+          rule: 'RunAsAny'
+        supplementalGroups:
+          rule: 'MustRunAs'
+          ranges:
+            # Forbid adding the root group.
+            - min: 1
+              max: 65535
+        fsGroup:
+          rule: 'MustRunAs'
+          ranges:
+            # Forbid adding the root group.
+            - min: 1
+              max: 65535
+        readOnlyRootFilesystem: false
+      imagePullSecrets:
+      - name: regcred
