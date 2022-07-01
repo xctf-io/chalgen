@@ -62,7 +62,7 @@ pytest
 	- [x] Recover files from series of git commits (and git stash?)
 - [ ] PCAP - (use scapy)
 	- [ ] Follow http stream to get username and passwords
-	* [ ] Recording of keyboard input
+	- [x] Recording of keyboard input
 	- [ ] Recording of bluetooth traffic
 - [x] Encrypted ZIP
 - [ ] PDF [NSA Guide](http://www.itsecure.hu/library/file/Biztons%C3%A1gi%20%C3%BAtmutat%C3%B3k/Alkalmaz%C3%A1sok/Hidden%20Data%20and%20Metadata%20in%20Adobe%20PDF%20Files.pdf)
