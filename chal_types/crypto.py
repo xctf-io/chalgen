@@ -28,9 +28,11 @@ class SubstitutionChallenge(GeneratedChallenge):
 
 class RSAChallenge(GeneratedChallenge):
     yaml_tag = u'!RSA'
-    __doc__ = """RSA challenge
+    __doc__ = """
+    RSA challenge
 
     Config:
+    
         None
     """
 
@@ -48,9 +50,11 @@ class RSAChallenge(GeneratedChallenge):
 
 class MD5Challenge(GeneratedChallenge):
     yaml_tag = u'!md5'
-    __doc__ = """A reverse MD5 hash challenge
+    __doc__ = """
+    A reverse MD5 hash challenge
 
     Config:
+
         None
     """
 
@@ -68,9 +72,11 @@ class MD5Challenge(GeneratedChallenge):
 
 class SHA256Challenge(GeneratedChallenge):
     yaml_tag = u'!sha256'
-    __doc__ = """A reverse SHA256 hash challenge
+    __doc__ = """
+    A reverse SHA256 hash challenge
 
     Config:
+
         None
     """
 
@@ -88,9 +94,11 @@ class SHA256Challenge(GeneratedChallenge):
 
 class VigenereChallenge(GeneratedChallenge):
     yaml_tag = u'!vigenere'
-    __doc__ = """A decode vigenere challenge
+    __doc__ = """
+    A decode vigenere challenge
     
     Config:
+
         key: word/phrase used to encrypt plaintext
     """
 
@@ -110,9 +118,11 @@ class VigenereChallenge(GeneratedChallenge):
 
 class BinaryChallenge(GeneratedChallenge):
     yaml_tag = u'!binary'
-    __doc__ = """A simple binary decoding challenge
+    __doc__ = """
+    A simple binary decoding challenge
     
     Config:
+
         None
     """
 
@@ -130,9 +140,11 @@ class BinaryChallenge(GeneratedChallenge):
 
 class HexChallenge(GeneratedChallenge):
     yaml_tag = u'!hex'
-    __doc__ = """A simple hex decoding challenge
+    __doc__ = """
+    A simple hex decoding challenge
 
     Config:
+
         None
     """
 
@@ -150,9 +162,11 @@ class HexChallenge(GeneratedChallenge):
 
 class Base64Challenge(GeneratedChallenge):
     yaml_tag = u'!base64'
-    __doc__ = """A simple base64 decoding challenge
+    __doc__ = """
+    A simple base64 decoding challenge
 
     Config:
+
         None
     """
 
@@ -172,9 +186,11 @@ class Base64Challenge(GeneratedChallenge):
 
 class CaesarCipherChallenge(GeneratedChallenge):
     yaml_tag = u'!caesar_cipher'
-    __doc__ = """A simple Caesar cipher challenge
+    __doc__ = """
+    A simple Caesar cipher challenge
 
     Config:
+
         shift - The amount to shift the alphabet by
     """
 
@@ -194,6 +210,7 @@ class CaesarCipherChallenge(GeneratedChallenge):
         """Solve the Caesar cipher challenge
 
         Description:
+
             Knowing that the first four letters are the word "flag",
             figure out the shift from the first letter
         """
@@ -205,9 +222,11 @@ class CaesarCipherChallenge(GeneratedChallenge):
 
 class XorChallenge(GeneratedChallenge):
     yaml_tag = u'!xor'
-    __doc__ = """A single or multi byte xor challenge
+    __doc__ = """
+    A single or multi byte xor challenge
 
     Config:
+
         key - A single byte key to xor the flag with
         text - Optional text to put before the flag to make sure there is enough text to correctly recover the flag
     """
@@ -236,6 +255,7 @@ class ECBBlockDuplication(GeneratedChallenge):
     __doc__ = """
 
     Config:
+
         key - The key to use
         secret - The secret value to append before flag
     """
@@ -249,6 +269,7 @@ class CBCPaddingOracle(GeneratedChallenge):
     __doc__ = """
 
     Config:
+
         key - The key to use
         secret - The secret value to append before flag
     """
@@ -259,13 +280,15 @@ class CBCPaddingOracle(GeneratedChallenge):
 
 class HashExtension(GeneratedChallenge):
     yaml_tag = u'!hash_extension'
-    __doc__ = """A simple SHA1 hash extension challenge
+    __doc__ = """
+    A simple SHA1 hash extension challenge
     
     Config:
+
         key - The secret for HMAC
         author - The author of the website
-        text - way to add data to secret, in order to connect to other challenges
-        custom_files - way to add custom files
+        text - Additional text in the secret file, in order to connect to other challenges
+        custom_files - Custom files on the web server
     """
 
     def gen(self, chal_dir):

@@ -14,11 +14,13 @@ ADD index.html $webroot/index.html
 
 class RobotsTxtChallenge(GeneratedChallenge):
     yaml_tag = u'!robots_txt'
-    __doc__ = """Flag is located in the robots file
+    __doc__ = """
+    Flag is located in the robots file
 
     Config:
-        index: Custom index.html page
-        text: Optional additional information
+    
+        index - Custom index.html page
+        text - Optional additional information
     """
 
     def gen(self, chal_dir):
@@ -57,13 +59,14 @@ class RobotsTxtChallenge(GeneratedChallenge):
 
 class TemplateInjection(GeneratedChallenge):
     yaml_tag = u'!temp_inj'
-    __doc__ = """Flag is located in flag.txt
+    __doc__ = """
+    Flag is located in flag.txt
 
     Config:
-        author: author of mad lib generator
-        blacklist: blackist for disallowed words(leave as [] for a blank blacklist)
-        files: optional additional files to add to webroot
 
+        author - author of mad lib generator
+        blacklist - blackist for disallowed words(leave as [] for a blank blacklist)
+        files - optional additional files to add to webroot
     """
 
     def gen(self, chal_dir):

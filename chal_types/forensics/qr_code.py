@@ -7,9 +7,11 @@ from ..challenge import GeneratedChallenge
 class BrokenQRCode(GeneratedChallenge):
     # TODO (cthompson) break qr code
     yaml_tag = u'!broken_qrcode'
-    __doc__ = """Fix a broken QR code
+    __doc__ = """
+    Fix a broken QR code
 
     Config:
+
         fluff - some text fluff to include in the challenge
     """
 
@@ -35,11 +37,13 @@ class BrokenQRCode(GeneratedChallenge):
 class QRCodeChallenge(GeneratedChallenge):
     # TODO (cthompson) break qr code
     yaml_tag = u'!qrcode'
-    __doc__ = """Create a QR Code with 
+    __doc__ = """
+    Create a QR Code with 
 
     Config:
+    
         fluff - some text fluff to include in the challenge
-        background_image: - background image to overlay 
+        background_image - background image to overlay 
             file - filename of background image
             x_pos - x coordinate of qr code placement
             y_pos - y coordinate of qr code placement

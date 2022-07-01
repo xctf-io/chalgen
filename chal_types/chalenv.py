@@ -74,9 +74,11 @@ class StaticSite(ChallengeEnvironment):
     security = 'readonly'
 
     yaml_tag = u'!static_site'
-    __doc__ = """Static Site
+    __doc__ = """
+    Static Site
 
     Config:
+
         None
     """
 
@@ -153,9 +155,11 @@ class ShellServer(ChallengeEnvironment):
     security = 'readonly'
 
     yaml_tag = u'!shell_server'
-    __doc__ = """Shell Server
+    __doc__ = """
+    Shell Server
 
     Config:
+
         None
     """
 
@@ -204,9 +208,11 @@ class ShellServer(ChallengeEnvironment):
 
 class FileshareFlask(ChallengeEnvironment):
     yaml_tag = u'!fileshare_flask'
-    __doc__ = """Fileshare Flask
+    __doc__ = """
+    Fileshare Flask
 
     Config:
+    
         username - Username to login
         password - Password to login
         files - Files to upload
@@ -280,9 +286,11 @@ class FileshareFlask(ChallengeEnvironment):
 
 class VirtualMachine(ChallengeEnvironment):
     yaml_tag = u'!virtual_machine'
-    __doc__ = """Virtual Machine
+    __doc__ = """
+    Virtual Machine
 
     Config:
+
         None
     """
 
@@ -341,9 +349,11 @@ class VirtualMachine(ChallengeEnvironment):
 
 class TwitterFlask(ChallengeEnvironment):
     yaml_tag = u'!twitter_flask'
-    __doc__ = """Twitter site
+    __doc__ = """
+    Twitter clone
 
     Config:
+
         users - Users of the site
         followers - Users that follower other users, each user must exist in `users`
         messages - Messages posted on twitter by users
@@ -429,9 +439,11 @@ class TwitterFlask(ChallengeEnvironment):
 
 class FacebookDjango(ChallengeEnvironment):
     yaml_tag = u'!facebook_django'
-    __doc__ = """Facebook clone
+    __doc__ = """
+    Facebook clone
 
     Config:
+    
         users - Users of the site
         posts - Posts posted by users
         profiles - Profiles of the users
@@ -612,9 +624,11 @@ class FacebookDjango(ChallengeEnvironment):
 
 class JekyllBlog(ChallengeEnvironment):
     yaml_tag = u'!jekyll_blog'
-    __doc__ = """A simple blog
+    __doc__ = """
+    A simple blog
 
     Config:
+    
         title - the name of the blog
         email - the email of the author
         author - the name of the author
