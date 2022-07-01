@@ -4,7 +4,7 @@ Module chal_types.forensics.forensics
 Classes
 -------
 
-`BinaryAudio(name, flag, config)`
+`BinaryAudio`
 :   
 
 ```
@@ -17,7 +17,7 @@ Ancestors:
     - chal_types.challenge.GeneratedChallenge
 ```
 
-`BrokenPNGHeaderChallenge(name, flag, config)`
+`BrokenPNGHeaderChallenge`
 :   
 
 ```
@@ -30,7 +30,7 @@ Ancestors:
     - chal_types.challenge.GeneratedChallenge
 ```
 
-`ChangeExtension(name, flag, config)`
+`ChangeExtension`
 :   
 
 ```
@@ -44,7 +44,7 @@ Ancestors:
     - chal_types.challenge.GeneratedChallenge
 ```
 
-`ChromiumHistory(name, flag, config)`
+`ChromiumHistory`
 :   
 
 ```
@@ -57,7 +57,7 @@ Ancestors:
     - chal_types.challenge.GeneratedChallenge
 ```
 
-`DiffImages(name, flag, config)`
+`DiffImages`
 :   
 
 ```
@@ -70,7 +70,7 @@ Ancestors:
     - chal_types.challenge.GeneratedChallenge
 ```
 
-`DocxCarving(name, flag, config)`
+`DocxCarving`
 :   
 
 ```
@@ -85,7 +85,7 @@ Ancestors:
     - chal_types.challenge.GeneratedChallenge
 ```
 
-`EditContrast(name, flag, config)`
+`EditContrast`
 :   
 
 ```
@@ -93,7 +93,7 @@ Ancestors:
     - chal_types.challenge.GeneratedChallenge
 ```
 
-`EditNotepad(name, flag, config)`
+`EditNotepad`
 :   
 
 ```
@@ -106,7 +106,7 @@ Ancestors:
     - chal_types.challenge.GeneratedChallenge
 ```
 
-`EncryptedZipChallenge(name, flag, config)`
+`EncryptedZipChallenge`
 :   
 
 ```
@@ -121,7 +121,7 @@ Ancestors:
     - chal_types.challenge.GeneratedChallenge
 ```
 
-`Ext4FileRecovery(name, flag, config)`
+`Ext4FileRecovery`
 :   
 
 ```
@@ -135,7 +135,7 @@ Ancestors:
     - chal_types.challenge.GeneratedChallenge
 ```
 
-`FileCarving(name, flag, config)`
+`FileCarving`
 :   
 
 ```
@@ -163,7 +163,7 @@ Ancestors:
     - chal_types.challenge.GeneratedChallenge
 ```
 
-`GitReassemblyChallenge(name, flag, config)`
+`GitReassemblyChallenge`
 :   
 
 ```
@@ -179,7 +179,7 @@ Ancestors:
     - chal_types.challenge.GeneratedChallenge
 ```
 
-`GitRevertChallenge(name, flag, config)`
+`GitRevertChallenge`
 :   
 
 ```
@@ -196,7 +196,7 @@ Ancestors:
     - chal_types.challenge.GeneratedChallenge
 ```
 
-`HiddenStuffInPDF(name, flag, config)`
+`HiddenStuffInPDF`
 :   
 
 ```
@@ -209,7 +209,7 @@ Ancestors:
     - chal_types.challenge.GeneratedChallenge
 ```
 
-`ImageExifChallenge(name, flag, config)`
+`ImageExifChallenge`
 :   
 
 ```
@@ -226,7 +226,7 @@ Ancestors:
     - chal_types.challenge.GeneratedChallenge
 ```
 
-`InvisibleChars(name, flag, config)`
+`InvisibleChars`
 :   
 
 ```
@@ -239,7 +239,7 @@ Ancestors:
     - chal_types.challenge.GeneratedChallenge
 ```
 
-`LSB(name, flag, config)`
+`LSB`
 :   
 
 ```
@@ -252,7 +252,7 @@ Ancestors:
     - chal_types.challenge.GeneratedChallenge
 ```
 
-`ReverseAudio(name, flag, config)`
+`ReverseAudio`
 :   
 
 ```
@@ -265,7 +265,7 @@ Ancestors:
     - chal_types.challenge.GeneratedChallenge
 ```
 
-`SpectrogramChallenge(name, flag, config)`
+`SpectrogramChallenge`
 :   
 
 ```
@@ -280,7 +280,7 @@ Ancestors:
     - chal_types.challenge.GeneratedChallenge
 ```
 
-`SteghideChallenge(name, flag, config)`
+`SteghideChallenge`
 :   
 
 ```
