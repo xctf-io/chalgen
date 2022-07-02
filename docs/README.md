@@ -81,7 +81,7 @@ This command runs the docker image for local testing. You must run `python chalg
 python chalgen.py competitiongen --competition-folder=<relative path of the competition> --reg-url=<registry to push images to>
 ```
 
-This command builds all of the Kubernetes files needed to deploy to a Kubernetes cluster. Upon completion, a graph of the challenges will be generated.
+This command builds all of the Kubernetes files needed to deploy to a Kubernetes cluster. Upon completion, a graph of the challenges will be generated. Make sure to create a `challenges` namespace before deploying.
 ***
 ### Build and run a competition locally
 
