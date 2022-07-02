@@ -10,6 +10,7 @@ from shutil import copyfile, copytree
 from jinja2 import Template
 import tempfile
 import uuid
+from .utils import WorkDir
 
 docker_template = """
 FROM {base_img}
@@ -42,18 +43,6 @@ class Process:
 
     def clone(self):
         return Process(self.shell)
-
-
-class WorkDir(object):
-    def __init__(self, chal_dir):
-        self.chal_dir = chal_dir
-        self.cwd = os.getcwd()
-
-    def __enter__(self):
-        os.chdir(self.chal_dir)
-
-    def __exit__(self, *args):
-        os.chdir(self.cwd)
 
 
 class DockerBuilder(object):
