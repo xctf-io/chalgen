@@ -4,6 +4,7 @@ Chalgen Docs
   - [All challenges](chal_types/README.md)
   - [Concepts explained](README.md#concepts-explained)
   - [Example commands](README.md#available-commands)
+  - [Running on AWS](README.md#run-a-competition-on-an-aws-lab)
 
 ## Concepts explained
 
