@@ -102,10 +102,10 @@ This command assumes you have `minikube` installed. Install it [here](https://mi
  - Run `export KUBECONFIG=./kubeconfig` to use the kube config
     - Rerun everytime you refresh
  - Transfer all files in the `kube` directory to the Lab
- - Run `./kubectl create namespace challenges`
+ - Run `kubectl create namespace challenges`
  - Change the annotation field of ingress.yaml to `traefik.ingress.kubernetes.io/router.entrypoints: web`
- - Run `./kubectl apply -f kube` to start the competition
-    - Run `./kubectl delete namespace challenges` to stop
+ - Run `kubectl apply -f kube` to start the competition
+    - Run `kubectl delete namespace challenges` to stop
  - Run `aws lightsail open-instance-public-ports --instance-name "Agent1" --port-info fromPort=80,toPort=80`
     - The static ip address of Agent1 will be the ingress
 
