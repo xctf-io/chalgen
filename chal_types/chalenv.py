@@ -26,7 +26,6 @@ class ChallengeEnvironment(GeneratedChallenge):
         if self.config is None:
             return
 
-
         tree = {
             "name": self.name,
             "chal": self,
@@ -705,6 +704,7 @@ class JekyllBlog(ChallengeEnvironment):
             make.write(make_template.format(
                 chal_run_options=f'-p 8081:{self.target_port}', chal_name=self.container_id))
         with FixMinikube():
-            os.system(f'docker run --rm --volume="{chal_out_dir}:/srv/jekyll" -it jekyll/builder:3.8 jekyll build')
+            os.system(
+                f'docker run --rm --volume="{chal_out_dir}:/srv/jekyll" -it jekyll/builder:3.8 jekyll build')
         with WorkDir(chal_out_dir):
             os.system('make build')

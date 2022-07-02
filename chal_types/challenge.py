@@ -20,6 +20,7 @@ def mkdir_p(path):
         else:
             raise
 
+
 def get_kube_service(chal, namespace='challenges'):
     chal_name = chal['name']
     service_name = chal['service_name']
