@@ -4,6 +4,7 @@ import ruamel.yaml
 from gtts import gTTS
 import os
 
+
 class WorkDir(object):
     def __init__(self, chal_dir):
         self.chal_dir = chal_dir
@@ -14,6 +15,7 @@ class WorkDir(object):
 
     def __exit__(self, *args):
         os.chdir(self.cwd)
+
 
 def load_chal_from_config(challenge_types, chal_config):
     yaml = ruamel.yaml.YAML()
@@ -33,12 +35,14 @@ def text_to_wav(text, path, tld='com'):
     tts = gTTS(text=text, lang='en', tld=tld)
     tts.save(path)
 
+
 def fwrite(src, src_file, dest, dest_file, jinja=False, **formats):
     with open(join(src, src_file), 'r') as s, open(join(dest, dest_file), 'w') as d:
         if jinja:
             d.write(Template(s.read()).render(**formats))
         else:
             d.write(s.read().format(**formats))
+
 
 class FixMinikube(object):
     def __init__(self):
