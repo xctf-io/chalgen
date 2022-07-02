@@ -19,10 +19,10 @@ A challenge is represented by a YAML file like the following:
     fluff: fluff
 ```
 
-The type of challenge is determined by the YAML tag (starts with a !). Values passed in the `config` field allow you customize the challenge to your competition.
+The type of challenge is determined by the YAML tag (starts with a !). Values in the `config` field allow you customize the challenge to your competition.
 
 ### Challenge environments
-Challenge environments host other challenges and can also be configured to fit the competition. They have the same fields as Challenges but also "link" to other challenges through the `chals` field. An example is show below.
+Challenge environments host other challenges and can also be configured to fit the competition. They have the same fields as Challenges but also "link" to other challenges through the `chals` subfield. An example is shown below.
 
 ```yaml
 - !jekyll_blog
@@ -46,7 +46,7 @@ Competitions are structured in a tree-like fashion, with some Challenge Environm
 
 ![image](../evidence_graph.png)
 
-A competition folder has `config.yaml` that specifies the entrypoints and `chals` folder that contains the challenges. You can look at the example in [/competitions/middle-school-teaser-2021](/competitions/middle-school-teaser-2021/)
+A competition folder has a `config.yaml` that specifies the entrypoints and `chals` folder that contains the challenges. You can look at the example in [/competitions/middle-school-teaser-2021](/competitions/middle-school-teaser-2021/)
 
 ## Available commands
 ***
