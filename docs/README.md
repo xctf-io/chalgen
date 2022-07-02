@@ -91,3 +91,20 @@ python chalgen.py competitiongen --competition-folder=<relative path of the comp
 
 This command assumes you have `minikube` installed. Install it [here](https://minikube.sigs.k8s.io/docs/start/). This command runs the competition using minikube for local testing. Remember to add `127.0.0.1:53` as a DNS server. The urls of the challenges will be located in the `zones.txt` file.
 ***
+
+## Run a competition on an AWS Lab
+
+ - Start by running the competitiongen command, as shown [above](README.md#build-a-competition-for-kubernetes) 
+    - Choose `docker.io/<your username>/` for a free, public registry
+ - Paste `curl https://gist.githubusercontent.com/just-luk/d5e2dbf530d2d162e853d356cfe0a792/raw/run.sh | bash` into the Lab terminal
+ - Wait for your instances to start
+ - Run `export KUBECONFIG=./kubeconfig` to use the kube config
+    - Rerun everytime you refresh
+ - Transfer all files in the `kube` directory to the Lab
+ - Run `./kubectl create namespace challenges`
+ - Change the annotation field of ingress.yaml to `traefik.ingress.kubernetes.io/router.entrypoints: web`
+ - Run `./kubectl apply -f kube` to start the competition
+    - Run `./kubectl delete namespace challenges` to stop
+ - Run `aws lightsail open-instance-public-ports --instance-name "Agent1" --port-info fromPort=80,toPort=80`
+    - The static ip address of Agent1 will be the ingress
+

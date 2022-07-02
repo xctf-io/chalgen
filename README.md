@@ -1,4 +1,4 @@
-[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.mcpshsf.com/#https://github.com/breadchris/mcps-hsf-chalgen)
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/breadchris/mcps-hsf-chalgen)
 
 # chalgen
 
