@@ -856,7 +856,6 @@ class InvisibleChars(GeneratedChallenge):
     Config:
     
         hide_text - text before invisible characters
-
     """
 
     def gen(self, chal_dir):

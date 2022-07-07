@@ -44,12 +44,13 @@ class App(tk.Tk):
         for text, command in text_to_commands:
             button = ttk.Button(button_frame, text=text,
                                 command=command, style="Accent.TButton")
-            button.pack(padx=10, pady=10, side=tk.LEFT, fill=tk.X, expand=True)
+            button.pack(padx=10, pady=10, side=tk.LEFT, fill=tk.X, expand=True) 
         button_frame.pack(fill=tk.X)
 
         self.canvas.bind('<1>', self.select_object)
         self.canvas.bind('<Shift-1>', self.make_line)
         self.canvas.bind('<Double-Button-1>', self.open_panel)
+        self.insert_entrypoint()
 
     def make_line(self, event):
         x, y = event.x, event.y
@@ -157,6 +158,8 @@ class App(tk.Tk):
                 return 'text'
 
     def move_object(self, event):
+        if event.x < 0 or event.x > self.canvas.winfo_width() or event.y < 0 or event.y > self.canvas.winfo_height():
+            return
         cur_coords = self.canvas.coords('selected')
         self.move(event, cur_coords, 'selected')
         other_coords = self.canvas.coords('selected2')
