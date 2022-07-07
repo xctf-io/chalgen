@@ -4,6 +4,7 @@ import tkinter as tk
 from tkinter import messagebox
 import tkinter.ttk as ttk
 from os.path import *
+from cv2 import line
 from logzero import logger
 from jinja2 import Template
 from .popup import PopUpWindow
@@ -44,7 +45,7 @@ class App(tk.Tk):
         for text, command in text_to_commands:
             button = ttk.Button(button_frame, text=text,
                                 command=command, style="Accent.TButton")
-            button.pack(padx=10, pady=10, side=tk.LEFT, fill=tk.X, expand=True) 
+            button.pack(padx=10, pady=10, side=tk.LEFT, fill=tk.X, expand=True)
         button_frame.pack(fill=tk.X)
 
         self.canvas.bind('<1>', self.select_object)
@@ -66,7 +67,6 @@ class App(tk.Tk):
         self.canvas.bind('<ButtonRelease-1>', self.exit_line)
         self.config(cursor='crosshair')
 
-    # TODO Reformat later
     def select_object(self, event):
         self.canvas.bind('<ButtonRelease-1>', self.deselect)
         self.bind('<BackSpace>', self.delete)
@@ -160,10 +160,21 @@ class App(tk.Tk):
     def move_object(self, event):
         if event.x < 0 or event.x > self.canvas.winfo_width() or event.y < 0 or event.y > self.canvas.winfo_height():
             return
-        cur_coords = self.canvas.coords('selected')
-        self.move(event, cur_coords, 'selected')
-        other_coords = self.canvas.coords('selected2')
-        self.move(event, other_coords, 'selected2')
+        text_coords = self.canvas.coords('selected')
+        rect_coords = self.canvas.coords('selected2')
+        for obj in self.find_all('selected2'):
+            if self.item_type(obj) == 'line':
+                line_coords = self.canvas.coords(obj)
+                if line_coords[2] >= rect_coords[0] and line_coords[2] <= rect_coords[2] and line_coords[3] >= rect_coords[1] and line_coords[3] <= rect_coords[3]:
+                    line_coords[2] = line_coords[2] - text_coords[0] + event.x
+                    line_coords[3] = line_coords[3] - text_coords[1] + event.y
+                else:
+                    line_coords[0] = line_coords[0] - text_coords[0] + event.x
+                    line_coords[1] = line_coords[1] - text_coords[1] + event.y
+                self.canvas.coords(obj, *line_coords)
+        
+        self.move(event, text_coords, 'selected')
+        self.move(event, rect_coords, 'selected2')
 
     def move(self, event, coords, tag):
         if not coords:
@@ -192,6 +203,10 @@ class App(tk.Tk):
         if item_type == 'text':
             name = self.canvas.itemcget('selected', 'text')
             self.challenges.pop(name, None)
+
+        for item in self.canvas.find_all('selected2'):
+            if(self.item_type(item) == 'line'):
+                self.canvas.delete(item)
         self.canvas.delete('selected')
         self.canvas.delete('selected2')
 
