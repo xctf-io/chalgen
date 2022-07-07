@@ -95,7 +95,7 @@ This command assumes you have `minikube` installed. Install it [here](https://mi
 
 ## Run a competition on an AWS Lab
 
- - Start by running the competitiongen command, as shown [above](README.md#build-a-competition-for-kubernetes) 
+ - Start by running the competitiongen command, as shown [above](README.md#build-a-competition-for-kubernetes) (for Kubernetes)
     - Choose `docker.io/<your username>/` for a free, public registry
  - Paste `curl https://gist.githubusercontent.com/just-luk/d5e2dbf530d2d162e853d356cfe0a792/raw/run.sh | bash` into the Lab terminal
  - Wait for your instances to start
