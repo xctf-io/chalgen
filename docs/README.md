@@ -105,7 +105,7 @@ This command assumes you have `minikube` installed. Install it [here](https://mi
  - Run `kubectl create namespace challenges`
  - Change the annotation field of ingress.yaml to `traefik.ingress.kubernetes.io/router.entrypoints: web`
  - Run `kubectl apply -f kube` to start the competition
-    - Run `kubectl delete namespace challenges` to stop
  - Run `aws lightsail open-instance-public-ports --instance-name "Agent1" --port-info fromPort=80,toPort=80`
     - The static ip address of Agent1 will be the ingress
+ - Stop the competition with `kubectl delete namespace challenges`
 
