@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/devcontainers/universal
+FROM mcr.microsoft.com/devcontainers/python
 
 RUN sudo apt -y update
 RUN sudo apt -y install graphviz graphviz-dev ffmpeg
