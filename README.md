@@ -7,6 +7,7 @@ chalgen generates challenges which are nodes in an evidence map
 ## Prerequisites
 
 - Follow the documentation [here](https://pygraphviz.github.io/documentation/stable/install.html) to install `pygraphviz` for your system
+- Install ffmpeg from [here](https://ffmpeg.org/download.html)
 - Install Docker from [here](https://docs.docker.com/engine/install/)
 - Install kubectl from [here](https://kubernetes.io/docs/tasks/tools/)
 
@@ -38,7 +39,11 @@ pytest
 
 ## TODO
 
-* take all created evidence and integrate it into this
+* Use [kompose](https://kompose.io/) to simplify the tool
+* Add more challanges
+* Make the output pretty with [rich](https://github.com/Textualize/rich)
+* Integrate with CTFg
+* Improve GUI / port tool to web
 
 ## Challenge Options
 
@@ -114,7 +119,7 @@ pytest
 - [ ] Path Traversal (CSAW RED 2019 Prelims, also https://medium.com/hackstreetboys/ritsec-ctf-2018-writeup-web-72a0e5aa01ad)
 - [ ] Exposed files
 	- [ ] .htpasswd
-	- [ ] robots.txt
+	- [x] robots.txt
 	- [ ] .git
 - [ ] SQLi Injection
 	- [ ] report error (basic)
