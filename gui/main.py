@@ -1,11 +1,14 @@
 import os
+import sys
 from shutil import rmtree
 import tkinter as tk
 from tkinter import messagebox
 import tkinter.ttk as ttk
 from os.path import *
-from cv2 import line
-from logzero import logger
+
+sys.path.append("../chal_types")
+from chal_types import logger
+
 from jinja2 import Template
 from .popup import PopUpWindow
 import re

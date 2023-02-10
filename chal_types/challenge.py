@@ -2,11 +2,10 @@ import errno
 import os
 import sys
 import ruamel.yaml
-from logzero import logger
 from shutil import copyfile, copytree, rmtree
 from os.path import join, abspath, dirname
 from slugify import slugify
-from .utils import WorkDir
+from .utils import WorkDir, logger
 
 yaml = ruamel.yaml.YAML()
 
