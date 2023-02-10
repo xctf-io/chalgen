@@ -7,7 +7,6 @@ from fractions import Fraction
 import piexif
 from piexif import GPSIFD
 from PIL import Image
-from logzero import logger
 from pdfrw import PdfReader, PdfWriter, PageMerge
 from pdfrw.findobjs import page_per_xobj
 from pydub import AudioSegment
