@@ -65,3 +65,16 @@ class FixMinikube(object):
         if self.minikube_active:
             for env_var in self.env_vars:
                 os.environ[env_var] = self.env_vars_value[env_var]
+
+class logger:
+    def __init__(self):
+        logging.basicConfig(
+            level="NOTSET", format="%(message)s", datefmt="[%X]", handlers=[RichHandler()]
+        )
+        self.log = logging.getLogger("rich")
+    
+    def info(message):
+        self.log.info(message)
+    
+    def error(message):
+        self.log.error(message)
