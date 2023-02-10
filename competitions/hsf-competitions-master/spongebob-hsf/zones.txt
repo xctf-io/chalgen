@@ -1,0 +1,4 @@
+bikinibottom.ctf.test  A       127.0.0.1
+chal-host.ctf.test  A       127.0.0.1
+squidward-s-blog.ctf.test  A       127.0.0.1
+bargnmart.ctf.test  A       127.0.0.1

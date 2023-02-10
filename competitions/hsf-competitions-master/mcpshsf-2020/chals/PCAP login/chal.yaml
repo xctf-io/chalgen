@@ -1,0 +1,6 @@
+- !pcap_login
+  name: "PCAP Login"
+  flag: "flag{t1r3d_0f_ESS_t3rm5_y3t?}"
+  config:
+    username: "d3t3ct1ve_k4r5t"
+    password: "t4lw3g flag{t1r3d_0f_ESS_t3rm5_y3t?}"

@@ -1,0 +1,8 @@
+- !file_evidence
+  name: "Squidward Secret"
+  flag: flag{in_my_life}
+  config:
+    files:
+      - SquidwardSecret.png
+    chals:
+      - "Squidward's Blog"

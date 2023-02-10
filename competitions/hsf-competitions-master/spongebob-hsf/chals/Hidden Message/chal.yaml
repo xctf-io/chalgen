@@ -1,0 +1,9 @@
+- !file_evidence
+  name: "Hidden Message"
+  flag: flag{patrick_can_drive!}
+  config:
+    files:
+    - hiddenmessage.png
+
+
+    

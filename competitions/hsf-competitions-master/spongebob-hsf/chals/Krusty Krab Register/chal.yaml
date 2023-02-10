@@ -1,0 +1,6 @@
+- !change_extension
+  name: "Krusty Krab Register"
+  flag: "flag{krUstY_kr4b_rEgisTer}"
+  config:
+    orig_file: KrustyKrabRegister.pdf
+    out_ext: .png

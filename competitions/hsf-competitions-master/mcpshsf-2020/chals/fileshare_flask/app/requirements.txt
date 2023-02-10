@@ -1,0 +1,6 @@
+Flask==0.10.1
+gunicorn==19.3.0
+Werkzeug==0.10.4
+humanize
+flask-login
+pathlib2

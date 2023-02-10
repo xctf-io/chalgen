@@ -176,7 +176,7 @@ def competitiongen(ctx, competition_folder, reg_url, local):
                 home_path = subprocess.check_output(
                     ['wslpath', home_path]).decode()[:-1]
             os.environ['DOCKER_TLS_VERIFY'] = "1"
-            os.environ['DOCKER_HOST'] = url.group()
+            os.environ['DOCKER_HOST'] = "tcp://192.168.49.2:2376"
             os.environ['DOCKER_CERT_PATH'] = home_path
             os.environ['MINIKUBE_ACTIVE_DOCKERD'] = 'minikube'
     else:

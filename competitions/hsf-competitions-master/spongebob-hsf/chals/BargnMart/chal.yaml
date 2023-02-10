@@ -1,0 +1,9 @@
+- !static_site
+  name: "BargnMart"
+  flag: flag{store_site}
+  config:
+    webroot: root
+    chal_to_path: [{ name: "Spectrogram", path: "" },{ name: "BargnMart Log", path: "" }]
+    chals: 
+      - Spectrogram
+      - BargnMart Log

@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+  <h1>Update Profile</h1>
+
+  <table>
+    <form enctype="multipart/form-data" method="POST">
+      {% csrf_token %}
+      {{ form.as_table }}
+      <tr>
+        <th>Current avatar:</th>
+        <td>
+          <img width="80px" src="{{ profile.avatar_url }}"/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button type="submit">Save</button>
+        </td>
+      </tr>
+    </form>
+  </table>
+
+{% endblock %}

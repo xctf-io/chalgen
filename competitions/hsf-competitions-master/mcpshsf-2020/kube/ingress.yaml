@@ -1,0 +1,70 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: challenge-ingress
+  namespace: challenges
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: 'false'
+spec:
+  rules:
+  - host: twitter-flask.ctf.test
+    http:
+      paths:
+      - pathType: ImplementationSpecific
+        path: /
+        backend:
+          service:
+            name: twitter-flask-svc
+            port:
+              number: 8000
+  - host: chal-host.ctf.test
+    http:
+      paths:
+      - pathType: ImplementationSpecific
+        path: /
+        backend:
+          service:
+            name: chal-host-svc
+            port:
+              number: 8000
+  - host: corncob-s-sus-website.ctf.test
+    http:
+      paths:
+      - pathType: ImplementationSpecific
+        path: /
+        backend:
+          service:
+            name: corncob-s-sus-website-svc
+            port:
+              number: 8000
+  - host: facebook-django.ctf.test
+    http:
+      paths:
+      - pathType: ImplementationSpecific
+        path: /
+        backend:
+          service:
+            name: facebook-django-svc
+            port:
+              number: 8000
+  - host: fileshare-flask.ctf.test
+    http:
+      paths:
+      - pathType: ImplementationSpecific
+        path: /
+        backend:
+          service:
+            name: fileshare-flask-svc
+            port:
+              number: 8000
+  - host: jekyll-blog.ctf.test
+    http:
+      paths:
+      - pathType: ImplementationSpecific
+        path: /
+        backend:
+          service:
+            name: jekyll-blog-svc
+            port:
+              number: 8000

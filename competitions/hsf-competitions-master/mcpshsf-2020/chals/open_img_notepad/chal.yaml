@@ -1,0 +1,5 @@
+- !edit_notepad
+  name: "Open Image in Notepad"
+  flag: "flag{n0t3p4d++_15_0ur_s4v10r}"
+  config:
+    orig_img: office.jpg

@@ -1,0 +1,6 @@
+- !vigenere
+      name: Vigenere
+      flag: "flag{f0ll0w_th3_url!}"
+      config:
+        key: latke
+        addl_text: "https://drive.google.com/file/d/1sLaQw-kMYGhexxUV12y09RJj_blVLzNz/view?usp=sharing"

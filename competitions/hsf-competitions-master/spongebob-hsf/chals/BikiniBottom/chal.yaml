@@ -1,0 +1,18 @@
+- !static_site
+  name: "BikiniBottom"
+  config:
+    webroot: root
+    chal_to_path:
+      [
+        { name: Napkin, path: "" },
+        { name: Squidward Secret, path: "" },
+        { name: Krusty Krab Register, path: "" },
+        { name: BargnMart, path: "root/locations.html" },
+        {name : Receipt, path : ""}
+      ]
+    chals:
+      - Napkin
+      - Squidward Secret
+      - Krusty Krab Register
+      - BargnMart
+      - Receipt

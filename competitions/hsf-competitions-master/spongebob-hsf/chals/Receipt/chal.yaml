@@ -1,0 +1,8 @@
+- !qrcode
+  name: Receipt
+  flag: flag{where_to_next?} Barg N Mart
+  config:
+    background_image:
+      filename: receipt.png
+      x_pos: 1000
+      y_pos: 1500

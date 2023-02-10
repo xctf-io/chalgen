@@ -1,0 +1,7 @@
+ - !docx_carving
+    name: Docx Carving
+    flag: "flag{test}"
+    config:
+      hidden_file: flag.txt
+      main_file: recipe.docx
+      dest_path: word/

@@ -1,0 +1,7 @@
+twitter-flask.ctf.test  A       127.0.0.1
+chal-host.ctf.test  A       127.0.0.1
+corncob-s-sus-website.ctf.test  A       127.0.0.1
+facebook-django.ctf.test  A       127.0.0.1
+fileshare-flask.ctf.test  A       127.0.0.1
+192.168.49.2
+jekyll-blog.ctf.test  A       127.0.0.1

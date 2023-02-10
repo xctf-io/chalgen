@@ -1,0 +1,9 @@
+- !image_exif
+  name: Image Exif
+  flag: flag{wh4t'5_1n_th3_l0c4t10n?}
+  config:
+    orig_img: vacation.jpg
+    metadata_key: 315
+    flag_transform: base64
+    lat: 19.8968
+    lng: -155.5828

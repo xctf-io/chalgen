@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login page</title>
+    </head>
+    <body>
+        <h1>Login Page for Barg'n Mart Store Employees</h1>
+        <form name="login">
+            Username<input type="text" name="userid"/>
+            Password<input type="password" name="pswrd"/>
+            <input type="button" onclick="check(this.form)" value="Login"/>
+            <input type="reset" value="Cancel"/>
+        </form>
+        <script language="javascript">
+
+            /*the check function sees if the input value of the username and password is equal to the actual username and password*/
+            function check(form) { 
+                if(form.userid.value == "patrick" && form.pswrd.value == "star") {
+                    window.open('home.html')
+                }
+                else {
+                    alert("Username or Password WRONG!")
+/*ah! looks like you've opened the source code and found the password flag{storesite} */
+                }
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,50 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: challenge-ingress
+  namespace: challenges
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: 'false'
+spec:
+  rules:
+  - host: bikinibottom.ctf.test
+    http:
+      paths:
+      - pathType: ImplementationSpecific
+        path: /
+        backend:
+          service:
+            name: bikinibottom-svc
+            port:
+              number: 8000
+  - host: chal-host.ctf.test
+    http:
+      paths:
+      - pathType: ImplementationSpecific
+        path: /
+        backend:
+          service:
+            name: chal-host-svc
+            port:
+              number: 8000
+  - host: squidward-s-blog.ctf.test
+    http:
+      paths:
+      - pathType: ImplementationSpecific
+        path: /
+        backend:
+          service:
+            name: squidward-s-blog-svc
+            port:
+              number: 8000
+  - host: bargnmart.ctf.test
+    http:
+      paths:
+      - pathType: ImplementationSpecific
+        path: /
+        backend:
+          service:
+            name: bargnmart-svc
+            port:
+              number: 8000

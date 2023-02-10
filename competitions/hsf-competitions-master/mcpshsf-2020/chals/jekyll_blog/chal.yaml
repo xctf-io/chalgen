@@ -1,0 +1,12 @@
+- !jekyll_blog
+  name: Jekyll Blog
+  flag: "flag{test}"
+  config:
+    meta:
+      title: Chance's Cooking Blog!
+    posts:
+    - 2014-06-08-post1.md
+    - 2014-06-08-post2.md
+    chals:
+      - Vigenere
+      - Docx Carving

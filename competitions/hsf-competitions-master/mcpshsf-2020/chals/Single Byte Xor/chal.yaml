@@ -1,0 +1,6 @@
+- !xor
+  name: Single Byte Xor
+  flag: "flag{s3d1m3nt4ry_r0ck}"
+  config:
+    key: n
+    addl_text: "nope, maybe he’s just playing Hearthrock while I’m here doing all his work for him"

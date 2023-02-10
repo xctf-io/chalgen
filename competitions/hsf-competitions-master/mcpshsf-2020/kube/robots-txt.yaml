@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: robots-txt-svc
+  namespace: challenges
+  labels:
+    app: robots-txt
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: robots-txt
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: robots-txt-svc
+  namespace: challenges
+  labels:
+    app: robots-txt
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: robots-txt
+  template:
+    metadata:
+      labels:
+        app: robots-txt
+    spec:
+      containers:
+      - name: robots-txt
+        image: registry.mcpshsf.com/mcpshsf/robots-txt:latest
+        ports:
+        - containerPort: 80
+        imagePullPolicy: Always
+      imagePullSecrets:
+      - name: regcred

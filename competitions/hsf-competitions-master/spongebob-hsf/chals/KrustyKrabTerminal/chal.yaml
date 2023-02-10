@@ -1,0 +1,15 @@
+- !shell_server
+  name: Krusty Krab Shared Server
+  flag: 
+  config:
+    username: squidward
+    password: I<3Clarinet&HateSpongebob
+    users:
+    - eugene
+    - squidward
+    - spongebob
+    workdir: /home/squidward
+    filesystem_root: directory
+    chal_to_path: {"Hidden Message" : "a5265661/text"}
+    chals: 
+      - Hidden Message

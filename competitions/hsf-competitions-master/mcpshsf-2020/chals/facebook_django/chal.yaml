@@ -1,0 +1,91 @@
+- !facebook_django
+  name: "facebook django"
+  flag: "flag{this_is_a_test}"
+  config:
+    script: index.js
+    users: 
+      - username: chance
+        password: L4tk35_4_3v3r
+      - username: CornCob
+        password: L4tk3_M4f14_L0rd_123
+      - username: Karst
+        password: 3ddy_Curr3nT5
+      - username: Long
+        password: test
+      - username: Hubbz
+        password: test
+      - username: Sadamana
+        password: test
+    posts:
+      - text: here's a memorial for my best friend Chance. RIP. Will miss you always.
+        author: Karst
+        chal: Change Extension
+        likers: [Hubbz, Sadamana]
+      - text: guys i just wanted to say that my boss is an awful human being he never does any of his own work so i do all the dirty work and ngl im lowkey glad he's gone. Here's his office it's so gross and he just left for another party and i'm here cleaning it up. Thanks for listening to my ted talk.
+        author: CornCob
+        chal: Open Image in Notepad
+        likers: [Long]
+      - text: im having such an amazing time on vacation! if only i had some latkes, that'd be perfect...
+        author: Long
+        chal: Image Exif
+        likers: [Karst, CornCob, Hubbz, Sadamana]
+      - text: guys look at this Legendary Stupendous Beautiful frying pan i just bought im so excited!
+        author: Hubbz
+        chal: LSB Encoding
+        likers: [Long]
+      - text: guys check out our new robot! isnt it amazing?
+        author: Karst
+        chal: Diff Images
+        likers: [Long, CornCob, Hubbz, Sadamana]
+      - text: here's the link to my new project! (i have some encrypted files from the ongoing murder investigation of chance, so pls dont share)
+        author: Karst
+        chal: Fileshare Flask
+    profiles:
+    comments:
+      - author: Hubbz
+        date_added: 2020-03-06 00:00:00.000000+00:00
+        post: 0
+        text: ya chance was a pretty cool guy, rip
+      - author: Sadamana
+        date_added: 2020-03-04 00:00:00.000000+00:00
+        post: 2
+        text: Long where are you vacationing?
+      - author: Long
+        date_added: 2020-03-05 00:00:00.000000+00:00
+        post: 2
+        text: Top secret, can't tell you, but see if you can get it from the image
+      - author: Karst
+        date_added: 2020-03-06 00:00:00.000000+00:00
+        post: 2
+        text: why are you on vacation it's not even spring break man
+      - author: Long
+        date_added: 2020-03-07 00:00:00.000000+00:00
+        post: 2
+        text: i had some business that i needed to take care of
+      - author: Karst
+        date_added: 2020-03-08 00:00:00.000000+00:00
+        post: 2
+        text: sounds kinda sus ngl
+      - author: Long
+        date_added: 2020-03-06 00:00:00.000000+00:00
+        post: 3
+        text: yoooo thats a nice frying pan whered you get it
+      - author: Hubbz
+        date_added: 2020-03-07 00:00:00.000000+00:00
+        post: 3
+        text: top secret, can't tell you...it's a super rare pan, there's only one
+      - author: CornCob
+        date_added: 2020-03-08 00:00:00.000000+00:00
+        post: 3
+        text: i bet its perfect for making latkes
+      - author: Hubbz
+        date_added: 2020-03-15 00:00:00.000000+00:00
+        post: 3
+        text: BRUH SOMEONE STOLE MY PAN OMG
+    chals:
+      - Change Extension
+      - Open Image in Notepad
+      - Image Exif
+      - LSB Encoding
+      - Diff Images
+      - Fileshare Flask

@@ -1,0 +1,6 @@
+- !lsb
+  name: LSB Encoding
+  flag: "flag{l0v3ly_sup3r_b3st_3nc0d1ng}"
+  config:
+    orig_img: pan.png
+    addl_text: "username: k4r5t_t0p0gr4phy"

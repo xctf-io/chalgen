@@ -1,0 +1,7 @@
+- !encrypted_zip
+                  name: "Encrypted Zip"
+                  flag: "flag{this_is_a_test}"
+                  config:
+                    files_dir: "files"
+                    password: "mischance"
+                    wordlist: "wordlist.txt"

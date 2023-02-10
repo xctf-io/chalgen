@@ -1,0 +1,437 @@
+users:
+- name: chance
+  email: chance@latkeboss.com
+  password: L4tk35_4_3v3r
+- name: corncob
+  email: corncob@latkeboss.com
+  password: L4tk3_M4f14_L0rd_123
+- name: long
+  email: long@gmail.com
+  password: gonl
+- name: karst
+  email: karst@detectivekarst.com
+  password: ESS_f0r_th3_w1n
+- name: hubbz
+  email: hubbz@gmail.com
+  password: testtest
+- name: sadamana
+  email: sadamana@gmail.com
+  password: s4d4m4n4
+
+followers:
+- name1: sadamana
+  name2: karst
+- name1: sadamana
+  name2: chance
+- name1: sadamana
+  name2: long
+- name1: sadamana
+  name2: hubbz
+- name1: sadamana
+  name2: corncob
+
+messages:
+- user: chance
+  text: Just got to Metamorphic rank in Hearthrock! I love this game, it rocks! Might
+    cook up some latkes to celebrate
+  date: 2/10/20
+- user: corncob
+  text: Nice job, what’s your favorite rock to play as? I like pyrite
+  date: 2/10/20
+- user: chance
+  text: pyrite sucks topaz or die
+  date: 2/10/20
+- user: long
+  text: corundum 4L @Chance let’s play right now, if I win you make me latkes too
+  date: 2/10/20
+- user: karst
+  text: That’s so cool Chance, congrats! Can’t wait to reach Sedimentary rank :) Do
+    you ever stream? @Chance
+  date: 2/10/20
+- user: corncob
+  text: bruh chance dont you have work to be doing??? the latke cartels are literally
+    falling apart rn...
+  date: 2/10/20
+- user: chance
+  text: honestly? not my problem thats what youre here for corncob
+  date: 2/10/20
+- user: corncob
+  text: '...'
+  date: 2/10/20
+- user: long
+  text: hey chance does being in the latke cartel come with perks
+  date: 2/10/20
+- user: chance
+  text: ya ofc, you get free latkes any time you want
+  date: 2/10/20
+- user: long
+  text: danggggg can i join plsss
+  date: 2/10/20
+- user: chance
+  text: no
+  date: 2/10/20
+- user: long
+  text: bruh what why
+  date: 2/10/20
+- user: long
+  text: this is straight up racism
+  date: 2/10/20
+- user: corncob
+  text: bruh long you dont even have any experience working in this kind of stuff
+    and you want to join the most dangerous cartel out there?? ofc not
+  date: 2/10/20
+- user: long
+  text: bro what do you even do as part of a cartel? all y'all do is make latkes and
+    hit people with like frying pans i bet
+  date: 2/10/20
+- user: chance
+  text: we have many classified activities that you are not permitted to know about.
+    now go away im playing hearthrock here.
+  date: 2/10/20
+- user: long
+  text: well time for me to get some experience then...
+  date: 2/10/20
+
+- user: karst
+  text: I hate the sound of metal-on-metal and such a high speed. So loud and annoying.
+    I hate using industrial tools. Would rather spend eternity alone than to hear
+    this wretched sound all day. Jk, I’m too emotionally attached to bear that. Haha
+  date: 2/15/20
+- user: hubbz
+  text: I’ll come over so you don’t gotta be alone.
+  date: 2/15/20
+- user: chance
+  text: Same, it’s gonna be a party!
+  date: 2/15/20
+- user: sadamana
+  text: Count me in! Like that boy at the Harambe enclosure haha
+  date: 2/15/20
+- user: hubbz
+  text: Wait what
+  date: 2/15/20
+- user: sadamana
+  text: The Harambe thing? I learned it in school the other day and it’s so funny
+  date: 2/15/20
+- user: karst
+  text: OMG THANK YOU SO MUCH GUYS I’m at 72935 Topography St. btw
+  date: 2/15/20
+- user: sadamana
+  text: What does btw mean?
+  date: 2/15/20
+- user: long
+  text: it means by the way. karst, just get used to the sound bro it’s not even that
+    bad
+  date: 2/15/20
+
+- user: long
+  text: anyone know where I can get a latke? I’m really craving some rn. @Chance please
+    give
+  date: 2/20/20
+- user: chance
+  text: Sorry but no can do, I’ve closed all the local latke places for the holidays,
+    the cartel will be back in a few weeks just wait until then.
+  date: 2/20/20
+- user: long
+  text: How are you guys having latkes then?
+  date: 2/20/20
+- user: chance
+  text: well we have a lot stashed throughout the county, and every cartel member
+    can make them at ease. Like I said, please wait a few weeks.
+  date: 2/20/20
+- user: corncob
+  text: can confirm, our latkes are the best
+  date: 2/20/20
+- user: long
+  text: but I want them NOW
+  date: 2/20/20
+- user: chance
+  text: Can’t give you the secret recipe, sorry. But here’s an alright one [https://cooking.nytimes.com/recipes/1015533-classic-potato-latkes]
+  date: 2/20/20
+- user: karst
+  text: Big ups for doing the right thing, Chance! You’re such a great guy
+  date: 2/20/20
+- user: long
+  text: It’s behind a paywall for me…
+  date: 2/20/20
+- user: chance
+  text: I’ll give the order for them to remove that wall, just be patient
+  date: 2/20/20
+- user: long
+  text: bruh if i dont get some latkes rn imma throw hands
+  date: 2/20/20
+
+- user: chance
+  text: i just launched my new cooking blog! Check it out!http://jekyll-blog.chals.mcpshsf.com
+  date: 2/21/20
+  chal: Jekyll Blog
+- user: long
+  text: it better not have a paywall…
+  date: 2/21/20
+- user: long
+  text: also i still havent gotten any latkes
+  date: 2/21/20
+- user: long
+  text: this is literally so unfair like why do you get to hoard all this
+  date: 2/21/20
+- user: long
+  text: sw mywsxq kpdob iyepvkq{k_fobi_lkcsm_mkockb_mszrob}
+  date: 2/21/20
+  chal: Caesar Cipher
+
+- user: karst
+  text: GUYS!!!!
+  date: 2/26/20
+- user: corncob
+  text: Karst what’s up?
+  date: 2/26/20
+- user: karst
+  text: OMGGGG BRUHHHHH
+  date: 2/26/20
+- user: long
+  text: karst are you ok
+  date: 2/26/20
+- user: karst
+  text: Chance hasn’t responded to my texts in 3 DAYS!!! I think something’s happened
+    to him!
+  date: 2/26/20
+- user: hubbz
+  text: maybe he just got tired of you karst
+  date: 2/26/20
+- user: karst
+  text: HEY! I’m his bestie :))
+  date: 2/26/20
+- user: long
+  text: uh huh sure
+  date: 2/26/20
+- user: karst
+  text: plus Chance works in a very high-risk environment...has anyone else heard
+    from him?
+  date: 2/26/20
+- user: corncob
+  text: 08020f09151d5d0a5f035d001a5a1c17311c5e0d051300011e0b424e030f170c0b4e060be281b71d4e041b1d1a4e1e020f170700094e260b0f1c1a061c010d054e190607020b4e27e281b7034e060b1c0b4e0a010700094e0f02024e06071d4e19011c054e08011c4e060703
+  date: 2/26/20
+  chal: Single Byte Xor
+- user: hubbz
+  text: TEA
+  date: 2/26/20
+- user: sadamana
+  text: tea? like the drink?
+  date: 2/26/20
+- user: long
+  text: dang, that sounds like a toxic work environment if you get me some latkes
+    i can see if i can try to find you a position at my work...we’re always looking
+    for people
+  date: 2/26/20
+- user: corncob
+  text: bruh STOP about the latkes already
+  date: 2/26/20
+- user: karst
+  text: don’t any of you care about Chance???? I’m gonna find out what’s happened
+    to him
+  date: 2/26/20
+- user: long
+  text: bro Karst you still have 5000 parts to mill i better not see you away from
+    the cnc
+  date: 2/26/20
+- user: karst
+  text: owo cnc
+  date: 2/26/20
+- user: sadamana
+  text: what's a cnc?
+  date: 2/26/20
+- user: long
+  text: https://en.wikipedia.org/wiki/Numerical_control
+  date: 2/26/20
+
+- user: karst
+  text: bro yall its been 3 more days im actually worried now
+  date: 2/29/20
+- user: corncob
+  text: i heard he was kidnapped?
+  date: 2/29/20
+- user: hubbz
+  text: bruh what no way
+  date: 2/29/20
+- user: long
+  text: i bet it was karst
+  date: 2/29/20
+- user: karst
+  text: IT WASNT ME BRO
+  date: 2/29/20
+- user: long
+  text: prove it
+  date: 2/29/20
+- user: karst
+  text: here are my creds, you can literally look at my DMs
+  date: 2/29/20
+- user: karst
+  text: dSA9IGthcnN0LCBwYXNzID0gM2RkeV9DdXJyM25UNSEhZmxhZ3tjcjNkNV80cjNfdTUzZnUxX3cwd30=
+  date: 2/29/20
+  chal: Base64
+- user: corncob
+  text: bruh karst im not about to drop my creds
+  date: 03/01/20
+- user: corncob
+  text: "they're somewhere on this website though...here's your clue: dont you just\
+    \ love robots?"
+  date: 03/01/20
+  chal: Corncob's Sus Website
+- user: karst
+  text: no actually i hate robots i hate milling i hate this cnc i just wanna go to
+    mcdonalds with my best friend chance but he's probably kidnapped or dead somewhere
+    and NONE of y'all care!!
+  date: 03/01/20
+- user: long
+  text: '...'
+  date: 03/01/20
+
+- user: hubbz
+  text: y'all better go like up my fb postfacebook-django.chals.mcpshsf.com
+  date: 03/02/20
+  chal: facebook django
+dms:
+- from_user: karst
+  to_user: karst
+  text: 'fb creds so i dont forget username: Karst, password: 3ddy_Curr3nT5'
+
+- from_user: long
+  to_user: corncob
+  text: yo cob tell me when you get latkes
+- from_user: corncob
+  to_user: long
+  text: oui
+- from_user: long
+  to_user: corncob
+  text: i have a craving
+- from_user: corncob
+  to_user: long
+  text: ok...
+- from_user: long
+  to_user: corncob
+  text: latke?
+- from_user: long
+  to_user: corncob
+  text: yo latke?
+- from_user: long
+  to_user: corncob
+  text: when latke?
+- from_user: corncob
+  to_user: long
+  text: no
+- from_user: long
+  to_user: corncob
+  text: latke?
+- from_user: long
+  to_user: corncob
+  text: latkes
+- from_user: long
+  to_user: corncob
+  text: latke
+- from_user: corncob
+  to_user: long
+  text: NO
+- from_user: long
+  to_user: corncob
+  text: yo CornCob where are my latkes
+- from_user: long
+  to_user: corncob
+  text: CORNCOB GIMME YOUR LATKES
+- from_user: long
+  to_user: corncob
+  text: I love you gimme latkes
+- from_user: long
+  to_user: corncob
+  text: I will love you more if you give me latkes
+- from_user: long
+  to_user: corncob
+  text: yo chance is going to a latke party are you going
+- from_user: long
+  to_user: corncob
+  text: do you have a +1
+- from_user: long
+  to_user: corncob
+  text: or can you bring some back
+- from_user: corncob
+  to_user: long
+  text: no
+- from_user: long
+  to_user: corncob
+  text: :(
+
+- from_user: corncob
+  to_user: hubbz
+  text: Bruh that wacko long keeps texting me about latkes
+- from_user: hubbz
+  to_user: corncob
+  text: why don’t you just tell Chance?
+- from_user: corncob
+  to_user: hubbz
+  text: don’t even get me started about Chance
+- from_user: hubbz
+  to_user: corncob
+  text: ??
+- from_user: corncob
+  to_user: hubbz
+  text: manz always makes me do the dirty work
+- from_user: corncob
+  to_user: hubbz
+  text: he never does anything
+- from_user: hubbz
+  to_user: corncob
+  text: bruh that sucks
+- from_user: corncob
+  to_user: hubbz
+  text: its just not fair ya know
+- from_user: corncob
+  to_user: hubbz
+  text: i feel like i do all the work and he gets all the credit
+- from_user: corncob
+  to_user: hubbz
+  text: and he always promotes these scrubs over me like they never do anything
+- from_user: hubbz
+  to_user: corncob
+  text: bro you can’t just let Chance walk all over you...you need to do something
+    about it!
+- from_user: corncob
+  to_user: hubbz
+  text: you’re right...
+
+- from_user: karst
+  to_user: chance
+  text: yo chance whats up
+- from_user: karst
+  to_user: chance
+  text: wanna go out for dinner on friday
+- from_user: chance
+  to_user: karst
+  text: uh...
+- from_user: chance
+  to_user: karst
+  text: sorry i'm gonna be playing Hearthrock
+- from_user: karst
+  to_user: chance
+  text: awwwwwww
+- from_user: karst
+  to_user: chance
+  text: hey
+- from_user: karst
+  to_user: chance
+  text: hello?
+- from_user: karst
+  to_user: chance
+  text: hey chance wya
+- from_user: karst
+  to_user: chance
+  text: chance!!
+- from_user: karst
+  to_user: chance
+  text: bro are you ok????
+- from_user: karst
+  to_user: chance
+  text: we miss you!
+- from_user: karst
+  to_user: chance
+  text: well, mainly me, but...
+- from_user: karst
+  to_user: chance
+  text: chance!!! please come back!!!!

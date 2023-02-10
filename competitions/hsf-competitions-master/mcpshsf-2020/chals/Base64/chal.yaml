@@ -1,0 +1,5 @@
+- !base64
+  name: Base64
+  flag: "flag{cr3d5_4r3_u53fu1_w0w}"
+  config:
+    addl_text: "u = karst, pass = 3ddy_Curr3nT5!!"

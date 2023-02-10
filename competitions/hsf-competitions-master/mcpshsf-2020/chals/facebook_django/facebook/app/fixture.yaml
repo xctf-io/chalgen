@@ -1,0 +1,161 @@
+- fields:
+    username: chance
+    password: pbkdf2_sha256$12000$AAAAAAAAA$03wqIdX2HhtP/9p1ZMTqqWm0cTdeEq7nXJhGg+Vxt5M=
+  model: auth.user
+  pk: 0
+- fields:
+    username: CornCob
+    password: pbkdf2_sha256$12000$AAAAAAAAA$OVLzb5QhfcWzRPLaKYgdtrbpqGxJSUWVm3rzlO0RIHU=
+  model: auth.user
+  pk: 1
+- fields:
+    username: Karst
+    password: pbkdf2_sha256$12000$AAAAAAAAA$+nX+cN0kMjnLh5ELmla2M2cfYJYelS3ODebDAhlxCHU=
+  model: auth.user
+  pk: 2
+- fields:
+    username: Long
+    password: pbkdf2_sha256$12000$AAAAAAAAA$xA7f5YTZZHrxW6K5wLezkKVFCrU8h+jxPrZSYRNLQPQ=
+  model: auth.user
+  pk: 3
+- fields:
+    username: Hubbz
+    password: pbkdf2_sha256$12000$AAAAAAAAA$xA7f5YTZZHrxW6K5wLezkKVFCrU8h+jxPrZSYRNLQPQ=
+  model: auth.user
+  pk: 4
+- fields:
+    username: Sadamana
+    password: pbkdf2_sha256$12000$AAAAAAAAA$xA7f5YTZZHrxW6K5wLezkKVFCrU8h+jxPrZSYRNLQPQ=
+  model: auth.user
+  pk: 5
+- fields:
+    text: here's a memorial for my best friend Chance. RIP. Will miss you always.
+      http://chal-host.chals.mcpshsf.com/memorial.png
+    author: 2
+    likers:
+    - 4
+    - 5
+    date_added: '2020-03-06 00:00:00+00:00'
+  model: fb.userpost
+  pk: 0
+- fields:
+    text: guys i just wanted to say that my boss is an awful human being he never
+      does any of his own work so i do all the dirty work and ngl im lowkey glad he's
+      gone. Here's his office it's so gross and he just left for another party and
+      i'm here cleaning it up. Thanks for listening to my ted talk. http://chal-host.chals.mcpshsf.com/edited_photo.png
+    author: 1
+    likers:
+    - 3
+    date_added: '2020-03-06 00:00:00+00:00'
+  model: fb.userpost
+  pk: 1
+- fields:
+    text: im having such an amazing time on vacation! if only i had some latkes, that'd
+      be perfect... http://chal-host.chals.mcpshsf.com/chal_img.jpeg
+    author: 3
+    likers:
+    - 2
+    - 1
+    - 4
+    - 5
+    date_added: '2020-03-06 00:00:00+00:00'
+  model: fb.userpost
+  pk: 2
+- fields:
+    text: guys look at this Legendary Stupendous Beautiful frying pan i just bought
+      im so excited! http://chal-host.chals.mcpshsf.com/chal-img.png
+    author: 4
+    likers:
+    - 3
+    date_added: '2020-03-06 00:00:00+00:00'
+  model: fb.userpost
+  pk: 3
+- fields:
+    text: 'guys check out our new robot! isnt it amazing? http://chal-host.chals.mcpshsf.com/_robots.png
+      http://chal-host.chals.mcpshsf.com/chal.png '
+    author: 2
+    likers:
+    - 3
+    - 1
+    - 4
+    - 5
+    date_added: '2020-03-06 00:00:00+00:00'
+  model: fb.userpost
+  pk: 4
+- fields:
+    text: here's the link to my new project! (i have some encrypted files from the
+      ongoing murder investigation of chance, so pls dont share) http://fileshare-flask.chals.mcpshsf.com
+    author: 2
+    date_added: '2020-03-06 00:00:00+00:00'
+  model: fb.userpost
+  pk: 5
+- fields:
+    author: 4
+    date_added: 2020-03-06 00:00:00+00:00
+    post: 0
+    text: ya chance was a pretty cool guy, rip
+  model: fb.userpostcomment
+  pk: 0
+- fields:
+    author: 5
+    date_added: 2020-03-04 00:00:00+00:00
+    post: 2
+    text: Long where are you vacationing?
+  model: fb.userpostcomment
+  pk: 1
+- fields:
+    author: 3
+    date_added: 2020-03-05 00:00:00+00:00
+    post: 2
+    text: Top secret, can't tell you, but see if you can get it from the image
+  model: fb.userpostcomment
+  pk: 2
+- fields:
+    author: 2
+    date_added: 2020-03-06 00:00:00+00:00
+    post: 2
+    text: why are you on vacation it's not even spring break man
+  model: fb.userpostcomment
+  pk: 3
+- fields:
+    author: 3
+    date_added: 2020-03-07 00:00:00+00:00
+    post: 2
+    text: i had some business that i needed to take care of
+  model: fb.userpostcomment
+  pk: 4
+- fields:
+    author: 2
+    date_added: 2020-03-08 00:00:00+00:00
+    post: 2
+    text: sounds kinda sus ngl
+  model: fb.userpostcomment
+  pk: 5
+- fields:
+    author: 3
+    date_added: 2020-03-06 00:00:00+00:00
+    post: 3
+    text: yoooo thats a nice frying pan whered you get it
+  model: fb.userpostcomment
+  pk: 6
+- fields:
+    author: 4
+    date_added: 2020-03-07 00:00:00+00:00
+    post: 3
+    text: top secret, can't tell you...it's a super rare pan, there's only one
+  model: fb.userpostcomment
+  pk: 7
+- fields:
+    author: 1
+    date_added: 2020-03-08 00:00:00+00:00
+    post: 3
+    text: i bet its perfect for making latkes
+  model: fb.userpostcomment
+  pk: 8
+- fields:
+    author: 4
+    date_added: 2020-03-15 00:00:00+00:00
+    post: 3
+    text: BRUH SOMEONE STOLE MY PAN OMG
+  model: fb.userpostcomment
+  pk: 9

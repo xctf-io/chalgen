@@ -1,0 +1,7 @@
+- !file_evidence
+  name: "Napkin"
+  flag: flag{look_what_we_found}
+  config:
+    files:
+    - Napkin.pdf
+    chals:
