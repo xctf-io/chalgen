@@ -69,7 +69,7 @@ def get_kube_deployment(chal, local, namespace='challenges'):
             'image': registry_url,
             'ports': [
                 {
-                    'containerPort': chal.target_port
+                    'containerPort': chal['target_port']
                 }
             ],
             'imagePullPolicy': 'Always',

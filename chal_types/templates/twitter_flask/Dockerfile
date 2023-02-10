@@ -3,6 +3,7 @@ ADD project /project
 ADD requirements.txt /
 ADD db_create.py /
 RUN pip install -r requirements.txt
+ADD twitter_contents.yaml /
 RUN python db_create.py
 
 FROM python:2.7.17-buster
