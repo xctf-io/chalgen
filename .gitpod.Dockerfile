@@ -1,10 +1,6 @@
-FROM gitpod/workspace-full
+FROM mcr.microsoft.com/devcontainers/universal
 
-# Install custom tools, runtimes, etc.
-# For example "bastet", a command-line tetris clone:
-# RUN brew install bastet
-#
-# More information: https://www.gitpod.io/docs/config-docker/
 RUN sudo apt -y update
 RUN sudo apt -y install graphviz graphviz-dev ffmpeg
 RUN pip install pygraphviz 
+RUN pip install -r requirements.txt
