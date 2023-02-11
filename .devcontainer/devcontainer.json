@@ -11,5 +11,5 @@
 			"minikube": "latest"
 		}
 	},
-  "postCreateCommand": "pip3 install -r requirements.txt"
+  "onCreateCommand": "bash install.sh"
 }
