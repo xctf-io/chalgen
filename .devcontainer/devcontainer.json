@@ -1,5 +1,5 @@
 {
-  "build": { "dockerfile": "Dockerfile" },
+  "image": "mcr.microsoft.com/devcontainers/python",
   "features": {
 		"ghcr.io/devcontainers/features/docker-in-docker:2": {
 			"enableNonRootDocker": "true",
@@ -10,5 +10,6 @@
 			"helm": "latest",
 			"minikube": "latest"
 		}
-	}
+	},
+  "postCreateCommand": "pip3 install --user -r requirements.txt"
 }
