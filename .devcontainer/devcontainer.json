@@ -10,5 +10,5 @@
 			"minikube": "latest"
 		}
 	},
-  "postCreateCommand": "bash install.sh"
+  "onCreateCommand": "bash install.sh"
 }
