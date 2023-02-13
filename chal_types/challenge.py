@@ -6,6 +6,7 @@ from shutil import copyfile, copytree, rmtree
 from os.path import join, abspath, dirname
 from slugify import slugify
 from .utils import WorkDir, logger
+from rich import print
 
 yaml = ruamel.yaml.YAML()
 
@@ -272,7 +273,7 @@ class GeneratedChallenge(object):
         self.chal_dir = "not set"
 
     def do_gen(self, chal_dir):
-        print(f'Generating {self.__class__} {self.name}')
+        print(f'[white]Generating[/white] {self.__class__} [white]{self.name}[/white]')
         self.chal_dir = chal_dir
         self.container_id = None
         self.target_port = 80
