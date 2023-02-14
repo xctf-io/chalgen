@@ -103,6 +103,32 @@ def get_chal_path_lookup(chals_folder):
     return chal_path_lookup
 
 
+def get_chal_lookup(chals_folder):
+    chal_host_folder = os.path.join(chals_folder, 'chal_host')
+    if os.path.exists(chal_host_folder):
+        shutil.rmtree(chal_host_folder)
+
+    chal_lookup = {}
+    comp_chals = [d for d in os.listdir(
+        chals_folder) if os.path.isdir(os.path.join(chals_folder, d))]
+    for comp_chal in comp_chals:
+        chal_path = os.path.join(chals_folder, comp_chal)
+        chal_config = os.path.join(chal_path, 'chal.yaml')
+        assert os.path.exists(chal_config)
+
+        chal = load_chal_from_config(challenge_types, chal_config)
+        if type(chal) is str:
+            logger.error(
+                "Unable to deserialize config, is the challenge bang name correct?")
+            return
+
+        chal_lookup[chal.name] = {
+            "path": chal_path,
+            "chal": chal,
+        }
+    return chal_lookup
+
+
 @chalgen.command()
 @click.pass_context
 @click.option('--chal-config', required=True)
@@ -181,11 +207,15 @@ def competitiongen(ctx, competition_folder, reg_url, local):
             os.environ['MINIKUBE_ACTIVE_DOCKERD'] = 'minikube'
     else:
         logger.info("Please set up your kubernetes cluster before running!")
+
     os.system('kubectl delete namespace challenges')
     os.system('kubectl create namespace challenges')
+
     competition_folder = os.path.join(os.path.dirname(
         os.path.realpath(__file__)), competition_folder)
     chals_folder = os.path.join(competition_folder, 'chals')
+
+    chal_path_lookup = get_chal_path_lookup(chals_folder)
 
     competition_config = os.path.join(competition_folder, 'config.yaml')
     assert os.path.exists(competition_config)
@@ -193,8 +223,6 @@ def competitiongen(ctx, competition_folder, reg_url, local):
     yaml = ruamel.yaml.YAML()
     with open(competition_config, "r") as c:
         comp_config = yaml.load(c)
-
-    chal_path_lookup = get_chal_path_lookup(chals_folder)
 
     entrypoints = comp_config['entrypoint']
 
@@ -257,6 +285,19 @@ def competitiongen(ctx, competition_folder, reg_url, local):
             logger.info("\nPlease add 127.0.0.1 as a DNS client https://minikube.sigs.k8s.io/docs/handbook/addons/ingress-dns/")
             os.system('minikube tunnel')
 
+@chalgen.command()
+@click.pass_context
+@click.option('--competition-folder', required=True)
+def flags(ctx, competition_folder):
+    competition_folder = os.path.join(os.path.dirname(
+        os.path.realpath(__file__)), competition_folder)
+    chals_folder = os.path.join(competition_folder, 'chals')
+
+    chal_lookup = get_chal_lookup(chals_folder)
+    for name, chal_info in chal_lookup.items():
+        chal = chal_info["chal"]
+        chal_path = chal_info["path"]
+        print(name + ": " + chal.flag + f" ({chal_path})")
 
 @chalgen.command()
 @click.pass_context

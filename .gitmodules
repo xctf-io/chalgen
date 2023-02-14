@@ -1,3 +1,6 @@
 [submodule "competitions/hsf-competitions"]
 	path = competitions/hsf-competitions
 	url = git@github.com:vgcs/hsf-competitions.git
+[submodule "competitions/chalgen-competitions"]
+	path = competitions/chalgen-competitions
+	url = git@github.com:CTFg/chalgen-competitions.git
