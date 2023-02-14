@@ -258,8 +258,9 @@ class ChallengeHost(object):
             make.write(template_make.read().format(
                 chal_name=self.container_id, chal_run_options=''))
 
-        with WorkDir(self.host_dir):
-            os.system('make build')
+        with WorkDir(self.host_dir), Status(f"[cyan] Building Challenge Host", spinner_style="cyan"):
+            subprocess.check_output(['make', 'build'])
+        print(f":confetti_ball: Built Challenge Host :confetti_ball:")
 
 
 class GeneratedChallenge(object):
@@ -288,7 +289,7 @@ class GeneratedChallenge(object):
     def build_docker(self, docker_dir):
         with WorkDir(docker_dir), Status(f"[cyan] Building Container for [bold]{self.name}[/bold]", spinner_style="cyan"):
             subprocess.check_output(["make", "build"])
-        print(f":star2: Built Container for {self.name} :star2:")
+        print(f":star2: Built Container for [bold]{self.name}[bold] :star2:")
 
     def get_value(self, key, required=True):
         if key not in self.config.keys():

@@ -8,16 +8,5 @@
     - 2014-06-08-post1.md
     - 2014-06-08-post2.md
     chals:
-    - !vigenere
-      name: Vigenere
-      flag: "flag{f0ll0w_th3_url!}"
-      config:
-        key: asdf
-        addl_text: "<link to id card pic>"
-    - !docx_carving
-      name: Docx Carving
-      flag: "flag{test}"
-      config:
-        hidden_file: ../flag.txt
-        main_file: ../recipe.docx
-        dest_path: word/
+    - Vigenere
+    - Docx Carving

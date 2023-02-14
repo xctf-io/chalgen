@@ -3,9 +3,11 @@ import base64
 from os.path import join, abspath, dirname, basename
 
 import hashlib
+import subprocess
 from jinja2.environment import Template
 from slugify import slugify
 from shutil import copy, copytree, rmtree
+from rich.status import Status
 
 from .challenge import GeneratedChallenge
 from .utils import FixMinikube, load_chal_from_config, WorkDir, fwrite
@@ -332,8 +334,11 @@ class VirtualMachine(ChallengeEnvironment):
                 chal_run_options=f'-p 8081:{self.target_port}', chal_name=container_id))
 
         with WorkDir(chal_dir):
-            os.system('make build')
-            os.system('make generate-img')
+            with Status(f"[cyan] Building Container for [bold]{self.name}[/bold]", spinner_style="cyan"):
+                subprocess.check_output(["make", "build"])
+            with Status(f"[blue] Generating Image for [bold]{self.name}[/blue]", spinner_style="blue"):
+                subprocess.check_output(["make", "generate-img"])
+            print(f":star2: Created Virtual Machine for Challenge {self.name} :star2:")
 
         self.chal_file = 'vm.tar.gz'
 
@@ -694,7 +699,4 @@ class JekyllBlog(ChallengeEnvironment):
             make.write(make_template.format(
                 chal_run_options=f'-p 8081:{self.target_port}', chal_name=self.container_id))
         # TODO Make this silent
-        with FixMinikube():
-            os.system(
-                f'docker run --rm --volume="{chal_out_dir}:/srv/jekyll" -it jekyll/builder:3.8 jekyll build')
         self.build_docker(chal_out_dir)

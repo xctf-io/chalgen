@@ -1,0 +1,6 @@
+- !vigenere
+      name: Vigenere
+      flag: "flag{f0ll0w_th3_url!}"
+      config:
+        key: asdf
+        addl_text: "<link to id card pic>"

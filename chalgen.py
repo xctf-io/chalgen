@@ -137,6 +137,7 @@ def gen(ctx, chal_config, competition_folder):
     chal_dir = os.path.abspath(os.path.dirname(chal_config))
 
     chal_path_lookup = {}
+    chals_folder = None
     if competition_folder is not None:
         competition_folder = os.path.join(os.path.dirname(
             os.path.realpath(__file__)), competition_folder)
@@ -155,6 +156,9 @@ def gen(ctx, chal_config, competition_folder):
 
     chal_tree = {}
     if ChallengeEnvironment in type(chal_gen).__bases__:
+        if chals_folder == None:
+            logger.error("Please include the --competition-folder flag (folder where other challenges are located)")
+            exit(1)
         chal_host = ChallengeHost(
             'http://chal-host.chals.mcpshsf.com', chals_folder)
 
@@ -212,8 +216,11 @@ def competitiongen(ctx, competition_folder, reg_url, local):
         if "running" not in kube_status:
             logger.error("Please set up your kubernetes cluster before running!")
             exit(1)
-    with Status("[bold red]Deleting challenges namespace", spinner_style="red"):
-        subprocess.check_output('kubectl delete namespace challenges'.split())
+            
+    namespaces = subprocess.check_output('kubectl get namespaces'.split()).decode()
+    if "challenges" in namespaces:
+        with Status("[bold red]Deleting challenges namespace", spinner_style="red"):
+            subprocess.check_output('kubectl delete namespace challenges'.split())
     with Status("[bold green]Creating challenges namespace", spinner_style="green"):
         subprocess.check_output('kubectl create namespace challenges'.split())
     competition_folder = os.path.join(os.path.dirname(
@@ -274,7 +281,6 @@ def competitiongen(ctx, competition_folder, reg_url, local):
         configs = generate_kube_deploy(kube_dir, chal_trees, local, reg_url)
         generate_challenge_graph(chal_trees)
         if local:
-            return
             zones_path = os.path.join(os.path.dirname(kube_dir), 'zones.txt')
             if os.path.isfile(zones_path):
                 os.remove(zones_path)

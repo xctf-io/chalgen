@@ -77,5 +77,5 @@ class logger(object):
     def info(message):
         log.info(message)
     
-    def error(self, message):
+    def error(message):
         log.error(message)
