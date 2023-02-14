@@ -2,11 +2,11 @@ import errno
 import os
 import sys
 import ruamel.yaml
-from logzero import logger
 from shutil import copyfile, copytree, rmtree
 from os.path import join, abspath, dirname
 from slugify import slugify
-from .utils import WorkDir
+from .utils import WorkDir, logger
+from rich import print
 
 yaml = ruamel.yaml.YAML()
 
@@ -69,7 +69,7 @@ def get_kube_deployment(chal, local, namespace='challenges'):
             'image': registry_url,
             'ports': [
                 {
-                    'containerPort': chal.target_port
+                    'containerPort': chal['target_port']
                 }
             ],
             'imagePullPolicy': 'Always',
@@ -273,7 +273,7 @@ class GeneratedChallenge(object):
         self.chal_dir = "not set"
 
     def do_gen(self, chal_dir):
-        print(f'Generating {self.__class__} {self.name}')
+        print(f'[white]Generating[/white] {self.__class__} [white]{self.name}[/white]')
         self.chal_dir = chal_dir
         self.container_id = None
         self.target_port = 80

@@ -11,6 +11,8 @@ from jinja2 import Template
 import tempfile
 import uuid
 from .utils import WorkDir
+from rich.console import Console
+import subprocess
 
 docker_template = """
 FROM {base_img}
@@ -26,6 +28,8 @@ services:
       container_name: {{ container.name }}
 {% endfor %}
 """
+console = Console()
+stat = console.status("[bold white]Running Commands", spinner="point", spinner_style="white")
 
 
 class Process:
@@ -81,20 +85,22 @@ class DockerBuilder(object):
                 dockerfile_file.write(dockerfile)
 
     def __enter__(self):
-        with FixMinikube(), tempfile.TemporaryDirectory() as temp_dir:
+        with FixMinikube(), tempfile.TemporaryDirectory() as temp_dir, console.status("[bold green]Creating Docker Environment", spinner_style="green"):
             self.build(temp_dir)
-            os.system(f"docker build {temp_dir} -t {self.name}")
-            os.system(f'docker run -d --name {self.name} {self.name}')
+            subprocess.run(f"docker build -q {temp_dir} -t {self.name}".split(), capture_output=True)
+            subprocess.run(f'docker run -d --name {self.name} {self.name}'.split(), capture_output=True)
             proc = Process(f'docker exec -it {self.name} /bin/sh')
+        stat.start()
         return proc
 
     def __exit__(self, exc_type, exc_value, exc_traceback):
-        with FixMinikube():
+        stat.stop()
+        with FixMinikube(), console.status("[bold red]Deleting Docker Environment", spinner_style="red"):
             for file in self.docker_outputs:
                 os.system(f'docker cp {self.name}:{file} {self.outdir}')
-            os.system(f'docker rm -f -v {self.name}')
-            os.system(f'docker rmi -f {self.name}')
-
+            subprocess.run(f'docker rm -f -v {self.name}'.split(), capture_output=True)
+            subprocess.run(f'docker rmi -f {self.name}'.split(), capture_output=True)
+        console.print(":tada: [white]Finished Challenge Generation[/white] :tada:")
 
 class DockerNetwork:
 
@@ -116,21 +122,24 @@ class DockerNetwork:
         docker_compose_path = join(self.temp_dir.name, "docker-compose.yml")
         with open(docker_compose_path, "w") as d:
             d.write(docker_comp_file)
-        with WorkDir(self.temp_dir.name), FixMinikube():
-            os.system('docker-compose -p temp up --build --detach')
+        with WorkDir(self.temp_dir.name), FixMinikube(), console.status("[bold green]Creating Docker Network Environment", spinner_style="green"):
+            subprocess.run('docker-compose -p temp up --build --detach'.split(), capture_output=True)
 
         procs = []
         with FixMinikube():
             for container in self.containers:
                 proc = Process(f'docker exec -it {container.name} /bin/sh')
                 procs.append(proc)
+        stat.start()
         return procs
 
     def __exit__(self, exc_type, exc_value, exc_traceback):
-        with WorkDir(self.temp_dir.name), FixMinikube():
+        stat.stop()
+        with WorkDir(self.temp_dir.name), FixMinikube(), console.status("[bold red]Removing Docker Network Environment", spinner_style="red"):
             for name in self.docker_outputs:
                 files = self.docker_outputs[name]
                 for file in files:
                     os.system(f'docker cp {name}:{file} "{self.outdir}"')
-            os.system('docker-compose -p temp down --rmi all')
+            subprocess.run('docker-compose -p temp down --rmi all'.split(), capture_output=True)
         self.temp_dir.cleanup()
+        console.print(":tada: [white]Finished Challenge Generation[/white] :tada:")

@@ -1,17 +1,17 @@
 import re
 from platform import uname
 import subprocess
-import click
+import rich_click as click
 import os
-from logzero import logger
+import logging
+from rich.logging import RichHandler
 import ruamel.yaml
 import pygraphviz as pgv
 import shutil
 
-from chal_types import challenge_types, load_chal_from_config, chal_to_kube_config, gen_kube, mkdir_p
+from chal_types import challenge_types, load_chal_from_config, chal_to_kube_config, gen_kube, mkdir_p, logger
 from chal_types import GeneratedChallenge, ChallengeHost, ChallengeEnvironment
 from gui import App
-
 
 @click.group()
 @click.pass_context
