@@ -8,7 +8,7 @@ metadata:
     nginx.ingress.kubernetes.io/ssl-redirect: 'false'
 spec:
   rules:
-  - host: fesbuc.chals.mcpshsf.com
+  - host: fesbuc.ctf.test
     http:
       paths:
       - pathType: ImplementationSpecific
@@ -17,8 +17,8 @@ spec:
           service:
             name: fesbuc-svc
             port:
-              number: 80
-  - host: fred-shared-server.chals.mcpshsf.com
+              number: 8000
+  - host: fred-shared-server.ctf.test
     http:
       paths:
       - pathType: ImplementationSpecific
@@ -27,8 +27,8 @@ spec:
           service:
             name: fred-shared-server-svc
             port:
-              number: 80
-  - host: chal-host.chals.mcpshsf.com
+              number: 8000
+  - host: chal-host.ctf.test
     http:
       paths:
       - pathType: ImplementationSpecific
@@ -37,4 +37,4 @@ spec:
           service:
             name: chal-host-svc
             port:
-              number: 80
+              number: 8000

@@ -87,8 +87,8 @@ class DockerBuilder(object):
     def __enter__(self):
         with FixMinikube(), tempfile.TemporaryDirectory() as temp_dir, console.status("[bold green]Creating Docker Environment", spinner_style="green"):
             self.build(temp_dir)
-            subprocess.run(f"docker build -q {temp_dir} -t {self.name}".split(), capture_output=True)
-            subprocess.run(f'docker run -d --name {self.name} {self.name}'.split(), capture_output=True)
+            subprocess.check_output(f"docker build -q {temp_dir} -t {self.name}".split())
+            subprocess.check_output(f'docker run -d --name {self.name} {self.name}'.split())
             proc = Process(f'docker exec -it {self.name} /bin/sh')
         stat.start()
         return proc
@@ -98,8 +98,8 @@ class DockerBuilder(object):
         with FixMinikube(), console.status("[bold red]Deleting Docker Environment", spinner_style="red"):
             for file in self.docker_outputs:
                 os.system(f'docker cp {self.name}:{file} {self.outdir}')
-            subprocess.run(f'docker rm -f -v {self.name}'.split(), capture_output=True)
-            subprocess.run(f'docker rmi -f {self.name}'.split(), capture_output=True)
+            subprocess.check_output(f'docker rm -f -v {self.name}'.split())
+            subprocess.check_output(f'docker rmi -f {self.name}'.split())
         console.print(":tada: [white]Finished Challenge Generation[/white] :tada:")
 
 class DockerNetwork:
@@ -123,7 +123,7 @@ class DockerNetwork:
         with open(docker_compose_path, "w") as d:
             d.write(docker_comp_file)
         with WorkDir(self.temp_dir.name), FixMinikube(), console.status("[bold green]Creating Docker Network Environment", spinner_style="green"):
-            subprocess.run('docker-compose -p temp up --build --detach'.split(), capture_output=True)
+            subprocess.check_output('docker-compose -p temp up --build --detach'.split())
 
         procs = []
         with FixMinikube():
@@ -140,6 +140,6 @@ class DockerNetwork:
                 files = self.docker_outputs[name]
                 for file in files:
                     os.system(f'docker cp {name}:{file} "{self.outdir}"')
-            subprocess.run('docker-compose -p temp down --rmi all'.split(), capture_output=True)
+            subprocess.check_output('docker-compose -p temp down --rmi all'.split())
         self.temp_dir.cleanup()
         console.print(":tada: [white]Finished Challenge Generation[/white] :tada:")

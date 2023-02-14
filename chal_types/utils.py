@@ -1,3 +1,5 @@
+import logging
+from rich.logging import RichHandler
 from os.path import join
 from jinja2 import Template
 import ruamel.yaml
@@ -66,15 +68,14 @@ class FixMinikube(object):
             for env_var in self.env_vars:
                 os.environ[env_var] = self.env_vars_value[env_var]
 
-class logger:
-    def __init__(self):
-        logging.basicConfig(
-            level="NOTSET", format="%(message)s", datefmt="[%X]", handlers=[RichHandler()]
-        )
-        self.log = logging.getLogger("rich")
-    
+logging.basicConfig(
+    level="INFO", format="%(message)s", datefmt="[%X]", handlers=[RichHandler()]
+)
+log = logging.getLogger("rich")
+
+class logger(object):
     def info(message):
-        self.log.info(message)
+        log.info(message)
     
-    def error(message):
-        self.log.error(message)
+    def error(self, message):
+        log.error(message)

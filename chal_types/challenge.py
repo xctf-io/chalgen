@@ -1,5 +1,6 @@
 import errno
 import os
+import subprocess
 import sys
 import ruamel.yaml
 from shutil import copyfile, copytree, rmtree
@@ -7,6 +8,7 @@ from os.path import join, abspath, dirname
 from slugify import slugify
 from .utils import WorkDir, logger
 from rich import print
+from rich.status import Status
 
 yaml = ruamel.yaml.YAML()
 
@@ -282,6 +284,11 @@ class GeneratedChallenge(object):
     def gen(self, chal_dir):
         # override
         pass
+
+    def build_docker(self, docker_dir):
+        with WorkDir(docker_dir), Status(f"[cyan] Building Container for [bold]{self.name}[/bold]", spinner_style="cyan"):
+            subprocess.check_output(["make", "build"])
+        print(f":star2: Built Container for {self.name} :star2:")
 
     def get_value(self, key, required=True):
         if key not in self.config.keys():

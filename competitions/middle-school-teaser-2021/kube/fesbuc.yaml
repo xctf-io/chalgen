@@ -8,7 +8,7 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - port: 80
+  - port: 8000
     targetPort: 8000
     protocol: TCP
   selector:
@@ -33,11 +33,12 @@ spec:
     spec:
       containers:
       - name: fesbuc
-        image: ghcr.io/vgcs/fesbuc:latest
+        image: fesbuc:latest
         ports:
-        - containerPort: 80
-        imagePullPolicy: Always
+        - containerPort: 8000
+        imagePullPolicy: Never
         securityContext:
-          readOnlyRootFilesystem: false
+          allowPrivilegeEscalation: false
+          runAsUser: 0
       imagePullSecrets:
       - name: regcred

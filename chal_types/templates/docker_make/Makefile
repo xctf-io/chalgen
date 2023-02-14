@@ -1,11 +1,11 @@
 build:
-	docker build . -t {chal_name}
+	@docker build . -t {chal_name} -q
 
 run: build
-	docker run {chal_run_options} {chal_name}
+	@docker run {chal_run_options} {chal_name}
 
 clean:
-	docker rm -f -v {chal_name}
+	@docker rm -f -v {chal_name}
 
 generate-img:
 	docker run -d --name {chal_name} {chal_name}:latest

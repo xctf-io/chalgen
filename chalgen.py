@@ -2,9 +2,9 @@ import re
 from platform import uname
 import subprocess
 import rich_click as click
+from rich import print
+from rich.status import Status
 import os
-import logging
-from rich.logging import RichHandler
 import ruamel.yaml
 import pygraphviz as pgv
 import shutil
@@ -157,32 +157,39 @@ def no_reg_url(ctx, param, value):
 @click.pass_context
 @click.option('--competition-folder', required=True)
 @click.option('--reg-url', required=True, help="Registry to push docker images to")
-@click.option('-l', '--local', is_flag=True, default=False, callback=no_reg_url, help="Pass to run the ctf locally(uses minikube)")
+@click.option('-l', '--local', is_flag=True, default=False, callback=no_reg_url, help="Run the ctf locally using minikube (no reg url required)")
 def competitiongen(ctx, competition_folder, reg_url, local):
     if local:
         if shutil.which('minikube') is None:
             logger.error("minikube not installed!")
             return
         else:
-            os.system('minikube start')
-            os.system('minikube addons enable ingress')
+            try: 
+                subprocess.check_output(['minikube', 'status'])
+            except subprocess.CalledProcessError:
+                os.system('minikube start')
+                os.system('minikube addons enable ingress')
             docker_envs = subprocess.check_output(
                 ['minikube', 'docker-env', '--shell=cmd']).decode()
-            docker_envs = docker_envs.encode('unicode_escape').decode('ascii')
-            url = re.search('tcp://127.0.0.1:[0-9]+', docker_envs)
-            home_path = re.search('H=.*certs', docker_envs)
-            home_path = home_path.group()[2:]
+            docker_envs = docker_envs.split('\n')
+            url = docker_envs[1].split('=')[1]
+            home_path = docker_envs[2].split('=')[1]
             if 'microsoft-standard' in uname().release:
                 home_path = subprocess.check_output(
                     ['wslpath', home_path]).decode()[:-1]
             os.environ['DOCKER_TLS_VERIFY'] = "1"
-            os.environ['DOCKER_HOST'] = url.group()
+            os.environ['DOCKER_HOST'] = url
             os.environ['DOCKER_CERT_PATH'] = home_path
             os.environ['MINIKUBE_ACTIVE_DOCKERD'] = 'minikube'
     else:
-        logger.info("Please set up your kubernetes cluster before running!")
-    os.system('kubectl delete namespace challenges')
-    os.system('kubectl create namespace challenges')
+        kube_status = subprocess.check_output(['kubectl', 'cluster-info']).decode()
+        if "running" not in kube_status:
+            logger.error("Please set up your kubernetes cluster before running!")
+            exit(1)
+    with Status("[bold red]Deleting challenges namespace", spinner_style="red"):
+        subprocess.check_output('kubectl delete namespace challenges'.split())
+    with Status("[bold green]Creating challenges namespace", spinner_style="green"):
+        subprocess.check_output('kubectl create namespace challenges'.split())
     competition_folder = os.path.join(os.path.dirname(
         os.path.realpath(__file__)), competition_folder)
     chals_folder = os.path.join(competition_folder, 'chals')
@@ -241,6 +248,7 @@ def competitiongen(ctx, competition_folder, reg_url, local):
         configs = generate_kube_deploy(kube_dir, chal_trees, local, reg_url)
         generate_challenge_graph(chal_trees)
         if local:
+            return
             zones_path = os.path.join(os.path.dirname(kube_dir), 'zones.txt')
             if os.path.isfile(zones_path):
                 os.remove(zones_path)
@@ -254,7 +262,7 @@ def competitiongen(ctx, competition_folder, reg_url, local):
                 os.environ.pop(env_var, None)
             os.system(
                 f'docker run --name dnsserver -dp 53:53/udp -p 53:53/tcp -v {zones_path}:/zones/zones.txt samuelcolvin/dnserver')
-            logger.info("\nPlease add 127.0.0.1 as a DNS client https://minikube.sigs.k8s.io/docs/handbook/addons/ingress-dns/")
+            print("\nPlease add 127.0.0.1 as a DNS client https://minikube.sigs.k8s.io/docs/handbook/addons/ingress-dns/")
             os.system('minikube tunnel')
 
 

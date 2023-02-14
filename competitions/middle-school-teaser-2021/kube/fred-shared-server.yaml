@@ -8,7 +8,7 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - port: 80
+  - port: 8000
     targetPort: 8080
     protocol: TCP
   selector:
@@ -33,11 +33,12 @@ spec:
     spec:
       containers:
       - name: fred-shared-server
-        image: ghcr.io/vgcs/fred-shared-server:latest
+        image: fred-shared-server:latest
         ports:
-        - containerPort: 80
-        imagePullPolicy: Always
+        - containerPort: 8080
+        imagePullPolicy: Never
         securityContext:
-          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+          runAsUser: 0
       imagePullSecrets:
       - name: regcred

@@ -270,9 +270,6 @@ class ImageExifChallenge(GeneratedChallenge):
         img_out_path = os.path.join(chal_dir, 'chal_img.jpeg')
         img.save(img_out_path, "jpeg", exif=exif_bytes)
 
-# TODO make this a docker challenge
-
-
 class GitReassemblyChallenge(GeneratedChallenge):
     yaml_tag = u'!git_reassembly'
     __doc__ = """

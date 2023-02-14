@@ -326,5 +326,4 @@ class HashExtension(GeneratedChallenge):
         fwrite(temp_dir, "templates/index.html", app_dir, "templates/index.html", True,
                hash=sha1, key=key, files=all_files, author=self.get_value("author"), result='{{result}}')
 
-        with WorkDir(chal_dir):
-            os.system('make build')
+        self.build_docker(chal_dir)

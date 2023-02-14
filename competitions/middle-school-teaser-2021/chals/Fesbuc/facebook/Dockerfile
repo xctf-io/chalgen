@@ -1,4 +1,11 @@
-from python:2.7.17-buster
+FROM python:2.7.17-buster as builder
+ADD app /app
+WORKDIR /app
+RUN pip install -r requirements.txt
+RUN echo no | python manage.py syncdb
+RUN python manage.py loaddata fixture.yaml
+
+FROM python:2.7.17-buster
 
 RUN mkdir /facebook
 WORKDIR /facebook
@@ -14,7 +21,7 @@ ENV READ_ONLY true
 
 # NON-CACHED UPDATES
 
-ADD app/db.sqlite3 /facebook/db.sqlite3
+COPY --from=builder app/db.sqlite3 /facebook/db.sqlite3
 
 EXPOSE 8000
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

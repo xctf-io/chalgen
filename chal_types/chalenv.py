@@ -64,11 +64,6 @@ class ChallengeEnvironment(GeneratedChallenge):
             self._chal_lookup[chal_gen.name] = chal_gen
         return tree
 
-    def start_env(self, env_path):
-        os.chdir(env_path)
-        os.system("make clean && make build && make run")
-
-
 class StaticSite(ChallengeEnvironment):
     security = 'readonly'
 
@@ -146,8 +141,7 @@ class StaticSite(ChallengeEnvironment):
             make.write(template_make.read().format(
                 chal_name=self.container_id, chal_run_options=f'-p 8080:{self.target_port}'))
 
-        with WorkDir(chal_dir):
-            os.system('make build')
+        self.build_docker(chal_dir)
 
 
 class ShellServer(ChallengeEnvironment):
@@ -201,8 +195,7 @@ class ShellServer(ChallengeEnvironment):
             make.write(template_make.read().format(
                 chal_name=self.container_id, chal_run_options=f'-p 8080:{self.target_port}'))
 
-        with WorkDir(chal_dir):
-            os.system('make build')
+        self.build_docker(chal_dir)
 
 
 class FileshareFlask(ChallengeEnvironment):
@@ -279,8 +272,7 @@ class FileshareFlask(ChallengeEnvironment):
                 chal_name=self.container_id, chal_run_options=f'-p 8081:{self.target_port}'))
 
         # TODO (cthompson) be able to skip building of challenge environment
-        with WorkDir(chal_out_dir):
-            os.system('make build')
+        self.build_docker(chal_out_dir)
 
 
 class VirtualMachine(ChallengeEnvironment):
@@ -432,8 +424,7 @@ class TwitterFlask(ChallengeEnvironment):
         #     os.system(
         #         '/bin/bash -c "source env/bin/activate && python db_create.py"')
 
-        with WorkDir(chal_out_dir):
-            os.system('make build')
+        self.build_docker(chal_out_dir)
 
 
 class FacebookDjango(ChallengeEnvironment):
@@ -617,8 +608,7 @@ class FacebookDjango(ChallengeEnvironment):
         #     os.system(
         #         '/bin/bash -c "source env/bin/activate && python manage.py loaddata fixture.yaml"')
 
-        with WorkDir(chal_out_dir):
-            os.system('make build')
+        self.build_docker(chal_out_dir)
 
 
 class JekyllBlog(ChallengeEnvironment):
@@ -703,8 +693,8 @@ class JekyllBlog(ChallengeEnvironment):
             make_template = template_make.read()
             make.write(make_template.format(
                 chal_run_options=f'-p 8081:{self.target_port}', chal_name=self.container_id))
+        # TODO Make this silent
         with FixMinikube():
             os.system(
                 f'docker run --rm --volume="{chal_out_dir}:/srv/jekyll" -it jekyll/builder:3.8 jekyll build')
-        with WorkDir(chal_out_dir):
-            os.system('make build')
+        self.build_docker(chal_out_dir)

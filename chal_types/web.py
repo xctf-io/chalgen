@@ -54,8 +54,7 @@ class RobotsTxtChallenge(GeneratedChallenge):
         fwrite(makefile_dir, 'Makefile', chal_dir, 'Makefile',
                chal_name=self.container_id, chal_run_options=f'-p 8080:{self.target_port}')
 
-        with WorkDir(chal_dir):
-            os.system('make build')
+        self.build_docker(chal_dir)
 
 
 class TemplateInjection(GeneratedChallenge):
@@ -96,5 +95,4 @@ class TemplateInjection(GeneratedChallenge):
         fwrite(temp_dir, 'templates/base.html', app_dir, 'templates/base.html', jinja=True,
                author=author, content="{% block content %}{% endblock %}")
 
-        with WorkDir(chal_dir):
-            os.system('make build')
+        self.build_docker(chal_dir)
