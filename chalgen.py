@@ -294,12 +294,21 @@ def competitiongen(ctx, competition_folder, reg_url, local):
                         'DOCKER_CERT_PATH', 'MINIKUBE_ACTIVE_DOCKERD']
             for env_var in env_vars:
                 os.environ.pop(env_var, None)
-            os.system(
-                f'docker run --name dnsserver -dp 53:53/udp -p 53:53/tcp -v {zones_path}:/zones/zones.txt samuelcolvin/dnserver')
+
+            try:
+                with Status("[cyan]Starting DNS server", spinner="point", spinner_style="cyan"):
+                    subprocess.check_output(
+                    f'docker run --name dnsserver -dp 53:53/udp -p 53:53/tcp -v {zones_path}:/zones/zones.txt samuelcolvin/dnserver'.split())
+            except subprocess.CalledProcessError:
+                logger.error("Please clear the process using port 53 before running!")
+                # subprocess.check_output(['docker', 'rm', '-v', 'dnsserver'])
+                # return
             print("\nPlease add 127.0.0.1 as a DNS client https://minikube.sigs.k8s.io/docs/handbook/addons/ingress-dns/")
-            pid = subprocess.Popen(['minikube','tunnel']).pid
+            proc = subprocess.Popen(['minikube','tunnel'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             with Status("[white]Tunnel started, type anything to stop", spinner="dots12", spinner_style="white"):
                 input()
+            proc.kill()
+            subprocess.check_output(['docker', 'rm', '-v', 'dnsserver'])
 
 @chalgen.command()
 @click.pass_context
