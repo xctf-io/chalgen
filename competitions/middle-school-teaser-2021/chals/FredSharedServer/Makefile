@@ -1,13 +1,13 @@
 build:
-	@docker build . -t shell_server-8769283733813 -q
+	@docker build . -t shell_server-8756733910981 -q
 
 run: build
-	@docker run -p 8080:8080 shell_server-8769283733813
+	@docker run -p 8080:8080 shell_server-8756733910981
 
 clean:
-	@docker rm -f -v shell_server-8769283733813
+	@docker rm -f -v shell_server-8756733910981
 
 generate-img:
-	docker run -d --name shell_server-8769283733813 shell_server-8769283733813:latest
-	docker export shell_server-8769283733813 -o vm.tar.gz
-	docker stop shell_server-8769283733813
+	docker run -d --name shell_server-8756733910981 shell_server-8756733910981:latest
+	docker export shell_server-8756733910981 -o vm.tar.gz
+	docker stop shell_server-8756733910981

@@ -184,7 +184,7 @@ def push_container(chal_config, local):
         f'docker tag {chal_config["container_id"]} {chal_config["registry_url"]}')
     if not local:
         os.system(f'docker push {chal_config["registry_url"]}')
-    os.system(f'docker rmi {chal_config["container_id"]}')
+    subprocess.check_output(f'docker rmi {chal_config["container_id"]}'.split())
 
 
 def gen_kube(kube_dir, chal_kube_configs, local):

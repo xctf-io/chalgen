@@ -51,9 +51,10 @@ def generate_kube_deploy(kube_dir, trees, local, reg_url):
 
     gen_kube(kube_dir, configs, local)
 
-    for kube_config in os.listdir(kube_dir):
-        kube_config_path = os.path.join(kube_dir, kube_config)
-        os.system(f'kubectl apply -f {kube_config_path} -n challenges')
+    with Status("[bold blue] Applying Kubernetes files", spinner="line", spinner_style="blue"):
+        for kube_config in os.listdir(kube_dir):
+            kube_config_path = os.path.join(kube_dir, kube_config)
+            subprocess.check_output(f'kubectl apply -f {kube_config_path} -n challenges'.split())
 
     return configs
 
@@ -197,8 +198,9 @@ def competitiongen(ctx, competition_folder, reg_url, local):
             try: 
                 subprocess.check_output(['minikube', 'status'])
             except subprocess.CalledProcessError:
-                os.system('minikube start')
-                os.system('minikube addons enable ingress')
+                with Status("[bold blue] Starting Minikube", spinner="line", spinner_style="blue"):
+                    subprocess.check_output(['minikube', 'start'])
+                    subprocess.check_output(['minikube', 'addons', 'enable', 'ingress'])
             docker_envs = subprocess.check_output(
                 ['minikube', 'docker-env', '--shell=cmd']).decode()
             docker_envs = docker_envs.split('\n')
@@ -216,7 +218,7 @@ def competitiongen(ctx, competition_folder, reg_url, local):
         if "running" not in kube_status:
             logger.error("Please set up your kubernetes cluster before running!")
             exit(1)
-            
+
     namespaces = subprocess.check_output('kubectl get namespaces'.split()).decode()
     if "challenges" in namespaces:
         with Status("[bold red]Deleting challenges namespace", spinner_style="red"):
@@ -295,7 +297,9 @@ def competitiongen(ctx, competition_folder, reg_url, local):
             os.system(
                 f'docker run --name dnsserver -dp 53:53/udp -p 53:53/tcp -v {zones_path}:/zones/zones.txt samuelcolvin/dnserver')
             print("\nPlease add 127.0.0.1 as a DNS client https://minikube.sigs.k8s.io/docs/handbook/addons/ingress-dns/")
-            os.system('minikube tunnel')
+            pid = subprocess.Popen(['minikube','tunnel']).pid
+            with Status("[white]Tunnel started, type anything to stop", spinner="dots12", spinner_style="white"):
+                input()
 
 @chalgen.command()
 @click.pass_context
