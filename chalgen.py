@@ -214,8 +214,9 @@ def competitiongen(ctx, competition_folder, reg_url, local):
             os.environ['DOCKER_CERT_PATH'] = home_path
             os.environ['MINIKUBE_ACTIVE_DOCKERD'] = 'minikube'
     else:
-        kube_status = subprocess.check_output(['kubectl', 'cluster-info']).decode()
-        if "running" not in kube_status:
+        try:
+            subprocess.check_output(['kubectl', 'cluster-info'])
+        except subprocess.CalledProcessError:
             logger.error("Please set up your kubernetes cluster before running!")
             exit(1)
 
