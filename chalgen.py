@@ -77,7 +77,7 @@ def generate_challenge_graph(trees):
     formatted_edges = "\n".join(edges)
     graph = f'digraph {{\n{formatted_edges}\n}}'
     G = pgv.AGraph(graph)
-    G.layout()
+    G.layout(prog='dot')
     G.draw('evidence_graph.png')
 
 
