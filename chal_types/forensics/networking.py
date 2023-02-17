@@ -12,7 +12,6 @@ from scapy.layers.usb import *
 from os.path import join, realpath, dirname, basename, exists
 import random
 
-
 class PCAPLogin(GeneratedChallenge):
     yaml_tag = u'!pcap_login'
     __doc__ = """
@@ -127,11 +126,11 @@ class SQLLog(GeneratedChallenge):
         index_php = join(config_dir, 'index.php')
         setup = join(config_dir, 'setup.sql')
         out = join(chal_dir, 'access.log')
-        sender = DockerBuilder(name="sender", base_img="python:slim")
+        sender = DockerBuilder(name="sender", base_img="python:slim", color="yellow")
         recv = DockerBuilder(
-            name="recv", base_img="php:8.0-apache", included_files=[index_php])
+            name="recv", base_img="php:8.0-apache", included_files=[index_php], color="white")
         db = DockerBuilder(name='db', base_img='mysql',
-                           included_files=[setup] + files)
+                           included_files=[setup] + files, color="cyan")
         network = DockerNetwork([sender, recv, db], out, {
                                 "recv": ['/var/log/apache2/access.log']})
         self.chal_file = 'access.log'
@@ -146,11 +145,12 @@ class SQLLog(GeneratedChallenge):
             server.run('docker-php-ext-enable mysqli')
             server.run('mv /input/index.php /var/www/html/index.php')
             server.run('unlink /var/log/apache2/access.log')
-            server.run('service apache2 start', detach=False)
+            server.run('service apache2 start')
+            server.print("website online")
 
             # * setup database
             sql.run('su mysql')
-            sql.run('mysqld --initialize', detach=False)
+            sql.run('mysqld --initialize')
             sql.run('mysqld --init-file=/input/setup.sql --secure-file-priv=/input &')
             time.sleep(3)
             others = ", ".join([str(item).replace('\'', '"')
@@ -159,16 +159,16 @@ class SQLLog(GeneratedChallenge):
                   f"VALUES {others}, (\"{user}\", \"{self.flag}\");'"
             sql.run(cmd, wait=False)
             sql.proc.expect(': ')
-            print("setting up sql")
             sql.run('password', detach=False)
+            sql.print("sql server set up")
 
             # * start attack
             hacker.run('pip install sqlmap')
-            print("starting sqlmap, PLEASE BE PATIENT")
+            hacker.print("starting sqlmap attack, PLEASE BE PATIENT")
             hacker.run('sqlmap -u "http://recv?user=&pass=" --random-agent --dump --batch', detach=False,
                        timeout=900)
             for file in files:
-                print("reading file")
+                hacker.print("reading file")
                 cmd2 = f'sqlmap -u "http://recv?user=&pass=" --random-agent -' \
                        f'-file-read=/input/{basename(file)} --batch'
                 hacker.run(cmd2, detach=False)

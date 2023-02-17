@@ -33,21 +33,25 @@ stat = console.status("[bold white]Running Commands", spinner="point", spinner_s
 
 
 class Process:
-    def __init__(self, shell):
+    def __init__(self, shell, name, color):
         self.proc = px.spawn(shell, encoding='utf-8')
         self.proc.expect('[$#] ')
         self.shell = shell
+        self.name = name
+        self.color = color
 
     def run(self, cmd, wait=True, timeout=600, detach=True):
         self.proc.sendline(cmd)
         if wait:
             self.proc.expect('[$#] ', timeout)
         if not detach:
-            print(self.proc.before)
+            console.print(self.proc.before)
 
     def clone(self):
         return Process(self.shell)
-
+    
+    def print(self, text):
+        console.print(f"[bold {self.color}]\[{self.name}][/bold {self.color}] {text}")
 
 class DockerBuilder(object):
     def __init__(
@@ -55,6 +59,7 @@ class DockerBuilder(object):
             name=uuid.uuid4(),
             base_img="scratch",
             input_dir="input",
+            color="cyan",
             included_files=[],
             output_files=[],
             outdir=None,
@@ -62,6 +67,7 @@ class DockerBuilder(object):
         self.name = name
         self.base_img = base_img
         self.input_dir = input_dir
+        self.color = color
         self.included_files = included_files
         self.docker_outputs = output_files
         self.outdir = outdir
@@ -89,7 +95,7 @@ class DockerBuilder(object):
             self.build(temp_dir)
             subprocess.check_output(f"docker build -q {temp_dir} -t {self.name}".split())
             subprocess.check_output(f'docker run -d --name {self.name} {self.name}'.split())
-            proc = Process(f'docker exec -it {self.name} /bin/sh')
+            proc = Process(f'docker exec -it {self.name} /bin/sh', "container", self.color)
         stat.start()
         return proc
 
@@ -123,12 +129,12 @@ class DockerNetwork:
         with open(docker_compose_path, "w") as d:
             d.write(docker_comp_file)
         with WorkDir(self.temp_dir.name), FixMinikube(), console.status("[bold green]Creating Docker Network Environment", spinner_style="green"):
-            subprocess.check_output('docker-compose -p temp up --build --detach'.split())
+            subprocess.run('docker-compose -p temp up --build --detach'.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
         procs = []
         with FixMinikube():
             for container in self.containers:
-                proc = Process(f'docker exec -it {container.name} /bin/sh')
+                proc = Process(f'docker exec -it {container.name} /bin/sh', container.name, container.color)
                 procs.append(proc)
         stat.start()
         return procs
@@ -140,6 +146,7 @@ class DockerNetwork:
                 files = self.docker_outputs[name]
                 for file in files:
                     os.system(f'docker cp {name}:{file} "{self.outdir}"')
-            subprocess.check_output('docker-compose -p temp down --rmi all'.split())
+            subprocess.run('docker-compose -p temp down --rmi all'.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
         self.temp_dir.cleanup()
         console.print(":tada: [white]Finished Challenge Generation[/white] :tada:")
