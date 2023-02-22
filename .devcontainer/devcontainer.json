@@ -8,6 +8,9 @@
 			"version": "latest",
 			"helm": "latest",
 			"minikube": "latest"
+		},
+		"ghcr.io/devcontainers/features/azure-cli:1": {
+			"version": "latest"
 		}
 	},
   "onCreateCommand": "bash install.sh"
