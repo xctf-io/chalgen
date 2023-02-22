@@ -9,7 +9,7 @@
 			"helm": "latest",
 			"minikube": "latest"
 		},
-		"ghcr.io/devcontainers/features/azure-cli:1": {
+		"ghcr.io/dhoeric/features/google-cloud-cli:1": {
 			"version": "latest"
 		}
 	},
