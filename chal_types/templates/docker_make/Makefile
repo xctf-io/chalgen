@@ -8,6 +8,7 @@ clean:
 	@docker rm -f -v {chal_name}
 
 generate-img:
-	docker run -d --name {chal_name} {chal_name}:latest
-	docker export {chal_name} -o vm.tar.gz
-	docker stop {chal_name}
+	@docker run -d --name {chal_name} {chal_name}:latest
+	@docker export {chal_name} -o vm.tar.gz
+	@docker rm {chal_name}
+	@docker rmi {chal_name}

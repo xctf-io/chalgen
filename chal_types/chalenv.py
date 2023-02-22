@@ -8,6 +8,7 @@ from jinja2.environment import Template
 from slugify import slugify
 from shutil import copy, copytree, rmtree
 from rich.status import Status
+from rich import print
 
 from .challenge import GeneratedChallenge
 from .utils import FixMinikube, load_chal_from_config, WorkDir, fwrite
