@@ -636,7 +636,7 @@ class JekyllBlog(ChallengeEnvironment):
         for name, chal in self._chal_lookup.items():
             sub_content = ""
             if hasattr(chal, 'display'):
-                sub_content = chal.display
+                sub_content = f"[{chal.display}]({chal.display})"
             elif hasattr(chal, 'chal_file'):
                 if type(chal.chal_file) is list:
                     raise Exception(

@@ -1,6 +1,8 @@
 import hashlib
 import binascii
 import string
+from Crypto.Cipher import AES
+from Crypto import Random
 import base64
 
 #from pycipher import SimpleSubstitution
@@ -170,6 +172,21 @@ def encryptDecrypt(inpString, xorKey):
 def xor_text(string, key):
     return "".join([chr(ord(c1) ^ ord(c2)) for c1, c2 in zip(string, key*(len(string) / len(key) + 1))])
 
+def pad(s, block_size):
+    return s + (block_size - len(s) % block_size) * chr(block_size - len(s) % block_size)
+
+def aes_encrypt_text(input, key):
+    iv = Random.new().read(AES.block_size)
+    cipher = AES.new(key.encode(), AES.MODE_CBC, iv)
+    input = pad(input, AES.block_size)
+    return base64.b64encode(iv + cipher.encrypt(input.encode())).decode()
+
+def aes_decrypt_text(input, key):
+    input = base64.b64decode(input)
+    iv = input[:AES.block_size]
+    cipher = AES.new(key.encode(), AES.MODE_CBC, iv)
+    return cipher.decrypt(input[AES.block_size:]).decode('utf-8')
+
 
 text_transforms = {
     'hex': {
@@ -187,5 +204,9 @@ text_transforms = {
     'ceasar':  {
         'encode': ceasar_text,
         'decode': decode_ceasar_text
+    },
+    'vigenere': {
+        'encode': encrypt_vigenere_text,
+        'decode': decode_vigenere_text
     }
 }

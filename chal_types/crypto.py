@@ -278,6 +278,25 @@ class CBCPaddingOracle(GeneratedChallenge):
     def gen(self, chal_dir):
         pass
 
+class AESChallenge(GeneratedChallenge):
+    yaml_tag = u'!aes'
+    __doc__ = """
+    A simple AES challenge
+
+    Config:
+
+        key - The key to use
+        addl_text - Additional text to append to the flag
+    """
+
+    def gen(self, chal_dir):
+        key = self.get_value("key")
+        addl_text = self.get_value("addl_text", required=False)
+
+        with open(join(chal_dir, 'challenge.txt'), 'w') as f:
+            chal_txt = aes_encrypt_text(addl_text + " " + self.flag, key)
+            f.write(chal_txt)
+            self.display = chal_txt
 
 class HashExtension(GeneratedChallenge):
     yaml_tag = u'!hash_extension'

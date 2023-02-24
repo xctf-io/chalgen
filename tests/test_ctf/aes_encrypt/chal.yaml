@@ -1,0 +1,6 @@
+- !aes
+    name: AES Encrypt
+    flag: "flag{a3s_1s_u53fu1_w0w}"
+    config:
+      key: "smoressmorescool"
+      addl_text: "[insert secret admin creds here]"
