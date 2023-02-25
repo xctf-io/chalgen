@@ -10,6 +10,7 @@ import shutil
 
 from chal_types import challenge_types, load_chal_from_config, chal_to_kube_config, gen_kube, mkdir_p, logger
 from chal_types import GeneratedChallenge, ChallengeHost, ChallengeEnvironment
+from chal_types.web import TemplateInjection
 from gui import App
 
 @click.group()
@@ -30,7 +31,7 @@ def generate_kube_deploy(kube_dir, trees, local, reg_url):
             for child in tree['children']:
                 chal = child['chal']
                 if chal.container_id:
-                    kube_config = chal_to_kube_config(chal, reg_url, local)
+                    kube_config = chal_to_kube_config(chal, reg_url, local, isinstance(chal, TemplateInjection))
                     kube_configs.append(kube_config)
 
                 kube_configs.extend(traverse(child))
@@ -38,12 +39,12 @@ def generate_kube_deploy(kube_dir, trees, local, reg_url):
 
         chal = tree['chal']
         if chal.container_id:
-            kube_config = chal_to_kube_config(chal, reg_url, local)
+            kube_config = chal_to_kube_config(chal, reg_url, local, isinstance(chal, TemplateInjection))
             configs.append(kube_config)
 
         chal = tree.get('host')
         if chal and chal.container_id:
-            kube_config = chal_to_kube_config(chal, reg_url, local)
+            kube_config = chal_to_kube_config(chal, reg_url, local, isinstance(chal, TemplateInjection))
             configs.append(kube_config)
 
         configs.extend(traverse(tree))

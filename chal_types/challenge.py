@@ -6,6 +6,7 @@ import ruamel.yaml
 from shutil import copyfile, copytree, rmtree
 from os.path import join, abspath, dirname
 from slugify import slugify
+
 from .utils import WorkDir, logger
 from rich import print
 from rich.status import Status
@@ -87,6 +88,9 @@ def get_kube_deployment(chal, local, namespace='challenges'):
         spec['containers'][0]['imagePullPolicy'] = 'Never'
         spec['containers'][0]['securityContext'] = {
             'allowPrivilegeEscalation': False, 'runAsUser': 0}
+    if chal['chroot']:
+        spec['containers'][0]['securityContext']['privileged'] = True
+        
     return {
         'apiVersion': 'apps/v1',
         'kind': 'Deployment',
@@ -157,7 +161,7 @@ def get_kube_ingress(chals, namespace='challenges'):
     }
 
 
-def chal_to_kube_config(chal, registry_base_url, local):
+def chal_to_kube_config(chal, registry_base_url, local, chroot):
     chal_name = slugify(chal.name)
     service_name = f'{chal_name}-svc'
     registry_url = f'{registry_base_url}{chal_name}:latest'
@@ -175,7 +179,8 @@ def chal_to_kube_config(chal, registry_base_url, local):
         'target_port': chal.target_port,
         'container_id': chal.container_id,
         'security': chal.security,
-        'out_port': out_port
+        'out_port': out_port,
+        'chroot': chroot
     }
 
 

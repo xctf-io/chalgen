@@ -85,7 +85,7 @@ class TemplateInjection(GeneratedChallenge):
                 copyfile(join(chal_dir, file), join(app_dir, file))
 
         self.container_id = f'temp_inj-{hash(self)}'
-        self.target_port = '8080'
+        self.target_port = 8080
         fwrite(cur_file_path, 'templates/docker_make/Makefile', chal_dir, 'Makefile', chal_name=self.container_id,
                chal_run_options=f'-p 8080:{self.target_port} --cap-drop all --cap-add chown --cap-add setuid --cap-add setgid \
         --cap-add sys_admin --security-opt apparmor=unconfined --security-opt seccomp=unconfined')
