@@ -138,20 +138,16 @@ class SpectrogramChallenge(GeneratedChallenge):
     Config:
 
         orig_img - The relative path of the image to use
-        orig_audio - Original audio before the spectogram
         output_wav - The relative path to the wav output file
     """
 
     def gen(self, chal_dir):
         orig_img = self.get_value("orig_img")
         output_wav = self.get_value("output_wav")
-        input_wav = self.get_value("orig_audio", required=False)
-        if input_wav:
-            input_wav = join(chal_dir, input_wav)
         flag = self.flag
         seconds = int(len(flag)/3)
         start(os.path.join(chal_dir, orig_img),
-              os.path.join(chal_dir, output_wav), seconds, input_wav)
+              os.path.join(chal_dir, output_wav), seconds)
         self.chal_file = output_wav
 
 

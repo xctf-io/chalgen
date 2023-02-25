@@ -2,10 +2,8 @@ from PIL import Image
 import math
 import wave
 import array
-from pydub import AudioSegment
 
-
-def start(inputfile, outputfile, duration, original_audio):
+def start(inputfile, outputfile, duration):
     im = Image.open(inputfile)
     width, height = im.size
     rgb_im = im.convert('RGB')
@@ -55,16 +53,6 @@ def start(inputfile, outputfile, duration, original_audio):
                 numSamples, "NONE", "Uncompressed"))
     f.writeframes(data.tobytes())
     f.close()
-    if original_audio:
-        combine(outputfile, original_audio)
-
-
-def combine(outputfile, original_audio):
-    audio1 = AudioSegment.from_file(original_audio, format="wav")
-    audio2 = AudioSegment.from_file(outputfile, format="wav")
-    audio1 = audio1.set_channels(1)
-    combined = audio1 + audio2
-    combined.export(outputfile, format="wav")
 
 
 def getData(volume, freq, sampleRate, index):
