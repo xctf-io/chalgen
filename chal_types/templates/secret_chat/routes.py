@@ -6,8 +6,6 @@ from flask import (
     url_for,
     session
 )
-import bjoern
-
 
 from flask_bcrypt import check_password_hash
 
@@ -70,4 +68,4 @@ def logout():
 
 
 if __name__ == "__main__":
-    bjoern.run(app, "127.0.0.1", 5000)
+    app.run()

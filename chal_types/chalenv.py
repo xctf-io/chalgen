@@ -720,7 +720,25 @@ class SecretChat(ChallengeEnvironment):
         # convert to list of dicts
         chat_messages = self.get_value('chat')
         users = [dict(user) for user in users]
-        chat_messages = [dict(chat) for chat in chat_messages]
+        chat_messages = []
+        for message in self.get_value('chat'):
+            message = dict(message)
+            # if message contains chal key
+            if 'chal' in message:
+                chal = self._chal_lookup[message['chal']]
+                if hasattr(chal, 'display'):
+                    message['messages'].append(chal.display)
+                elif hasattr(chal, 'chal_file'):
+                    if type(chal.chal_file) is list:
+                        raise Exception(
+                            "challenges with multiple files not supported yet")
+
+                    chal_path = os.path.join(
+                        self.chal_path_lookup[chal.name], chal.chal_file)
+                    chal_url = self.chal_host.add_chal(chal_path)
+                    message['messages'].append(chal_url)
+
+            chat_messages.append(message)
         self.display = f'{slugify(self.name)}.chals.mcpshsf.com'
         chal_out_dir = join(chal_dir, 'chat')
         if os.path.isdir(chal_out_dir):

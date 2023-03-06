@@ -2,6 +2,8 @@
   name: "Secret Chat"
   flag: "flag{test}"
   config:
+   chals:
+     - 
    title: "Secret Chat"
    users:
     - name: "Alice"
