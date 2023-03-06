@@ -1,7 +1,4 @@
-FROM jekyll/builder:3.8 AS builder
-COPY . /srv/jekyll
-RUN jekyll build
+FROM klakegg/hugo:0.107.0-onbuild AS hugo
 
-FROM nginx:alpine
-
-COPY --from=builder /srv/jekyll/_site /usr/share/nginx/html
+FROM nginx:1.23.3
+COPY --from=hugo /target /usr/share/nginx/html

@@ -5,6 +5,8 @@ from jinja2 import Template
 import ruamel.yaml
 from gtts import gTTS
 import os
+import logging
+from rich.logging import RichHandler
 
 
 class WorkDir(object):
@@ -57,6 +59,9 @@ class FixMinikube(object):
         else:
             self.minikube_active = False
 
+        # TODO talk to luke about this boi
+        self.minikube_active = False
+
     def __enter__(self):
         if self.minikube_active:
             for env_var in self.env_vars:
@@ -69,13 +74,6 @@ class FixMinikube(object):
                 os.environ[env_var] = self.env_vars_value[env_var]
 
 logging.basicConfig(
-    level="INFO", format="%(message)s", datefmt="[%X]", handlers=[RichHandler()]
+    level="NOTSET", format="%(message)s", datefmt="[%X]", handlers=[RichHandler()]
 )
-log = logging.getLogger("rich")
-
-class logger(object):
-    def info(message):
-        log.info(message)
-    
-    def error(message):
-        log.error(message)
+logger = logging.getLogger("rich")

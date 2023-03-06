@@ -389,7 +389,7 @@ class TwitterFlask(ChallengeEnvironment):
                         f'Unable to find chal {chal} in {self.name}')
 
                 if hasattr(chal, 'display'):
-                    msg['text'] += chal.display
+                    msg['text'] += " " + chal.display
                 elif hasattr(chal, 'chal_file'):
                     if type(chal.chal_file) is list:
                         raise Exception(
@@ -398,7 +398,7 @@ class TwitterFlask(ChallengeEnvironment):
                     chal_path = os.path.join(
                         self.chal_path_lookup[chal.name], chal.chal_file)
                     chal_url = self.chal_host.add_chal(chal_path)
-                    msg['text'] += chal_url
+                    msg['text'] += " " + chal_url
                 chal_config[section][i] = msg
 
         fill_in_chals('messages')
@@ -662,36 +662,33 @@ class JekyllBlog(ChallengeEnvironment):
         copy_tree(template_dir, chal_out_dir)
 
         post_files = self.get_value('posts')
-        os.mkdir(join(chal_out_dir, "_posts"))
+        os.mkdir(join(chal_out_dir, "posts"))
         for post_file in post_files:
             post_path = join(chal_dir, post_file)
             with open(post_path, 'r') as post:
                 content = post.read()
                 new_content = self.insert_challenges(chal_dir, content)
 
-            post_out_path = join(chal_out_dir, '_posts', post_file)
+            post_out_path = join(chal_out_dir, 'content', 'post', post_file)
             with open(post_out_path, 'w') as post:
                 post.write(new_content)
 
-        config_yaml_path = os.path.join(chal_out_dir, '_config.yml')
+        # config_yaml_path = os.path.join(chal_out_dir, '_config.yml')
 
-        yaml = ruamel.yaml.YAML()
-        with open(config_yaml_path, 'r') as in_file:
-            current_config = yaml.load(in_file)
+        # yaml = ruamel.yaml.YAML()
+        # with open(config_yaml_path, 'r') as in_file:
+        #     current_config = yaml.load(in_file)
 
-        site_config = self.get_value('meta')
-        new_site_config = {**current_config, **site_config}
+        # site_config = self.get_value('meta')
+        # new_site_config = {**current_config, **site_config}
 
-        with open(config_yaml_path, 'w') as out:
-            yaml.dump(new_site_config, out)
+        # with open(config_yaml_path, 'w') as out:
+        #     yaml.dump(new_site_config, out)
 
         template_dir = join(dirname(abspath(__file__)),
                             'templates/jekyll_blog')
         makefile_dir = join(dirname(abspath(__file__)),
                             'templates/docker_make')
-
-        copy(join(template_dir, 'Dockerfile'),
-             join(chal_out_dir, 'Dockerfile'))
 
         self.container_id = f'jekyll-blog-{hash(self)}'
         with open(join(makefile_dir, 'Makefile'), 'r') as template_make,\
@@ -699,5 +696,6 @@ class JekyllBlog(ChallengeEnvironment):
             make_template = template_make.read()
             make.write(make_template.format(
                 chal_run_options=f'-p 8081:{self.target_port}', chal_name=self.container_id))
+
         # TODO Make this silent
         self.build_docker(chal_out_dir)

@@ -10,14 +10,7 @@
             </a>
         </div>
         <div class="media-body">
-            <h4 class="media-heading">{{ user.name }}
-                {% if user.name == session.name %}
-                </h4>
-                {% elif user.is_following(session.user_id, user.id) %}
-                <a class="btn btn-info btn-xs" href="{{ url_for('tweets.unfollow_user', user_id=user.id )}}">Unfollow</a></h4>
-                {% else %}
-                <a class="btn btn-info btn-xs" href="{{ url_for('tweets.follow_user', user_id=user.id )}}">Follow</a></h4>
-                {% endif %}
+            <h4 class="media-heading">{{ user.name }}</h4>
         </div>
     </div>
     {% endfor %}

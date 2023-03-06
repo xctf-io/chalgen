@@ -24,3 +24,4 @@ tk
 gtts
 pydub
 pygraphviz
+pyzipper
