@@ -14,7 +14,11 @@ with open('twitter_contents.yaml') as f:
     data = yaml.safe_load(f)
 
 users = data['users']
-messages = data['messages']
+
+# Reverse the messages when inserting because when they are written in the config
+# they are written from top to bottom, but we want to insert them bottom to top to keep the
+# chronological feel
+messages = data['messages'][::-1]
 followers = data['followers'] if data['followers'] is not None else []
 dms = data['dms']
 

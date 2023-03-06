@@ -12,6 +12,7 @@ from pdfrw.findobjs import page_per_xobj
 from pydub import AudioSegment
 from pydub.generators import Sine
 from chal_types.chalenv import ChallengeEnvironment
+import pyzipper
 
 from chal_types.utils import text_to_wav
 
@@ -81,6 +82,8 @@ class DiffImages(GeneratedChallenge):
 
         def insertFlag(mssg):
             hexflag = ''
+
+            # TODO make sure the same random number isnt used twice
             randomnum = random.randint(24, int(len(bytelist) / 4))
             for c in mssg:
                 hexval = format(ord(c), "x")
@@ -407,6 +410,25 @@ class GitRevertChallenge(GeneratedChallenge):
     def solve(self, chal_dir):
         pass
 
+def zipdir(path, zipfilename, password):
+    """
+    Compresses the contents of a directory into a zip archive using a password to encrypt it.
+
+    Args:
+    path (str): Path to the directory to be compressed.
+    zipfilename (str): Name of the resulting zip archive file.
+    password (str): Password to encrypt the zip archive with.
+    """
+    with pyzipper.AESZipFile(zipfilename,
+                         'w',
+                         compression=pyzipper.ZIP_LZMA,
+                         encryption=pyzipper.WZ_AES) as zipf:
+        # Set a password to encrypt the zip archive
+        zipf.setpassword(password.encode())
+        # Recursively compress each file in the directory
+        for root, dirs, files in os.walk(path):
+            for file in files:
+                zipf.write(os.path.join(root, file), arcname=file)
 
 class EncryptedZipChallenge(GeneratedChallenge):
     yaml_tag = u'!encrypted_zip'
@@ -423,7 +445,10 @@ class EncryptedZipChallenge(GeneratedChallenge):
     def gen(self, chal_dir):
         files_dir = self.get_value("files_dir")
         password = self.get_value("password")
+        filename = self.get_value("filename", required=False)
         word_list = self.get_value("word_list", required=False)
+
+        self.chal_file = "challenge.zip" if filename is None else filename
 
         # If we have a wordlist, read it and make sure the configured
         # password exists within it
@@ -434,11 +459,9 @@ class EncryptedZipChallenge(GeneratedChallenge):
 
         assert password in words
         files = os.path.join(chal_dir, files_dir)
-        output_zip = os.path.join(chal_dir, "chal.zip")
-        with ZipFile(output_zip, "w") as zipfile:
-            zipfile.write(files)
-            zipfile.setpassword(password.encode('utf-8'))
-        self.chal_file = "chal.zip"
+
+        output_zip = os.path.join(chal_dir, self.chal_file)
+        zipdir(files, output_zip, password)
 
     def solve(self, chal_dir):
         pass

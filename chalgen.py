@@ -130,11 +130,29 @@ def get_chal_lookup(chals_folder):
     return chal_lookup
 
 
+def print_env_vars():
+    env_vars = [
+        'DOCKER_TLS_VERIFY',
+        'DOCKER_HOST',
+        'DOCKER_CERT_PATH',
+        'MINIKUBE_ACTIVE_DOCKERD',
+        'MINIKUBE_EXISTING_DOCKER_HOST'
+    ]
+    for env_var in env_vars:
+        env_val = os.environ.get(env_var)
+        if env_val is None:
+            logger.error(f"{env_var} is not defined! Please run `eval $(minikube -p minikube docker-env)` and then `minikube start`")
+            return
+        logger.info(f"{env_var}={env_val}")
+
+
 @chalgen.command()
 @click.pass_context
 @click.option('--chal-config', required=True)
 @click.option('--competition-folder', default=None)
 def gen(ctx, chal_config, competition_folder):
+    print_env_vars()
+
     chal_dir = os.path.abspath(os.path.dirname(chal_config))
 
     chal_path_lookup = {}
@@ -195,24 +213,25 @@ def competitiongen(ctx, competition_folder, reg_url, local):
             logger.error("minikube not installed!")
             return
         else:
-            try: 
-                subprocess.check_output(['minikube', 'status'])
-            except subprocess.CalledProcessError:
-                with Status("[bold blue] Starting Minikube", spinner="line", spinner_style="blue"):
-                    subprocess.check_output(['minikube', 'start'])
-                    subprocess.check_output(['minikube', 'addons', 'enable', 'ingress'])
-            docker_envs = subprocess.check_output(
-                ['minikube', 'docker-env', '--shell=cmd']).decode()
-            docker_envs = docker_envs.split('\n')
-            url = docker_envs[1].split('=')[1]
-            home_path = docker_envs[2].split('=')[1]
-            if 'microsoft-standard' in uname().release:
-                home_path = subprocess.check_output(
-                    ['wslpath', home_path]).decode()[:-1]
-            os.environ['DOCKER_TLS_VERIFY'] = "1"
-            os.environ['DOCKER_HOST'] = url
-            os.environ['DOCKER_CERT_PATH'] = home_path
-            os.environ['MINIKUBE_ACTIVE_DOCKERD'] = 'minikube'
+            # try: 
+            #     subprocess.check_output(['minikube', 'status'])
+            # except subprocess.CalledProcessError:
+            #     with Status("[bold blue] Starting Minikube", spinner="line", spinner_style="blue"):
+            #         subprocess.check_output(['minikube', 'start'])
+            #         subprocess.check_output(['minikube', 'addons', 'enable', 'ingress'])
+            # docker_envs = subprocess.check_output(
+            #     ['minikube', 'docker-env', '--shell=cmd']).decode()
+            # docker_envs = docker_envs.split('\n')
+            # url = docker_envs[1].split('=')[1]
+            # home_path = docker_envs[2].split('=')[1]
+            # if 'microsoft-standard' in uname().release:
+            #     home_path = subprocess.check_output(
+            #         ['wslpath', home_path]).decode()[:-1]
+            # os.environ['DOCKER_TLS_VERIFY'] = "1"
+            # os.environ['DOCKER_HOST'] = url
+            # os.environ['DOCKER_CERT_PATH'] = home_path
+            # os.environ['MINIKUBE_ACTIVE_DOCKERD'] = 'minikube'
+            print_env_vars()
     else:
         try:
             subprocess.check_output(['kubectl', 'cluster-info'])

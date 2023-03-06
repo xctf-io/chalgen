@@ -107,7 +107,7 @@ class VigenereChallenge(GeneratedChallenge):
         key = self.get_value("key")
         with open(join(chal_dir, 'challenge.txt'), 'w') as f:
             chal_txt = encrypt_vigenere_text(
-                self.get_value("addl_text") + self.flag, key)
+                self.get_value("addl_text") + " " + self.flag, key)
             f.write(chal_txt)
             self.display = chal_txt
 
@@ -173,7 +173,7 @@ class Base64Challenge(GeneratedChallenge):
 
     def gen(self, chal_dir):
         with open(join(chal_dir, 'challenge.txt'), 'w') as f:
-            chal_txt = base64_text(self.get_value("addl_text") + self.flag)
+            chal_txt = base64_text(self.get_value("addl_text") + "\n" + self.flag)
             f.write(str(chal_txt))
             self.display = chal_txt
 
@@ -203,7 +203,7 @@ class CaesarCipherChallenge(GeneratedChallenge):
 
         with open(join(chal_dir, 'challenge.txt'), 'w') as f:
             chal_txt = ceasar_text(self.get_value(
-                "addl_text") + self.flag, shift)
+                "addl_text") + " " + self.flag, shift)
             f.write(chal_txt)
             self.display = chal_txt
 

@@ -4,6 +4,7 @@ from shutil import copyfile
 from distutils.dir_util import copy_tree
 from .challenge import GeneratedChallenge
 from .utils import WorkDir, fwrite
+from slugify import slugify
 
 robots_format = '''User-agent: *
 Disallow: {flag}
@@ -27,10 +28,12 @@ class RobotsTxtChallenge(GeneratedChallenge):
     def gen(self, chal_dir):
         """
         TODO (breadchris) cleanup here
-        - this is mostly just for getting down ideals, please refactor
+        - this is mostly just for getting down ideas, please refactor
         - Ideally we should be using docker compose
         - Docker templates and makefile templates should exist as helper functions
         """
+        self.display = f'http://{slugify(self.name)}.chals.mcpshsf.com'
+
         template_dir = join(dirname(abspath(__file__)),
                             'templates/static_site')
         makefile_dir = join(dirname(abspath(__file__)),
