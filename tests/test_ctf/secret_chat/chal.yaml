@@ -1,0 +1,21 @@
+- !secret_chat
+  name: "Secret Chat"
+  flag: "flag{test}"
+  config:
+   title: "Secret Chat"
+   users:
+    - name: "Alice"
+      password: "password1"
+    - name: "Bob"
+      password: "password2"
+   chat:
+    - name: "Alice"
+      messages: ["Hello Bob!", "How are you?"]
+    - name: "Bob"
+      messages: ["Hello Alice!", "I'm fine, thanks!"]
+    - name: "Alice"
+      messages: ["Good to hear!"]
+    - name: "Bob"
+      messages: ["Bye!"]
+    - name: "Alice"
+      messages: ["Bye!"]

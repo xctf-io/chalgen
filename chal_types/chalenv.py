@@ -701,3 +701,39 @@ class JekyllBlog(ChallengeEnvironment):
                 chal_run_options=f'-p 8081:{self.target_port}', chal_name=self.container_id))
         # TODO Make this silent
         self.build_docker(chal_out_dir)
+
+class SecretChat(ChallengeEnvironment):
+    yaml_tag = u'!secret_chat'
+    __doc__ = """
+    A simple chat application with login
+
+    Config:
+
+        title - the name of the chat
+        users - list of users to create
+        chat - list of messages to send
+    """
+
+    def gen(self, chal_dir):
+        title = self.get_value('title')
+        users = self.get_value('users')
+        # convert to list of dicts
+        chat_messages = self.get_value('chat')
+        users = [dict(user) for user in users]
+        chat_messages = [dict(chat) for chat in chat_messages]
+        self.display = f'{slugify(self.name)}.chals.mcpshsf.com'
+        chal_out_dir = join(chal_dir, 'chat')
+        if os.path.isdir(chal_out_dir):
+            rmtree(chal_out_dir)
+        os.makedirs(chal_out_dir)
+
+        template_dir = os.path.join(TEMPLATES_DIR, 'secret_chat')
+        copy_tree(template_dir, chal_out_dir)
+        fwrite(template_dir, 'routes.py', chal_out_dir, 'routes.py', title=title, chat_messages=chat_messages)
+        fwrite(template_dir, 'manage.py', chal_out_dir, 'manage.py', users=users)
+        self.target_port = 5000
+        self.container_id = f'secret_chat-{hash(self)}'
+        fwrite(TEMPLATES_DIR, 'docker_make/Makefile', chal_out_dir, 'Makefile', chal_name=self.container_id,
+               chal_run_options=f'-p 8080:{self.target_port}')
+
+        self.build_docker(chal_out_dir)
