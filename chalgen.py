@@ -92,7 +92,11 @@ def get_chal_path_lookup(chals_folder):
     for comp_chal in comp_chals:
         chal_path = os.path.join(chals_folder, comp_chal)
         chal_config = os.path.join(chal_path, 'chal.yaml')
-        assert os.path.exists(chal_config)
+        try:
+            assert os.path.exists(chal_config)
+        except Exception as e:
+            print(chal_config)
+            raise e
 
         chal = load_chal_from_config(challenge_types, chal_config)
         if type(chal) is str:
