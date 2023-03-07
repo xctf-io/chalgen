@@ -670,7 +670,8 @@ class JekyllBlog(ChallengeEnvironment):
                 new_content = self.insert_challenges(chal_dir, content)
 
             post_out_path = join(chal_out_dir, 'content', 'post', post_file)
-            with open(post_out_path, 'w') as post:
+            os.makedirs(dirname(post_out_path), exist_ok=True)
+            with open(post_out_path, 'w+') as post:
                 post.write(new_content)
 
         # config_yaml_path = os.path.join(chal_out_dir, '_config.yml')
@@ -698,4 +699,58 @@ class JekyllBlog(ChallengeEnvironment):
                 chal_run_options=f'-p 8081:{self.target_port}', chal_name=self.container_id))
 
         # TODO Make this silent
+        self.build_docker(chal_out_dir)
+
+class SecretChat(ChallengeEnvironment):
+    yaml_tag = u'!secret_chat'
+    __doc__ = """
+    A simple chat application with login
+
+    Config:
+
+        title - the name of the chat
+        users - list of users to create
+        chat - list of messages to send
+    """
+
+    def gen(self, chal_dir):
+        title = self.get_value('title')
+        users = self.get_value('users')
+        # convert to list of dicts
+        chat_messages = self.get_value('chat')
+        users = [dict(user) for user in users]
+        chat_messages = []
+        for message in self.get_value('chat'):
+            message = dict(message)
+            # if message contains chal key
+            if 'chal' in message:
+                chal = self._chal_lookup[message['chal']]
+                if hasattr(chal, 'display'):
+                    message['messages'].append(f"{chal.display}")
+                elif hasattr(chal, 'chal_file'):
+                    if type(chal.chal_file) is list:
+                        raise Exception(
+                            "challenges with multiple files not supported yet")
+
+                    chal_path = os.path.join(
+                        self.chal_path_lookup[chal.name], chal.chal_file)
+                    chal_url = self.chal_host.add_chal(chal_path)
+                    message['messages'].append(chal_url)
+
+            chat_messages.append(message)
+        self.display = f'{slugify(self.name)}.chals.mcpshsf.com'
+        chal_out_dir = join(chal_dir, 'chat')
+        if os.path.isdir(chal_out_dir):
+            rmtree(chal_out_dir)
+        os.makedirs(chal_out_dir)
+
+        template_dir = os.path.join(TEMPLATES_DIR, 'secret_chat')
+        copy_tree(template_dir, chal_out_dir)
+        fwrite(template_dir, 'routes.py', chal_out_dir, 'routes.py', title=title, chat_messages=chat_messages)
+        fwrite(template_dir, 'manage.py', chal_out_dir, 'manage.py', users=users)
+        self.target_port = 5000
+        self.container_id = f'secret_chat-{hash(self)}'
+        fwrite(TEMPLATES_DIR, 'docker_make/Makefile', chal_out_dir, 'Makefile', chal_name=self.container_id,
+               chal_run_options=f'-it -p 8080:{self.target_port}')
+
         self.build_docker(chal_out_dir)

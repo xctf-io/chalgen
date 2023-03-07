@@ -74,6 +74,6 @@ class FixMinikube(object):
                 os.environ[env_var] = self.env_vars_value[env_var]
 
 logging.basicConfig(
-    level="NOTSET", format="%(message)s", datefmt="[%X]", handlers=[RichHandler()]
+    level="INFO", format="%(message)s", datefmt="[%X]", handlers=[RichHandler()]
 )
 logger = logging.getLogger("rich")

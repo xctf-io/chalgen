@@ -48,7 +48,7 @@ class Process:
             console.print(self.proc.before)
 
     def clone(self):
-        return Process(self.shell)
+        return Process(self.shell, self.name, self.color)
     
     def print(self, text):
         console.print(f"[bold {self.color}]\[{self.name}][/bold {self.color}] {text}")
