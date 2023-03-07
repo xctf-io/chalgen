@@ -251,7 +251,7 @@ class KeyboardInput(GeneratedChallenge):
                 return b'\x02\x00' + val + b'\x00' * 5
 
     def gen(self, chal_dir):
-        self.chal_file = 'chal.pcap'
+        self.chal_file = 'keylog.pcap'
         text = self.get_value('text', required=False)
         backspace = self.get_value('rand_backspaces')
         fulltext = self.flag
@@ -274,7 +274,7 @@ class KeyboardInput(GeneratedChallenge):
                 add_keypress(chr(random.randint(97, 122)))
                 add_keypress("[BACKSPACE]")
 
-        pcap_out = join(chal_dir, "chal.pcap")
+        pcap_out = join(chal_dir, "keylog.pcap")
         if(exists(pcap_out)):
             remove(pcap_out)
         for pack in packets:
