@@ -33,7 +33,7 @@ stat = console.status("[bold white]Running Commands", spinner="point", spinner_s
 
 
 class Process:
-    def __init__(self, shell):
+    def __init__(self, shell, name="process", color="blue"):
         self.proc = px.spawn(shell, encoding='utf-8', env=os.environ)
         self.proc.expect('[$#] ')
         self.shell = shell

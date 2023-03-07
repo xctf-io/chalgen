@@ -249,7 +249,7 @@ class ChallengeHost(object):
             copyfile(chal, join(self.host_dir, os.path.basename(chal)))
 
         file_setup = "\n".join(
-            [f'COPY {os.path.basename(chal)} /usr/share/nginx/html/'
+            [f'COPY {os.path.basename(chal)} /usr/share/nginx/html/\nRUN true'
                 for chal in self.chals]
         )
 
@@ -293,9 +293,7 @@ class GeneratedChallenge(object):
 
     def build_docker(self, docker_dir):
         with WorkDir(docker_dir), Status(f"[cyan] Building Container for [bold]{self.name}[/bold]", spinner_style="cyan"):
-            result = subprocess.check_output(["make", "build"])
-            if result != 0:
-                raise Exception('failed to build jekyll blog')
+            subprocess.check_output(["make", "build"])
         print(f":star2: Built Container for [bold]{self.name}[bold] :star2:")
 
     def get_value(self, key, required=True):

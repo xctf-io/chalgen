@@ -11,6 +11,7 @@ from scapy.all import wrpcap, rdpcap
 from scapy.layers.usb import *
 from os.path import join, realpath, dirname, basename, exists
 import random
+from ..text_transforms import text_transforms
 
 class PCAPLogin(GeneratedChallenge):
     yaml_tag = u'!pcap_login'
@@ -24,6 +25,18 @@ class PCAPLogin(GeneratedChallenge):
     """
 
     def gen(self, chal_dir):
+        usern = self.get_value("username")
+        passw = self.get_value("password")
+        out_file = self.get_value("out_file")
+
+        self.chal_file = out_file
+
+        flag_transform = self.get_value("flag_transform", False)
+        if flag_transform is not None:
+            trans_func = text_transforms[flag_transform]["encode"]
+        else:
+            def trans_func(x): return x
+
         packets = []
         for i in range(0, 100, 5):
             ipadd = "10.10.10." + str(i)
@@ -32,17 +45,13 @@ class PCAPLogin(GeneratedChallenge):
                        'Keep-Alive Content-Type: text/html; charset=iso-8859-1 '
             packet = IP(dst=ipadd) / TCP(sport=80) / fakedata
             packets.append(packet)
-        usern = self.get_value("username")
-        passw = self.get_value("password")
-        data = usern + " : " + passw
+        data = usern + " : " + passw + " " + trans_func(self.flag)
         finalpacket = IP(dst="10.10.10.150") / TCP(sport=80) / data
         packets.append(finalpacket)
 
-        pcap_out = join(chal_dir, "testing.pcap")
+        pcap_out = join(chal_dir, out_file)
         for pack in packets:
             wrpcap(pcap_out, [pack], append=True)
-
-        self.chal_file = 'testing.pcap'
 
     def solve(self, chal_dir):
         pass

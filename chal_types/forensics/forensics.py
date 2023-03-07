@@ -170,10 +170,13 @@ class ImageExifChallenge(GeneratedChallenge):
 
     def gen(self, chal_dir):
         orig_img = self.get_value("orig_img")
+        out_img = self.get_value("out_img")
         metadata_key = self.get_value("metadata_key")
         flag_transform = self.get_value("flag_transform", False)
         lat = self.get_value("lat")
         lng = self.get_value("lng")
+
+        self.chal_file = out_img 
 
         if flag_transform is not None:
             trans_func = text_transforms[flag_transform]["encode"]
@@ -249,9 +252,8 @@ class ImageExifChallenge(GeneratedChallenge):
         exif_bytes = piexif.dump(exif_dict)
 
         # TODO Support different image types
-        img_out_path = os.path.join(chal_dir, 'chal_img.jpeg')
+        img_out_path = os.path.join(chal_dir, self.chal_file)
         img.save(img_out_path, "jpeg", exif=exif_bytes)
-        self.chal_file = 'chal_img.jpeg'
 
     def solve(self, chal_dir):
         orig_img = self.get_value("orig_img")
@@ -514,12 +516,15 @@ class DocxCarving(GeneratedChallenge):
 
     def gen(self, chal_dir):
         main_file = self.get_value("main_file")
+        out_file = self.get_value("out_file")
         hidden_file = self.get_value("hidden_file")
         dest_path = self.get_value("dest_path")
 
+        self.chal_file = out_file
+
         main_file_path = os.path.join(chal_dir, main_file)
         hidden_file_path = os.path.join(chal_dir, hidden_file)
-        output_file_path = os.path.join(chal_dir, "challenge")
+        output_file_path = os.path.join(chal_dir, self.chal_file)
 
         td = tempfile.mkdtemp()
         with ZipFile(main_file_path, "r") as zf:
@@ -530,10 +535,8 @@ class DocxCarving(GeneratedChallenge):
 
         make_archive(output_file_path, 'zip', td)
 
-        os.system("mv '{}.zip' '{}.docx'".format(
+        os.system("mv '{}.zip' '{}'".format(
             output_file_path, output_file_path))
-
-        self.chal_file = "challenge.docx"
 
     def solve(self, chal_dir):
         pass
