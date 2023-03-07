@@ -10,7 +10,7 @@ content%}
 		<div id="messages" class="card-body">
 			{% for thread in chat_messages %} {% if thread.name ==
 			current_user.username %} {% for message in thread.messages %}
-			{% if message[0:5] == "https" %}
+			{% if message[0:5] == "https" or message[0:4] == "http" %}
 			<div id="my-message">
 				<a href="{{ message }}" target="_blank" style="color: #fff">{{ message }}</a>
 			</div>
@@ -20,7 +20,7 @@ content%}
 			{% endfor %} {% else %}
 			<b id="name" class="text-muted">{{ thread.name }}</b>
 			{% for message in thread.messages %}
-			{% if message[0:5] == "https" %}
+			{% if message[0:5] == "https" or message[0:4] == "http" %}
 			<div id="my-message">
 				<a href="{{ message }}" target="_blank" style="color: #000">{{ message }}</a>
 			</div>
