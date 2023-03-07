@@ -670,7 +670,8 @@ class JekyllBlog(ChallengeEnvironment):
                 new_content = self.insert_challenges(chal_dir, content)
 
             post_out_path = join(chal_out_dir, 'content', 'post', post_file)
-            with open(post_out_path, 'w') as post:
+            os.makedirs(dirname(post_out_path), exist_ok=True)
+            with open(post_out_path, 'w+') as post:
                 post.write(new_content)
 
         # config_yaml_path = os.path.join(chal_out_dir, '_config.yml')
@@ -725,7 +726,7 @@ class SecretChat(ChallengeEnvironment):
             if 'chal' in message:
                 chal = self._chal_lookup[message['chal']]
                 if hasattr(chal, 'display'):
-                    message['messages'].append(chal.display)
+                    message['messages'].append(f"{chal.display}")
                 elif hasattr(chal, 'chal_file'):
                     if type(chal.chal_file) is list:
                         raise Exception(
@@ -750,6 +751,6 @@ class SecretChat(ChallengeEnvironment):
         self.target_port = 5000
         self.container_id = f'secret_chat-{hash(self)}'
         fwrite(TEMPLATES_DIR, 'docker_make/Makefile', chal_out_dir, 'Makefile', chal_name=self.container_id,
-               chal_run_options=f'-p 8080:{self.target_port}')
+               chal_run_options=f'-it -p 8080:{self.target_port}')
 
         self.build_docker(chal_out_dir)

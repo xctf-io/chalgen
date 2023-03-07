@@ -3,18 +3,30 @@ content%}
 
 <div id="chat">
 	<div class="card">
-		<div class="card-header row">
+		<div class="p-3 row">
 			<h5 class="text-white mb-0 col">Secret Chat</h5>
 			<a href="/logout" class="col-auto text-decoration-none">Logout</a>
 		</div>
 		<div id="messages" class="card-body">
 			{% for thread in chat_messages %} {% if thread.name ==
 			current_user.username %} {% for message in thread.messages %}
+			{% if message[0:5] == "https" %}
+			<div id="my-message">
+				<a href="{{ message }}" target="_blank" style="color: #fff">{{ message }}</a>
+			</div>
+			{% else %}
 			<div id="my-message">{{ message }}</div>
+			{% endif %}
 			{% endfor %} {% else %}
 			<b id="name" class="text-muted">{{ thread.name }}</b>
 			{% for message in thread.messages %}
+			{% if message[0:5] == "https" %}
+			<div id="my-message">
+				<a href="{{ message }}" target="_blank" style="color: #000">{{ message }}</a>
+			</div>
+			{% else %}
 			<div id="text-message">{{ message }}</div>
+			{% endif %}
 			{% endfor %} {% endif %} {% endfor %}
 		</div>
 		<div class="p-2 row">
@@ -116,6 +128,7 @@ content%}
 		height: 55vh;
 		max-height: 55vh;
 		overflow-y: auto;
+		border-top: 1px solid rgba(255, 255, 255, 0.15);
 	}
 </style>
 <script>

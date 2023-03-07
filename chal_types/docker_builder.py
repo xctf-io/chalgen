@@ -33,7 +33,7 @@ stat = console.status("[bold white]Running Commands", spinner="point", spinner_s
 
 
 class Process:
-    def __init__(self, shell):
+    def __init__(self, shell, name, color):
         self.proc = px.spawn(shell, encoding='utf-8', env=os.environ)
         self.proc.expect('[$#] ')
         self.shell = shell
@@ -48,7 +48,7 @@ class Process:
             console.print(self.proc.before)
 
     def clone(self):
-        return Process(self.shell)
+        return Process(self.shell, self.name, self.color)
     
     def print(self, text):
         console.print(f"[bold {self.color}]\[{self.name}][/bold {self.color}] {text}")

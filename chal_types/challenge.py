@@ -293,9 +293,7 @@ class GeneratedChallenge(object):
 
     def build_docker(self, docker_dir):
         with WorkDir(docker_dir), Status(f"[cyan] Building Container for [bold]{self.name}[/bold]", spinner_style="cyan"):
-            result = subprocess.check_output(["make", "build"])
-            if result != 0:
-                raise Exception('failed to build jekyll blog')
+            subprocess.check_output(["make", "build"])
         print(f":star2: Built Container for [bold]{self.name}[bold] :star2:")
 
     def get_value(self, key, required=True):

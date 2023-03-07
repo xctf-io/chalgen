@@ -874,12 +874,17 @@ class InvisibleChars(GeneratedChallenge):
     Config:
     
         hide_text - text before invisible characters
+        addl_text - additional text to say
     """
 
     def gen(self, chal_dir):
         out_file = join(chal_dir, 'chal.txt')
         hide_text = self.get_value("hide_text")
-        binary_flag = binary_text(self.flag)
+        addl_text = self.get_value("addl_text", required=False)
+        full_text = self.flag
+        if addl_text is not None:
+            full_text += " " + addl_text
+        binary_flag = binary_text(full_text)
         encoded_flag = [chr(6069) if c == '0' else chr(6158)
                         for c in binary_flag]
         chal_txt = hide_text + "".join(encoded_flag)
