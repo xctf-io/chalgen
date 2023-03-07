@@ -21,7 +21,7 @@ content%}
 			<b id="name" class="text-muted">{{ thread.name }}</b>
 			{% for message in thread.messages %}
 			{% if message[0:5] == "https" or message[0:4] == "http" %}
-			<div id="my-message">
+			<div id="text-message">
 				<a href="{{ message }}" target="_blank" style="color: #000">{{ message }}</a>
 			</div>
 			{% else %}
