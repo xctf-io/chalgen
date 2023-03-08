@@ -249,7 +249,7 @@ class ChallengeHost(object):
             copyfile(chal, join(self.host_dir, os.path.basename(chal)))
 
         file_setup = "\n".join(
-            [f'COPY {os.path.basename(chal)} /usr/share/nginx/html/'
+            [f'COPY {os.path.basename(chal)} /usr/share/nginx/html/\nRUN true'
                 for chal in self.chals]
         )
 

@@ -5,8 +5,6 @@
   <h3>{{ post.text | safe }}</h3>
   by <b><small>{{ post.author }}</small></b> on <b><small>{{ post.date_added }}</small></b>
   <br>
-
-  <a class="btn btn-primary btn-like" href="{% url 'like' post.pk %}">Like</a>
   
   {% if post.likers.count %}
   Who likes this:

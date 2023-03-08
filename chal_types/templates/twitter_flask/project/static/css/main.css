@@ -6,3 +6,7 @@
 .media-body {
     overflow: visible !important;
 }
+
+.media {
+    overflow: visible !important;
+}
