@@ -40,7 +40,7 @@ def get_kube_service(chal, namespace='challenges'):
             }
         },
         'spec': {
-            'type': 'LoadBalancer',
+            'type': 'ClusterIP',
             'ports': [
                 {
                     'port': out_port,
@@ -122,6 +122,7 @@ def get_kube_deployment(chal, local, namespace='challenges'):
 
 def get_kube_ingress(chals, namespace='challenges'):
     rules = []
+
     for chal in chals:
         service_name = chal['service_name']
         url = chal['url']

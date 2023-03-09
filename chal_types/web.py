@@ -80,6 +80,8 @@ class TemplateInjection(GeneratedChallenge):
         blacklist = self.get_value("blacklist")
         author = self.get_value("author")
 
+        self.display = f'http://{slugify(self.name)}.chals.mcpshsf.com'
+
         app_dir = join(chal_dir, 'app')
         copy_tree(temp_dir, app_dir)
         copy_tree(nsjail_dir, chal_dir)
