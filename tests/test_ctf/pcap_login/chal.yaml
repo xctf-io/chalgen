@@ -1,0 +1,8 @@
+- !pcap_login
+  name: "PCAP Login"
+  flag: "flag{succ3ssful_l0g1n}"
+  config:
+    username: "admin"
+    password: "admin"
+    out_file: "chal.pcap"
+    flag_transform: "hex"
