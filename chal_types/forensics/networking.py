@@ -1,9 +1,12 @@
+from shutil import rmtree
+import string
+import tempfile
 import time
 from os import remove
 
 from scapy.layers.inet import IP, TCP
 
-from chal_types.utils import FixMinikube
+from chal_types.utils import FixMinikube, fwrite
 from ..challenge import GeneratedChallenge
 from ..docker_builder import DockerBuilder, DockerNetwork
 from ..text_transforms import hex_text
@@ -22,6 +25,8 @@ class PCAPLogin(GeneratedChallenge):
 
         username - username to find
         password - password to find
+        out_file - name of the output file
+        flag_transform - transform to apply to the flag (optional)
     """
 
     def gen(self, chal_dir):
@@ -32,26 +37,45 @@ class PCAPLogin(GeneratedChallenge):
         self.chal_file = out_file
 
         flag_transform = self.get_value("flag_transform", False)
+        def trans_func(x):
+            return x
         if flag_transform is not None:
             trans_func = text_transforms[flag_transform]["encode"]
-        else:
-            def trans_func(x): return x
+        
+        out = join(chal_dir, out_file)
+        config_dir = join(dirname(dirname(realpath(__file__))),
+                          'chal_files', 'http_login')
+        temp_dir = tempfile.mkdtemp()
+        fwrite(config_dir, 'index.php', temp_dir, 'index.php', jinja=True, username=usern, password=passw)
+        
+        sender = DockerBuilder(name="sender", base_img="nicolaka/netshoot")
+        recv = DockerBuilder(name="recv", base_img="php:8.0-apache", included_files=[join(temp_dir, 'index.php')], color="white")
+        network = DockerNetwork([sender, recv], out, {"sender": [f'/root/{out_file}']})
+        with network as hosts:
+            send = hosts[0]
+            php = hosts[1]
+            tcpdump = send.clone()
+            tcpdump.run(f'tcpdump -q -w {out_file}')
+            php.run('mv /input/index.php /var/www/html/index.php')
+            php.run('service apache2 start')
+            # try random usernames and passwords
+            for i in range(random.randint(10, 20)):
+                random_user = ''.join(random.choices(string.ascii_letters + string.digits, k=10))
+                random_pass = ''.join(random.choices(string.ascii_letters + string.digits, k=10))
+                send.run(f'curl -X POST -d "username={random_user}&password={random_pass}" recv')
+            # try the actual username and password
+            send.run(f'curl -X POST -d "username={usern}&password={passw}&{trans_func("flag")}={trans_func(self.flag)}" recv')
+            # more random usernames and passwords
+            for i in range(random.randint(10, 20)):
+                random_user = ''.join(random.choices(string.ascii_letters + string.digits, k=10))
+                random_pass = ''.join(random.choices(string.ascii_letters + string.digits, k=10))
+                send.run(f'curl -X POST -d "username={random_user}&password={random_pass}" recv')
 
-        packets = []
-        for i in range(0, 100, 5):
-            ipadd = "10.10.10." + str(i)
-            fakedata = 'HTTP/1.1 401 Unauthorized Server: Apache/2.4.29 (Ubuntu) WWW-Authenticate: Basic ' \
-                       'realm="Authentication" Content-Length: 459 Keep-Alive: timeout=5, max=100 Connection: ' \
-                       'Keep-Alive Content-Type: text/html; charset=iso-8859-1 '
-            packet = IP(dst=ipadd) / TCP(sport=80) / fakedata
-            packets.append(packet)
-        data = usern + " : " + passw + " " + trans_func(self.flag)
-        finalpacket = IP(dst="10.10.10.150") / TCP(sport=80) / data
-        packets.append(finalpacket)
+            time.sleep(10)
+            tcpdump.run(chr(3))
 
-        pcap_out = join(chal_dir, out_file)
-        for pack in packets:
-            wrpcap(pcap_out, [pack], append=True)
+
+        rmtree(temp_dir)
 
     def solve(self, chal_dir):
         pass

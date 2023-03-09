@@ -40,8 +40,8 @@ pytest
 ## TODO
 
 * Use [kompose](https://kompose.io/) to simplify the tool
-* Add more challanges
-* Make the output pretty with [rich](https://github.com/Textualize/rich)
+* Add more challenges
+* Allow for partial competition generation
 * Integrate with CTFg
 * Improve GUI / port tool to web
 
