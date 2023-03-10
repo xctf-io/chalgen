@@ -339,7 +339,7 @@ class VirtualMachine(ChallengeEnvironment):
                 subprocess.check_output(["make", "build"])
             with Status(f"[blue] Generating Image for [bold]{self.name}[/blue]", spinner_style="blue"):
                 subprocess.check_output(["make", "generate-img"])
-            print(f":star2: Created Virtual Machine for Challenge {self.name} :star2:")
+            print(f":star2: Created Virtual Machine for [bold]{self.name}[bold] :star2:")
 
         self.chal_file = 'vm.tar.gz'
 
@@ -636,7 +636,7 @@ class JekyllBlog(ChallengeEnvironment):
         for name, chal in self._chal_lookup.items():
             sub_content = ""
             if hasattr(chal, 'display'):
-                sub_content = f"[{chal.display}]({chal.display})"
+                sub_content = chal.display
             elif hasattr(chal, 'chal_file'):
                 if type(chal.chal_file) is list:
                     raise Exception(
@@ -726,7 +726,7 @@ class SecretChat(ChallengeEnvironment):
             if 'chal' in message:
                 chal = self._chal_lookup[message['chal']]
                 if hasattr(chal, 'display'):
-                    message['messages'].append(f"{chal.display}")
+                    message['messages'].append(chal.display)
                 elif hasattr(chal, 'chal_file'):
                     if type(chal.chal_file) is list:
                         raise Exception(
