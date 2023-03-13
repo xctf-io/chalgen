@@ -59,7 +59,7 @@ def generate_kube_deploy(kube_dir, trees, local, reg_url):
     return configs
 
 
-def generate_challenge_graph(trees):
+def generate_challenge_graph(trees, competition_folder):
     def traverse(tree):
         if 'children' not in tree or tree['children'] == []:
             return []
@@ -78,7 +78,7 @@ def generate_challenge_graph(trees):
     graph = f'digraph {{\n{formatted_edges}\n}}'
     G = pgv.AGraph(graph, strict=True, rankdir="LR")
     G.layout(prog='dot')
-    G.draw('evidence_graph.png')
+    G.draw(os.path.join(competition_folder, 'evidence_graph.png'))
 
 
 def get_chal_path_lookup(chals_folder):
@@ -196,7 +196,7 @@ def gen(ctx, chal_config, competition_folder):
     if ChallengeEnvironment in type(chal_gen).__bases__:
         chal_host.create()
     if chal_tree and len(chal_tree) != 0:
-        generate_challenge_graph(chal_tree)
+        generate_challenge_graph(chal_tree, competition_folder)
 
 
 def no_reg_url(ctx, param, value):
@@ -305,7 +305,7 @@ def competitiongen(ctx, competition_folder, reg_url, local):
         kube_dir = os.path.join(competition_folder, 'kube')
         mkdir_p(kube_dir)
         configs = generate_kube_deploy(kube_dir, chal_trees, local, reg_url)
-        generate_challenge_graph(chal_trees)
+        generate_challenge_graph(chal_trees, competition_folder)
         if local:
             zones_path = os.path.join(os.path.dirname(kube_dir), 'zones.txt')
             if os.path.isfile(zones_path):
