@@ -1,3 +1,3 @@
 [submodule "competitions/chalgen-competitions"]
 	path = competitions/chalgen-competitions
-	url = git@github.com:CTFg/chalgen-competitions.git
+	url = https://github.com/CTFg/chalgen-competitions/
