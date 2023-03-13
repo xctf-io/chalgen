@@ -123,12 +123,16 @@ def get_kube_deployment(chal, local, namespace='challenges'):
 def get_kube_ingress(chals, namespace='challenges'):
     rules = []
 
+    hosts = []
     for chal in chals:
         service_name = chal['service_name']
-        url = chal['url']
+
+        host = chal['url']
+        hosts.append(host)
+
         out_port = chal['out_port']
         rules.append({
-            'host': url,
+            'host': host,
             'http': {
                 'paths': [{
                     'pathType': 'ImplementationSpecific',
@@ -157,6 +161,12 @@ def get_kube_ingress(chals, namespace='challenges'):
             }
         },
         'spec': {
+            'tls': [
+                {
+                    'hosts': hosts,
+                    'secretName': 'chalgen-cert-secret'
+                }
+            ],
             'rules': rules
         }
     }
