@@ -243,10 +243,6 @@ def competitiongen(ctx, competition_folder, reg_url, local):
             logger.error("Please set up your kubernetes cluster before running!")
             exit(1)
 
-    namespaces = subprocess.check_output('kubectl get namespaces'.split()).decode()
-    if "challenges" in namespaces:
-        with Status("[bold red]Deleting challenges namespace", spinner_style="red"):
-            subprocess.check_output('kubectl delete namespace challenges'.split())
     with Status("[bold green]Creating challenges namespace", spinner_style="green"):
         subprocess.check_output('kubectl create namespace challenges'.split())
     competition_folder = os.path.join(os.path.dirname(

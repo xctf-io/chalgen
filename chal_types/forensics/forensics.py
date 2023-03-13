@@ -44,6 +44,19 @@ class FileEvidence(ChallengeEnvironment):
             return
         self.chal_file = [f for f in files]
 
+class URLEvidence(ChallengeEnvironment):
+    yaml_tag = u'!url_evidence'
+    __doc__ = """
+    File Evidence
+
+    Config:
+
+        url: Url of challenge file
+    """
+
+    def gen(self, chal_dir):
+        self.display = self.get_value("url")
+
 
 class LSB(GeneratedChallenge):
     yaml_tag = u'!lsb'
