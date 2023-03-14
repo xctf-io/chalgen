@@ -157,7 +157,10 @@ def get_kube_ingress(chals, namespace='challenges'):
             'namespace': namespace,
             'annotations': {
                 'kubernetes.io/ingress.class': 'nginx',
-                'nginx.ingress.kubernetes.io/ssl-redirect': 'false'
+                'nginx.ingress.kubernetes.io/ssl-redirect': 'false',
+                'kubernetes.io/ingress.global-static-ip-name': '34.125.64.174',
+                'cert-manager.io/cluster-issuer': 'letsencrypt-prod',
+                'acme.cert-manager.io/http01-edit-in-place': 'true'
             }
         },
         'spec': {
