@@ -1,0 +1,8 @@
+- !encrypted_zip
+  name: "Encrypted Zip"
+  flag: "flag{h3_r34lly_turn3d_th4t_1n_t0_st4nf0rd}"
+  config:
+    filename: evidence.zip
+    files_dir: "files"
+    password: "mischance"
+    word_list: "wordlist.txt"

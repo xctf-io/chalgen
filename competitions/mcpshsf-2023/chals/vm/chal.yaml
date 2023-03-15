@@ -1,0 +1,7 @@
+- !virtual_machine
+  name: Virtual Machine
+  flag: "flag{this_is_a_test}"
+  config:
+    chals:
+      - Chromium History
+      - Git Reassembly

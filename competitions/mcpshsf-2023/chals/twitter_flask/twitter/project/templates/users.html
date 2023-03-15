@@ -1,0 +1,18 @@
+{% extends '_base.html' %}
+
+{% block content %}
+<div class="row marketing">
+    {% for user in users %}
+    <div class="media">
+        <div class="media-left">
+            <a href="#">
+                <img src="" alt="" />
+            </a>
+        </div>
+        <div class="media-body">
+            <h4 class="media-heading">{{ user.name }}</h4>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

@@ -1,0 +1,6 @@
+- !sql_log
+  name: "SQL Log"
+  flag: "flag{l33t_l0gs_br0}"
+  config:
+    flag_user: "flaguser"
+    other_users: {"chance":"mhm_p0t4t0es"}

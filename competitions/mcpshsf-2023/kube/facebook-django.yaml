@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: facebook-django-svc
+  namespace: challenges
+  labels:
+    app: facebook-django
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 8000
+    protocol: TCP
+  selector:
+    app: facebook-django
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: facebook-django-svc
+  namespace: challenges
+  labels:
+    app: facebook-django
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: facebook-django
+  template:
+    metadata:
+      labels:
+        app: facebook-django
+    spec:
+      containers:
+      - name: facebook-django
+        image: gcr.io/mcps-hsf-316519/facebook-django:latest
+        ports:
+        - containerPort: 8000
+        imagePullPolicy: Always
+        securityContext:
+          readOnlyRootFilesystem: false
+      imagePullSecrets:
+      - name: regcred

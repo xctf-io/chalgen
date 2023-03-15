@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: madlibs-svc
+  namespace: challenges
+  labels:
+    app: madlibs
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 8080
+    protocol: TCP
+  selector:
+    app: madlibs
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: madlibs-svc
+  namespace: challenges
+  labels:
+    app: madlibs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: madlibs
+  template:
+    metadata:
+      labels:
+        app: madlibs
+    spec:
+      containers:
+      - name: madlibs
+        image: gcr.io/mcps-hsf-316519/madlibs:latest
+        ports:
+        - containerPort: 8080
+        imagePullPolicy: Always
+        securityContext:
+          readOnlyRootFilesystem: false
+          privileged: true
+      imagePullSecrets:
+      - name: regcred

@@ -1,0 +1,7 @@
+- !file_evidence
+  name: "Lock Challenge"
+  flag: "flag{l33t_l0ckp1ck1ng_br0}"
+  config:
+    files:
+    - info.txt
+    disable_set_file: true

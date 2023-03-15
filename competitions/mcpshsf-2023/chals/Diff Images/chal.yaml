@@ -1,0 +1,7 @@
+- !diffimages
+  name: Diff Images
+  flag: "flag{5uch_4_c00l_pr0j3ct!!}"
+  dest_path: /home/robot.png
+  config:
+    orig_img: robots.png
+    addl_text: "password: y4z00_tr1but4ry"

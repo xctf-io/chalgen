@@ -1,0 +1,6 @@
+- !key_input
+  name: "Keyboard Input"
+  flag: "flag{b3_c4r3ful_0f_wh4t_y0u_typ3...}"
+  config:
+   text: "Dear Chance, I really miss you. I know you're dead and can't read this but I just wanted to tell you how I feel. I'm sorry if I ever made you feel like a bad friend. You were one my BFFs and it's going to be really hard without you. From, corncob"
+   rand_backspaces: true

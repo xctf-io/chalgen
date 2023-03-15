@@ -1,0 +1,6 @@
+- !aes
+      name: AES Challenge
+      flag: "flag{f0ll0w_th3_url!}"
+      config:
+        key: ilovelatkesalot!
+        addl_text: "https://drive.google.com/file/d/1sLaQw-kMYGhexxUV12y09RJj_blVLzNz/view?usp=sharing"

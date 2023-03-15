@@ -1,0 +1,16 @@
+- !fileshare_flask
+  name: Fileshare Flask
+  flag: flag{f1l3sh4r3}
+  config:
+    username: k4r5t_t0p0gr4phy
+    password: y4z00_tr1but4ry
+    files:
+      - wordlist.txt
+    chals:
+      - Encrypted Zip
+      - Spectrogram
+      - PCAP Login
+      - Broken PNG Header
+      - Virtual Machine
+
+              

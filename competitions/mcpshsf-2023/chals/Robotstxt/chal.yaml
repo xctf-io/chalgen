@@ -1,0 +1,5 @@
+- !robots_txt
+  name: Corncobs Sus Website
+  flag: flag{domo_arigato}
+  config:
+    text: "User: corncob, pass: L4tk3_M4f14_L0rd_123"

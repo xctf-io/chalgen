@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: chal-host-svc
+  namespace: challenges
+  labels:
+    app: chal-host
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: chal-host
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chal-host-svc
+  namespace: challenges
+  labels:
+    app: chal-host
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chal-host
+  template:
+    metadata:
+      labels:
+        app: chal-host
+    spec:
+      containers:
+      - name: chal-host
+        image: gcr.io/mcps-hsf-316519/chal-host:latest
+        ports:
+        - containerPort: 80
+        imagePullPolicy: Always
+        securityContext:
+          readOnlyRootFilesystem: false
+      imagePullSecrets:
+      - name: regcred

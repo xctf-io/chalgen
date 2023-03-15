@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: fileshare-flask-svc
+  namespace: challenges
+  labels:
+    app: fileshare-flask
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 8000
+    protocol: TCP
+  selector:
+    app: fileshare-flask
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fileshare-flask-svc
+  namespace: challenges
+  labels:
+    app: fileshare-flask
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fileshare-flask
+  template:
+    metadata:
+      labels:
+        app: fileshare-flask
+    spec:
+      containers:
+      - name: fileshare-flask
+        image: gcr.io/mcps-hsf-316519/fileshare-flask:latest
+        ports:
+        - containerPort: 8000
+        imagePullPolicy: Always
+        securityContext:
+          readOnlyRootFilesystem: false
+      imagePullSecrets:
+      - name: regcred

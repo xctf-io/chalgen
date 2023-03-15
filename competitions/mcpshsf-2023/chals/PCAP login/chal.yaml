@@ -1,0 +1,8 @@
+- !pcap_login
+  name: "PCAP Login"
+  flag: "flag{bytes_over_the_wire}"
+  config:
+    out_file: "login.pcap"
+    flag_transform: "hex"
+    username: "long"
+    password: "gonl321!!!"

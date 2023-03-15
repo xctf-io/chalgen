@@ -1,0 +1,3 @@
+- !RSA
+  name: RSA Challenge
+  flag: flag{this_thing_was_really_encrypted_huh?}

@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: twitter-flask-svc
+  namespace: challenges
+  labels:
+    app: twitter-flask
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 5000
+    protocol: TCP
+  selector:
+    app: twitter-flask
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: twitter-flask-svc
+  namespace: challenges
+  labels:
+    app: twitter-flask
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: twitter-flask
+  template:
+    metadata:
+      labels:
+        app: twitter-flask
+    spec:
+      containers:
+      - name: twitter-flask
+        image: gcr.io/mcps-hsf-316519/twitter-flask:latest
+        ports:
+        - containerPort: 5000
+        imagePullPolicy: Always
+        securityContext:
+          readOnlyRootFilesystem: false
+      imagePullSecrets:
+      - name: regcred

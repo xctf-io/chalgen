@@ -1,0 +1,7 @@
+- !temp_inj
+  name: "MadLibs"
+  flag: "flag{th1s_1s_a_t3mp14t3_f0r_fl4sk5_4nd_inj3ct1on5}"
+  config:
+    author: "Long"
+    blacklist: ["__class__"]
+    files: ['letter.txt']

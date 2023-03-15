@@ -1,0 +1,8 @@
+ - !docx_carving
+    name: Docx Carving
+    flag: "flag{recipe_for_success}"
+    config:
+      hidden_file: flag.txt
+      main_file: recipe.docx
+      out_file: latke_recipe.docx
+      dest_path: word/

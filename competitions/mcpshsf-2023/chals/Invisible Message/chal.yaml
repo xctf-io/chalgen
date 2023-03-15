@@ -1,0 +1,6 @@
+- !invisible_chars
+  name: Invisible Message
+  flag: "flag{b00_im_a_gh0st_4nd_y0u_c4nt_s33_m3}"
+  config:
+    addl_text: "chance is so stupid lololol. probably shouldn't even been in this cartel tbh. but i still love him bc he's so nice <3"
+    hide_text: "Nulla pellentesque dignissim enim sit amet venenatis urna cursus eget. Aliquam purus sit amet luctus venenatis lectus. Pellentesque habitant morbi tristique senectus et netus et. Faucibus a pellentesque sit amet. Aliquet bibendum enim facilisis gravida neque convallis a. Ut placerat orci nulla pellentesque. Nisi vitae suscipit tellus mauris a diam maecenas sed enim. Hac habitasse platea dictumst quisque sagittis. Tempor orci dapibus ultrices in iaculis nunc sed. A scelerisque purus semper eget."

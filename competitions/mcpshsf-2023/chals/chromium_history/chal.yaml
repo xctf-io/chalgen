@@ -1,0 +1,6 @@
+- !chromium_history
+  name: Chromium History
+  flag: flag{historically_important}
+  config:
+    script: index.js
+  dest_path: /history-backup.zip

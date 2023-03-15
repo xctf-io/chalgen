@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: flag{domo_arigato}
+User: corncob, pass: L4tk3_M4f14_L0rd_123

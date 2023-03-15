@@ -1,0 +1,5 @@
+- !brokenpngheader
+  name: "Broken PNG Header"
+  flag: "flag{4rch35_l00p5_wh0rl5}"
+  config:
+    orig_img: fingerprints.png

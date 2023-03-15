@@ -1,0 +1,101 @@
+/* Culori
+   rosu: #c03;
+   verde: #a1b963;
+ */
+
+* {
+	border-radius: 0!important;
+}
+
+.container {
+	max-width: 600px; /* micsoram latimea continutului */
+}
+
+.navbar-default {
+	border: 0;
+	background-color: #c03; 
+}
+
+/* logo */
+.navbar-brand {
+	padding-top: 8px;
+	padding-bottom: 8px;
+}
+.navbar-brand img {
+	max-height: 100%; 
+	/* din inaltimea primului parinte cu height definit,
+	   adica .navbar-brand definit in css-ul bootstrap */
+	width: auto;
+}
+
+.navbar-default .navbar-nav > li > a {
+	color: #fff;
+}
+
+.navbar-default .navbar-nav > li > a:hover, 
+.navbar-default .navbar-nav > li > a:focus {
+	color: #fff;
+	background-color: #d03;
+}
+
+/* Deoarece .navbar-fixed-top are position: fixed
+   el nu mai impinge continutul in jos, adica este
+   scos din document flow. 
+   Pentru asta trebuie sa coboram contentul manual. */
+body {
+	padding-top: 50px;
+}
+
+.btn-primary {
+	border-color: transparent!important;
+	background-color: #a1b963;
+}
+
+.btn-primary:hover, 
+.btn-primary:focus {
+	background-color: #82a74c;
+}
+
+/* :before si :after sunt pseudo-clase ele adauga 
+   continut in html.
+   Vom adauga o iconita pe toate butoanele .btn-like  */
+.btn-like:after {
+	content: ''; /* obligatoriu macar string gol */
+	display: inline-block;
+	width: 1.4em; /* relativ la font-size */
+	height: 1.4em;
+	margin-right: -.5em;
+	background: url('../img/icon-cane.svg') no-repeat;
+	background-size: contain;
+	vertical-align: middle;
+}
+
+/* demo counter */
+[counter]:before {
+	content: attr(counter);
+	position: absolute;
+	display: block;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	color: white;
+	background: red;
+	top: -10px;
+	left: -10px;
+}
+
+
+
+.media {
+	padding: 5px;
+	border: 1px solid #eee;
+}
+
+.media-left {
+	width: 55px;
+}
+
+.media-left img {
+	max-width: 100%; /* 100% din primul parinte cu width (.media-left) */
+	height: auto; /* scalat proportional */
+}

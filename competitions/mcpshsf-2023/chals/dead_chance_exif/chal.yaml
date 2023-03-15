@@ -1,0 +1,10 @@
+- !image_exif
+  name: Dead Chance Exif
+  flag: flag{he_dead_oh_no}
+  config:
+    orig_img: chance_with_fingerprint.jpg
+    out_img: chance.jpg
+    metadata_key: 315
+    flag_transform: base64
+    lat: 19.8967
+    lng: -155.5827

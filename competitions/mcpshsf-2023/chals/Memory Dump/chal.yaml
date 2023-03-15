@@ -1,0 +1,5 @@
+- !url_evidence
+  name: "Memory Dump"
+  flag: "flag{wh0_us3s_w1nd0ws7??}"
+  config:
+    url: https://drive.google.com/file/d/1Twp_wsiyxExlnY7qKvWnJh0w2qRQ4wND/view?usp=sharing

@@ -1,0 +1,7 @@
+# this is not used, the google drive link does not work
+- !change_extension
+  name: Change Extension
+  flag: ""
+  config:
+    orig_file: memorial.txt
+    out_ext: .png
