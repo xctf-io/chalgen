@@ -90,19 +90,18 @@ class DiffImages(GeneratedChallenge):
         filename = self.get_value("orig_img")
         orig_img_path = os.path.join(chal_dir, filename)
         with open(orig_img_path, 'rb') as f:
-            content = f.read()
-            bytelist = bytearray(content)
+            raw_data = f.read()
+            bytelist = bytearray(raw_data)
 
         def insertFlag(mssg):
-            hexflag = ''
 
             # TODO make sure the same random number isnt used twice
-            randomnum = random.randint(24, int(len(bytelist) / 4))
-            for c in mssg:
-                hexval = format(ord(c), "x")
-                randomnum = random.randint(randomnum, len(bytelist) - 4)
-                bytelist[randomnum:randomnum + 1] = c.encode('utf-8')
-                hexflag += c
+            random_offset = random.randint(24, int(len(bytelist) / 4))
+            available_bytes = int((len(bytelist) - 4 - random_offset) / len(mssg))
+            for i, c in enumerate(mssg):
+                random_num = random.randint(random_offset + (i * available_bytes), random_offset + ((i + 1) * available_bytes))
+                print(random_num, c)
+                bytelist[random_num:random_num+1] = c.encode('utf-8')
 
             return bytelist
         flag = self.flag + self.get_value("addl_text")
