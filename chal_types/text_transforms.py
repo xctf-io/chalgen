@@ -146,11 +146,11 @@ def decode_base64_text(text):
 
 
 def binary_text(text):
-    return " ".join([bin(ord(c))[2:].zfill(8) for c in text])
+    return "".join([bin(ord(c))[2:].zfill(8) for c in text])
 
 
 def decode_binary_text(text):
-    return "".join([int(text[i:i+8], 2) for i in range(0, len(text), 8)])
+    return "".join([chr(int(text[i:i+8], 2)) for i in range(0, len(text), 8)])
 
 
 def encryptDecrypt(inpString, xorKey):
