@@ -3,6 +3,7 @@
 * Use [kompose](https://kompose.io/) to simplify the tool
 * Add more challenges
 * Allow for partial competition generation
+	* Stub flag
 * Integrate with CTFg
 * Improve GUI / port tool to web
 
