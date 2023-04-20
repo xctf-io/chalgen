@@ -43,15 +43,3 @@ To run the tests:
 ```
 pytest
 ```
-
-## Evidence Guidelines
-
-* A challenge may provide an option to include data within it to make it story relevant
-* A challenge is expected to be solvable by itself. If a challenge is not solvable by itself (i.e. encrypted zip has unguessable password), then a connection must be specified for the challenge.
-* Challenges may specify a way to embed another challenge inside of themselves.
-
-Some questions that should be answered:
-
-* How much perscription do we want to give challenges?
-* If we are creating an sql injection challenge, do we give them website and the vuln code?
-* Need to figure out how the vuln plugs into a website. Have a module system for the website that you drop in views for challenges.
