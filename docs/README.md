@@ -82,7 +82,7 @@ This command runs the docker image for local testing. You must run `python main.
 python main.py comp gen -f <relative path of the competition> -r <registry to push images to>
 ```
 
-This command builds all of the Kubernetes files needed to deploy to a Kubernetes cluster. Upon completion, a graph of the challenges will be generated. The graph will be located at `evidence_graph.png` file in the competition folder.
+This command builds all of the Kubernetes files needed to deploy to a prexisting Kubernetes cluster. Upon completion, a graph of the challenges will be generated. The graph will be located at `evidence_graph.png` file in the competition folder.
 
 ### Build and run a competition locally
 
