@@ -4,14 +4,10 @@ import tempfile
 import time
 from os import remove
 
-from scapy.layers.inet import IP, TCP
-
-from chal_types.utils import FixMinikube, fwrite
+from chal_types.utils import fwrite
 from ..challenge import GeneratedChallenge
 from ..docker_builder import DockerBuilder, DockerNetwork
 from ..text_transforms import hex_text
-from scapy.all import wrpcap, rdpcap
-from scapy.layers.usb import *
 from os.path import join, realpath, dirname, basename, exists
 import random
 from ..text_transforms import text_transforms

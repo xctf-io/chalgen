@@ -14,7 +14,6 @@ crypto
 rsa
 python-jade
 pdfrw
-scapy
 stegano
 qrcode
 passlib
