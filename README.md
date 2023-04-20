@@ -22,8 +22,7 @@ Note: This is not required for Github Codespaces. Everything is setup up automat
 pip install -r requirements.txt
 ```
 
-
-## Commands to run
+## Simple Usage
 
 Run the application:
 
@@ -34,14 +33,10 @@ python chalgen.py --help
 Example challenge generator command
 
 ```
-python chalgen.py gen --chal-config tests/test_ctf/base64/chal.yaml
+python main.py chal gen -c tests/test_ctf/base64/chal.yaml
 ```
 
-To run the tests:
-
-```
-pytest
-```
+For a more detailed explanation of the commands, see our docs [here](docs/README.md).
 
 ## Todo
 We have some TODOs [here](TODO.md). These are challenge ideas we have not implemented yet.

@@ -15,10 +15,18 @@ from gui import App
 
 @click.group()
 @click.pass_context
-@click.option('--chal-folder', default=None)
-def chalgen(ctx, chal_folder):
-    ctx.obj = {'chal_folder': chal_folder}
+def chalgen(cmd):
+    pass
 
+@click.group("Generate or run competitions")
+@click.pass_context
+def comp(cmd):
+    pass
+
+@click.group(help="Generate or run challenges")
+@click.pass_context
+def chal(cmd):
+    pass
 
 def generate_kube_deploy(kube_dir, trees, local, reg_url):
     configs = []
@@ -150,10 +158,10 @@ def print_env_vars():
         logger.info(f"{env_var}={env_val}")
 
 
-@chalgen.command()
+@chal.command(help="Generate a challenge from a config file")
 @click.pass_context
-@click.option('--chal-config', required=True)
-@click.option('--competition-folder', default=None)
+@click.option('--config', '-c', required=True)
+@click.option('--competition-folder', '-f', default=None)
 def gen(ctx, chal_config, competition_folder):
     print_env_vars()
 
@@ -205,36 +213,17 @@ def no_reg_url(ctx, param, value):
         ctx.command.params[1].default = ""
     return value
 
-
-@chalgen.command()
+@comp.command()
 @click.pass_context
-@click.option('--competition-folder', required=True)
-@click.option('--reg-url', required=True, help="Registry to push docker images to")
-@click.option('-l', '--local', is_flag=True, default=False, callback=no_reg_url, help="Run the ctf locally using minikube (no reg url required)")
-def competitiongen(ctx, competition_folder, reg_url, local):
+@click.option('--competition-folder', '-f', required=True)
+@click.option('--reg-url', 'r', required=True, help="Registry to push docker images to")
+@click.option('--local', '-l', is_flag=True, default=False, callback=no_reg_url, help="Run the ctf locally using minikube (no reg url required)")
+def gen(ctx, competition_folder, reg_url, local):
     if local:
         if shutil.which('minikube') is None:
             logger.error("minikube not installed!")
             return
         else:
-            # try: 
-            #     subprocess.check_output(['minikube', 'status'])
-            # except subprocess.CalledProcessError:
-            #     with Status("[bold blue] Starting Minikube", spinner="line", spinner_style="blue"):
-            #         subprocess.check_output(['minikube', 'start'])
-            #         subprocess.check_output(['minikube', 'addons', 'enable', 'ingress'])
-            # docker_envs = subprocess.check_output(
-            #     ['minikube', 'docker-env', '--shell=cmd']).decode()
-            # docker_envs = docker_envs.split('\n')
-            # url = docker_envs[1].split('=')[1]
-            # home_path = docker_envs[2].split('=')[1]
-            # if 'microsoft-standard' in uname().release:
-            #     home_path = subprocess.check_output(
-            #         ['wslpath', home_path]).decode()[:-1]
-            # os.environ['DOCKER_TLS_VERIFY'] = "1"
-            # os.environ['DOCKER_HOST'] = url
-            # os.environ['DOCKER_CERT_PATH'] = home_path
-            # os.environ['MINIKUBE_ACTIVE_DOCKERD'] = 'minikube'
             print_env_vars()
     else:
         try:
@@ -329,9 +318,9 @@ def competitiongen(ctx, competition_folder, reg_url, local):
                 input()
             proc.kill()
 
-@chalgen.command()
+@chalgen.command(help="Print the flags for a competition")
 @click.pass_context
-@click.option('--competition-folder', required=True)
+@click.option('--competition-folder', '-f', required=True)
 def flags(ctx, competition_folder):
     competition_folder = os.path.join(os.path.dirname(
         os.path.realpath(__file__)), competition_folder)
@@ -343,18 +332,18 @@ def flags(ctx, competition_folder):
         chal_path = chal_info["path"]
         print(name + ": " + chal.flag + f" ({chal_path})")
 
-@chalgen.command()
+@chal.command(help="Run a challenge locally")
 @click.pass_context
-@click.option('--chal-config', required=True)
+@click.option('--config', '-c', required=True)
 def run(ctx, chal_config):
     chal_dir = os.path.dirname(chal_config)
     p = subprocess.Popen(['make', 'run'], cwd=chal_dir)
     p.wait()
 
 
-@chalgen.command()
+@chal.command()
 @click.pass_context
-@click.option('--chal-config', required=True)
+@click.option('--config', '-c', required=True)
 def solve(ctx, chal_config):
     chal_gen = load_chal_from_config(challenge_types, chal_config)
     if chal_gen.config is None:
@@ -370,12 +359,14 @@ def solve(ctx, chal_config):
             "Challenge was not solved correctly: {}".format(solved_flag))
 
 
-@chalgen.command()
+@chalgen.command(help="Launch the GUI for creating a competition")
 @click.pass_context
-@click.option('--competition-folder', required=True)
+@click.option('--competition-folder', '-f', required=True)
 def gui(ctx, competition_folder):
     App(competition_folder).mainloop()
 
+chalgen.add_command(comp)
+chalgen.add_command(chal)
 
 if __name__ == '__main__':
     chalgen()

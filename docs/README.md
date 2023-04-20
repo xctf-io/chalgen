@@ -40,7 +40,7 @@ Challenge environments host other challenges and can also be configured to fit t
       - Docx Carving
 ```
 
-Challenges link through the `name` field. Challenge environments can't be made/run through the `python chalgen.py gen` command, so you must use `python chalgen.py competitiongen`. 
+Challenges link through the `name` field. Challenge environments can't be made/run through the `python main.py gen` command, so you must use `python main.py competitiongen`. 
 
 ### Competition structure
 Competitions are structured in a tree-like fashion, with some Challenge Environments serving as entrypoints. An example structure is shown below. In this case, Fesbuc is an entrypoint.
@@ -54,7 +54,7 @@ A competition folder has a `config.yaml` that specifies the entrypoints and `cha
 ### Run the Competion Creator GUI
 
 ```shell
-python chalgen.py gui --competition-folder=<relative path of the competition folder>
+python main.py gui -f <relative path of the competition folder>
 ```
 
 After running the above command, a GUI will pop up to help scaffold your competition. You can create a challenge map and after clicking 
@@ -63,7 +63,7 @@ create competition files, a folder with all the nessecary YAML files will be cre
 ### Generate a single challenge
 
 ```shell
-python chalgen.py gen --chal-config=<relative path of the challenge YAML>
+python main.py chal gen -c <relative path of the challenge YAML>
 ```
 
 This command generates all the files for challenges and builds the docker image if needed.
@@ -71,23 +71,23 @@ This command generates all the files for challenges and builds the docker image 
 ### Run a single challenge
 
 ```shell
-python chalgen.py run --chal-config=<relative path of the challenge YAML>
+python main.py chal run -c <relative path of the challenge YAML>
 ```
 
-This command runs the docker image for local testing. You must run `python chalgen.py gen` before in order to create all the files and build.
+This command runs the docker image for local testing. You must run `python main.py chal gen` before in order to create all the files and build.
 ***
 ### Build a competition for Kubernetes
 
 ```shell
-python chalgen.py competitiongen --competition-folder=<relative path of the competition> --reg-url=<registry to push images to>
+python main.py comp gen -f <relative path of the competition> -r <registry to push images to>
 ```
 
-This command builds all of the Kubernetes files needed to deploy to a Kubernetes cluster. Upon completion, a graph of the challenges will be generated. Make sure to create a `challenges` namespace before deploying.
-***
+This command builds all of the Kubernetes files needed to deploy to a Kubernetes cluster. Upon completion, a graph of the challenges will be generated. The graph will be located at `evidence_graph.png` file in the competition folder.
+
 ### Build and run a competition locally
 
 ```shell
-python chalgen.py competitiongen --competition-folder=<relative path of the competition> --local
+python main.py competitiongen -f <relative path of the competition> -l
 ```
 
 This command assumes you have `minikube` installed. Install it [here](https://minikube.sigs.k8s.io/docs/start/). This command runs the competition using minikube for local testing. Remember to add `127.0.0.1:53` as a DNS server. The urls of the challenges will be located in the `zones.txt` file.
