@@ -87,7 +87,7 @@ This command builds all of the Kubernetes files needed to deploy to a Kubernetes
 ### Build and run a competition locally
 
 ```shell
-python main.py competitiongen -f <relative path of the competition> -l
+python main.py comp gen -f <relative path of the competition> -l
 ```
 
 This command assumes you have `minikube` installed. Install it [here](https://minikube.sigs.k8s.io/docs/start/). This command runs the competition using minikube for local testing. Remember to add `127.0.0.1:53` as a DNS server. The urls of the challenges will be located in the `zones.txt` file.
