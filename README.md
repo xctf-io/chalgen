@@ -11,6 +11,7 @@ chalgen generates challenges which are nodes in an evidence map
 | MCPS HSF 2023 | [Writeup](https://lukegriffith.me/posts/writeups/mcpshsf/) | [Source Code](/competitions/mcpshsf-2023/) |
 
 ## Prerequisites
+Note: This is not required for Github Codespaces. Everything is setup up automatically.
 
 - Follow the documentation [here](https://pygraphviz.github.io/documentation/stable/install.html) to install `pygraphviz` for your system
 - Install ffmpeg from [here](https://ffmpeg.org/download.html)
