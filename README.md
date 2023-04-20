@@ -42,3 +42,6 @@ To run the tests:
 ```
 pytest
 ```
+
+## Todo
+We have some TODOs [here](TODO.md). These are challenge ideas we have not implemented yet.
