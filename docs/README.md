@@ -40,7 +40,7 @@ Challenge environments host other challenges and can also be configured to fit t
       - Docx Carving
 ```
 
-Challenges link through the `name` field. Challenge environments can't be made/run through the `python main.py gen` command, so you must use `python main.py competitiongen`. 
+Challenges link through the `name` field. Challenge environments can't be made/run through the `python main.py gen` command, so you must use `python main.py comp gen`. 
 
 ### Competition structure
 Competitions are structured in a tree-like fashion, with some Challenge Environments serving as entrypoints. An example structure is shown below. In this case, Fesbuc is an entrypoint.
