@@ -17,14 +17,13 @@ Note: This is not required for Github Codespaces. Everything is setup up automat
 - Install ffmpeg from [here](https://ffmpeg.org/download.html)
 - Install Docker from [here](https://docs.docker.com/engine/install/)
 - Install kubectl from [here](https://kubernetes.io/docs/tasks/tools/)
-
-## Basic setup
-
-Install the requirements:
-
+- Install the requirements:
 ```
 pip install -r requirements.txt
 ```
+
+
+## Commands to run
 
 Run the application:
 
