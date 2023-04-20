@@ -64,7 +64,7 @@ class App(tk.Tk):
         if self.coords[0] == -1:
             self.coords = (x, y)
         line = self.canvas.create_line(
-            self.coords[0], self.coords[1], x, y, width=5, arrow=tk.LAST)
+            self.coords[0], self.coords[1], x, y, width=5, fill="black", arrow=tk.LAST)
         self.canvas.addtag_withtag('line', line)
         self.canvas.bind('<Shift-Motion>', self.finish_line)
         self.canvas.bind('<ButtonRelease-1>', self.exit_line)
@@ -73,6 +73,7 @@ class App(tk.Tk):
     def select_object(self, event):
         self.canvas.bind('<ButtonRelease-1>', self.deselect)
         self.bind('<BackSpace>', self.delete)
+        self.bind('<Delete>', self.delete)
         self.close_panel(hold=True)
         old_item = self.item_type('selected')
         new_item = self.item_type(tk.CURRENT)
@@ -207,7 +208,7 @@ class App(tk.Tk):
             name = self.canvas.itemcget('selected', 'text')
             self.challenges.pop(name, None)
 
-        for item in self.canvas.find_all('selected2'):
+        for item in self.canvas.find_all():
             if(self.item_type(item) == 'line'):
                 self.canvas.delete(item)
         self.canvas.delete('selected')
@@ -230,7 +231,7 @@ class App(tk.Tk):
         bounds[1] -= 5
         bounds[2] += 5
         bounds[3] += 5
-        r = self.canvas.create_rectangle(bounds, fill=fill, tags=tag)
+        r = self.canvas.create_rectangle(bounds, fill=fill, tags=tag, outline="black")
         self.canvas.tag_lower(r, text_id)
 
     def insert_entrypoint(self):

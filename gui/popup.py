@@ -20,7 +20,7 @@ class PopUpWindow(tk.Toplevel):
     def __init__(self, master, entrypoint):
         self.master = master
         super().__init__(master)
-        master.wm_attributes("-disabled", True)
+        self.grab_set()
 
         self.minsize(300, 100)
         self.transient(self.master)
@@ -67,6 +67,6 @@ class PopUpWindow(tk.Toplevel):
         else:
             self.master.challenge = (
                 name_out, all_challenges[type_out], flag_out, challenge_types[type_out])
-            self.master.wm_attributes("-disabled", False)
+            self.grab_release()
             self.destroy()
             self.master.deiconify()
