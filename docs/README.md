@@ -40,7 +40,7 @@ Challenge environments host other challenges and can also be configured to fit t
       - Docx Carving
 ```
 
-Challenges link through the `name` field. Challenge environments can't be made/run through the `python main.py gen` command, so you must use `python main.py competitiongen`. 
+Challenges link through the `name` field. Challenge environments can't be made/run through the `python main.py gen` command, so you must use `python main.py comp gen`. 
 
 ### Competition structure
 Competitions are structured in a tree-like fashion, with some Challenge Environments serving as entrypoints. An example structure is shown below. In this case, Fesbuc is an entrypoint.
@@ -82,12 +82,12 @@ This command runs the docker image for local testing. You must run `python main.
 python main.py comp gen -f <relative path of the competition> -r <registry to push images to>
 ```
 
-This command builds all of the Kubernetes files needed to deploy to a Kubernetes cluster. Upon completion, a graph of the challenges will be generated. The graph will be located at `evidence_graph.png` file in the competition folder.
+This command builds all of the Kubernetes files needed to deploy to a prexisting Kubernetes cluster. Upon completion, a graph of the challenges will be generated. The graph will be located at `evidence_graph.png` file in the competition folder.
 
 ### Build and run a competition locally
 
 ```shell
-python main.py competitiongen -f <relative path of the competition> -l
+python main.py comp gen -f <relative path of the competition> -l
 ```
 
 This command assumes you have `minikube` installed. Install it [here](https://minikube.sigs.k8s.io/docs/start/). This command runs the competition using minikube for local testing. Remember to add `127.0.0.1:53` as a DNS server. The urls of the challenges will be located in the `zones.txt` file.
