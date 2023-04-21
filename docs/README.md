@@ -45,7 +45,7 @@ Challenges link through the `name` field. Challenge environments can't be made/r
 ### Competition structure
 Competitions are structured in a tree-like fashion, with some Challenge Environments serving as entrypoints. An example structure is shown below. In this case, Fesbuc is an entrypoint.
 
-![image](../evidence_graph.png)
+![image](../competitions/mcpshsf-2023/evidence_graph.png)
 
 A competition folder has a `config.yaml` that specifies the entrypoints and `chals` folder that contains the challenges. You can look at the example in [/competitions/middle-school-teaser-2021](/competitions/middle-school-teaser-2021/)
 

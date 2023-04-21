@@ -5,3 +5,7 @@ This competition took place on March 14th, 2023 and had over 200 competitors. Th
 
 ## Writeup
 [Competition Writeup](https://lukegriffith.me/posts/writeups/mcpshsf/)
+
+## Challenge Graph
+
+![evidence graph](evidence_graph.png)
