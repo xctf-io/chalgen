@@ -93,19 +93,29 @@ python main.py comp gen -f <relative path of the competition> -l
 This command assumes you have `minikube` installed. Install it [here](https://minikube.sigs.k8s.io/docs/start/). This command runs the competition using minikube for local testing. Remember to add `127.0.0.1:53` as a DNS server. The urls of the challenges will be located in the `zones.txt` file.
 ***
 
-## Run a competition on an AWS Lab
+## Getting an entire competition running on Google Cloud
 
- - Start by running the competitiongen command, as shown [above](README.md#build-a-competition-for-kubernetes) (for Kubernetes)
-    - Choose `docker.io/<your username>/` for a free, public registry
- - Paste `curl https://gist.githubusercontent.com/just-luk/d5e2dbf530d2d162e853d356cfe0a792/raw/run.sh | bash` into the Lab terminal
- - Wait for your instances to start
- - Run `export KUBECONFIG=./kubeconfig` to use the kube config
-    - Rerun everytime you refresh
- - Transfer all files in the `kube` directory to the Lab
- - Run `kubectl create namespace challenges`
- - Change the annotation field of ingress.yaml to `traefik.ingress.kubernetes.io/router.entrypoints: web`
- - Run `kubectl apply -f kube` to start the competition
- - Run `aws lightsail open-instance-public-ports --instance-name "Agent1" --port-info fromPort=80,toPort=80`
-    - The static ip address of Agent1 will be the ingress
- - Stop the competition with `kubectl delete namespace challenges`
+1. Obtain a domain name with a wildcard SSL certificate
+2. Create a Google Cloud account ![here](https://cloud.google.com/free)
+3. Create a project in Google Cloud
+    - Go to the ![Google Cloud Console](https://console.cloud.google.com/)
+    - Click on the dropdown next to the Google Cloud logo and select "New Project"
+    - Give your project a name and click "Create"
+4. Use the Codespaces button in our repo to create a new Codespace OR install the Pre-reqs and clone the repo.
+    - Install the Google Cloud SDK ![here](https://cloud.google.com/sdk/docs/install) if running locally
+5. Run `gcloud auth login` and follow the instructions to login to your Google Cloud account
+6. Create a Kubernetes cluster in Google Cloud
+    - `gcloud container clusters create <cluster-name> --num-nodes=<number of node> --zone=<zone>`
+    - You can change the zone to any of the zones listed ![here](https://cloud.google.com/compute/docs/regions-zones)
+    - You can change the number of nodes to any number you want
+7. Get the credentials for your cluster
+    - `gcloud container clusters get-credentials <cluster-name> --zone=<zone>`
+8. Run `python main.py comp gen -f <relative path of the competition> -r <registry to push images to>`
+    - Docker Hub is a free registry to use, check it out ![here](https://hub.docker.com/)
+        - All images will be public, however, so you may want to create a private repo
+    - You can also use a private registry, check out the instructions ![here](https://cloud.google.com/container-registry/docs/quickstart)
+    - Once you create a private registry, you will need to run `gcloud auth configure-docker` to authenticate with your registry
+9. Update your domain's DNS records to point to the ingress IP address of your cluster
+    - Run `kubectl get ingress -n challenges` to get the IP address
+    - Update your domain's DNS records to point to the IP address
 
