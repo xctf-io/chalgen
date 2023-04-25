@@ -320,8 +320,8 @@ def gen(ctx, competition_folder, reg_url, local):
             #     return
             # print("\nPlease add 127.0.0.1 as a DNS client https://minikube.sigs.k8s.io/docs/handbook/addons/ingress-dns/")
             entry_url = configs[0]['url']
-            print(f'\nEntrypoint url: {entry_url}\n')
-            md = Markdown("Run ```minikube tunnel --bind-address='127.0.0.1'``` to access the entrypoint and challenges")
+            print(f'\nEntrypoint url: {entry_url}')
+            md = Markdown("Run ```minikube tunnel --bind-address='127.0.0.1'``` to access the entrypoint and challenges. If the website redirects to localhost, try restarting the tunnel. \n")
             print(md)
             
 
