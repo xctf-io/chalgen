@@ -6,9 +6,9 @@ metadata:
   labels:
     app: chal-host
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   ports:
-  - port: 8000
+  - port: 8002
     targetPort: 80
     protocol: TCP
   selector:

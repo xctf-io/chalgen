@@ -1,3 +1,3 @@
-fesbuc.ctf.test  A       127.0.0.1
-fred-shared-server.ctf.test  A       127.0.0.1
-chal-host.ctf.test  A       127.0.0.1
+https://just-luk-ubiquitous-guacamole-qjqpqq6qv63x77v-8000.preview.app.github.dev  A       127.0.0.1
+https://just-luk-ubiquitous-guacamole-qjqpqq6qv63x77v-8001.preview.app.github.dev  A       127.0.0.1
+https://just-luk-ubiquitous-guacamole-qjqpqq6qv63x77v-8002.preview.app.github.dev  A       127.0.0.1

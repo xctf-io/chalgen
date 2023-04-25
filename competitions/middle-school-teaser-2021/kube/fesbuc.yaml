@@ -6,7 +6,7 @@ metadata:
   labels:
     app: fesbuc
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   ports:
   - port: 8000
     targetPort: 8000
