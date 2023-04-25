@@ -298,29 +298,14 @@ def gen(ctx, competition_folder, reg_url, local):
         configs = generate_kube_deploy(kube_dir, chal_trees, local, reg_url)
         generate_challenge_graph(chal_trees, competition_folder)
         if local:
-            zones_path = os.path.join(os.path.dirname(kube_dir), 'zones.txt')
-            if os.path.isfile(zones_path):
-                os.remove(zones_path)
-            for config in configs:
-                url = config['url']
-                with open(zones_path, 'a') as z:
-                    z.write(f'{url}  A       127.0.0.1\n')
-            # env_vars = ['DOCKER_TLS_VERIFY', 'DOCKER_HOST',
-            #             'DOCKER_CERT_PATH', 'MINIKUBE_ACTIVE_DOCKERD']
-            # for env_var in env_vars:
-            #     os.environ.pop(env_var, None)
-
-            # try:
-            #     with Status("[cyan]Starting DNS server", spinner="point", spinner_style="cyan"):
-            #         subprocess.check_output(['docker', 'pull', 'samuelcolvin/dnserver'])
-            #         subprocess.check_output(
-            #         f'docker run --name dnsserver --rm -dp 53:53/udp -p 53:53/tcp -v {zones_path}:/zones/zones.txt samuelcolvin/dnserver'.split())
-            # except subprocess.CalledProcessError:
-            #     logger.error("Please clear the process using port 53 before running!")
-            #     return
-            # print("\nPlease add 127.0.0.1 as a DNS client https://minikube.sigs.k8s.io/docs/handbook/addons/ingress-dns/")
-            entry_url = configs[0]['url']
-            print(f'\nEntrypoint url: {entry_url}')
+            if os.environ['CODESPACE_NAME'] is not None:
+                print('Add the following to your etc/hosts file:')
+                for config in configs:
+                    url = config['url']
+                    print(f'{url} 127.0.0.1')
+            else:
+                entry_url = configs[0]['url']
+                print(f'\nEntrypoint url: {entry_url}')
             md = Markdown("Run ```minikube tunnel --bind-address='127.0.0.1'``` to access the entrypoint and challenges. If the website redirects to localhost, try restarting the tunnel. \n")
             print(md)
             
