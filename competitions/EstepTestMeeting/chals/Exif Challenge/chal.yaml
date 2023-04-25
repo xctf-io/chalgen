@@ -1,0 +1,9 @@
+- !image_exif
+  name: "Exif Challenge"
+  flag: "flag{exif_data}"
+  config:
+    orig_img: evidence.jpg
+    out_img: construction.jpg
+    lat: 39.1435
+    lng: -77.4186
+    metadata_key: 315

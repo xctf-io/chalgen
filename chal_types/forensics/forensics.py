@@ -174,6 +174,7 @@ class ImageExifChallenge(GeneratedChallenge):
     Config:
 
         orig_img - The relative path of the original image to use
+        out_img - The relative path of the output
         metadata_key - The metadata key to store the flag under
         flag_transform - The method to use to transform the flag (so you can't solve it with strings)
         lat - latitude of gps exif
@@ -199,7 +200,7 @@ class ImageExifChallenge(GeneratedChallenge):
         img = Image.open(img_path)
 
         exif_dict = {}
-        if 'exif' in img.info.keys():
+        if 'exif' in img.info.keys() or 'Exif' in img.info.keys():
             exif_dict = piexif.load(img.info['exif'])
         else:
             exif_dict = {
@@ -261,6 +262,7 @@ class ImageExifChallenge(GeneratedChallenge):
         exif_dict['GPS'] = GPS_IFD
 
         exif_dict['0th'][metadata_key] = trans_func(self.flag)
+        exif_dict['Exif'][41729] = b'1'
         exif_bytes = piexif.dump(exif_dict)
 
         # TODO Support different image types
