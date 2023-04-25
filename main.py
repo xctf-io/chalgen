@@ -3,6 +3,7 @@ import subprocess
 import rich_click as click
 from rich import print
 from rich.status import Status
+from rich.markdown import Markdown
 import os
 import ruamel.yaml
 import pygraphviz as pgv
@@ -151,14 +152,13 @@ def print_env_vars():
         'DOCKER_TLS_VERIFY',
         'DOCKER_HOST',
         'DOCKER_CERT_PATH',
-        'MINIKUBE_ACTIVE_DOCKERD',
-        'MINIKUBE_EXISTING_DOCKER_HOST'
+        'MINIKUBE_ACTIVE_DOCKERD'
     ]
     for env_var in env_vars:
         env_val = os.environ.get(env_var)
         if env_val is None:
-            logger.error(f"{env_var} is not defined! Please run `eval $(minikube -p minikube docker-env)` and then `minikube start`")
-            return
+            logger.error(f"{env_var} is not defined! Please run `minikube start` and then `eval $(minikube -p minikube docker-env)`")
+            exit(1)
         logger.info(f"{env_var}={env_val}")
 
 
@@ -319,12 +319,11 @@ def gen(ctx, competition_folder, reg_url, local):
             #     logger.error("Please clear the process using port 53 before running!")
             #     return
             # print("\nPlease add 127.0.0.1 as a DNS client https://minikube.sigs.k8s.io/docs/handbook/addons/ingress-dns/")
-            proc = subprocess.Popen(['minikube','tunnel', "--bind-address='127.0.0.1'"], shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             entry_url = configs[0]['url']
             print(f'\nEntrypoint url: {entry_url}\n')
-            with Status("[white]Tunnel started, type anything to stop", spinner="dots12", spinner_style="white"):
-                input()
-            proc.kill()
+            md = Markdown("Run ```minikube tunnel --bind-address='127.0.0.1'``` to access the entrypoint and challenges")
+            print(md)
+            
 
 @chalgen.command(help="Print the flags for a competition")
 @click.pass_context
