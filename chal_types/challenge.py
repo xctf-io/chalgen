@@ -24,11 +24,12 @@ def mkdir_p(path):
             raise
 
 
-def get_kube_service(chal, namespace='challenges'):
+def get_kube_service(chal, local, namespace='challenges'):
     chal_name = chal['name']
     service_name = chal['service_name']
     target_port = chal['target_port']
     out_port = chal['out_port']
+    type = "LoadBalancer" if local else "ClusterIP"
     return {
         'apiVersion': 'v1',
         'kind': 'Service',
@@ -40,7 +41,7 @@ def get_kube_service(chal, namespace='challenges'):
             }
         },
         'spec': {
-            'type': 'ClusterIP',
+            'type': type,
             'ports': [
                 {
                     'port': out_port,
@@ -175,7 +176,7 @@ def get_kube_ingress(chals, namespace='challenges'):
     }
 
 
-def chal_to_kube_config(chal, registry_base_url, local, chroot):
+def chal_to_kube_config(chal, registry_base_url, local, port_num, chroot):
     chal_name = slugify(chal.name)
     service_name = f'{chal_name}-svc'
     registry_url = f'{registry_base_url}{chal_name}:latest'
@@ -183,8 +184,10 @@ def chal_to_kube_config(chal, registry_base_url, local, chroot):
     out_port = 80
     if local:
         url_base = 'ctf.test'
-        out_port = 8000
+        out_port = port_num
     url = f'{chal_name}.{url_base}'
+    if os.environ['CODESPACE_NAME'] is not None:
+        url = f'https://{os.environ["CODESPACE_NAME"]}-{port_num}.preview.app.github.dev'
     return {
         'name': chal_name,
         'service_name': service_name,
@@ -212,25 +215,19 @@ def gen_kube(kube_dir, chal_kube_configs, local):
         kube_config_out = os.path.join(
             kube_dir, f'{chal_kube_config["name"]}.yaml')
 
-        service_config = get_kube_service(chal_kube_config)
+        service_config = get_kube_service(chal_kube_config, local)
         deployment_config = get_kube_deployment(chal_kube_config, local)
 
         with open(kube_config_out, 'w') as out:
             yaml.dump_all([service_config, deployment_config], out)
 
         push_container(chal_kube_config, local)
-
-    # chal_kube_configs = [
-    #     *chal_kube_configs,
-    #     {
-    #         "service_name": "ctfd-svc",
-    #         "url": "camp.mcpshsf.com"
-    #     }
-    # ]
-    ingress_config = get_kube_ingress(chal_kube_configs)
-    kube_ingress_out = os.path.join(kube_dir, 'ingress.yaml')
-    with open(kube_ingress_out, 'w') as out:
-        yaml.dump(ingress_config, out)
+        
+    if not local:
+        ingress_config = get_kube_ingress(chal_kube_configs)
+        kube_ingress_out = os.path.join(kube_dir, 'ingress.yaml')
+        with open(kube_ingress_out, 'w') as out:
+            yaml.dump(ingress_config, out)
 
 
 class ChallengeHost(object):

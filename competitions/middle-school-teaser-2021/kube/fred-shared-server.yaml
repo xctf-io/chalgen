@@ -6,9 +6,9 @@ metadata:
   labels:
     app: fred-shared-server
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   ports:
-  - port: 8000
+  - port: 8001
     targetPort: 8080
     protocol: TCP
   selector:

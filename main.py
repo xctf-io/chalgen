@@ -30,6 +30,7 @@ def chal(cmd):
 
 def generate_kube_deploy(kube_dir, trees, local, reg_url):
     configs = []
+    port_num = 8000
     for tree in trees:
         def traverse(tree):
             if 'children' not in tree:
@@ -39,7 +40,8 @@ def generate_kube_deploy(kube_dir, trees, local, reg_url):
             for child in tree['children']:
                 chal = child['chal']
                 if chal.container_id:
-                    kube_config = chal_to_kube_config(chal, reg_url, local, isinstance(chal, TemplateInjection))
+                    kube_config = chal_to_kube_config(chal, reg_url, local, port_num, isinstance(chal, TemplateInjection))
+                    port_num += 1
                     kube_configs.append(kube_config)
 
                 kube_configs.extend(traverse(child))
@@ -47,12 +49,14 @@ def generate_kube_deploy(kube_dir, trees, local, reg_url):
 
         chal = tree['chal']
         if chal.container_id:
-            kube_config = chal_to_kube_config(chal, reg_url, local, isinstance(chal, TemplateInjection))
+            kube_config = chal_to_kube_config(chal, reg_url, local, port_num, isinstance(chal, TemplateInjection))
+            port_num += 1
             configs.append(kube_config)
 
         chal = tree.get('host')
         if chal and chal.container_id:
-            kube_config = chal_to_kube_config(chal, reg_url, local, isinstance(chal, TemplateInjection))
+            kube_config = chal_to_kube_config(chal, reg_url, local, port_num, isinstance(chal, TemplateInjection))
+            port_num += 1
             configs.append(kube_config)
 
         configs.extend(traverse(tree))
@@ -231,9 +235,11 @@ def gen(ctx, competition_folder, reg_url, local):
         except subprocess.CalledProcessError:
             logger.error("Please set up your kubernetes cluster before running!")
             exit(1)
-
-    with Status("[bold green]Creating challenges namespace", spinner_style="green"):
-        subprocess.check_output('kubectl create namespace challenges'.split())
+    try:
+        with Status("[bold green]Creating challenges namespace", spinner_style="green"):
+            subprocess.check_output('kubectl create namespace challenges'.split())
+    except subprocess.CalledProcessError:
+        pass
     competition_folder = os.path.join(os.path.dirname(
         os.path.realpath(__file__)), competition_folder)
     chals_folder = os.path.join(competition_folder, 'chals')
@@ -299,21 +305,23 @@ def gen(ctx, competition_folder, reg_url, local):
                 url = config['url']
                 with open(zones_path, 'a') as z:
                     z.write(f'{url}  A       127.0.0.1\n')
-            env_vars = ['DOCKER_TLS_VERIFY', 'DOCKER_HOST',
-                        'DOCKER_CERT_PATH', 'MINIKUBE_ACTIVE_DOCKERD']
-            for env_var in env_vars:
-                os.environ.pop(env_var, None)
+            # env_vars = ['DOCKER_TLS_VERIFY', 'DOCKER_HOST',
+            #             'DOCKER_CERT_PATH', 'MINIKUBE_ACTIVE_DOCKERD']
+            # for env_var in env_vars:
+            #     os.environ.pop(env_var, None)
 
-            try:
-                with Status("[cyan]Starting DNS server", spinner="point", spinner_style="cyan"):
-                    subprocess.check_output(['docker', 'pull', 'samuelcolvin/dnserver'])
-                    subprocess.check_output(
-                    f'docker run --name dnsserver --rm -dp 53:53/udp -p 53:53/tcp -v {zones_path}:/zones/zones.txt samuelcolvin/dnserver'.split())
-            except subprocess.CalledProcessError:
-                logger.error("Please clear the process using port 53 before running!")
-                return
-            print("\nPlease add 127.0.0.1 as a DNS client https://minikube.sigs.k8s.io/docs/handbook/addons/ingress-dns/")
-            proc = subprocess.Popen(['minikube','tunnel'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            # try:
+            #     with Status("[cyan]Starting DNS server", spinner="point", spinner_style="cyan"):
+            #         subprocess.check_output(['docker', 'pull', 'samuelcolvin/dnserver'])
+            #         subprocess.check_output(
+            #         f'docker run --name dnsserver --rm -dp 53:53/udp -p 53:53/tcp -v {zones_path}:/zones/zones.txt samuelcolvin/dnserver'.split())
+            # except subprocess.CalledProcessError:
+            #     logger.error("Please clear the process using port 53 before running!")
+            #     return
+            # print("\nPlease add 127.0.0.1 as a DNS client https://minikube.sigs.k8s.io/docs/handbook/addons/ingress-dns/")
+            proc = subprocess.Popen(['minikube','tunnel', "--bind-address='127.0.0.1'"], shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            entry_url = configs[0]['url']
+            print(f'\nEntrypoint url: {entry_url}\n')
             with Status("[white]Tunnel started, type anything to stop", spinner="dots12", spinner_style="white"):
                 input()
             proc.kill()
