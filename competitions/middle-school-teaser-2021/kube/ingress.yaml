@@ -5,8 +5,17 @@ metadata:
   namespace: challenges
   annotations:
     kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/ssl-redirect: 'false'
+    nginx.ingress.kubernetes.io/ssl-redirect: 'true'
+    kubernetes.io/ingress.global-static-ip-name: 34.125.64.174
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    acme.cert-manager.io/http01-edit-in-place: 'true'
 spec:
+  tls:
+  - hosts:
+    - fesbuc.ctf.test
+    - fred-shared-server.ctf.test
+    - chal-host.ctf.test
+    secretName: chalgen-cert-secret
   rules:
   - host: fesbuc.ctf.test
     http:

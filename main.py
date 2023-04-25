@@ -18,7 +18,7 @@ from gui import App
 def chalgen(cmd):
     pass
 
-@click.group("Generate or run competitions")
+@click.group(help="Generate or run competitions")
 @click.pass_context
 def comp(cmd):
     pass
@@ -216,7 +216,7 @@ def no_reg_url(ctx, param, value):
 @comp.command()
 @click.pass_context
 @click.option('--competition-folder', '-f', required=True)
-@click.option('--reg-url', 'r', required=True, help="Registry to push docker images to")
+@click.option('--reg-url', '-r', required=True, help="Registry to push docker images to")
 @click.option('--local', '-l', is_flag=True, default=False, callback=no_reg_url, help="Run the ctf locally using minikube (no reg url required)")
 def gen(ctx, competition_folder, reg_url, local):
     if local:
