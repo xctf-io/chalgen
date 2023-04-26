@@ -74,6 +74,7 @@ class FixMinikube(object):
                 os.environ[env_var] = self.env_vars_value[env_var]
 
 logging.basicConfig(
-    level="INFO", format="%(message)s", datefmt="[%X]", handlers=[RichHandler()]
+    level="ERROR", format="%(message)s", datefmt="[%X]", handlers=[RichHandler()]
 )
+logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
 logger = logging.getLogger("rich")

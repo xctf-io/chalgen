@@ -32,7 +32,7 @@ class RobotsTxtChallenge(GeneratedChallenge):
         - Ideally we should be using docker compose
         - Docker templates and makefile templates should exist as helper functions
         """
-        self.display = f'http://{slugify(self.name)}.chals.mcpshsf.com'
+        self.set_display()
 
         template_dir = join(dirname(abspath(__file__)),
                             'templates/static_site')

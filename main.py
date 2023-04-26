@@ -1,18 +1,22 @@
-from platform import uname
+import logging
 import subprocess
-import rich_click as click
-from rich import print
-from rich.status import Status
-from rich.markdown import Markdown
 import os
 import ruamel.yaml
 import pygraphviz as pgv
 import shutil
 
-from chal_types import challenge_types, load_chal_from_config, chal_to_kube_config, gen_kube, mkdir_p, logger
+from slugify import slugify
+
+from chal_types import challenge_types, load_chal_from_config, chal_to_kube_config, gen_kube, mkdir_p, logger, increase_display_port
 from chal_types import GeneratedChallenge, ChallengeHost, ChallengeEnvironment
 from chal_types.web import TemplateInjection
 from gui import App
+
+import rich_click as click
+from rich import print
+from rich.status import Status
+from rich.markdown import Markdown
+from rich.panel import Panel
 
 @click.group()
 @click.pass_context
@@ -41,6 +45,7 @@ def generate_kube_deploy(kube_dir, trees, local, reg_url):
             for child in tree['children']:
                 chal = child['chal']
                 if chal.container_id:
+                    nonlocal port_num
                     kube_config = chal_to_kube_config(chal, reg_url, local, port_num, isinstance(chal, TemplateInjection))
                     port_num += 1
                     kube_configs.append(kube_config)
@@ -56,8 +61,7 @@ def generate_kube_deploy(kube_dir, trees, local, reg_url):
 
         chal = tree.get('host')
         if chal and chal.container_id:
-            kube_config = chal_to_kube_config(chal, reg_url, local, port_num, isinstance(chal, TemplateInjection))
-            port_num += 1
+            kube_config = chal_to_kube_config(chal, reg_url, local, 8200, isinstance(chal, TemplateInjection))
             configs.append(kube_config)
 
         configs.extend(traverse(tree))
@@ -85,7 +89,10 @@ def generate_challenge_graph(trees, competition_folder):
 
     edges = []
     for tree in trees:
-        edges.extend(traverse(tree))
+        if(tree['children'] == []):
+            edges.append(f'\t"{tree["name"]}";')
+        else:
+            edges.extend(traverse(tree))
 
     formatted_edges = "\n".join(edges)
     graph = f'digraph {{\n{formatted_edges}\n}}'
@@ -166,7 +173,11 @@ def print_env_vars():
 @click.pass_context
 @click.option('--config', '-c', required=True)
 @click.option('--competition-folder', '-f', default=None)
-def gen(ctx, chal_config, competition_folder):
+@click.option('--verbose', '-v', is_flag=True, default=False)
+def gen(ctx, chal_config, competition_folder, verbose):
+    if verbose:
+        logger.setLevel(logging.INFO)
+
     print_env_vars()
 
     chal_dir = os.path.abspath(os.path.dirname(chal_config))
@@ -200,10 +211,10 @@ def gen(ctx, chal_config, competition_folder):
         chal_gen.chal_host = chal_host
         chal_gen.chal_path_lookup = chal_path_lookup
         chal_gen.challenge_types = challenge_types
-        chal_tree = chal_gen.gen_chals(chal_dir)
+        chal_tree = chal_gen.gen_chals(chal_dir, local=True)
         chal_tree = [chal_tree]
 
-    chal_gen.do_gen(chal_dir)
+    chal_gen.do_gen(chal_dir, local=True)
 
     if ChallengeEnvironment in type(chal_gen).__bases__:
         chal_host.create()
@@ -222,7 +233,11 @@ def no_reg_url(ctx, param, value):
 @click.option('--competition-folder', '-f', required=True)
 @click.option('--reg-url', '-r', required=True, help="Registry to push docker images to")
 @click.option('--local', '-l', is_flag=True, default=False, callback=no_reg_url, help="Run the ctf locally using minikube (no reg url required)")
-def gen(ctx, competition_folder, reg_url, local):
+@click.option('--verbose', '-v', is_flag=True, default=False)
+def gen(ctx, competition_folder, reg_url, local, verbose):
+    if verbose:
+        logger.setLevel(logging.INFO)
+
     if local:
         if shutil.which('minikube') is None:
             logger.error("minikube not installed!")
@@ -259,23 +274,29 @@ def gen(ctx, competition_folder, reg_url, local):
         entrypoints = [entrypoints]
 
     chal_trees = []
-    chal_host = ChallengeHost(
-        'http://chal-host.chals.mcpshsf.com', chals_folder)
+    host_url = 'http://chal-host.chals.mcpshsf.com'
+    if local:
+        host_url = 'http://127.0.0.1.:8200'
+        if 'CODESPACE_NAME' in os.environ.keys():
+            host_url = f'https://{os.environ["CODESPACE_NAME"]}-8200.preview.app.github.dev'
+    chal_host = ChallengeHost(host_url, chals_folder)
 
+    entry_files = {}
     for entrypoint in entrypoints:
         entrypoint_path = chal_path_lookup[entrypoint]
         entrypoint_config = os.path.join(entrypoint_path, 'chal.yaml')
         chal_gen = load_chal_from_config(challenge_types, entrypoint_config)
         chal_tree = {}
+        increase_display_port()
 
         if ChallengeEnvironment in type(chal_gen).__bases__:
             chal_gen.chal_host = chal_host
             chal_gen.chal_path_lookup = chal_path_lookup
             chal_gen.challenge_types = challenge_types
-            chal_tree = chal_gen.gen_chals(entrypoint_path)
+            chal_tree = chal_gen.gen_chals(entrypoint_path, local=local)
             chal_trees.append(chal_tree)
 
-        chal_gen.do_gen(entrypoint_path)
+        chal_gen.do_gen(entrypoint_path, local=local)
 
         if GeneratedChallenge in type(chal_gen).__bases__:
             chal_files = chal_gen.chal_file
@@ -297,17 +318,28 @@ def gen(ctx, competition_folder, reg_url, local):
         mkdir_p(kube_dir)
         configs = generate_kube_deploy(kube_dir, chal_trees, local, reg_url)
         generate_challenge_graph(chal_trees, competition_folder)
-        if local:
-            if os.environ['CODESPACE_NAME'] is not None:
-                print('Add the following to your etc/hosts file:')
-                for config in configs:
-                    url = config['url']
-                    print(f'{url} 127.0.0.1')
+        
+        name_to_index = {}
+        for i, config in enumerate(configs):
+            name_to_index[config['name']] = i
+        full_text  = "Entrypoints\n"
+        for entrypoint in entrypoints:
+            slug = slugify(entrypoint)
+            entry_url = ""
+            if slug not in name_to_index.keys():
+                entrypoint_path = chal_path_lookup[entrypoint]
+                entrypoint_config = os.path.join(entrypoint_path, 'chal.yaml')
+                chal_gen = load_chal_from_config(challenge_types, entrypoint_config)
+                entry_url = host_url + '/' + chal_gen.get_value('files')[0]
             else:
-                entry_url = configs[0]['url']
-                print(f'\nEntrypoint url: {entry_url}')
-            md = Markdown("Run ```minikube tunnel --bind-address='127.0.0.1'``` to access the entrypoint and challenges. If the website redirects to localhost, try restarting the tunnel. \n")
-            print(md)
+                entry_url = configs[name_to_index[slug]]['url']
+            full_text += f" - {entrypoint}: [bold][bright_white]{entry_url}[/bright_white][/bold]\n"
+        
+        print("")
+        if local:
+            full_text += "\n[white]Run [bold][bright_red]minikube tunnel --bind-address='127.0.0.1'[/bright_red][/bold] to access everything. You may need to restart the tunnel if it fails to connect.[/white]"
+        p = Panel.fit(full_text)    
+        print(p)
             
 
 @chalgen.command(help="Print the flags for a competition")
@@ -351,7 +383,7 @@ def solve(ctx, chal_config):
             "Challenge was not solved correctly: {}".format(solved_flag))
 
 
-@chalgen.command(help="Launch the GUI for creating a competition")
+@chalgen.command(help="Launch a GUI for creating a competition")
 @click.pass_context
 @click.option('--competition-folder', '-f', required=True)
 def gui(ctx, competition_folder):

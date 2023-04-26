@@ -24,7 +24,7 @@ class ChallengeEnvironment(GeneratedChallenge):
         self.chal_path_lookup = {}
         self.challenge_types = None
 
-    def gen_chals(self, env_path):
+    def gen_chals(self, env_path, local):
         self._chal_lookup = {}
         if self.config is None:
             return
@@ -51,12 +51,12 @@ class ChallengeEnvironment(GeneratedChallenge):
                 chal_gen.chal_host = self.chal_host
                 chal_gen.chal_path_lookup = self.chal_path_lookup
                 chal_gen.challenge_types = self.challenge_types
-                chal_children = chal_gen.gen_chals(chal_path)
-                chal_gen.do_gen(chal_path)
+                chal_children = chal_gen.gen_chals(chal_path, local=local)
+                chal_gen.do_gen(chal_path, local=local)
 
                 tree["children"].append(chal_children)
             else:
-                chal_gen.do_gen(chal_path)
+                chal_gen.do_gen(chal_path, local=local)
 
                 tree["children"].append({
                     "name": chal_gen.name,
@@ -714,6 +714,8 @@ class SecretChat(ChallengeEnvironment):
     """
 
     def gen(self, chal_dir):
+        self.set_display()
+
         title = self.get_value('title')
         users = self.get_value('users')
         # convert to list of dicts
@@ -738,7 +740,6 @@ class SecretChat(ChallengeEnvironment):
                     message['messages'].append(chal_url)
 
             chat_messages.append(message)
-        self.display = f'{slugify(self.name)}.chals.mcpshsf.com'
         chal_out_dir = join(chal_dir, 'chat')
         if os.path.isdir(chal_out_dir):
             rmtree(chal_out_dir)

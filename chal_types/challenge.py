@@ -12,7 +12,7 @@ from rich import print
 from rich.status import Status
 
 yaml = ruamel.yaml.YAML()
-
+display_port  = 8000
 
 def mkdir_p(path):
     try:
@@ -22,6 +22,10 @@ def mkdir_p(path):
             pass
         else:
             raise
+
+def increase_display_port():
+    global display_port
+    display_port += 1
 
 
 def get_kube_service(chal, local, namespace='challenges'):
@@ -180,14 +184,14 @@ def chal_to_kube_config(chal, registry_base_url, local, port_num, chroot):
     chal_name = slugify(chal.name)
     service_name = f'{chal_name}-svc'
     registry_url = f'{registry_base_url}{chal_name}:latest'
-    url_base = 'chals.mcpshsf.com'
     out_port = 80
+    url = f'{chal_name}.chals.mcpshsf.com'
     if local:
-        url_base = 'ctf.test'
         out_port = port_num
-    url = f'{chal_name}.{url_base}'
-    if os.environ['CODESPACE_NAME'] is not None:
-        url = f'https://{os.environ["CODESPACE_NAME"]}-{port_num}.preview.app.github.dev'
+        if 'CODESPACE_NAME' in os.environ.keys():
+            url = f'https://{os.environ["CODESPACE_NAME"]}-{port_num}.preview.app.github.dev'
+        else:
+            url = f'http://127.0.0.1:{port_num}'
     return {
         'name': chal_name,
         'service_name': service_name,
@@ -290,12 +294,14 @@ class GeneratedChallenge(object):
         self.display = "nothing to display"
         self.chal_host = None
         self.chal_dir = "not set"
+        self.local = False
 
-    def do_gen(self, chal_dir):
+    def do_gen(self, chal_dir, local=False):
         print(f'[white]Generating[/white] {self.__class__} [white]{self.name}[/white]')
         self.chal_dir = chal_dir
         self.container_id = None
         self.target_port = 80
+        self.local = local
         self.gen(chal_dir)
 
     def gen(self, chal_dir):
@@ -323,3 +329,13 @@ class GeneratedChallenge(object):
     def get_file(self, filename):
         with open(self.get_file_path(filename), 'rb') as f:
             return f.read()
+    
+    def set_display(self):
+        self.display = f'http://{slugify(self.name)}.chals.mcpshsf.com'
+        global display_port
+        if self.local:
+            self.display = f'http://127.0.0.1:{display_port}'
+            print('Using display port:', display_port)
+            if 'CODESPACE_NAME' in os.environ:
+                self.display = f'https://{os.environ["CODESPACE_NAME"]}-{display_port}.preview.app.github.dev'
+        display_port += 1

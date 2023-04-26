@@ -43,6 +43,8 @@ class FileEvidence(ChallengeEnvironment):
         if self.get_value("disable_set_file", required=False):
             return
         self.chal_file = [f for f in files]
+        for file in files:
+            self.chal_host.add_chal(join(chal_dir, file))
 
 class URLEvidence(ChallengeEnvironment):
     yaml_tag = u'!url_evidence'
@@ -100,7 +102,6 @@ class DiffImages(GeneratedChallenge):
             available_bytes = int((len(bytelist) - 4 - random_offset) / len(mssg))
             for i, c in enumerate(mssg):
                 random_num = random.randint(random_offset + (i * available_bytes), random_offset + ((i + 1) * available_bytes))
-                print(random_num, c)
                 bytelist[random_num:random_num+1] = c.encode('utf-8')
 
             return bytelist
