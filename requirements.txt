@@ -24,3 +24,4 @@ gtts
 pydub
 pygraphviz
 pyzipper
+scapy
