@@ -80,7 +80,8 @@ class StaticSite(ChallengeEnvironment):
     """
 
     def gen(self, chal_dir):
-        self.display = f'http://{slugify(self.name)}.ctf.test'
+        self.set_display()
+        
         template_dir = join(dirname(abspath(__file__)),
                             'templates/static_site')
         makefile_dir = join(dirname(abspath(__file__)),
@@ -214,7 +215,7 @@ class FileshareFlask(ChallengeEnvironment):
     """
 
     def gen(self, chal_dir):
-        self.display = f'http://{slugify(self.name)}.chals.mcpshsf.com'
+        self.set_display()
 
         username = self.get_value('username')
         password = self.get_value('password')
@@ -358,7 +359,7 @@ class TwitterFlask(ChallengeEnvironment):
     """
 
     def gen(self, chal_dir):
-        self.display = f'http://{slugify(self.name)}.chals.mcpshsf.com'
+        self.set_display()
 
         chal_out_dir = os.path.join(chal_dir, 'twitter')
         if os.path.isdir(chal_out_dir):
@@ -533,7 +534,7 @@ class FacebookDjango(ChallengeEnvironment):
         return out
 
     def gen(self, chal_dir):
-        self.display = f'{slugify(self.name)}.chals.mcpshsf.com'
+        self.set_display()
 
         chal_out_dir = os.path.join(chal_dir, 'facebook')
         if os.path.isdir(chal_out_dir):
@@ -651,7 +652,7 @@ class JekyllBlog(ChallengeEnvironment):
         return new_content
 
     def gen(self, chal_dir):
-        self.display = f'http://{slugify(self.name)}.chals.mcpshsf.com'
+        self.set_display()
 
         chal_out_dir = os.path.join(chal_dir, 'blog')
         if os.path.isdir(chal_out_dir):
