@@ -43,6 +43,7 @@ def generate_kube_deploy(kube_dir, trees, local, reg_url):
 
             kube_configs = []
             for child in tree['children']:
+                kube_configs.extend(traverse(child))
                 chal = child['chal']
                 if chal.container_id:
                     nonlocal port_num
@@ -50,7 +51,6 @@ def generate_kube_deploy(kube_dir, trees, local, reg_url):
                     port_num += 1
                     kube_configs.append(kube_config)
 
-                kube_configs.extend(traverse(child))
             return kube_configs
 
         chal = tree['chal']

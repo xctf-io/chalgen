@@ -91,8 +91,7 @@ def get_kube_deployment(chal, local, namespace='challenges'):
     }
     if local:
         spec['containers'][0]['imagePullPolicy'] = 'Never'
-        spec['containers'][0]['securityContext'] = {
-            'allowPrivilegeEscalation': False, 'runAsUser': 0}
+        spec['containers'][0]['securityContext'] = {'runAsUser': 0}
     if chal['chroot']:
         spec['containers'][0]['securityContext']['privileged'] = True
         
