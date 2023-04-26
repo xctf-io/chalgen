@@ -335,7 +335,6 @@ class GeneratedChallenge(object):
         global display_port
         if self.local:
             self.display = f'http://127.0.0.1:{display_port}'
-            print('Using display port:', display_port)
             if 'CODESPACE_NAME' in os.environ:
                 self.display = f'https://{os.environ["CODESPACE_NAME"]}-{display_port}.preview.app.github.dev'
         display_port += 1

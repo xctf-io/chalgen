@@ -276,7 +276,7 @@ def gen(ctx, competition_folder, reg_url, local, verbose):
     chal_trees = []
     host_url = 'http://chal-host.chals.mcpshsf.com'
     if local:
-        host_url = 'http://127.0.0.1.:8200'
+        host_url = 'http://127.0.0.1:8200'
         if 'CODESPACE_NAME' in os.environ.keys():
             host_url = f'https://{os.environ["CODESPACE_NAME"]}-8200.preview.app.github.dev'
     chal_host = ChallengeHost(host_url, chals_folder)

@@ -1,6 +1,0 @@
-- !caesar_cipher
-        name: Caesar Challenge
-        flag: "flag{a_very_basic_caesar_cipher}"
-        config:
-          shift: 10
-          addl_text: "These students are complaining too much...I'll show them...the concrete mix includes a little radio-active material...they won't know until they have children"
