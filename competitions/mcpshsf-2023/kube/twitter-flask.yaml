@@ -6,9 +6,9 @@ metadata:
   labels:
     app: twitter-flask
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   ports:
-  - port: 80
+  - port: 8000
     targetPort: 5000
     protocol: TCP
   selector:
@@ -33,11 +33,11 @@ spec:
     spec:
       containers:
       - name: twitter-flask
-        image: gcr.io/mcps-hsf-316519/twitter-flask:latest
+        image: twitter-302324477
         ports:
         - containerPort: 5000
-        imagePullPolicy: Always
+        imagePullPolicy: Never
         securityContext:
-          readOnlyRootFilesystem: false
+          runAsUser: 0
       imagePullSecrets:
       - name: regcred

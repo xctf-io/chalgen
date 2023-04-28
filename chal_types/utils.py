@@ -1,3 +1,4 @@
+import inspect
 import logging
 from rich.logging import RichHandler
 from os.path import join
@@ -7,6 +8,9 @@ from gtts import gTTS
 import os
 import logging
 from rich.logging import RichHandler
+from dirhash import dirhash
+
+from chal_types.text_transforms import SHA256
 
 
 class WorkDir(object):
@@ -19,6 +23,11 @@ class WorkDir(object):
 
     def __exit__(self, *args):
         os.chdir(self.cwd)
+
+def get_challenge_hash(chal_path, chal):
+    directory_hash = dirhash(chal_path, 'sha256')
+    full_hash = SHA256(directory_hash + inspect.getsource(chal.gen))
+    return full_hash
 
 
 def load_chal_from_config(challenge_types, chal_config):

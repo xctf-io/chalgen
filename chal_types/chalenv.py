@@ -1,6 +1,7 @@
 import os
 import base64
 from os.path import join, abspath, dirname, basename
+from dirhash import dirhash
 
 import hashlib
 import subprocess
@@ -11,7 +12,7 @@ from rich.status import Status
 from rich import print
 
 from .challenge import GeneratedChallenge
-from .utils import FixMinikube, load_chal_from_config, WorkDir, fwrite
+from .utils import FixMinikube, get_challenge_hash, load_chal_from_config, WorkDir, fwrite
 from distutils.dir_util import copy_tree
 import ruamel.yaml
 
@@ -24,8 +25,9 @@ class ChallengeEnvironment(GeneratedChallenge):
         self.chal_path_lookup = {}
         self.challenge_types = None
 
-    def gen_chals(self, env_path, local):
+    def gen_chals(self, local, chals_lock={}):
         self._chal_lookup = {}
+        cached = True
         if self.config is None:
             return
 
@@ -35,7 +37,8 @@ class ChallengeEnvironment(GeneratedChallenge):
             "children": []
         }
         if 'chals' not in self.config or self.config['chals'] is None:
-            return tree
+            return tree, cached
+        
         for chal in self.config['chals']:
             chal_path = self.chal_path_lookup.get(chal)
             if not chal_path or not os.path.isdir(chal_path):
@@ -46,17 +49,30 @@ class ChallengeEnvironment(GeneratedChallenge):
                 raise Exception(f'could not find challenge config! {chal}')
 
             chal_gen = load_chal_from_config(self.challenge_types, chal_config)
+            if chals_lock != {}:
+                hash = get_challenge_hash(chal_path, chal_gen)
+                lock_hash = chals_lock[chal_gen.name]['hash'] if chal_gen.name in chals_lock else None
+                if (hash!=lock_hash):
+                    cached = False
+            else:
+                cached = False
 
             if ChallengeEnvironment in type(chal_gen).__bases__:
                 chal_gen.chal_host = self.chal_host
                 chal_gen.chal_path_lookup = self.chal_path_lookup
                 chal_gen.challenge_types = self.challenge_types
-                chal_children = chal_gen.gen_chals(chal_path, local=local)
-                chal_gen.do_gen(chal_path, local=local)
+                chal_children, chals_cached = chal_gen.gen_chals(local, chals_lock=chals_lock)
+                if chals_lock != {}:
+                    chal_gen.do_gen(chal_path, local, (hash==lock_hash and chals_cached), attr=chals_lock[chal_gen.name])
+                else:
+                    chal_gen.do_gen(chal_path, local, chals_cached)
 
                 tree["children"].append(chal_children)
             else:
-                chal_gen.do_gen(chal_path, local=local)
+                if chals_lock != {}:
+                    chal_gen.do_gen(chal_path, local, (hash==lock_hash), attr=chals_lock[chal_gen.name])
+                else:
+                    chal_gen.do_gen(chal_path, local, False)
 
                 tree["children"].append({
                     "name": chal_gen.name,
@@ -65,7 +81,7 @@ class ChallengeEnvironment(GeneratedChallenge):
                 })
 
             self._chal_lookup[chal_gen.name] = chal_gen
-        return tree
+        return tree, cached
 
 class StaticSite(ChallengeEnvironment):
     security = 'readonly'
@@ -78,7 +94,6 @@ class StaticSite(ChallengeEnvironment):
 
         None
     """
-
     def gen(self, chal_dir):
         self.set_display()
         
@@ -161,6 +176,8 @@ class ShellServer(ChallengeEnvironment):
     """
 
     def gen(self, chal_dir):
+        self.set_display()
+
         template_dir = join(dirname(abspath(__file__)),
                             'templates/shell_server')
         makefile_dir = join(dirname(abspath(__file__)),

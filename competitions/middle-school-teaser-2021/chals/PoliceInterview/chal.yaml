@@ -1,5 +1,4 @@
 - !file_evidence
   name: "Police Interview"
   config:
-    files:
-    - PoliceInterview.docx
+    file: PoliceInterview.docx

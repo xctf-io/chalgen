@@ -35,16 +35,15 @@ class FileEvidence(ChallengeEnvironment):
     Config:
 
         disable_set_file: Set the chal_file to this file
-        files: List of files to include in the challenge
+        file: File to include in the challenge
     """
 
     def gen(self, chal_dir):
-        files = self.get_value("files")
+        file = self.get_value("file")
         if self.get_value("disable_set_file", required=False):
             return
-        self.chal_file = [f for f in files]
-        for file in files:
-            self.chal_host.add_chal(join(chal_dir, file))
+        self.chal_file = file
+        self.chal_host.add_chal(join(chal_dir, file))
 
 class URLEvidence(ChallengeEnvironment):
     yaml_tag = u'!url_evidence'

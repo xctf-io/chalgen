@@ -8,7 +8,7 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - port: 8002
+  - port: 8200
     targetPort: 80
     protocol: TCP
   selector:
@@ -38,7 +38,6 @@ spec:
         - containerPort: 80
         imagePullPolicy: Never
         securityContext:
-          allowPrivilegeEscalation: false
           runAsUser: 0
       imagePullSecrets:
       - name: regcred

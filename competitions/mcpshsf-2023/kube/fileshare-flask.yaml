@@ -6,9 +6,9 @@ metadata:
   labels:
     app: fileshare-flask
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   ports:
-  - port: 80
+  - port: 8002
     targetPort: 8000
     protocol: TCP
   selector:
@@ -33,11 +33,11 @@ spec:
     spec:
       containers:
       - name: fileshare-flask
-        image: gcr.io/mcps-hsf-316519/fileshare-flask:latest
+        image: fileshare-flask-302367349
         ports:
         - containerPort: 8000
-        imagePullPolicy: Always
+        imagePullPolicy: Never
         securityContext:
-          readOnlyRootFilesystem: false
+          runAsUser: 0
       imagePullSecrets:
       - name: regcred

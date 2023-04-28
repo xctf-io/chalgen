@@ -6,9 +6,9 @@ metadata:
   labels:
     app: facebook-django
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   ports:
-  - port: 80
+  - port: 8004
     targetPort: 8000
     protocol: TCP
   selector:
@@ -33,11 +33,11 @@ spec:
     spec:
       containers:
       - name: facebook-django
-        image: gcr.io/mcps-hsf-316519/facebook-django:latest
+        image: facebook-django-302303001
         ports:
         - containerPort: 8000
-        imagePullPolicy: Always
+        imagePullPolicy: Never
         securityContext:
-          readOnlyRootFilesystem: false
+          runAsUser: 0
       imagePullSecrets:
       - name: regcred

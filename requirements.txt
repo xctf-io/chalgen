@@ -25,3 +25,4 @@ pydub
 pygraphviz
 pyzipper
 scapy
+dirhash

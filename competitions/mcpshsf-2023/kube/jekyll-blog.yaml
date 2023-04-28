@@ -6,9 +6,9 @@ metadata:
   labels:
     app: jekyll-blog
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   ports:
-  - port: 80
+  - port: 8005
     targetPort: 80
     protocol: TCP
   selector:
@@ -33,11 +33,11 @@ spec:
     spec:
       containers:
       - name: jekyll-blog
-        image: gcr.io/mcps-hsf-316519/jekyll-blog:latest
+        image: jekyll-blog-302390121
         ports:
         - containerPort: 80
-        imagePullPolicy: Always
+        imagePullPolicy: Never
         securityContext:
-          readOnlyRootFilesystem: false
+          runAsUser: 0
       imagePullSecrets:
       - name: regcred

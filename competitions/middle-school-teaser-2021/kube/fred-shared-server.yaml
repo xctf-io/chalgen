@@ -38,7 +38,6 @@ spec:
         - containerPort: 8080
         imagePullPolicy: Never
         securityContext:
-          allowPrivilegeEscalation: false
           runAsUser: 0
       imagePullSecrets:
       - name: regcred

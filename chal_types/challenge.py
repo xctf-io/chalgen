@@ -187,6 +187,7 @@ def chal_to_kube_config(chal, registry_base_url, local, port_num, chroot):
     url = f'{chal_name}.chals.mcpshsf.com'
     if local:
         out_port = port_num
+        registry_url = chal.container_id
         if 'CODESPACE_NAME' in os.environ.keys():
             url = f'https://{os.environ["CODESPACE_NAME"]}-{port_num}.preview.app.github.dev'
         else:
@@ -204,11 +205,9 @@ def chal_to_kube_config(chal, registry_base_url, local, port_num, chroot):
     }
 
 
-def push_container(chal_config, local):
-    os.system(
-        f'docker tag {chal_config["container_id"]} {chal_config["registry_url"]}')
-    if not local:
-        os.system(f'docker push {chal_config["registry_url"]}')
+def push_container(chal_config):
+    os.system(f'docker tag {chal_config["container_id"]} {chal_config["registry_url"]}')
+    os.system(f'docker push {chal_config["registry_url"]}')
     subprocess.check_output(f'docker rmi {chal_config["container_id"]}'.split())
 
 
@@ -224,7 +223,8 @@ def gen_kube(kube_dir, chal_kube_configs, local):
         with open(kube_config_out, 'w') as out:
             yaml.dump_all([service_config, deployment_config], out)
 
-        push_container(chal_kube_config, local)
+        if not local:
+            push_container(chal_kube_config)
         
     if not local:
         ingress_config = get_kube_ingress(chal_kube_configs)
@@ -255,9 +255,9 @@ class ChallengeHost(object):
         makefile_dir = join(dirname(abspath(__file__)),
                             'templates/docker_make')
 
-        if(os.path.isdir(self.host_dir)):
+        if not os.path.isdir(self.host_dir):
             rmtree(self.host_dir)
-        copytree(template_dir, self.host_dir)
+            copytree(template_dir, self.host_dir)
 
         for chal in self.chals:
             copyfile(chal, join(self.host_dir, os.path.basename(chal)))
@@ -295,13 +295,20 @@ class GeneratedChallenge(object):
         self.chal_dir = "not set"
         self.local = False
 
-    def do_gen(self, chal_dir, local=False):
-        print(f'[white]Generating[/white] {self.__class__} [white]{self.name}[/white]')
+    def do_gen(self, chal_dir, local, cached, attr=None):
         self.chal_dir = chal_dir
         self.container_id = None
         self.target_port = 80
         self.local = local
-        self.gen(chal_dir)
+        if cached:
+            print(f'[white]Using cached [/white]{self.__class__} [white]{self.name}[/white]')
+            if attr and 'container_id' in attr:
+                self.container_id = attr['container_id']
+                self.target_port = attr['target_port']
+                self.display = attr['display']
+        else:
+            print(f'[white]Generating [/white]{self.__class__} [white]{self.name}[/white]')
+            self.gen(chal_dir)
 
     def gen(self, chal_dir):
         # override
@@ -330,10 +337,11 @@ class GeneratedChallenge(object):
             return f.read()
     
     def set_display(self):
-        self.display = f'http://{slugify(self.name)}.chals.mcpshsf.com'
+        display_url = f'http://{slugify(self.name)}.chals.mcpshsf.com'
         global display_port
         if self.local:
-            self.display = f'http://127.0.0.1:{display_port}'
+            display_url = f'http://127.0.0.1:{display_port}'
             if 'CODESPACE_NAME' in os.environ:
-                self.display = f'https://{os.environ["CODESPACE_NAME"]}-{display_port}.preview.app.github.dev'
+                display_url = f'https://{os.environ["CODESPACE_NAME"]}-{display_port}.preview.app.github.dev'
+        self.display = display_url
         display_port += 1
