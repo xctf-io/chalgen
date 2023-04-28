@@ -1,7 +1,7 @@
 {
     "Fesbuc": {
-        "hash": "3761878017ff75c0191edfdefc216f20886b09cc15857d99068ba5cfd5874030",
-        "container_id": "facebook-django-304889537",
+        "hash": "d5d22ae7c95c1302a617ff36ab39540c31d7c943b61329c0cebd2af3a4a1f1be",
+        "container_id": "facebook-django-309867125",
         "target_port": 8000,
         "display": "http://127.0.0.1:8000"
     },
@@ -18,13 +18,13 @@
         "display": "s mkx dokmr iye wybo sp iye gyevn vsuo, led iye kbo qysxq dy rkfo dy zki... pvkq{coowc_vsuo_iye_uxyg_iyeb_mc}"
     },
     "Fred Shared Server": {
-        "hash": "fa99dede80470cdf1b97f92d190ca971e2fe725d37ca1f663335ceba4e218e16",
-        "container_id": "shell_server-304887693",
+        "hash": "d5be78918b5fa82131b029b9f6ae93c96b7693d3ea6730f9eb92322e16eae774",
+        "container_id": "shell_server-309870873",
         "target_port": 8080,
-        "display": "http://127.0.0.1:8001"
+        "display": "http://127.0.0.1:8000"
     },
     "Police Interview": {
         "hash": "bd6583cfa5e0ff0a9773add8d6baf919fe6f86029c46b97c8d930f59c9b79d4b",
-        "display": "http://127.0.0.1:8002"
+        "chal_file": "PoliceInterview.docx"
     }
 }

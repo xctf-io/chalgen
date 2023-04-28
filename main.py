@@ -344,7 +344,8 @@ def gen(ctx, competition_folder, reg_url, local, verbose, force_rebuild):
         use_cache, attr = get_cache_state(chal_path_lookup, chal_gen, chals_lock)
         chal_gen.do_gen(entrypoint_path, local, use_cache, attr)
         
-        chal_gen.set_port(chal_port)
+        if 'display' in chal_gen.__dict__.keys():
+            chal_gen.set_port(chal_port)
 
         if GeneratedChallenge in type(chal_gen).__bases__:
             chal_files = chal_gen.chal_file
