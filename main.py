@@ -204,13 +204,13 @@ def create_lock(competition_folder, chal_lookup, chal_trees):
 @click.option('--config', '-c', required=True)
 @click.option('--competition-folder', '-f', default=None)
 @click.option('--verbose', '-v', is_flag=True, default=False)
-def gen(ctx, chal_config, competition_folder, verbose):
+def gen(ctx, config, competition_folder, verbose):
     if verbose:
         logger.setLevel(logging.INFO)
 
     print_env_vars()
 
-    chal_dir = os.path.abspath(os.path.dirname(chal_config))
+    chal_dir = os.path.abspath(os.path.dirname(config))
 
     chal_path_lookup = {}
     chals_folder = None
@@ -220,7 +220,7 @@ def gen(ctx, chal_config, competition_folder, verbose):
         chals_folder = join(competition_folder, 'chals')
         chal_path_lookup = get_chal_path_lookup(chals_folder)
 
-    chal_gen = load_chal_from_config(challenge_types, chal_config)
+    chal_gen = load_chal_from_config(challenge_types, config)
     if type(chal_gen) is str:
         logger.error(
             "Unable to deserialize config, is the challenge bang name correct?")
@@ -237,7 +237,7 @@ def gen(ctx, chal_config, competition_folder, verbose):
                 "Please include the --competition-folder flag (folder where other challenges are located)")
             exit(1)
         chal_host = ChallengeHost(
-            'http://chal-host.chals.mcpshsf.com', chals_folder)
+            'http:/127.0.0.1:8200', chals_folder)
 
         chal_gen.chal_host = chal_host
         chal_gen.chal_path_lookup = chal_path_lookup
