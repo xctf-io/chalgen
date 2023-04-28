@@ -33,7 +33,7 @@ spec:
     spec:
       containers:
       - name: fesbuc
-        image: facebook-django-319391921
+        image: facebook-django-304889537
         ports:
         - containerPort: 8000
         imagePullPolicy: Never

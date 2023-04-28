@@ -348,7 +348,6 @@ class GeneratedChallenge(object):
             display_url = f'http://127.0.0.1:{display_port}'
             if 'CODESPACE_NAME' in os.environ:
                 display_url = f'https://{os.environ["CODESPACE_NAME"]}-{display_port}.preview.app.github.dev'
-        print(display_url)
         self.display = display_url
         display_port += 1
     

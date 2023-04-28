@@ -33,7 +33,7 @@ spec:
     spec:
       containers:
       - name: fileshare-flask
-        image: fileshare-flask-302680321
+        image: fileshare-flask-304547433
         ports:
         - containerPort: 8000
         imagePullPolicy: Never

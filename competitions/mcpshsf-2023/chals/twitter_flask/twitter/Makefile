@@ -1,14 +1,14 @@
 build:
-	@docker build . -t twitter-302680849 -q
+	@docker build . -t twitter-304562497 -q
 
 run: build
-	@docker run -p 8081:5000 twitter-302680849
+	@docker run -p 8081:5000 twitter-304562497
 
 clean:
-	@docker rm -f -v twitter-302680849
+	@docker rm -f -v twitter-304562497
 
 generate-img:
-	@docker run -d --name twitter-302680849 twitter-302680849:latest
-	@docker export twitter-302680849 -o vm.tar.gz
-	@docker rm twitter-302680849
-	@docker rmi twitter-302680849
+	@docker run -d --name twitter-304562497 twitter-304562497:latest
+	@docker export twitter-304562497 -o vm.tar.gz
+	@docker rm twitter-304562497
+	@docker rmi twitter-304562497

@@ -33,7 +33,7 @@ spec:
     spec:
       containers:
       - name: facebook-django
-        image: facebook-django-302686057
+        image: facebook-django-304554977
         ports:
         - containerPort: 8000
         imagePullPolicy: Never

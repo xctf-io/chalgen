@@ -33,7 +33,7 @@ spec:
     spec:
       containers:
       - name: corncobs-sus-website
-        image: robots_txt-302691197
+        image: robots_txt-304575137
         ports:
         - containerPort: 80
         imagePullPolicy: Never

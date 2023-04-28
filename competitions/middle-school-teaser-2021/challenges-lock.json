@@ -1,26 +1,30 @@
 {
     "Fesbuc": {
-        "hash": "6357e399d6839bd71decc97dc385fe65eb1975608c8d3518fd29f89b14fe09fe",
-        "container_id": "facebook-django-319391921",
+        "hash": "3761878017ff75c0191edfdefc216f20886b09cc15857d99068ba5cfd5874030",
+        "container_id": "facebook-django-304889537",
         "target_port": 8000,
         "display": "http://127.0.0.1:8000"
     },
     "Boarding Pass": {
-        "hash": "ed503a2dc15b8a7c26aa60e243e26ec4a4ef68dacc3c52149d52dee61847f818"
+        "hash": "ed503a2dc15b8a7c26aa60e243e26ec4a4ef68dacc3c52149d52dee61847f818",
+        "chal_file": "BoardingPass.png"
     },
     "CabinImageExif": {
-        "hash": "d6c2ee1c9d26e86aa036d47e27ad575279d521891caef16471b71ca1fe67ad19"
+        "hash": "d6c2ee1c9d26e86aa036d47e27ad575279d521891caef16471b71ca1fe67ad19",
+        "chal_file": "chal_img.jpeg"
     },
     "CodingChallengeCaserCipher": {
-        "hash": "c9973ee096b67126303fa6f13da0b15133714435de5bca86d34492ff84e86ece"
+        "hash": "c9973ee096b67126303fa6f13da0b15133714435de5bca86d34492ff84e86ece",
+        "display": "s mkx dokmr iye wybo sp iye gyevn vsuo, led iye kbo qysxq dy rkfo dy zki... pvkq{coowc_vsuo_iye_uxyg_iyeb_mc}"
     },
     "Fred Shared Server": {
-        "hash": "5cb379da8e0d5e7e7ca79f367cc36eaa61b98a890ebc782be6987febde703e04",
-        "container_id": "shell_server-319439017",
+        "hash": "fa99dede80470cdf1b97f92d190ca971e2fe725d37ca1f663335ceba4e218e16",
+        "container_id": "shell_server-304887693",
         "target_port": 8080,
         "display": "http://127.0.0.1:8001"
     },
     "Police Interview": {
-        "hash": "bd6583cfa5e0ff0a9773add8d6baf919fe6f86029c46b97c8d930f59c9b79d4b"
+        "hash": "bd6583cfa5e0ff0a9773add8d6baf919fe6f86029c46b97c8d930f59c9b79d4b",
+        "display": "http://127.0.0.1:8002"
     }
 }

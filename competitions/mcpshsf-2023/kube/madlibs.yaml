@@ -33,7 +33,7 @@ spec:
     spec:
       containers:
       - name: madlibs
-        image: temp_inj-302689001
+        image: temp_inj-304559849
         ports:
         - containerPort: 8080
         imagePullPolicy: Never
