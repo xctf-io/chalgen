@@ -33,7 +33,7 @@ spec:
     spec:
       containers:
       - name: fred-shared-server
-        image: fred-shared-server:latest
+        image: shell_server-319439017
         ports:
         - containerPort: 8080
         imagePullPolicy: Never

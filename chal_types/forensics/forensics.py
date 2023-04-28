@@ -96,7 +96,6 @@ class DiffImages(GeneratedChallenge):
 
         def insertFlag(mssg):
 
-            # TODO make sure the same random number isnt used twice
             random_offset = random.randint(24, int(len(bytelist) / 4))
             available_bytes = int((len(bytelist) - 4 - random_offset) / len(mssg))
             for i, c in enumerate(mssg):

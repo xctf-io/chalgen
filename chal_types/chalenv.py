@@ -12,7 +12,7 @@ from rich.status import Status
 from rich import print
 
 from .challenge import GeneratedChallenge
-from .utils import FixMinikube, get_challenge_hash, load_chal_from_config, WorkDir, fwrite
+from .utils import FixMinikube, get_cache_state, get_challenge_hash, load_chal_from_config, WorkDir, fwrite
 from distutils.dir_util import copy_tree
 import ruamel.yaml
 
@@ -49,30 +49,20 @@ class ChallengeEnvironment(GeneratedChallenge):
                 raise Exception(f'could not find challenge config! {chal}')
 
             chal_gen = load_chal_from_config(self.challenge_types, chal_config)
-            if chals_lock != {}:
-                hash = get_challenge_hash(chal_path, chal_gen)
-                lock_hash = chals_lock[chal_gen.name]['hash'] if chal_gen.name in chals_lock else None
-                if (hash!=lock_hash):
-                    cached = False
-            else:
-                cached = False
+            use_cache, attr = get_cache_state(self.chal_path_lookup, chal_gen, chals_lock)
+            if cached:
+                cached = use_cache
 
             if ChallengeEnvironment in type(chal_gen).__bases__:
                 chal_gen.chal_host = self.chal_host
                 chal_gen.chal_path_lookup = self.chal_path_lookup
                 chal_gen.challenge_types = self.challenge_types
                 chal_children, chals_cached = chal_gen.gen_chals(local, chals_lock=chals_lock)
-                if chals_lock != {}:
-                    chal_gen.do_gen(chal_path, local, (hash==lock_hash and chals_cached), attr=chals_lock[chal_gen.name])
-                else:
-                    chal_gen.do_gen(chal_path, local, chals_cached)
+                chal_gen.do_gen(chal_path, local, (use_cache and chals_cached), attr)
 
                 tree["children"].append(chal_children)
             else:
-                if chals_lock != {}:
-                    chal_gen.do_gen(chal_path, local, (hash==lock_hash), attr=chals_lock[chal_gen.name])
-                else:
-                    chal_gen.do_gen(chal_path, local, False)
+                chal_gen.do_gen(chal_path, local, use_cache, attr)
 
                 tree["children"].append({
                     "name": chal_gen.name,
@@ -716,7 +706,6 @@ class JekyllBlog(ChallengeEnvironment):
             make.write(make_template.format(
                 chal_run_options=f'-p 8081:{self.target_port}', chal_name=self.container_id))
 
-        # TODO Make this silent
         self.build_docker(chal_out_dir)
 
 class SecretChat(ChallengeEnvironment):

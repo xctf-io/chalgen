@@ -68,6 +68,8 @@
 - fields:
     text: 9 out of 10 people can't solve this. Do you know enough Computer Science
       to get this one? If you are struggling, I provide tutoring ... for a price.
+      s mkx dokmr iye wybo sp iye gyevn vsuo, led iye kbo qysxq dy rkfo dy zki...
+      pvkq{coowc_vsuo_iye_uxyg_iyeb_mc}
     author: 5
     date_added: '2020-03-06 00:00:00+00:00'
   model: fb.userpost
@@ -91,6 +93,7 @@
     date_added: 2020-01-21 00:00:00+00:00
     post: 2
     text: when will my flight be boarding then? I have my boarding pass attached here.
+      http://127.0.0.1:8200/BoardingPass.png
   model: fb.userpostcomment
   pk: 0
 - fields:

@@ -33,7 +33,7 @@ spec:
     spec:
       containers:
       - name: twitter-flask
-        image: twitter-302324477
+        image: twitter-302680849
         ports:
         - containerPort: 5000
         imagePullPolicy: Never

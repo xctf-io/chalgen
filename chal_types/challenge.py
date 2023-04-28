@@ -295,17 +295,22 @@ class GeneratedChallenge(object):
         self.chal_dir = "not set"
         self.local = False
 
-    def do_gen(self, chal_dir, local, cached, attr=None):
+    def do_gen(self, chal_dir, local, cached, attr):
         self.chal_dir = chal_dir
         self.container_id = None
         self.target_port = 80
         self.local = local
         if cached:
             print(f'[white]Using cached [/white]{self.__class__} [white]{self.name}[/white]')
-            if attr and 'container_id' in attr:
-                self.container_id = attr['container_id']
-                self.target_port = attr['target_port']
-                self.display = attr['display']
+            if attr:
+                if 'container_id' in attr:
+                    self.container_id = attr['container_id']
+                    self.target_port = attr['target_port']
+                    self.display = attr['display']
+                elif 'display' in attr:
+                    self.display = attr['display']
+                elif 'chal_file' in attr:
+                    self.chal_file = attr['chal_file']
         else:
             print(f'[white]Generating [/white]{self.__class__} [white]{self.name}[/white]')
             self.gen(chal_dir)
@@ -343,5 +348,15 @@ class GeneratedChallenge(object):
             display_url = f'http://127.0.0.1:{display_port}'
             if 'CODESPACE_NAME' in os.environ:
                 display_url = f'https://{os.environ["CODESPACE_NAME"]}-{display_port}.preview.app.github.dev'
+        print(display_url)
         self.display = display_url
         display_port += 1
+    
+    def get_display_port(self):
+        return display_port
+
+    def set_port(self, port):
+        if self.local:
+            self.display = f'http://127.0.0.1:{port}'
+            global display_port
+            display_port -= 1

@@ -33,7 +33,7 @@ spec:
     spec:
       containers:
       - name: chal-host
-        image: chal-host:latest
+        image: chal_host-319385013
         ports:
         - containerPort: 80
         imagePullPolicy: Never

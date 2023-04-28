@@ -6,7 +6,7 @@ import ruamel.yaml
 import pygraphviz as pgv
 import shutil
 from slugify import slugify
-from chal_types.utils import get_challenge_hash
+from chal_types.utils import get_cache_state, get_challenge_hash
 from os.path import join
 
 
@@ -186,6 +186,10 @@ def create_lock(competition_folder, chal_lookup, chal_trees):
             lock_json[name]['container_id'] = chal.container_id
             lock_json[name]['target_port'] = chal.target_port
             lock_json[name]['display'] = chal.display
+        elif 'display' in chal.__dict__:
+            lock_json[name]['display'] = chal.display
+        elif 'chal_file' in chal.__dict__:
+            lock_json[name]['chal_file'] = chal.chal_file
         if 'children' not in tree or tree['children'] == []:
             return
 
@@ -245,7 +249,7 @@ def gen(ctx, config, competition_folder, verbose):
         chal_tree, _ = chal_gen.gen_chals(True)
         chal_tree = [chal_tree]
 
-    chal_gen.do_gen(chal_dir, True, False)
+    chal_gen.do_gen(chal_dir, True, False, None)
 
     if ChallengeEnvironment in type(chal_gen).__bases__:
         chal_host.create()
@@ -326,6 +330,7 @@ def gen(ctx, competition_folder, reg_url, local, verbose, force_rebuild):
         entrypoint_config = join(entrypoint_path, 'chal.yaml')
         chal_gen = load_chal_from_config(challenge_types, entrypoint_config)
         chal_tree = {}
+        chal_port = chal_gen.get_display_port()
         increase_display_port()
 
         if ChallengeEnvironment in type(chal_gen).__bases__:
@@ -336,12 +341,10 @@ def gen(ctx, competition_folder, reg_url, local, verbose, force_rebuild):
                 local, chals_lock=chals_lock)
             chal_trees.append(chal_tree)
 
-        if chals_lock != {}:
-            hash = get_challenge_hash(chal_path_lookup[chal_gen.name], chal_gen)
-            lock_hash = chals_lock[chal_gen.name]['hash'] if chal_gen.name in chals_lock else None
-            chal_gen.do_gen(entrypoint_path, local, (hash == lock_hash and chals_cached), attr=chals_lock[chal_gen.name])
-        else:
-            chal_gen.do_gen(entrypoint_path, local, False)
+        use_cache, attr = get_cache_state(chal_path_lookup, chal_gen, chals_lock)
+        chal_gen.do_gen(entrypoint_path, local, use_cache, attr)
+        
+        chal_gen.set_port(chal_port)
 
         if GeneratedChallenge in type(chal_gen).__bases__:
             chal_files = chal_gen.chal_file

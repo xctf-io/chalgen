@@ -1,5 +1,6 @@
 import inspect
 import logging
+import subprocess
 from rich.logging import RichHandler
 from os.path import join
 from jinja2 import Template
@@ -29,6 +30,16 @@ def get_challenge_hash(chal_path, chal):
     full_hash = SHA256(directory_hash + inspect.getsource(chal.gen))
     return full_hash
 
+def get_cache_state(chal_path_lookup, chal, chals_lock):
+    name = chal.name
+    if chals_lock == {} or name not in chals_lock:
+        return False, None
+    images = subprocess.check_output(['docker', 'images', '--format', '{{.Repository}}']).decode().split('\n')
+    if 'container_id' in chals_lock[name] and chals_lock[name]['container_id'] not in images:
+        return False, None
+    hash = get_challenge_hash(chal_path_lookup[name], chal)
+    lock_hash = chals_lock[name]['hash']
+    return hash == lock_hash, chals_lock[name]
 
 def load_chal_from_config(challenge_types, chal_config):
     yaml = ruamel.yaml.YAML()

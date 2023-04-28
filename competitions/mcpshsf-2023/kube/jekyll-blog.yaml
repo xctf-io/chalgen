@@ -33,7 +33,7 @@ spec:
     spec:
       containers:
       - name: jekyll-blog
-        image: jekyll-blog-302390121
+        image: jekyll-blog-302685485
         ports:
         - containerPort: 80
         imagePullPolicy: Never
