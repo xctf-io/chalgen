@@ -25,22 +25,6 @@ class WorkDir(object):
     def __exit__(self, *args):
         os.chdir(self.cwd)
 
-def get_challenge_hash(chal_path, chal):
-    directory_hash = dirhash(chal_path, 'sha256')
-    full_hash = SHA256(directory_hash + inspect.getsource(chal.gen))
-    return full_hash
-
-def get_cache_state(chal_path_lookup, chal, chals_lock):
-    name = chal.name
-    if chals_lock == {} or name not in chals_lock:
-        return False, None
-    images = subprocess.check_output(['docker', 'images', '--format', '{{.Repository}}']).decode().split('\n')
-    if 'container_id' in chals_lock[name] and chals_lock[name]['container_id'] not in images:
-        return False, None
-    hash = get_challenge_hash(chal_path_lookup[name], chal)
-    lock_hash = chals_lock[name]['hash']
-    return hash == lock_hash, chals_lock[name]
-
 def load_chal_from_config(challenge_types, chal_config):
     yaml = ruamel.yaml.YAML()
     for chal_name, chal_type in challenge_types.items():
@@ -92,6 +76,34 @@ class FixMinikube(object):
         if self.minikube_active:
             for env_var in self.env_vars:
                 os.environ[env_var] = self.env_vars_value[env_var]
+used_ports = []
+base_port = 7999
+def get_open_port():
+    global base_port
+    base_port += 1
+    while base_port in used_ports:
+        base_port += 1
+    return base_port
+
+def set_used_ports(ports):
+    global used_ports
+    used_ports = ports
+
+def get_challenge_hash(chal_path, chal):
+    directory_hash = dirhash(chal_path, 'sha256')
+    full_hash = SHA256(directory_hash + inspect.getsource(chal.gen))
+    return full_hash
+
+def get_cache_state(chal_path_lookup, chal, chals_lock):
+    name = chal.name
+    if chals_lock == {} or name not in chals_lock:
+        return False, None
+    images = subprocess.check_output(['docker', 'images', '--format', '{{.Repository}}']).decode().split('\n')
+    if 'container_id' in chals_lock[name] and chals_lock[name]['container_id'] not in images:
+        return False, None
+    hash = get_challenge_hash(chal_path_lookup[name], chal)
+    lock_hash = chals_lock[name]['hash']
+    return hash == lock_hash, chals_lock[name]
 
 logging.basicConfig(
     level="ERROR", format="%(message)s", datefmt="[%X]", handlers=[RichHandler()]

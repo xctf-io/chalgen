@@ -1,0 +1,5 @@
+- !robots_txt
+  name: RobotsChallenge
+  flag: flag{robots_are_our_friends}
+  config:
+    asdf: asdf

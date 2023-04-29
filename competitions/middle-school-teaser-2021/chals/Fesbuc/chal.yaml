@@ -39,6 +39,9 @@
         likers: [ethan]
       - text: I love my wife! I love going on errands with her.
         author: ethan
+      - text: Check out my first website! I am so proud of it!
+        author: alex
+        chal: RobotsChallenge
     profiles:
     comments:
       - author: bill
@@ -62,3 +65,4 @@
       - Boarding Pass 
       - CabinImageExif
       - CodingChallengeCaserCipher
+      - RobotsChallenge

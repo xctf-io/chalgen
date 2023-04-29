@@ -1,7 +1,7 @@
 {
     "Fesbuc": {
-        "hash": "d5d22ae7c95c1302a617ff36ab39540c31d7c943b61329c0cebd2af3a4a1f1be",
-        "container_id": "facebook-django-309867125",
+        "hash": "584c62bd83f5b6937e5831004ead0201fc33185d4dc63dbc1635dbec4d3e6ed7",
+        "container_id": "facebook-django-307417861",
         "target_port": 8000,
         "display": "http://127.0.0.1:8000"
     },
@@ -17,14 +17,25 @@
         "hash": "c9973ee096b67126303fa6f13da0b15133714435de5bca86d34492ff84e86ece",
         "display": "s mkx dokmr iye wybo sp iye gyevn vsuo, led iye kbo qysxq dy rkfo dy zki... pvkq{coowc_vsuo_iye_uxyg_iyeb_mc}"
     },
+    "RobotsChallenge": {
+        "hash": "111657c8f902f9b27e3fa8a3456edfb2a2ef485fe1d5b9051d61b2ca47d9b6ed",
+        "container_id": "robots_txt-307434221",
+        "target_port": 80,
+        "display": "http://127.0.0.1:8002"
+    },
     "Fred Shared Server": {
-        "hash": "d5be78918b5fa82131b029b9f6ae93c96b7693d3ea6730f9eb92322e16eae774",
-        "container_id": "shell_server-309870873",
+        "hash": "f02f82375c00701b5284af73622c9fd70d31f10431ddb9e75a7d02e62da604c7",
+        "container_id": "shell_server-309908297",
         "target_port": 8080,
-        "display": "http://127.0.0.1:8000"
+        "display": "http://127.0.0.1:8001"
     },
     "Police Interview": {
         "hash": "bd6583cfa5e0ff0a9773add8d6baf919fe6f86029c46b97c8d930f59c9b79d4b",
         "chal_file": "PoliceInterview.docx"
-    }
+    },
+    "display_ports": [
+        8000,
+        8002,
+        8001
+    ]
 }

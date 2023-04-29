@@ -7,12 +7,11 @@ from shutil import copyfile, copytree, rmtree
 from os.path import join, abspath, dirname
 from slugify import slugify
 
-from .utils import WorkDir, logger
+from .utils import WorkDir, get_open_port, logger
 from rich import print
 from rich.status import Status
 
 yaml = ruamel.yaml.YAML()
-display_port  = 8000
 
 def mkdir_p(path):
     try:
@@ -22,10 +21,6 @@ def mkdir_p(path):
             pass
         else:
             raise
-
-def increase_display_port():
-    global display_port
-    display_port += 1
 
 
 def get_kube_service(chal, local, namespace='challenges'):
@@ -248,6 +243,11 @@ class ChallengeHost(object):
         self.chals.append(file)
         filename = os.path.basename(file)
         return f'{self.url}/{filename}'
+    
+    def remove_chal(self, file):
+        self.chals.remove(file)
+        filename = os.path.basename(file)
+        return f'{self.url}/{filename}'
 
     def create(self):
         template_dir = join(dirname(abspath(__file__)),
@@ -255,9 +255,10 @@ class ChallengeHost(object):
         makefile_dir = join(dirname(abspath(__file__)),
                             'templates/docker_make')
 
-        if not os.path.isdir(self.host_dir):
+        if os.path.isdir(self.host_dir):
             rmtree(self.host_dir)
-            copytree(template_dir, self.host_dir)
+        
+        copytree(template_dir, self.host_dir)
 
         for chal in self.chals:
             copyfile(chal, join(self.host_dir, os.path.basename(chal)))
@@ -295,11 +296,12 @@ class GeneratedChallenge(object):
         self.chal_dir = "not set"
         self.local = False
 
-    def do_gen(self, chal_dir, local, cached, attr):
+    def do_gen(self, chal_dir, local, cached, attr, chal_host):
         self.chal_dir = chal_dir
         self.container_id = None
         self.target_port = 80
         self.local = local
+        self.attr = attr
         if cached:
             print(f'[white]Using cached [/white]{self.__class__} [white]{self.name}[/white]')
             if attr:
@@ -307,10 +309,17 @@ class GeneratedChallenge(object):
                     self.container_id = attr['container_id']
                     self.target_port = attr['target_port']
                     self.display = attr['display']
+                    self.display_port = int(attr['display'].split(':')[-1])
                 elif 'display' in attr:
                     self.display = attr['display']
                 elif 'chal_file' in attr:
                     self.chal_file = attr['chal_file']
+                    # if type is list
+                    if type(self.chal_file) == str:
+                        chal_host.add_chal(join(self.chal_dir, self.chal_file))
+                    else:
+                        for file in self.chal_file:
+                            chal_host.add_chal(join(self.chal_dir, file))
         else:
             print(f'[white]Generating [/white]{self.__class__} [white]{self.name}[/white]')
             self.gen(chal_dir)
@@ -343,19 +352,13 @@ class GeneratedChallenge(object):
     
     def set_display(self):
         display_url = f'http://{slugify(self.name)}.chals.mcpshsf.com'
-        global display_port
         if self.local:
-            display_url = f'http://127.0.0.1:{display_port}'
+            if self.attr != None:
+                port = int(self.attr['display'].split(':')[-1])
+            else:
+                port = get_open_port()
+            display_url = f'http://127.0.0.1:{port}'
             if 'CODESPACE_NAME' in os.environ:
-                display_url = f'https://{os.environ["CODESPACE_NAME"]}-{display_port}.preview.app.github.dev'
+                display_url = f'https://{os.environ["CODESPACE_NAME"]}-{port}.preview.app.github.dev'
+            self.display_port = port
         self.display = display_url
-        display_port += 1
-    
-    def get_display_port(self):
-        return display_port
-
-    def set_port(self, port):
-        if self.local:
-            self.display = f'http://127.0.0.1:{port}'
-            global display_port
-            display_port -= 1

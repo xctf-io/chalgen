@@ -80,7 +80,7 @@
   pk: 3
 - fields:
     text: here's the link to my new project! (i have some encrypted files from the
-      ongoing murder investigation of chance, so pls dont share) http://127.0.0.1:8002
+      ongoing murder investigation of chance, so pls dont share) http://127.0.0.1:8001
     author: 2
     date_added: '2020-03-06 00:00:00+00:00'
   model: fb.userpost
@@ -96,7 +96,7 @@
   pk: 5
 - fields:
     text: I made my first website! Go check it out and let me know if you like it
-      http://127.0.0.1:8003
+      http://127.0.0.1:8002
     author: 3
     likers:
     - 1

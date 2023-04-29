@@ -6,11 +6,11 @@ import ruamel.yaml
 import pygraphviz as pgv
 import shutil
 from slugify import slugify
-from chal_types.utils import get_cache_state, get_challenge_hash
+from chal_types.utils import get_cache_state, get_challenge_hash, set_used_ports
 from os.path import join
 
 
-from chal_types import challenge_types, load_chal_from_config, chal_to_kube_config, gen_kube, mkdir_p, logger, increase_display_port
+from chal_types import challenge_types, load_chal_from_config, chal_to_kube_config, gen_kube, mkdir_p, logger
 from chal_types import GeneratedChallenge, ChallengeHost, ChallengeEnvironment
 from chal_types.web import TemplateInjection
 from gui import App
@@ -41,7 +41,6 @@ def chal(cmd):
 
 def generate_kube_deploy(kube_dir, trees, local, reg_url):
     configs = []
-    port_num = 8000
     for tree in trees:
         def traverse(tree):
             if 'children' not in tree:
@@ -52,10 +51,8 @@ def generate_kube_deploy(kube_dir, trees, local, reg_url):
                 kube_configs.extend(traverse(child))
                 chal = child['chal']
                 if chal.container_id:
-                    nonlocal port_num
                     kube_config = chal_to_kube_config(
-                        chal, reg_url, local, port_num, isinstance(chal, TemplateInjection))
-                    port_num += 1
+                        chal, reg_url, local, chal.display_port, isinstance(chal, TemplateInjection))
                     kube_configs.append(kube_config)
 
             return kube_configs
@@ -63,8 +60,7 @@ def generate_kube_deploy(kube_dir, trees, local, reg_url):
         chal = tree['chal']
         if chal.container_id:
             kube_config = chal_to_kube_config(
-                chal, reg_url, local, port_num, isinstance(chal, TemplateInjection))
-            port_num += 1
+                chal, reg_url, local, chal.display_port, isinstance(chal, TemplateInjection))
             configs.append(kube_config)
 
         chal = tree.get('host')
@@ -112,6 +108,8 @@ def generate_challenge_graph(trees, competition_folder):
 
 
 def get_chal_path_lookup(chals_folder):
+
+
     chal_path_lookup = {}
     comp_chals = [d for d in os.listdir(
         chals_folder) if os.path.isdir(join(chals_folder, d))]
@@ -176,6 +174,7 @@ def print_env_vars():
 
 def create_lock(competition_folder, chal_lookup, chal_trees):
     lock_json = {}
+    display_ports = []
 
     def traverse(tree):
         name = tree['name']
@@ -186,6 +185,7 @@ def create_lock(competition_folder, chal_lookup, chal_trees):
             lock_json[name]['container_id'] = chal.container_id
             lock_json[name]['target_port'] = chal.target_port
             lock_json[name]['display'] = chal.display
+            display_ports.append(chal.display_port)
         elif 'display' in chal.__dict__:
             lock_json[name]['display'] = chal.display
         elif 'chal_file' in chal.__dict__:
@@ -198,6 +198,8 @@ def create_lock(competition_folder, chal_lookup, chal_trees):
 
     for tree in chal_trees:
         traverse(tree)
+
+    lock_json['display_ports'] = display_ports
 
     with open(join(competition_folder, 'challenges-lock.json'), 'w') as f:
         json.dump(lock_json, f, indent=4)
@@ -249,7 +251,7 @@ def gen(ctx, config, competition_folder, verbose):
         chal_tree, _ = chal_gen.gen_chals(True)
         chal_tree = [chal_tree]
 
-    chal_gen.do_gen(chal_dir, True, False, None)
+    chal_gen.do_gen(chal_dir, True, False, None, None)
 
     if ChallengeEnvironment in type(chal_gen).__bases__:
         chal_host.create()
@@ -288,12 +290,13 @@ def gen(ctx, competition_folder, reg_url, local, verbose, force_rebuild):
             logger.error(
                 "Please set up your kubernetes cluster before running!")
             exit(1)
-    try:
-        with Status("[bold green]Creating challenges namespace", spinner_style="green"):
+
+    with Status("[bold green]Creating challenges namespace", spinner_style="green"):
+        try:
             subprocess.check_output(
                 'kubectl create namespace challenges'.split())
-    except subprocess.CalledProcessError:
-        pass
+        except subprocess.CalledProcessError:
+            pass
 
     competition_folder = join(os.path.dirname(
         os.path.realpath(__file__)), competition_folder)
@@ -304,6 +307,7 @@ def gen(ctx, competition_folder, reg_url, local, verbose, force_rebuild):
     if os.path.exists(lock_file) and not force_rebuild:
         with open(lock_file, 'r') as f:
             chals_lock = json.load(f)
+        set_used_ports(chals_lock['display_ports'])
     else:
         chals_lock = {}
 
@@ -330,8 +334,6 @@ def gen(ctx, competition_folder, reg_url, local, verbose, force_rebuild):
         entrypoint_config = join(entrypoint_path, 'chal.yaml')
         chal_gen = load_chal_from_config(challenge_types, entrypoint_config)
         chal_tree = {}
-        chal_port = chal_gen.get_display_port()
-        increase_display_port()
 
         if ChallengeEnvironment in type(chal_gen).__bases__:
             chal_gen.chal_host = chal_host
@@ -340,12 +342,9 @@ def gen(ctx, competition_folder, reg_url, local, verbose, force_rebuild):
             chal_tree, chals_cached = chal_gen.gen_chals(
                 local, chals_lock=chals_lock)
             chal_trees.append(chal_tree)
-
-        use_cache, attr = get_cache_state(chal_path_lookup, chal_gen, chals_lock)
-        chal_gen.do_gen(entrypoint_path, local, use_cache, attr)
         
-        if 'display' in chal_gen.__dict__.keys():
-            chal_gen.set_port(chal_port)
+        use_cache, attr = get_cache_state(chal_path_lookup, chal_gen, chals_lock)
+        chal_gen.do_gen(entrypoint_path, local, (use_cache and chals_cached), attr, chal_host)
 
         if GeneratedChallenge in type(chal_gen).__bases__:
             chal_files = chal_gen.chal_file
@@ -365,6 +364,8 @@ def gen(ctx, competition_folder, reg_url, local, verbose, force_rebuild):
 
     if len(chal_trees) != 0:
         kube_dir = join(competition_folder, 'kube')
+        if os.path.exists(kube_dir):
+            shutil.rmtree(kube_dir)
         mkdir_p(kube_dir)
         configs = generate_kube_deploy(kube_dir, chal_trees, local, reg_url)
         generate_challenge_graph(chal_trees, competition_folder)

@@ -50,19 +50,19 @@ class ChallengeEnvironment(GeneratedChallenge):
 
             chal_gen = load_chal_from_config(self.challenge_types, chal_config)
             use_cache, attr = get_cache_state(self.chal_path_lookup, chal_gen, chals_lock)
-            if cached:
-                cached = use_cache
+            if use_cache == False:
+                cached = False
 
             if ChallengeEnvironment in type(chal_gen).__bases__:
                 chal_gen.chal_host = self.chal_host
                 chal_gen.chal_path_lookup = self.chal_path_lookup
                 chal_gen.challenge_types = self.challenge_types
                 chal_children, chals_cached = chal_gen.gen_chals(local, chals_lock=chals_lock)
-                chal_gen.do_gen(chal_path, local, (use_cache and chals_cached), attr)
+                chal_gen.do_gen(chal_path, local, (use_cache and chals_cached), attr, self.chal_host)
 
                 tree["children"].append(chal_children)
             else:
-                chal_gen.do_gen(chal_path, local, use_cache, attr)
+                chal_gen.do_gen(chal_path, local, use_cache, attr, self.chal_host)
 
                 tree["children"].append({
                     "name": chal_gen.name,

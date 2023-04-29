@@ -1,9 +1,9 @@
 {
     "Twitter Flask": {
-        "hash": "9a313526692249e9d423af4d8531c2435abb8358702baa46775274cc7759ec23",
-        "container_id": "twitter-304562497",
+        "hash": "0397489586965e610eab11f0833fbb1e1771c5a99a296e92ef443491a9318c84",
+        "container_id": "twitter-304898973",
         "target_port": 5000,
-        "display": "http://127.0.0.1:8000"
+        "display": "http://127.0.0.1:8006"
     },
     "Caesar Cipher": {
         "hash": "c1861e553194dfea86821f4321627d1bc1cb49a682184e6caeb036937b27da6d",
@@ -18,16 +18,16 @@
         "display": "dSA9IGthcnN0LCBwYXNzID0gRVNTX2Ywcl90aDNfdzFuCmZsYWd7Y3IzZDVfNHIzX3U1M2Z1MV93MHd9"
     },
     "Corncobs Sus Website": {
-        "hash": "47524b5d5de9574030b6cc2177e18e4e8e45c2b9dcd0655b5414a5471b89d132",
-        "container_id": "robots_txt-304575137",
+        "hash": "0f677731126bca8e622535859bd9b142dfbaf55d99167e7bb80762874d864a2c",
+        "container_id": "robots_txt-302410273",
         "target_port": 80,
-        "display": "http://127.0.0.1:8001"
+        "display": "http://127.0.0.1:8000"
     },
     "facebook django": {
-        "hash": "c70bcfc287b6540a34d10a3e7444f5fc42c7dab56f37b0ef57dfc0c148f169fe",
-        "container_id": "facebook-django-304554977",
+        "hash": "a4aadd49f54ee5c7eb77571ebdba782cddebe1b1924bdff6a9afae8dcdee3d15",
+        "container_id": "facebook-django-304900889",
         "target_port": 8000,
-        "display": "http://127.0.0.1:8004"
+        "display": "http://127.0.0.1:8003"
     },
     "Dead Chance Exif": {
         "hash": "b9a50e75c61ada0012f5b97eb27394bb42c3345632b0a69a68f3ff30f7574e79",
@@ -42,20 +42,20 @@
         "chal_file": "chal-img.png"
     },
     "Diff Images": {
-        "hash": "0d2117aee39e36e02dc42a3b0ff9be09bb0af4ba4800d3f7a4f420517525e194",
+        "hash": "7225ed9fed86dc4c01f904690b843a8de4e5e67e195f852c532f524d4a535caf",
         "chal_file": [
             "_robots.png",
             "chal.png"
         ]
     },
     "Fileshare Flask": {
-        "hash": "9e9e4a0eaca0513f2533cf33d58ea5f8ed13ef43b0a8fb0ef80db49b0e31387b",
-        "container_id": "fileshare-flask-304547433",
+        "hash": "643a12316408ff9914dff8e671b88b6af297ad1eadb55a51d1d37ac2933cfb4e",
+        "container_id": "fileshare-flask-302453609",
         "target_port": 8000,
-        "display": "http://127.0.0.1:8002"
+        "display": "http://127.0.0.1:8001"
     },
     "Encrypted Zip": {
-        "hash": "1a4eff994c607107b3b5815d57fbf9cf1364a2e6d88bf2acfd1f4f457c82ad6e",
+        "hash": "b8bc1b7c3dbe2cbd95a5d52807179bc7211cfe3d8ce7ee9b5df9ecfab8ddbdb0",
         "chal_file": "evidence.zip"
     },
     "Spectrogram": {
@@ -63,7 +63,7 @@
         "chal_file": "output.wav"
     },
     "PCAP Login": {
-        "hash": "65cf96799b30f877cc567c6791e04f8bb731022dfe18dba7d087b46241a0ed0d",
+        "hash": "bbb9a9b2d5d73e021d89dd04136b798a6e379c1de1690012b2f85fd427b4838d",
         "chal_file": "login.pcap"
     },
     "Broken PNG Header": {
@@ -71,42 +71,42 @@
         "chal_file": "edited_photo.png"
     },
     "Virtual Machine": {
-        "hash": "4eb37315054dfaad00c4ed8b1106daf1b6a207928b18c9d830a3dbd170bfde19",
+        "hash": "f08346fc7e41046dd342c7443d0511a2348b426cff50fded298c1a54f92bf1cd",
         "chal_file": "vm.tar.gz"
     },
     "Chromium History": {
-        "hash": "96d16270a52eb679f7d2f8b6200fda4a694f2b6ba4af5b25d79dd60fb1f12c5b",
+        "hash": "68c13a37bb690d0f3dab33fbe7a3b69d2825a1b8f41d4b26d7ca469b0ae27c1e",
         "chal_file": "chrome.tar.gz"
     },
     "Git Reassembly": {
-        "hash": "6f78dd1974d5c7444202642f7e1045615922dbfdd6a9b38c0e9276ba92cce178",
+        "hash": "141cbe4e8ca7c95e9fa74c93ca9c5cc3fa8a8ec9b98a6a008ca8ae68c4397210",
         "chal_file": "chal.zip"
     },
     "MadLibs": {
-        "hash": "bf748f3d23a2b5eb8b4a6927d3ffa7977a1170c0462d2ef0551470c3f048b459",
-        "container_id": "temp_inj-304559849",
+        "hash": "3c66d0778404fd3c2dbd1092a71fcdf9d7cb178ad540c826e9922ed1748517d4",
+        "container_id": "temp_inj-304924157",
         "target_port": 8080,
-        "display": "http://127.0.0.1:8003"
+        "display": "http://127.0.0.1:8002"
     },
     "Jekyll Blog": {
-        "hash": "2689d1216c9a311b3cebb84949af81d0e6aabe093ed9a5cb5fd7259df489bd0c",
-        "container_id": "jekyll-blog-304545197",
+        "hash": "ee55a66d54b4dbc49f5cd475827b3e7db6d791cc9aa4a93782cf191363fd3824",
+        "container_id": "jekyll-blog-302476125",
         "target_port": 80,
-        "display": "http://127.0.0.1:8005"
+        "display": "http://127.0.0.1:8004"
     },
     "Lock Challenge": {
         "hash": "7d3b711b4d139d83cfed68d3d310a8f5a8f8f712cef1183a206a66d6093f2476"
     },
     "AES Challenge": {
-        "hash": "9cba2a59ba4771b88193e46895ba08623acd2e835a4896eee0073a67bd98f0d5",
-        "display": "giWb6mJIQ7SbEljCPYHcbZ5cOU+ewq6tfDX8TLDSg7gBXg0b/u5H9d2KkZdNVwk00yKN70tjBHbD4CKsMlYty+nVTKExcSKg+E4us5rM9A82PW2UKfvAulJLWtbpXoNomdGvLqMO+qsd63PEC27HkEiSoXGhU0YPwdVArhmqUEk="
+        "hash": "91848291ffe3777db8f16dd123b938fdca2a1a376468dc637ab9a2965f0c301c",
+        "display": "1QfhXvUFp71Jjlsur+XzIOxhG5UM9tU7WyoWa3/2c+MdklFQh4C3HfbDqsknJd2g3ihsp0Qz5cODlf2LDdlkLCGrHE6/XGuf/hP6dEy054FGON8OC0MAA9IvZU1U6aChNsiP/7P+9cfWwchqysmW9uT8dl3zX4Ew/YHePxsx2uc="
     },
     "Docx Carving": {
-        "hash": "a9ad3a0cc53e14d35998027f4a950d9a869e1684b5794e893e86dbc063692399",
+        "hash": "d1ca1e29967b9f69431f6ef6205c746aaaaacecee3dd7665507e6edd9e70bab4",
         "chal_file": "latke_recipe.docx"
     },
     "SQL Log": {
-        "hash": "7211a272e9541d8d3cf894333cb46d099c9764c0deffff1f351c8f379481d4cd",
+        "hash": "cb98af1734f73f29a444c84b7519defee35f912d9b4bb1f313f17af665692eee",
         "chal_file": "access.log"
     },
     "Vacation Image Exif": {
@@ -114,21 +114,30 @@
         "chal_file": "vacation.jpg"
     },
     "Secret Chat": {
-        "hash": "76cef45f19aad7474f7d5063b30585c24b97521713f9e65dc078daf99ed7610c",
-        "container_id": "secret_chat-309882717",
+        "hash": "2481c9d857b322501049889ef5f103da3b841a5930066ff30347c8be2c386351",
+        "container_id": "secret_chat-302472041",
         "target_port": 5000,
-        "display": "http://127.0.0.1:8006"
+        "display": "http://127.0.0.1:8005"
     },
     "Invisible Message": {
         "hash": "b71f28a2952c20119e7d62e8ce917d25a4cd0d6d5f98add2aab705604734ebe9",
         "display": "Nulla pellentesque dignissim enim sit amet venenatis urna cursus eget. Aliquam purus sit amet luctus venenatis lectus. Pellentesque habitant morbi tristique senectus et netus et. Faucibus a pellentesque sit amet. Aliquet bibendum enim facilisis gravida neque convallis a. Ut placerat orci nulla pellentesque. Nisi vitae suscipit tellus mauris a diam maecenas sed enim. Hac habitasse platea dictumst quisque sagittis. Tempor orci dapibus ultrices in iaculis nunc sed. A scelerisque purus semper eget.\u17b5\u180e\u180e\u17b5\u17b5\u180e\u180e\u17b5\u17b5\u180e\u180e\u17b5\u180e\u180e\u17b5\u17b5\u17b5\u180e\u180e\u17b5\u17b5\u17b5\u17b5\u180e\u17b5\u180e\u180e\u17b5\u17b5\u180e\u180e\u180e\u17b5\u180e\u180e\u180e\u180e\u17b5\u180e\u180e\u17b5\u180e\u180e\u17b5\u17b5\u17b5\u180e\u17b5\u17b5\u17b5\u180e\u180e\u17b5\u17b5\u17b5\u17b5\u17b5\u17b5\u180e\u180e\u17b5\u17b5\u17b5\u17b5\u17b5\u180e\u17b5\u180e\u180e\u180e\u180e\u180e\u17b5\u180e\u180e\u17b5\u180e\u17b5\u17b5\u180e\u17b5\u180e\u180e\u17b5\u180e\u180e\u17b5\u180e\u17b5\u180e\u17b5\u180e\u180e\u180e\u180e\u180e\u17b5\u180e\u180e\u17b5\u17b5\u17b5\u17b5\u180e\u17b5\u180e\u17b5\u180e\u180e\u180e\u180e\u180e\u17b5\u180e\u180e\u17b5\u17b5\u180e\u180e\u180e\u17b5\u180e\u180e\u17b5\u180e\u17b5\u17b5\u17b5\u17b5\u17b5\u180e\u180e\u17b5\u17b5\u17b5\u17b5\u17b5\u180e\u180e\u180e\u17b5\u17b5\u180e\u180e\u17b5\u180e\u180e\u180e\u17b5\u180e\u17b5\u17b5\u17b5\u180e\u17b5\u180e\u180e\u180e\u180e\u180e\u17b5\u17b5\u180e\u180e\u17b5\u180e\u17b5\u17b5\u17b5\u180e\u180e\u17b5\u180e\u180e\u180e\u17b5\u17b5\u180e\u180e\u17b5\u17b5\u180e\u17b5\u17b5\u17b5\u180e\u17b5\u180e\u180e\u180e\u180e\u180e\u17b5\u180e\u180e\u180e\u180e\u17b5\u17b5\u180e\u17b5\u17b5\u180e\u180e\u17b5\u17b5\u17b5\u17b5\u17b5\u180e\u180e\u180e\u17b5\u180e\u17b5\u180e\u17b5\u180e\u17b5\u180e\u180e\u180e\u180e\u180e\u17b5\u180e\u180e\u17b5\u17b5\u17b5\u180e\u180e\u17b5\u17b5\u180e\u180e\u17b5\u180e\u17b5\u17b5\u17b5\u180e\u180e\u17b5\u180e\u180e\u180e\u17b5\u17b5\u180e\u180e\u180e\u17b5\u180e\u17b5\u17b5\u17b5\u180e\u17b5\u180e\u180e\u180e\u180e\u180e\u17b5\u180e\u180e\u180e\u17b5\u17b5\u180e\u180e\u17b5\u17b5\u180e\u180e\u17b5\u17b5\u180e\u180e\u17b5\u17b5\u180e\u180e\u17b5\u17b5\u180e\u180e\u17b5\u180e\u17b5\u180e\u180e\u180e\u180e\u180e\u17b5\u180e\u180e\u17b5\u180e\u180e\u17b5\u180e\u17b5\u17b5\u180e\u180e\u17b5\u17b5\u180e\u180e\u17b5\u180e\u180e\u180e\u180e\u180e\u17b5\u180e\u17b5\u17b5\u180e\u17b5\u17b5\u17b5\u17b5\u17b5\u17b5\u180e\u180e\u17b5\u17b5\u17b5\u180e\u180e\u17b5\u180e\u180e\u17b5\u180e\u17b5\u17b5\u17b5\u17b5\u180e\u180e\u17b5\u17b5\u17b5\u17b5\u180e\u17b5\u180e\u180e\u17b5\u180e\u180e\u180e\u17b5\u17b5\u180e\u180e\u17b5\u17b5\u17b5\u180e\u180e\u17b5\u180e\u180e\u17b5\u17b5\u180e\u17b5\u180e\u17b5\u17b5\u180e\u17b5\u17b5\u17b5\u17b5\u17b5\u17b5\u180e\u180e\u17b5\u180e\u17b5\u17b5\u180e\u17b5\u180e\u180e\u180e\u17b5\u17b5\u180e\u180e\u17b5\u17b5\u180e\u17b5\u17b5\u17b5\u17b5\u17b5\u17b5\u180e\u180e\u180e\u17b5\u17b5\u180e\u180e\u17b5\u180e\u180e\u17b5\u180e\u180e\u180e\u180e\u17b5\u17b5\u180e\u17b5\u17b5\u17b5\u17b5\u17b5\u17b5\u180e\u180e\u180e\u17b5\u17b5\u180e\u180e\u17b5\u180e\u180e\u180e\u17b5\u180e\u17b5\u17b5\u17b5\u180e\u180e\u180e\u17b5\u180e\u17b5\u180e\u17b5\u180e\u180e\u180e\u17b5\u17b5\u17b5\u17b5\u17b5\u180e\u180e\u17b5\u180e\u17b5\u17b5\u180e\u17b5\u180e\u180e\u17b5\u17b5\u180e\u17b5\u17b5\u17b5\u17b5\u180e\u17b5\u17b5\u17b5\u17b5\u17b5\u17b5\u180e\u180e\u17b5\u180e\u180e\u17b5\u17b5\u17b5\u180e\u180e\u17b5\u180e\u180e\u180e\u180e\u17b5\u180e\u180e\u17b5\u180e\u180e\u17b5\u17b5\u17b5\u180e\u180e\u17b5\u180e\u180e\u180e\u180e\u17b5\u180e\u180e\u17b5\u180e\u180e\u17b5\u17b5\u17b5\u180e\u180e\u17b5\u180e\u180e\u180e\u180e\u17b5\u180e\u180e\u17b5\u180e\u180e\u17b5\u17b5\u17b5\u17b5\u180e\u17b5\u180e\u180e\u180e\u17b5\u17b5\u17b5\u180e\u17b5\u17b5\u17b5\u17b5\u17b5\u17b5\u180e\u180e\u180e\u17b5\u17b5\u17b5\u17b5\u17b5\u180e\u180e\u180e\u17b5\u17b5\u180e\u17b5\u17b5\u180e\u180e\u17b5\u180e\u180e\u180e\u180e\u17b5\u180e\u180e\u17b5\u17b5\u17b5\u180e\u17b5\u17b5\u180e\u180e\u17b5\u17b5\u17b5\u17b5\u180e\u17b5\u180e\u180e\u17b5\u17b5\u17b5\u180e\u17b5\u17b5\u180e\u180e\u17b5\u180e\u180e\u17b5\u17b5\u17b5\u180e\u180e\u180e\u180e\u17b5\u17b5\u180e\u17b5\u17b5\u180e\u17b5\u17b5\u17b5\u17b5\u17b5\u17b5\u180e\u180e\u180e\u17b5\u17b5\u180e\u180e\u17b5\u180e\u180e\u17b5\u180e\u17b5\u17b5\u17b5\u17b5\u180e\u180e\u17b5\u180e\u180e\u180e\u180e\u17b5\u180e\u180e\u180e\u17b5\u180e\u17b5\u180e\u17b5\u180e\u180e\u17b5\u180e\u180e\u17b5\u17b5\u17b5\u180e\u180e\u17b5\u17b5\u180e\u17b5\u17b5\u17b5\u180e\u180e\u17b5\u180e\u180e\u180e\u17b5\u17b5\u17b5\u180e\u17b5\u17b5\u180e\u180e\u180e\u17b5\u180e\u180e\u180e\u17b5\u180e\u17b5\u17b5\u17b5\u17b5\u180e\u17b5\u17b5\u17b5\u17b5\u17b5\u17b5\u180e\u180e\u17b5\u17b5\u180e\u17b5\u180e\u17b5\u180e\u180e\u180e\u17b5\u180e\u180e\u17b5\u17b5\u180e\u180e\u17b5\u17b5\u180e\u17b5\u180e\u17b5\u180e\u180e\u17b5\u180e\u180e\u180e\u17b5\u17b5\u17b5\u180e\u17b5\u17b5\u17b5\u17b5\u17b5\u17b5\u180e\u180e\u17b5\u17b5\u17b5\u180e\u17b5\u17b5\u180e\u180e\u17b5\u17b5\u180e\u17b5\u180e\u17b5\u180e\u180e\u17b5\u17b5\u180e\u17b5\u180e\u17b5\u180e\u180e\u17b5\u180e\u180e\u180e\u17b5\u17b5\u17b5\u180e\u17b5\u17b5\u17b5\u17b5\u17b5\u17b5\u180e\u180e\u17b5\u180e\u17b5\u17b5\u180e\u17b5\u180e\u180e\u17b5\u180e\u180e\u180e\u17b5\u17b5\u17b5\u180e\u17b5\u17b5\u17b5\u17b5\u17b5\u17b5\u180e\u180e\u180e\u17b5\u180e\u17b5\u17b5\u17b5\u180e\u180e\u17b5\u180e\u17b5\u17b5\u17b5\u17b5\u180e\u180e\u17b5\u180e\u17b5\u17b5\u180e\u17b5\u180e\u180e\u180e\u17b5\u17b5\u180e\u180e\u17b5\u17b5\u180e\u17b5\u17b5\u17b5\u17b5\u17b5\u17b5\u180e\u180e\u17b5\u17b5\u17b5\u180e\u180e\u17b5\u180e\u180e\u17b5\u17b5\u17b5\u17b5\u180e\u17b5\u180e\u180e\u180e\u17b5\u17b5\u180e\u17b5\u17b5\u180e\u180e\u180e\u17b5\u180e\u17b5\u17b5\u17b5\u180e\u180e\u17b5\u17b5\u180e\u17b5\u180e\u17b5\u180e\u180e\u17b5\u180e\u180e\u17b5\u17b5\u17b5\u17b5\u180e\u17b5\u17b5\u17b5\u17b5\u17b5\u17b5\u180e\u180e\u180e\u17b5\u180e\u17b5\u17b5\u17b5\u180e\u180e\u17b5\u17b5\u17b5\u180e\u17b5\u17b5\u180e\u180e\u17b5\u180e\u17b5\u17b5\u17b5\u17b5\u17b5\u180e\u17b5\u180e\u180e\u180e\u17b5\u17b5\u17b5\u180e\u17b5\u17b5\u17b5\u17b5\u17b5\u17b5\u180e\u180e\u17b5\u17b5\u17b5\u180e\u17b5\u17b5\u180e\u180e\u180e\u17b5\u180e\u17b5\u180e\u17b5\u180e\u180e\u180e\u17b5\u180e\u17b5\u17b5\u17b5\u17b5\u180e\u17b5\u17b5\u17b5\u17b5\u17b5\u17b5\u180e\u180e\u17b5\u180e\u17b5\u17b5\u180e\u17b5\u17b5\u180e\u17b5\u17b5\u17b5\u17b5\u17b5\u17b5\u180e\u180e\u180e\u17b5\u17b5\u180e\u180e\u17b5\u180e\u180e\u180e\u17b5\u180e\u17b5\u17b5\u17b5\u180e\u180e\u17b5\u180e\u17b5\u17b5\u180e\u17b5\u180e\u180e\u17b5\u180e\u180e\u17b5\u17b5\u17b5\u180e\u180e\u17b5\u180e\u180e\u17b5\u17b5\u17b5\u17b5\u180e\u17b5\u17b5\u17b5\u17b5\u17b5\u17b5\u180e\u180e\u17b5\u180e\u180e\u17b5\u17b5\u17b5\u180e\u180e\u17b5\u180e\u180e\u180e\u180e\u17b5\u180e\u180e\u180e\u17b5\u180e\u180e\u17b5\u17b5\u180e\u180e\u17b5\u17b5\u180e\u17b5\u180e\u17b5\u17b5\u180e\u17b5\u17b5\u17b5\u17b5\u17b5\u17b5\u180e\u180e\u17b5\u180e\u17b5\u17b5\u17b5\u17b5\u180e\u180e\u17b5\u180e\u17b5\u17b5\u180e\u17b5\u180e\u180e\u17b5\u180e\u180e\u17b5\u180e\u17b5\u17b5\u180e\u17b5\u17b5\u17b5\u17b5\u17b5\u17b5\u180e\u180e\u17b5\u17b5\u17b5\u180e\u17b5\u17b5\u180e\u180e\u17b5\u17b5\u17b5\u180e\u180e\u17b5\u17b5\u180e\u17b5\u17b5\u17b5\u17b5\u17b5\u17b5\u180e\u180e\u17b5\u180e\u17b5\u17b5\u17b5\u17b5\u180e\u180e\u17b5\u17b5\u180e\u17b5\u180e\u17b5\u17b5\u180e\u17b5\u17b5\u180e\u180e\u180e\u17b5\u180e\u180e\u180e\u17b5\u17b5\u180e\u180e\u17b5\u17b5\u180e\u17b5\u17b5\u17b5\u17b5\u17b5\u17b5\u180e\u180e\u180e\u17b5\u17b5\u180e\u180e\u17b5\u180e\u180e\u17b5\u180e\u180e\u180e\u180e\u17b5\u17b5\u180e\u17b5\u17b5\u17b5\u17b5\u17b5\u17b5\u180e\u180e\u17b5\u180e\u180e\u180e\u17b5\u17b5\u180e\u180e\u17b5\u180e\u17b5\u17b5\u180e\u17b5\u180e\u180e\u17b5\u17b5\u17b5\u180e\u180e\u17b5\u180e\u180e\u17b5\u17b5\u180e\u17b5\u180e\u17b5\u17b5\u180e\u17b5\u17b5\u17b5\u17b5\u17b5\u17b5\u17b5\u180e\u180e\u180e\u180e\u17b5\u17b5\u17b5\u17b5\u180e\u180e\u17b5\u17b5\u180e\u180e"
     },
     "Keyboard Input": {
-        "hash": "195c948c5bc5fb61b49d3a39432da7634c35671b81256e0a9ea1add48f157a8f",
+        "hash": "5f83d93362138ba4dde8ea10436caec3a02e3475ad038a8eba7f896675a48031",
         "chal_file": "keylog.pcap"
     },
     "Memory Dump": {
         "hash": "f127a3a36f6dfba1f7a798ddbcdbbe5a723847fb55fcdd69483a4c27f9a84b11",
         "display": "https://drive.google.com/file/d/1Twp_wsiyxExlnY7qKvWnJh0w2qRQ4wND/view?usp=sharing"
-    }
+    },
+    "display_ports": [
+        8006,
+        8000,
+        8003,
+        8001,
+        8002,
+        8004,
+        8005
+    ]
 }

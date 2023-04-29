@@ -89,6 +89,12 @@
   model: fb.userpost
   pk: 5
 - fields:
+    text: Check out my first website! I am so proud of it! http://127.0.0.1:8002
+    author: 0
+    date_added: '2020-03-06 00:00:00+00:00'
+  model: fb.userpost
+  pk: 6
+- fields:
     author: 1
     date_added: 2020-01-21 00:00:00+00:00
     post: 2
