@@ -1,9 +1,8 @@
 Chalgen Docs
 ==============
 ## Links
-  - [All challenges](chal_types/README.md)
   - [Concepts explained](README.md#concepts-explained)
-  - [Example commands](README.md#available-commands)
+  - [Available commands](README.md#available-commands)
   - [Running on AWS](README.md#run-a-competition-on-an-aws-lab)
 
 ## Concepts explained
@@ -90,7 +89,9 @@ This command builds all of the Kubernetes files needed to deploy to a prexisting
 python main.py comp gen -f <relative path of the competition> -l
 ```
 
-This command assumes you have `minikube` installed. Install it [here](https://minikube.sigs.k8s.io/docs/start/). This command runs the competition using minikube for local testing. Remember to add `127.0.0.1:53` as a DNS server. The urls of the challenges will be located in the `zones.txt` file.
+This command assumes you have `minikube` installed. Install it [here](https://minikube.sigs.k8s.io/docs/start/). By default, this command uses the `challenges-lock.json` to only generate challenges that have been changed. If you want to regenerate all challenges, use the `-a` flag. This command will also generate a graph of the challenges. The graph will be located at `evidence_graph.png` file in the competition folder. 
+
+Once you are done, you can run `kubectl delete namespace challenges` to delete the competition and `minikube delete` to delete the cluster.
 ***
 
 ## Getting an entire competition running on Google Cloud

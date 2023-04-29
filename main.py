@@ -272,7 +272,7 @@ def no_reg_url(ctx, param, value):
 @click.option('--reg-url', '-u', required=True, help="Registry to push docker images to")
 @click.option('--local', '-l', is_flag=True, default=False, callback=no_reg_url, help="Run the ctf locally using minikube (no reg url required)")
 @click.option('--verbose', '-v', is_flag=True, default=False, help="Verbose logging")
-@click.option('--force-rebuild', '-r', is_flag=True, default=False, help="Force rebuild of entire competition")
+@click.option('--generate-all', '-a', is_flag=True, default=False, help="Ignore lock file and generate all challenges")
 def gen(ctx, competition_folder, reg_url, local, verbose, force_rebuild):
     if verbose:
         logger.setLevel(logging.INFO)
