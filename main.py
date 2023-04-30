@@ -138,9 +138,12 @@ def get_chal_lookup(chals_folder):
     chal_lookup = {}
     comp_chals = [d for d in os.listdir(
         chals_folder) if os.path.isdir(join(chals_folder, d))]
+    if 'chal_host' in comp_chals:
+        comp_chals.remove('chal_host')
     for comp_chal in comp_chals:
         chal_path = join(chals_folder, comp_chal)
         chal_config = join(chal_path, 'chal.yaml')
+        
         assert os.path.exists(chal_config)
 
         chal = load_chal_from_config(challenge_types, chal_config)
