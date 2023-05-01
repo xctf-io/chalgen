@@ -276,7 +276,7 @@ def no_reg_url(ctx, param, value):
 @click.option('--local', '-l', is_flag=True, default=False, callback=no_reg_url, help="Run the ctf locally using minikube (no reg url required)")
 @click.option('--verbose', '-v', is_flag=True, default=False, help="Verbose logging")
 @click.option('--generate-all', '-a', is_flag=True, default=False, help="Ignore lock file and generate all challenges")
-def gen(ctx, competition_folder, reg_url, local, verbose, force_rebuild):
+def gen(ctx, competition_folder, reg_url, local, verbose, generate_all):
     if verbose:
         logger.setLevel(logging.INFO)
 
@@ -307,7 +307,7 @@ def gen(ctx, competition_folder, reg_url, local, verbose, force_rebuild):
     chal_path_lookup = get_chal_path_lookup(chals_folder)
 
     lock_file = join(competition_folder, 'challenges-lock.json')
-    if os.path.exists(lock_file) and not force_rebuild:
+    if os.path.exists(lock_file) and not generate_all:
         with open(lock_file, 'r') as f:
             chals_lock = json.load(f)
         set_used_ports(chals_lock['display_ports'])
