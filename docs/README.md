@@ -97,24 +97,24 @@ Once you are done, you can run `kubectl delete namespace challenges` to delete t
 ## Getting an entire competition running on Google Cloud
 
 1. Obtain a domain name with a wildcard SSL certificate
-2. Create a Google Cloud account ![here](https://cloud.google.com/free)
+2. Create a Google Cloud account [here](https://cloud.google.com/free)
 3. Create a project in Google Cloud
     - Go to the ![Google Cloud Console](https://console.cloud.google.com/)
     - Click on the dropdown next to the Google Cloud logo and select "New Project"
     - Give your project a name and click "Create"
 4. Use the Codespaces button in our repo to create a new Codespace OR install the Pre-reqs and clone the repo.
-    - Install the Google Cloud SDK ![here](https://cloud.google.com/sdk/docs/install) if running locally
+    - Install the Google Cloud SDK [here](https://cloud.google.com/sdk/docs/install) if running locally
 5. Run `gcloud auth login` and follow the instructions to login to your Google Cloud account
 6. Create a Kubernetes cluster in Google Cloud
     - `gcloud container clusters create <cluster-name> --num-nodes=<number of node> --zone=<zone>`
-    - You can change the zone to any of the zones listed ![here](https://cloud.google.com/compute/docs/regions-zones)
+    - You can change the zone to any of the zones listed [here](https://cloud.google.com/compute/docs/regions-zones)
     - You can change the number of nodes to any number you want
 7. Get the credentials for your cluster
     - `gcloud container clusters get-credentials <cluster-name> --zone=<zone>`
 8. Run `python main.py comp gen -f <relative path of the competition> -r <registry to push images to>`
-    - Docker Hub is a free registry to use, check it out ![here](https://hub.docker.com/)
+    - Docker Hub is a free registry to use, check it out [here](https://hub.docker.com/)
         - All images will be public, however, so you may want to create a private repo
-    - You can also use a private registry, check out the instructions ![here](https://cloud.google.com/container-registry/docs/quickstart)
+    - You can also use a private registry, check out the instructions [here](https://cloud.google.com/container-registry/docs/quickstart)
     - Once you create a private registry, you will need to run `gcloud auth configure-docker` to authenticate with your registry
 9. Update your domain's DNS records to point to the ingress IP address of your cluster
     - Run `kubectl get ingress -n challenges` to get the IP address
