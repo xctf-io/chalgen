@@ -3,7 +3,7 @@ Chalgen Docs
 ## Links
   - [Concepts explained](README.md#concepts-explained)
   - [Available commands](README.md#available-commands)
-  - [Running on AWS](README.md#run-a-competition-on-an-aws-lab)
+  - [Running on Google Cloud](README.md#getting-an-entire-competition-running-on-google-cloud)
 
 ## Concepts explained
 
@@ -99,7 +99,7 @@ Once you are done, you can run `kubectl delete namespace challenges` to delete t
 1. Obtain a domain name with a wildcard SSL certificate
 2. Create a Google Cloud account [here](https://cloud.google.com/free)
 3. Create a project in Google Cloud
-    - Go to the ![Google Cloud Console](https://console.cloud.google.com/)
+    - Go to the [Google Cloud Console](https://console.cloud.google.com/)
     - Click on the dropdown next to the Google Cloud logo and select "New Project"
     - Give your project a name and click "Create"
 4. Use the Codespaces button in our repo to create a new Codespace OR install the Pre-reqs and clone the repo.
