@@ -1,3 +1,7 @@
 [submodule "competitions/chalgen-competitions"]
 	path = competitions/chalgen-competitions
 	url = https://github.com/CTFg/chalgen-competitions/
+
+[submodule "compettiion_infra/ctfg"]
+	path = compettiion_infra/ctfg
+	url = https://github.com/CTFg/ctfg/
