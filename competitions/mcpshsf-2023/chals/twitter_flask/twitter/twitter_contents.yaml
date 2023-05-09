@@ -161,7 +161,7 @@ messages:
   date: 2/20/20
 
 - user: chance
-  text: i just launched my new cooking blog! Check it out! http://127.0.0.1:8005
+  text: i just launched my new cooking blog! Check it out! https://just-luk-fluffy-space-lamp-qx597qpgvpxc44rq-8011.preview.app.github.dev
   date: 2/21/20
   chal: Jekyll Blog
 - user: long
@@ -208,7 +208,8 @@ messages:
     from him?
   date: 2/26/20
 - user: corncob
-  text: I learned about new cryptography technique, anyone want to take a byte? 08020f09151d5d0a5f035d001a5a1c17311c5e0d051300011e0b424e030f170c0b4e060be281b71d4e041b1d1a4e1e020f170700094e260b0f1c1a061c010d054e190607020b4e27e281b7034e060b1c0b4e0a010700094e0f02024e06071d4e19011c054e08011c4e060703
+  text: I learned about new cryptography technique, anyone want to take a byte? 
+    08020f09151d5d0a5f035d001a5a1c17311c5e0d051300011e0b424e030f170c0b4e060be281b71d4e041b1d1a4e1e020f170700094e260b0f1c1a061c010d054e190607020b4e27e281b7034e060b1c0b4e0a010700094e0f02024e06071d4e19011c054e08011c4e060703
   date: 2/26/20
   chal: Single Byte Xor
 - user: hubbz
@@ -272,8 +273,8 @@ messages:
   text: bruh karst im not about to drop my creds
   date: 03/01/20
 - user: corncob
-  text: "they're somewhere on this website though...here's your clue: dont you just\
-    \ love robots? http://127.0.0.1:8001"
+  text: "they're somewhere on this website though...here's your clue: dont you just
+    love robots? https://just-luk-fluffy-space-lamp-qx597qpgvpxc44rq-8007.preview.app.github.dev"
   date: 03/01/20
   chal: Corncobs Sus Website
 - user: karst
@@ -286,7 +287,7 @@ messages:
   date: 03/01/20
 
 - user: hubbz
-  text: y'all better go like up my fb post http://127.0.0.1:8004
+  text: y'all better go like up my fb post https://just-luk-fluffy-space-lamp-qx597qpgvpxc44rq-8010.preview.app.github.dev
   date: 03/02/20
   chal: facebook django
 dms:
@@ -366,7 +367,8 @@ dms:
   text: did you happen to take it accidentally?
 - from_user: long
   to_user: hubbz
-  text: i haven't seen it, also I am on vacation right now http://127.0.0.1:8200/vacation.jpg
+  text: i haven't seen it, also I am on vacation right now 
+    https://just-luk-fluffy-space-lamp-qx597qpgvpxc44rq-8200.preview.app.github.dev/vacation.jpg
   chal: Vacation Image Exif
 - from_user: long
   to_user: hubbz
@@ -472,7 +474,7 @@ dms:
   text: you're not a real latke fan
 - from_user: corncob
   to_user: chance
-  text: what do you mean? i even found your login site http://127.0.0.1:8006
+  text: what do you mean? i even found your login site https://just-luk-fluffy-space-lamp-qx597qpgvpxc44rq-8012.preview.app.github.dev
   chal: Secret Chat
 - from_user: chance
   to_user: corncob

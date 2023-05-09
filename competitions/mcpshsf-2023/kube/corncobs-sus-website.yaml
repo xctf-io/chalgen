@@ -8,7 +8,7 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - port: 8001
+  - port: 8007
     targetPort: 80
     protocol: TCP
   selector:
@@ -33,7 +33,7 @@ spec:
     spec:
       containers:
       - name: corncobs-sus-website
-        image: robots_txt-363769405
+        image: robots_txt-8793343000507
         ports:
         - containerPort: 80
         imagePullPolicy: Never

@@ -8,7 +8,7 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - port: 8005
+  - port: 8011
     targetPort: 80
     protocol: TCP
   selector:
@@ -33,7 +33,7 @@ spec:
     spec:
       containers:
       - name: jekyll-blog
-        image: jekyll-blog-378028045
+        image: jekyll-blog-8793342933677
         ports:
         - containerPort: 80
         imagePullPolicy: Never

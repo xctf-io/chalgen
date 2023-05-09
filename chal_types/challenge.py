@@ -314,7 +314,10 @@ class GeneratedChallenge(object):
                     self.container_id = attr['container_id']
                     self.target_port = attr['target_port']
                     self.display = attr['display']
-                    self.display_port = int(attr['display'].split(':')[-1])
+                    if 'github' in attr['display']:
+                        self.display_port = int(attr['display'].split('-')[-1][:4])
+                    else:
+                        self.display_port = int(attr['display'].split(':')[-1])
                 elif 'display' in attr:
                     self.display = attr['display']
                 elif 'chal_file' in attr:
@@ -359,7 +362,10 @@ class GeneratedChallenge(object):
         display_url = f'http://{slugify(self.name)}.chals.mcpshsf.com'
         if self.local:
             if self.attr != None:
-                port = int(self.attr['display'].split(':')[-1])
+                if 'github' in self.attr['display']:
+                    self.display_port = int(self.attr['display'].split('-')[-1][:4])
+                else:
+                    self.display_port = int(self.attr['display'].split(':')[-1])
             else:
                 port = get_open_port()
             display_url = f'http://127.0.0.1:{port}'

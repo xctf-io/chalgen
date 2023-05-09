@@ -451,8 +451,9 @@ def gen(ctx, competition_folder, reg_url, base_url, local, verbose, generate_all
         with WorkDir(join('competition_infra', 'ctfg')):
             subprocess.run(f'go run cmd/manage/main.go --url {ctfg_url} --email flag --password pass flags sync {competition_folder}/chals', shell=True, capture_output=True)
 
-        with Status("Running [bright_white italic]minikube tunnel --bind-address='127.0.0.1'[/bright_white italic] (press any key to stop)", spinner="point", spinner_style="bright_white"):
-            input()
+        if local:
+            with Status("Running [bright_white italic]minikube tunnel --bind-address='127.0.0.1'[/bright_white italic] (press any key to stop)", spinner="point", spinner_style="bright_white"):
+                input()
             
 
 @chalgen.command(help="Print the flags for a competition")
