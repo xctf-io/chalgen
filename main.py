@@ -438,7 +438,7 @@ def gen(ctx, competition_folder, reg_url, base_url, local, verbose, generate_all
                 ctfg_url = 'http://127.0.0.1:8000'
         else:
             ctfg_url = 'https://ctfg.chals.mcpshsf.com'
-        full_text += f"\nCTFG: [bold][bright_white]{ctfg_url}[/bright_white][/bold]"
+        full_text += f"\nCTFg: [bold][bright_white]{ctfg_url}[/bright_white][/bold]"
         
         p = Panel.fit(full_text)
         print("")
