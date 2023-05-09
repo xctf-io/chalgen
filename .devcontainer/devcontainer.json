@@ -1,5 +1,5 @@
 {
-  "image": "mcr.microsoft.com/devcontainers/python",
+  "image": "mcr.microsoft.com/devcontainers/universal",
   "features": {
 		"ghcr.io/devcontainers/features/docker-in-docker:2": {
 			"enableNonRootDocker": "true"
@@ -8,9 +8,6 @@
 			"version": "latest",
 			"helm": "latest",
 			"minikube": "latest"
-		},
-		"ghcr.io/dhoeric/features/google-cloud-cli:1": {
-			"version": "latest"
 		}
 	},
   "onCreateCommand": "bash install.sh"
