@@ -77,7 +77,7 @@ class FixMinikube(object):
             for env_var in self.env_vars:
                 os.environ[env_var] = self.env_vars_value[env_var]
 used_ports = []
-base_port = 7999
+base_port = 8000
 def get_open_port():
     global base_port
     base_port += 1

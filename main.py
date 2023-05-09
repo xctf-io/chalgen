@@ -2,11 +2,12 @@ import json
 import logging
 import subprocess
 import os
+import threading
 import ruamel.yaml
 import pygraphviz as pgv
 import shutil
 from slugify import slugify
-from chal_types.utils import get_cache_state, get_challenge_hash, set_used_ports
+from chal_types.utils import WorkDir, fwrite, get_cache_state, get_challenge_hash, set_used_ports
 from os.path import join
 
 
@@ -73,12 +74,6 @@ def generate_kube_deploy(kube_dir, trees, local, reg_url):
 
     gen_kube(kube_dir, configs, local)
 
-    with Status("[bold blue] Applying Kubernetes files", spinner="line", spinner_style="blue"):
-        for kube_config in os.listdir(kube_dir):
-            kube_config_path = join(kube_dir, kube_config)
-            subprocess.check_output(
-                f'kubectl apply -f {kube_config_path} -n challenges'.split())
-
     return configs
 
 
@@ -108,7 +103,6 @@ def generate_challenge_graph(trees, competition_folder):
 
 
 def get_chal_path_lookup(chals_folder):
-
 
     chal_path_lookup = {}
     comp_chals = [d for d in os.listdir(
@@ -143,7 +137,7 @@ def get_chal_lookup(chals_folder):
     for comp_chal in comp_chals:
         chal_path = join(chals_folder, comp_chal)
         chal_config = join(chal_path, 'chal.yaml')
-        
+
         assert os.path.exists(chal_config)
 
         chal = load_chal_from_config(challenge_types, chal_config)
@@ -206,6 +200,36 @@ def create_lock(competition_folder, chal_lookup, chal_trees):
 
     with open(join(competition_folder, 'challenges-lock.json'), 'w') as f:
         json.dump(lock_json, f, indent=4)
+
+
+def create_ctfg(comp_folder, reg_url, admin_email, admin_password, local):
+    ctfg_folder = join(comp_folder, 'ctfg')
+    template_dir = join('competition_infra', 'ctfg_kube')
+
+    if os.path.exists(ctfg_folder):
+        shutil.rmtree(ctfg_folder)
+    shutil.copytree(template_dir, ctfg_folder)
+
+    image = 'ctfg'
+    out_port = 8000
+    type = 'LoadBalancer'
+    policy = 'Never'
+    with WorkDir(join('competition_infra', 'ctfg')), Status('[cyan] Building [bold]CTFg[/bold]', spinner_style="cyan"):
+        if local:
+            subprocess.check_output(
+                'docker build -q -t ctfg:latest .'.split())
+        else:
+            image = f'{reg_url}ctfg:latest'
+            out_port = 80
+            type = 'ClusterIP'
+            policy = 'Always'
+            subprocess.check_output(
+                f'docker build -t {reg_url}ctfg:latest -q .'.split())
+            subprocess.check_output(
+                f'docker push {reg_url}ctfg:latest'.split())
+    fwrite(template_dir, 'ctfg-deployment.yaml', ctfg_folder, 'ctfg-deployment.yaml',
+           email=admin_email, password=admin_password, image=image, policy=policy)
+    fwrite(template_dir, 'ctfg-service.yaml', ctfg_folder, 'ctfg-service.yaml', port=out_port, type=type)
 
 
 @chal.command(help="Generate a challenge from a config file")
@@ -277,6 +301,7 @@ def no_reg_url(ctx, param, value):
 @click.option('--verbose', '-v', is_flag=True, default=False, help="Verbose logging")
 @click.option('--generate-all', '-a', is_flag=True, default=False, help="Ignore lock file and generate all challenges")
 def gen(ctx, competition_folder, reg_url, local, verbose, generate_all):
+
     if verbose:
         logger.setLevel(logging.INFO)
 
@@ -345,9 +370,11 @@ def gen(ctx, competition_folder, reg_url, local, verbose, generate_all):
             chal_tree, chals_cached = chal_gen.gen_chals(
                 local, chals_lock=chals_lock)
             chal_trees.append(chal_tree)
-        
-        use_cache, attr = get_cache_state(chal_path_lookup, chal_gen, chals_lock)
-        chal_gen.do_gen(entrypoint_path, local, (use_cache and chals_cached), attr, chal_host)
+
+        use_cache, attr = get_cache_state(
+            chal_path_lookup, chal_gen, chals_lock)
+        chal_gen.do_gen(entrypoint_path, local,
+                        (use_cache and chals_cached), attr, chal_host)
 
         if GeneratedChallenge in type(chal_gen).__bases__:
             chal_files = chal_gen.chal_file
@@ -370,8 +397,15 @@ def gen(ctx, competition_folder, reg_url, local, verbose, generate_all):
         if os.path.exists(kube_dir):
             shutil.rmtree(kube_dir)
         mkdir_p(kube_dir)
+        create_ctfg(competition_folder, reg_url,
+                comp_config['admin_email'], comp_config['admin_password'], local)
         configs = generate_kube_deploy(kube_dir, chal_trees, local, reg_url)
-        generate_challenge_graph(chal_trees, competition_folder)
+        with Status("[bold blue] Applying Kubernetes files", spinner="line", spinner_style="blue"):
+            subprocess.check_output(
+                    f'kubectl apply -f {kube_dir} -n challenges'.split())
+            subprocess.check_output(
+                    f'kubectl apply -f {join(competition_folder, "ctfg")} -n challenges'.split())
+            generate_challenge_graph(chal_trees, competition_folder)
 
         name_to_index = {}
         full_text = "Entrypoints\n"
@@ -392,13 +426,31 @@ def gen(ctx, competition_folder, reg_url, local, verbose, generate_all):
             else:
                 entry_url = configs[name_to_index[slug]]['url']
             full_text += f" - {entrypoint}: [bold][bright_white]{entry_url}[/bright_white][/bold]\n"
-
-        print("")
+            
+        ctfg_url = ""
         if local:
-            full_text += "\n[white]Run [bold][bright_red]minikube tunnel --bind-address='127.0.0.1'[/bright_red][/bold] to access everything. You may need to restart the tunnel if it fails to connect.[/white]"
+            if 'CODESPACE_NAME' in os.environ.keys():
+                ctfg_url = f'https://{os.environ["CODESPACE_NAME"]}-8000.preview.app.github.dev'
+            else:
+                ctfg_url = 'http://127.0.0.1:8000'
+        else:
+            ctfg_url = 'https://ctfg.chals.mcpshsf.com'
+        full_text += f"\nCTFG: [bold][bright_white]{ctfg_url}[/bright_white][/bold]"
+        
         p = Panel.fit(full_text)
+        print("")
         print(p)
+        print("")                   
 
+        if local:
+            subprocess.Popen("minikube tunnel --bind-address='127.0.0.1'", stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+
+        with WorkDir(join('competition_infra', 'ctfg')):
+            subprocess.run(f'go run cmd/manage/main.go --url {ctfg_url} --email flag --password pass flags sync {competition_folder}/chals', shell=True, capture_output=True)
+
+        with Status("Running [bright_white italic]minikube tunnel --bind-address='127.0.0.1'[/bright_white italic] (press any key to stop)", spinner="point", spinner_style="bright_white"):
+            input()
+            
 
 @chalgen.command(help="Print the flags for a competition")
 @click.pass_context

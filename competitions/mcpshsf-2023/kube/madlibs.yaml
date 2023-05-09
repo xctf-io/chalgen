@@ -8,7 +8,7 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - port: 8002
+  - port: 8003
     targetPort: 8080
     protocol: TCP
   selector:
@@ -33,7 +33,7 @@ spec:
     spec:
       containers:
       - name: madlibs
-        image: temp_inj-304924157
+        image: temp_inj-363766505
         ports:
         - containerPort: 8080
         imagePullPolicy: Never

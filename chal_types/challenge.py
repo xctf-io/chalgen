@@ -121,7 +121,12 @@ def get_kube_deployment(chal, local, namespace='challenges'):
 
 def get_kube_ingress(chals, namespace='challenges'):
     rules = []
-
+    chals.append({
+        'name': 'ctfg',
+        'service_name': 'ctf',
+        'url': 'ctf.mcpshsf.com',
+        'out_port': 80
+    })
     hosts = []
     for chal in chals:
         service_name = chal['service_name']

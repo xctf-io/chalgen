@@ -1,14 +1,14 @@
 build:
-	@docker build . -t chal_host-304924085 -q
+	@docker build . -t chal_host-346942677 -q
 
 run: build
-	@docker run  chal_host-304924085
+	@docker run  chal_host-346942677
 
 clean:
-	@docker rm -f -v chal_host-304924085
+	@docker rm -f -v chal_host-346942677
 
 generate-img:
-	@docker run -d --name chal_host-304924085 chal_host-304924085:latest
-	@docker export chal_host-304924085 -o vm.tar.gz
-	@docker rm chal_host-304924085
-	@docker rmi chal_host-304924085
+	@docker run -d --name chal_host-346942677 chal_host-346942677:latest
+	@docker export chal_host-346942677 -o vm.tar.gz
+	@docker rm chal_host-346942677
+	@docker rmi chal_host-346942677

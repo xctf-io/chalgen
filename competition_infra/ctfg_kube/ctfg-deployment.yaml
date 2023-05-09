@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose -f docker-compose.prod.yaml convert -c -o k8s
+    kompose.image-pull-secret: ghcr-pull-secret
+    kompose.service.type: clusterip
+    kompose.version: 1.28.0 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: ctfg
+  name: ctfg
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: ctfg
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose -f docker-compose.prod.yaml convert -c -o k8s
+        kompose.image-pull-secret: ghcr-pull-secret
+        kompose.service.type: clusterip
+        kompose.version: 1.28.0 (HEAD)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/ctfg-default: "true"
+        io.kompose.service: ctfg
+    spec:
+      containers:
+        - env:
+            - name: CTFG_ADMIN_EMAIL
+              value: {email}
+            - name: CTFG_ADMIN_PASSWORD
+              value: {password}
+            - name: DB_DSN
+              value: host=postgres user=postgres password=password sslmode=disable
+            - name: DB_TYPE
+              value: postgres
+            - name: PORT
+              value: "8000"
+          image: {image}
+          name: ctfg
+          ports:
+            - containerPort: 8000
+          imagePullPolicy: {policy}
+      imagePullSecrets:
+        - name: ghcr-pull-secret
+      restartPolicy: Always

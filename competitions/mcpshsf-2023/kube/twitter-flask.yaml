@@ -8,7 +8,7 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - port: 8006
+  - port: 8014
     targetPort: 5000
     protocol: TCP
   selector:
@@ -33,7 +33,7 @@ spec:
     spec:
       containers:
       - name: twitter-flask
-        image: twitter-304898973
+        image: twitter-363773801
         ports:
         - containerPort: 5000
         imagePullPolicy: Never
