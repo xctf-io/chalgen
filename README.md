@@ -11,14 +11,15 @@ chalgen generates challenges and evidence for CTFs using a tree based format
 | MCPS HSF 2023 | [Writeup](https://lukegriffith.me/posts/writeups/mcpshsf/) | [Source Code](/competitions/mcpshsf-2023/) |
 
 ## Prerequisites
-Note: This is not required for Github Codespaces. Everything will be installed automatically.
+Note: This is **not required** for Github Codespaces. Everything will be installed automatically.
 
 - Follow the documentation [here](https://pygraphviz.github.io/documentation/stable/install.html) to install `pygraphviz` for your system
 - Install ffmpeg from [here](https://ffmpeg.org/download.html)
 - Install Docker from [here](https://docs.docker.com/engine/install/)
 - Install kubectl from [here](https://kubernetes.io/docs/tasks/tools/)
 - Install minikube from [here](https://minikube.sigs.k8s.io/docs/start/) (only required for local testing)
-- Install the requirements:
+- Install python3 from [here](https://www.python.org/downloads/)
+- Install go from [here](https://golang.org/doc/install)
 ```
 pip install -r requirements.txt
 ```

@@ -290,6 +290,8 @@ def no_reg_url(ctx, param, value):
     if value:
         ctx.command.params[1].required = False
         ctx.command.params[1].default = ""
+        ctx.command.params[2].required = False
+        ctx.command.params[2].default = "mcpshsf.com"
     return value
 
 
@@ -297,10 +299,11 @@ def no_reg_url(ctx, param, value):
 @click.pass_context
 @click.option('--competition-folder', '-f', required=True)
 @click.option('--reg-url', '-u', required=True, help="Registry to push docker images to")
+@click.option('--base-url', '-b', required=True, help="Base url for the competition sites")
 @click.option('--local', '-l', is_flag=True, default=False, callback=no_reg_url, help="Run the ctf locally using minikube (no reg url required)")
 @click.option('--verbose', '-v', is_flag=True, default=False, help="Verbose logging")
 @click.option('--generate-all', '-a', is_flag=True, default=False, help="Ignore lock file and generate all challenges")
-def gen(ctx, competition_folder, reg_url, local, verbose, generate_all):
+def gen(ctx, competition_folder, reg_url, base_url, local, verbose, generate_all):
 
     if verbose:
         logger.setLevel(logging.INFO)
