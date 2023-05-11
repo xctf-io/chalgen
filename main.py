@@ -446,7 +446,7 @@ def gen(ctx, competition_folder, reg_url, base_url, local, verbose, generate_all
         print("")                   
 
         if local:
-            subprocess.Popen("minikube tunnel --bind-address='127.0.0.1'", stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+            p = subprocess.Popen("minikube tunnel --bind-address='127.0.0.1'", stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
 
         with WorkDir(join('competition_infra', 'ctfg')):
             email = comp_config['admin_email']
@@ -456,6 +456,7 @@ def gen(ctx, competition_folder, reg_url, base_url, local, verbose, generate_all
         if local:
             with Status("Running [bright_white italic]minikube tunnel --bind-address='127.0.0.1'[/bright_white italic] (press any key to stop)", spinner="point", spinner_style="bright_white"):
                 input()
+            p.kill()
             
 
 @chalgen.command(help="Print the flags for a competition")
