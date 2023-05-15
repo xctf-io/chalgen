@@ -182,6 +182,7 @@ class ImageExifChallenge(GeneratedChallenge):
 
     def gen(self, chal_dir):
         orig_img = self.get_value("orig_img")
+        addl_text = self.get_value("addl_text", False)
         out_img = self.get_value("out_img")
         metadata_key = self.get_value("metadata_key")
         flag_transform = self.get_value("flag_transform", False)
@@ -194,6 +195,10 @@ class ImageExifChallenge(GeneratedChallenge):
             trans_func = text_transforms[flag_transform]["encode"]
         else:
             def trans_func(x): return x
+
+        flag = self.flag
+        if addl_text:
+            flag += addl_text
 
         img_path = os.path.join(chal_dir, orig_img)
         img = Image.open(img_path)
@@ -260,7 +265,7 @@ class ImageExifChallenge(GeneratedChallenge):
         }
         exif_dict['GPS'] = GPS_IFD
 
-        exif_dict['0th'][metadata_key] = trans_func(self.flag)
+        exif_dict['0th'][metadata_key] = trans_func(flag)
         exif_dict['Exif'][41729] = b'1'
         exif_bytes = piexif.dump(exif_dict)
 
