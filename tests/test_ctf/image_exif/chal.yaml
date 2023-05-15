@@ -3,6 +3,7 @@
   flag: "flag{w0w_h3'5_d34d_0h_n035}"
   config:
     orig_img: evidence.jpg
+    out_img: chal.jpg
     metadata_key: 315
     flag_transform: base64
     lat: 19.8968
