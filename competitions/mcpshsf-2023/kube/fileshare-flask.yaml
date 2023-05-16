@@ -8,7 +8,7 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - port: 8008
+  - port: 8002
     targetPort: 8000
     protocol: TCP
   selector:
@@ -33,7 +33,7 @@ spec:
     spec:
       containers:
       - name: fileshare-flask
-        image: fileshare-flask-8793343030011
+        image: fileshare-flask-8791128532902
         ports:
         - containerPort: 8000
         imagePullPolicy: Never

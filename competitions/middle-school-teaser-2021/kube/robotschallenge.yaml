@@ -8,7 +8,7 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - port: 8002
+  - port: 8001
     targetPort: 80
     protocol: TCP
   selector:
@@ -33,7 +33,7 @@ spec:
     spec:
       containers:
       - name: robotschallenge
-        image: robots_txt-307434221
+        image: robots_txt-8773376075638
         ports:
         - containerPort: 80
         imagePullPolicy: Never

@@ -1,16 +1,16 @@
 {
     "Fesbuc": {
-        "hash": "584c62bd83f5b6937e5831004ead0201fc33185d4dc63dbc1635dbec4d3e6ed7",
-        "container_id": "facebook-django-307417861",
+        "hash": "7d52b32629ef950c076a9fd837222e8bdaee39d9d77aa282c4f3968f5811f559",
+        "container_id": "facebook-django-8773403318056",
         "target_port": 8000,
-        "display": "http://127.0.0.1:8000"
+        "display": "https://just-luk-crispy-space-couscous-jgp4j5qwrjpcq76-8002.preview.app.github.dev"
     },
     "Boarding Pass": {
         "hash": "ed503a2dc15b8a7c26aa60e243e26ec4a4ef68dacc3c52149d52dee61847f818",
         "chal_file": "BoardingPass.png"
     },
     "CabinImageExif": {
-        "hash": "d6c2ee1c9d26e86aa036d47e27ad575279d521891caef16471b71ca1fe67ad19",
+        "hash": "44fb610cc3d9f28adca3e292b536758d5ab9215691fed6ba8162851982ce89a3",
         "chal_file": "chal_img.jpeg"
     },
     "CodingChallengeCaserCipher": {
@@ -18,24 +18,24 @@
         "display": "s mkx dokmr iye wybo sp iye gyevn vsuo, led iye kbo qysxq dy rkfo dy zki... pvkq{coowc_vsuo_iye_uxyg_iyeb_mc}"
     },
     "RobotsChallenge": {
-        "hash": "111657c8f902f9b27e3fa8a3456edfb2a2ef485fe1d5b9051d61b2ca47d9b6ed",
-        "container_id": "robots_txt-307434221",
+        "hash": "6d31d293a3f243e77176c88647a561bfba55e7cbc5147de84bc0aacac2cf6920",
+        "container_id": "robots_txt-8773376075638",
         "target_port": 80,
-        "display": "http://127.0.0.1:8002"
+        "display": "https://just-luk-crispy-space-couscous-jgp4j5qwrjpcq76-8001.preview.app.github.dev"
     },
     "Fred Shared Server": {
-        "hash": "f02f82375c00701b5284af73622c9fd70d31f10431ddb9e75a7d02e62da604c7",
-        "container_id": "shell_server-309908297",
+        "hash": "df05532317079c95b2b853fd9483e03710d22f538181e4a1b558c23981948f01",
+        "container_id": "shell_server-8773376075632",
         "target_port": 8080,
-        "display": "http://127.0.0.1:8001"
+        "display": "https://just-luk-crispy-space-couscous-jgp4j5qwrjpcq76-8003.preview.app.github.dev"
     },
     "Police Interview": {
         "hash": "bd6583cfa5e0ff0a9773add8d6baf919fe6f86029c46b97c8d930f59c9b79d4b",
         "chal_file": "PoliceInterview.docx"
     },
     "display_ports": [
-        8000,
         8002,
-        8001
+        8001,
+        8003
     ]
 }

@@ -2,3 +2,5 @@ entrypoint:
   - Fesbuc
   - Fred Shared Server
   - Police Interview
+admin_email: admin@admin.com
+admin_password: password

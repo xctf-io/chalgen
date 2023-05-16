@@ -1,14 +1,14 @@
 build:
-	@docker build . -t jekyll-blog-8793342933677 -q
+	@docker build . -t jekyll-blog-8791128436280 -q
 
 run: build
-	@docker run -p 8081:80 jekyll-blog-8793342933677
+	@docker run -p 8081:80 jekyll-blog-8791128436280
 
 clean:
-	@docker rm -f -v jekyll-blog-8793342933677
+	@docker rm -f -v jekyll-blog-8791128436280
 
 generate-img:
-	@docker run -d --name jekyll-blog-8793342933677 jekyll-blog-8793342933677:latest
-	@docker export jekyll-blog-8793342933677 -o vm.tar.gz
-	@docker rm jekyll-blog-8793342933677
-	@docker rmi jekyll-blog-8793342933677
+	@docker run -d --name jekyll-blog-8791128436280 jekyll-blog-8791128436280:latest
+	@docker export jekyll-blog-8791128436280 -o vm.tar.gz
+	@docker rm jekyll-blog-8791128436280
+	@docker rmi jekyll-blog-8791128436280

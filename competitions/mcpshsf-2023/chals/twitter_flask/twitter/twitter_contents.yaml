@@ -161,7 +161,8 @@ messages:
   date: 2/20/20
 
 - user: chance
-  text: i just launched my new cooking blog! Check it out! https://just-luk-fluffy-space-lamp-qx597qpgvpxc44rq-8011.preview.app.github.dev
+  text: i just launched my new cooking blog! Check it out! 
+    https://just-luk-crispy-space-couscous-jgp4j5qwrjpcq76-8005.preview.app.github.dev
   date: 2/21/20
   chal: Jekyll Blog
 - user: long
@@ -274,7 +275,7 @@ messages:
   date: 03/01/20
 - user: corncob
   text: "they're somewhere on this website though...here's your clue: dont you just
-    love robots? https://just-luk-fluffy-space-lamp-qx597qpgvpxc44rq-8007.preview.app.github.dev"
+    love robots? https://just-luk-crispy-space-couscous-jgp4j5qwrjpcq76-8001.preview.app.github.dev"
   date: 03/01/20
   chal: Corncobs Sus Website
 - user: karst
@@ -287,7 +288,8 @@ messages:
   date: 03/01/20
 
 - user: hubbz
-  text: y'all better go like up my fb post https://just-luk-fluffy-space-lamp-qx597qpgvpxc44rq-8010.preview.app.github.dev
+  text: y'all better go like up my fb post 
+    https://just-luk-crispy-space-couscous-jgp4j5qwrjpcq76-8004.preview.app.github.dev
   date: 03/02/20
   chal: facebook django
 dms:
@@ -368,7 +370,7 @@ dms:
 - from_user: long
   to_user: hubbz
   text: i haven't seen it, also I am on vacation right now 
-    https://just-luk-fluffy-space-lamp-qx597qpgvpxc44rq-8200.preview.app.github.dev/vacation.jpg
+    https://just-luk-crispy-space-couscous-jgp4j5qwrjpcq76-8200.preview.app.github.dev/vacation.jpg
   chal: Vacation Image Exif
 - from_user: long
   to_user: hubbz
@@ -474,7 +476,8 @@ dms:
   text: you're not a real latke fan
 - from_user: corncob
   to_user: chance
-  text: what do you mean? i even found your login site https://just-luk-fluffy-space-lamp-qx597qpgvpxc44rq-8012.preview.app.github.dev
+  text: what do you mean? i even found your login site 
+    https://just-luk-crispy-space-couscous-jgp4j5qwrjpcq76-8006.preview.app.github.dev
   chal: Secret Chat
 - from_user: chance
   to_user: corncob
