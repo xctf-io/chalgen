@@ -277,7 +277,7 @@ class ChallengeHost(object):
                 open(join(self.host_dir, 'Dockerfile'), 'w') as docker:
             docker.write(template_docker.read().format(setup=file_setup))
 
-        self.container_id = f'chal_host-{hash(self)}'
+        self.container_id = f'chal_host'
         with open(join(makefile_dir, 'Makefile'), 'r') as template_make,\
                 open(join(self.host_dir, 'Makefile'), 'w') as make:
             make.write(template_make.read().format(

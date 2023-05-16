@@ -1,9 +1,9 @@
 {
     "Fesbuc": {
-        "hash": "7d52b32629ef950c076a9fd837222e8bdaee39d9d77aa282c4f3968f5811f559",
-        "container_id": "facebook-django-8773403318056",
+        "hash": "c1ae71233ed7c038c75fc62d029429bba07fd997e2dabd7875ba32d400159a83",
+        "container_id": "facebook-django-8781660438841",
         "target_port": 8000,
-        "display": "https://just-luk-crispy-space-couscous-jgp4j5qwrjpcq76-8002.preview.app.github.dev"
+        "display": "https://just-luk-crispy-space-couscous-jgp4j5qwrjpcq76-8005.preview.app.github.dev"
     },
     "Boarding Pass": {
         "hash": "ed503a2dc15b8a7c26aa60e243e26ec4a4ef68dacc3c52149d52dee61847f818",
@@ -18,24 +18,24 @@
         "display": "s mkx dokmr iye wybo sp iye gyevn vsuo, led iye kbo qysxq dy rkfo dy zki... pvkq{coowc_vsuo_iye_uxyg_iyeb_mc}"
     },
     "RobotsChallenge": {
-        "hash": "6d31d293a3f243e77176c88647a561bfba55e7cbc5147de84bc0aacac2cf6920",
-        "container_id": "robots_txt-8773376075638",
+        "hash": "124439cc43366cec4e245053c4b26f5d4a64141dad22becd737e2a824bc06be2",
+        "container_id": "robots_txt-8781660439120",
         "target_port": 80,
-        "display": "https://just-luk-crispy-space-couscous-jgp4j5qwrjpcq76-8001.preview.app.github.dev"
+        "display": "https://just-luk-crispy-space-couscous-jgp4j5qwrjpcq76-8004.preview.app.github.dev"
     },
     "Fred Shared Server": {
-        "hash": "df05532317079c95b2b853fd9483e03710d22f538181e4a1b558c23981948f01",
-        "container_id": "shell_server-8773376075632",
+        "hash": "750840056f1c2aade49a56ef01e0f9d8eb20a98fa365d3b74593f05f65e7cf9f",
+        "container_id": "shell_server-8781660439453",
         "target_port": 8080,
-        "display": "https://just-luk-crispy-space-couscous-jgp4j5qwrjpcq76-8003.preview.app.github.dev"
+        "display": "https://just-luk-crispy-space-couscous-jgp4j5qwrjpcq76-8006.preview.app.github.dev"
     },
     "Police Interview": {
         "hash": "bd6583cfa5e0ff0a9773add8d6baf919fe6f86029c46b97c8d930f59c9b79d4b",
         "chal_file": "PoliceInterview.docx"
     },
     "display_ports": [
-        8002,
-        8001,
-        8003
+        8005,
+        8004,
+        8006
     ]
 }
