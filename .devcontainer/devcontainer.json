@@ -8,5 +8,5 @@
 			"version": "latest"
 		}
 	},
-  "onCreateCommand": "bash install.sh"
+  "onCreateCommand": "bash scripts/install_codespaces.sh"
 }
