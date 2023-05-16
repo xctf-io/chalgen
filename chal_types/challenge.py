@@ -314,7 +314,7 @@ class GeneratedChallenge(object):
                     self.container_id = attr['container_id']
                     self.target_port = attr['target_port']
                     self.display = attr['display']
-                    if 'github' in attr['display']:
+                    if 'CODESPACE_NAME' in os.environ.keys():
                         self.display_port = int(attr['display'].split('-')[-1][:4])
                     else:
                         self.display_port = int(attr['display'].split(':')[-1])
@@ -362,7 +362,7 @@ class GeneratedChallenge(object):
         display_url = f'http://{slugify(self.name)}.chals.mcpshsf.com'
         if self.local:
             if self.attr != None:
-                if 'github' in self.attr['display']:
+                if 'CODESPACE_NAME' in os.environ.keys():
                     self.display_port = int(self.attr['display'].split('-')[-1][:4])
                 else:
                     self.display_port = int(self.attr['display'].split(':')[-1])
