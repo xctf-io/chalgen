@@ -466,9 +466,9 @@ def gen(ctx, competition_folder, reg_url, base_url, local, verbose, generate_all
                         time.sleep(1)
                         break
         
-        p = Panel.fit(full_text)
+        pan = Panel.fit(full_text)
         print("")
-        print(p)
+        print(pan)
         print("")
 
         with WorkDir(join('competition_infra', 'ctfg')):
