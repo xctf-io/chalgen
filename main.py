@@ -453,7 +453,7 @@ def gen(ctx, competition_folder, reg_url, base_url, local, verbose, generate_all
         with WorkDir(join('competition_infra', 'ctfg')):
             email = comp_config['admin_email']
             password = comp_config['admin_password']
-            subprocess.run(f'go run cmd/manage/main.go --url {ctfg_url} --email {email} --password {password} flags sync {competition_folder}/chals', shell=True)
+            subprocess.run(f'go run cmd/manage/main.go --url {ctfg_url} --email {email} --password {password} flags sync {competition_folder}/chals', shell=True, capture_output=(not verbose))
 
         if local:
             with Status("Running [bright_white italic]minikube tunnel --bind-address='127.0.0.1'[/bright_white italic] (press any key to stop)", spinner="point", spinner_style="bright_white"):
