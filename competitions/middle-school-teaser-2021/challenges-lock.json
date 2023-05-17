@@ -1,9 +1,9 @@
 {
     "Fesbuc": {
-        "hash": "c1ae71233ed7c038c75fc62d029429bba07fd997e2dabd7875ba32d400159a83",
-        "container_id": "facebook-django-8781660438841",
+        "hash": "180061ec3ba4010f5460d5f6b44a5ba8fc0141b2138440f9488792095bf6e5fc",
+        "container_id": "facebook-django-314927041",
         "target_port": 8000,
-        "display": "https://just-luk-crispy-space-couscous-jgp4j5qwrjpcq76-8005.preview.app.github.dev"
+        "display": "http://127.0.0.1:8002"
     },
     "Boarding Pass": {
         "hash": "ed503a2dc15b8a7c26aa60e243e26ec4a4ef68dacc3c52149d52dee61847f818",
@@ -18,24 +18,24 @@
         "display": "s mkx dokmr iye wybo sp iye gyevn vsuo, led iye kbo qysxq dy rkfo dy zki... pvkq{coowc_vsuo_iye_uxyg_iyeb_mc}"
     },
     "RobotsChallenge": {
-        "hash": "124439cc43366cec4e245053c4b26f5d4a64141dad22becd737e2a824bc06be2",
-        "container_id": "robots_txt-8781660439120",
+        "hash": "476f89a04a93ad452041905bfc6eaf45fca28fcea8e0361f7e2bc2803e6bcc36",
+        "container_id": "robots_txt-314935233",
         "target_port": 80,
-        "display": "https://just-luk-crispy-space-couscous-jgp4j5qwrjpcq76-8004.preview.app.github.dev"
+        "display": "http://127.0.0.1:8001"
     },
     "Fred Shared Server": {
-        "hash": "750840056f1c2aade49a56ef01e0f9d8eb20a98fa365d3b74593f05f65e7cf9f",
-        "container_id": "shell_server-8781660439453",
+        "hash": "8f60aaba2efcbcd1abc0c1a6a638be2f9c521da73524208c633a682a4ca655a6",
+        "container_id": "shell_server-314929309",
         "target_port": 8080,
-        "display": "https://just-luk-crispy-space-couscous-jgp4j5qwrjpcq76-8006.preview.app.github.dev"
+        "display": "http://127.0.0.1:8003"
     },
     "Police Interview": {
         "hash": "bd6583cfa5e0ff0a9773add8d6baf919fe6f86029c46b97c8d930f59c9b79d4b",
         "chal_file": "PoliceInterview.docx"
     },
     "display_ports": [
-        8005,
-        8004,
-        8006
+        8002,
+        8001,
+        8003
     ]
 }

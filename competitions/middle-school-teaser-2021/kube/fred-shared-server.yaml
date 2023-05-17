@@ -8,7 +8,7 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - port: 8006
+  - port: 8003
     targetPort: 8080
     protocol: TCP
   selector:
@@ -33,7 +33,7 @@ spec:
     spec:
       containers:
       - name: fred-shared-server
-        image: shell_server-8781660439453
+        image: shell_server-314929309
         ports:
         - containerPort: 8080
         imagePullPolicy: Never

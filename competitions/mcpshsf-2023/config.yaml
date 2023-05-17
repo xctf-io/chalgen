@@ -1,3 +1,4 @@
 entrypoint: Twitter Flask
 admin_email: admin@admin.com
 admin_password: password
+homepage: Home.mdx

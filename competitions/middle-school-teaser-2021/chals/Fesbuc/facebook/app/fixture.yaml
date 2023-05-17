@@ -40,8 +40,7 @@
   pk: 7
 - fields:
     text: Come stay at the Last Place on Earth! You will fall in love with how dark
-      it gets here! No one is around for miles :) 
-      https://just-luk-crispy-space-couscous-jgp4j5qwrjpcq76-8200.preview.app.github.dev/chal_img.jpeg
+      it gets here! No one is around for miles :) http://127.0.0.1:8200/chal_img.jpeg
     author: 2
     likers:
     - 0
@@ -90,8 +89,7 @@
   model: fb.userpost
   pk: 5
 - fields:
-    text: Check out my first website! I am so proud of it! 
-      https://just-luk-crispy-space-couscous-jgp4j5qwrjpcq76-8004.preview.app.github.dev
+    text: Check out my first website! I am so proud of it! http://127.0.0.1:8001
     author: 0
     date_added: '2020-03-06 00:00:00+00:00'
   model: fb.userpost
@@ -101,7 +99,7 @@
     date_added: 2020-01-21 00:00:00+00:00
     post: 2
     text: when will my flight be boarding then? I have my boarding pass attached here.
-      https://just-luk-crispy-space-couscous-jgp4j5qwrjpcq76-8200.preview.app.github.dev/BoardingPass.png
+      http://127.0.0.1:8200/BoardingPass.png
   model: fb.userpostcomment
   pk: 0
 - fields:

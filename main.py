@@ -403,6 +403,7 @@ def gen(ctx, competition_folder, reg_url, base_url, local, verbose, generate_all
         mkdir_p(kube_dir)
         create_ctfg(competition_folder, reg_url,
                 comp_config['admin_email'], comp_config['admin_password'], local)
+        fwrite(competition_folder, comp_config['homepage'], join('competition_infra', 'ctfg', 'client', 'src', 'routes'), 'Home.mdx')
         configs = generate_kube_deploy(kube_dir, chal_trees, local, reg_url)
         with Status("[bold blue] Applying Kubernetes files", spinner="line", spinner_style="blue"):
             subprocess.check_output(
@@ -449,7 +450,6 @@ def gen(ctx, competition_folder, reg_url, base_url, local, verbose, generate_all
         if local:
             p = subprocess.Popen("minikube tunnel --bind-address='127.0.0.1'", stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
 
-        time.sleep(5)
         with WorkDir(join('competition_infra', 'ctfg')):
             email = comp_config['admin_email']
             password = comp_config['admin_password']
