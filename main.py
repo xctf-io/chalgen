@@ -450,6 +450,18 @@ def gen(ctx, competition_folder, reg_url, base_url, local, verbose, generate_all
         if local:
             p = subprocess.Popen("minikube tunnel --bind-address='127.0.0.1'", stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
 
+        with Status("[bold green] Waiting for challenges to be ready", spinner_style="green"):
+            ok = True
+            while ok:
+                ok = False
+                running_output = subprocess.check_output('kubectl get pods -n challenges --no-headers'.split())
+                running_pods = [line.split()[2] for line in running_output.decode('utf-8').split('\n') if len(line) > 0]
+                for pod_status in running_pods:
+                    if pod_status != 'Running':
+                        ok = True
+                        time.sleep(1)
+                        break
+
         with WorkDir(join('competition_infra', 'ctfg')):
             email = comp_config['admin_email']
             password = comp_config['admin_password']
