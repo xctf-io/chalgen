@@ -230,7 +230,8 @@ def create_ctfg(comp_folder, reg_url, admin_email, admin_password, local):
                 f'docker push {reg_url}ctfg:latest'.split())
     fwrite(template_dir, 'ctfg-deployment.yaml', ctfg_folder, 'ctfg-deployment.yaml',
            email=admin_email, password=admin_password, image=image, policy=policy)
-    fwrite(template_dir, 'ctfg-service.yaml', ctfg_folder, 'ctfg-service.yaml', port=out_port, type=type)
+    fwrite(template_dir, 'ctfg-service.yaml', ctfg_folder,
+           'ctfg-service.yaml', port=out_port, type=type)
 
 
 @chal.command(help="Generate a challenge from a config file")
@@ -402,14 +403,19 @@ def gen(ctx, competition_folder, reg_url, base_url, local, verbose, generate_all
             shutil.rmtree(kube_dir)
         mkdir_p(kube_dir)
         create_ctfg(competition_folder, reg_url,
-                comp_config['admin_email'], comp_config['admin_password'], local)
-        fwrite(competition_folder, comp_config['homepage'], join('competition_infra', 'ctfg', 'client', 'src', 'routes'), 'Home.mdx')
+                    comp_config['admin_email'], comp_config['admin_password'], local)
+        fwrite(competition_folder, comp_config['homepage'], join(
+            'competition_infra', 'ctfg', 'client', 'src', 'routes'), 'Home.mdx')
         configs = generate_kube_deploy(kube_dir, chal_trees, local, reg_url)
         with Status("[bold blue] Applying Kubernetes files", spinner="line", spinner_style="blue"):
             subprocess.check_output(
-                    f'kubectl apply -f {kube_dir} -n challenges'.split())
+                f'kubectl apply -f {kube_dir} -n challenges'.split())
             subprocess.check_output(
-                    f'kubectl apply -f {join(competition_folder, "ctfg")} -n challenges'.split())
+                f'kubectl apply -f {join(competition_folder, "ctfg")} -n challenges'.split())
+            subprocess.run(
+                f'kubectl rollout restart -f {kube_dir} -n challenges'.split(), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            subprocess.run(
+                f'kubectl rollout restart -f {join(competition_folder, "ctfg")} -n challenges'.split(), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             generate_challenge_graph(chal_trees, competition_folder)
 
         name_to_index = {}
@@ -431,7 +437,7 @@ def gen(ctx, competition_folder, reg_url, base_url, local, verbose, generate_all
             else:
                 entry_url = configs[name_to_index[slug]]['url']
             full_text += f" - {entrypoint}: [bold][bright_white]{entry_url}[/bright_white][/bold]\n"
-            
+
         ctfg_url = ""
         if local:
             if 'CODESPACE_NAME' in os.environ.keys():
@@ -441,40 +447,43 @@ def gen(ctx, competition_folder, reg_url, base_url, local, verbose, generate_all
         else:
             ctfg_url = 'https://ctfg.chals.mcpshsf.com'
         full_text += f"\nCTFg: [bold][bright_white]{ctfg_url}[/bright_white][/bold]"
-        
-        p = Panel.fit(full_text)
-        print("")
-        print(p)
-        print("")                   
 
         if local:
-            p = subprocess.Popen("minikube tunnel --bind-address='127.0.0.1'", stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+            p = subprocess.Popen("minikube tunnel --bind-address='127.0.0.1'",
+                                 stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
 
         with Status("[bold green] Waiting for challenges to be ready", spinner_style="green"):
             ok = True
             while ok:
                 ok = False
-                running_output = subprocess.check_output('kubectl get pods -n challenges --no-headers'.split())
-                running_pods = [line.split()[2] for line in running_output.decode('utf-8').split('\n') if len(line) > 0]
+                running_output = subprocess.check_output(
+                    'kubectl get pods -n challenges --no-headers'.split())
+                running_pods = [line.split()[2] for line in running_output.decode(
+                    'utf-8').split('\n') if len(line) > 0]
                 for pod_status in running_pods:
                     if pod_status != 'Running':
                         ok = True
                         time.sleep(1)
                         break
+        
+        p = Panel.fit(full_text)
+        print("")
+        print(p)
+        print("")
 
         with WorkDir(join('competition_infra', 'ctfg')):
             email = comp_config['admin_email']
             password = comp_config['admin_password']
             if 'CODESPACE_NAME' in os.environ.keys():
                 ctfg_url = 'http://127.0.0.1:8000'
-            subprocess.run(f'go run cmd/manage/main.go --url {ctfg_url} --email {email} --password {password} flags sync {competition_folder}/chals', shell=True, capture_output=(not verbose))
+            subprocess.run(
+                f'go run cmd/manage/main.go --url {ctfg_url} --email {email} --password {password} flags sync {competition_folder}/chals', shell=True, capture_output=(not verbose))
 
         if local:
             with Status("Running [bright_white italic]minikube tunnel --bind-address='127.0.0.1'[/bright_white italic] (press any key to stop)", spinner="point", spinner_style="bright_white"):
                 input()
             os.kill(p.pid, signal.SIGSTOP)
-            
-            
+
 
 @chalgen.command(help="Print the flags for a competition")
 @click.pass_context
