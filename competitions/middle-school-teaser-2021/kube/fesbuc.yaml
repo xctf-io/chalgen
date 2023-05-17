@@ -6,9 +6,9 @@ metadata:
   labels:
     app: fesbuc
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
-  - port: 8002
+  - port: 80
     targetPort: 8000
     protocol: TCP
   selector:
@@ -33,11 +33,11 @@ spec:
     spec:
       containers:
       - name: fesbuc
-        image: facebook-django-314927041
+        image: gcr.io/mcps-hsf-316519/fesbuc:latest
         ports:
         - containerPort: 8000
-        imagePullPolicy: Never
+        imagePullPolicy: Always
         securityContext:
-          runAsUser: 0
+          readOnlyRootFilesystem: false
       imagePullSecrets:
       - name: regcred

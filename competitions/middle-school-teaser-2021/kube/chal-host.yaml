@@ -6,9 +6,9 @@ metadata:
   labels:
     app: chal-host
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
-  - port: 8200
+  - port: 80
     targetPort: 80
     protocol: TCP
   selector:
@@ -33,11 +33,11 @@ spec:
     spec:
       containers:
       - name: chal-host
-        image: chal_host
+        image: gcr.io/mcps-hsf-316519/chal-host:latest
         ports:
         - containerPort: 80
-        imagePullPolicy: Never
+        imagePullPolicy: Always
         securityContext:
-          runAsUser: 0
+          readOnlyRootFilesystem: false
       imagePullSecrets:
       - name: regcred

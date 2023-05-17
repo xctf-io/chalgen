@@ -41,7 +41,7 @@ def chal(cmd):
     pass
 
 
-def generate_kube_deploy(kube_dir, trees, local, reg_url):
+def generate_kube_deploy(kube_dir, trees, local, reg_url, base_url):
     configs = []
     for tree in trees:
         def traverse(tree):
@@ -54,7 +54,7 @@ def generate_kube_deploy(kube_dir, trees, local, reg_url):
                 chal = child['chal']
                 if chal.container_id:
                     kube_config = chal_to_kube_config(
-                        chal, reg_url, local, chal.display_port, isinstance(chal, TemplateInjection))
+                        chal, reg_url, local, chal.display_port, isinstance(chal, TemplateInjection), base_url)
                     kube_configs.append(kube_config)
 
             return kube_configs
@@ -62,18 +62,18 @@ def generate_kube_deploy(kube_dir, trees, local, reg_url):
         chal = tree['chal']
         if chal.container_id:
             kube_config = chal_to_kube_config(
-                chal, reg_url, local, chal.display_port, isinstance(chal, TemplateInjection))
+                chal, reg_url, local, chal.display_port, isinstance(chal, TemplateInjection), base_url)
             configs.append(kube_config)
 
         chal = tree.get('host')
         if chal and chal.container_id:
             kube_config = chal_to_kube_config(
-                chal, reg_url, local, 8200, isinstance(chal, TemplateInjection))
+                chal, reg_url, local, 8200, isinstance(chal, TemplateInjection), base_url)
             configs.append(kube_config)
 
         configs.extend(traverse(tree))
 
-    gen_kube(kube_dir, configs, local)
+    gen_kube(kube_dir, configs, local, base_url)
 
     return configs
 
@@ -277,10 +277,10 @@ def gen(ctx, config, competition_folder, verbose):
         chal_gen.chal_host = chal_host
         chal_gen.chal_path_lookup = chal_path_lookup
         chal_gen.challenge_types = challenge_types
-        chal_tree, _ = chal_gen.gen_chals(True)
+        chal_tree, _ = chal_gen.gen_chals(True, '')
         chal_tree = [chal_tree]
 
-    chal_gen.do_gen(chal_dir, True, False, None, None)
+    chal_gen.do_gen(chal_dir, True, False, None, None, '')
 
     if ChallengeEnvironment in type(chal_gen).__bases__:
         chal_host.create()
@@ -355,7 +355,7 @@ def gen(ctx, competition_folder, reg_url, base_url, local, verbose, generate_all
         entrypoints = [entrypoints]
 
     chal_trees = []
-    host_url = 'http://chal-host.chals.mcpshsf.com'
+    host_url = f'http://chal-host.chals.{base_url}'
     if local:
         host_url = 'http://127.0.0.1:8200'
         if 'CODESPACE_NAME' in os.environ.keys():
@@ -373,13 +373,13 @@ def gen(ctx, competition_folder, reg_url, base_url, local, verbose, generate_all
             chal_gen.chal_path_lookup = chal_path_lookup
             chal_gen.challenge_types = challenge_types
             chal_tree, chals_cached = chal_gen.gen_chals(
-                local, chals_lock=chals_lock)
+                local, base_url, chals_lock=chals_lock)
             chal_trees.append(chal_tree)
 
         use_cache, attr = get_cache_state(
             chal_path_lookup, chal_gen, chals_lock)
         chal_gen.do_gen(entrypoint_path, local,
-                        (use_cache and chals_cached), attr, chal_host)
+                        (use_cache and chals_cached), attr, chal_host, base_url)
 
         if GeneratedChallenge in type(chal_gen).__bases__:
             chal_files = chal_gen.chal_file
@@ -406,7 +406,7 @@ def gen(ctx, competition_folder, reg_url, base_url, local, verbose, generate_all
                     comp_config['admin_email'], comp_config['admin_password'], local)
         fwrite(competition_folder, comp_config['homepage'], join(
             'competition_infra', 'ctfg', 'client', 'src', 'routes'), 'Home.mdx')
-        configs = generate_kube_deploy(kube_dir, chal_trees, local, reg_url)
+        configs = generate_kube_deploy(kube_dir, chal_trees, local, reg_url, base_url)
         with Status("[bold blue] Applying Kubernetes files", spinner="line", spinner_style="blue"):
             subprocess.check_output(
                 f'kubectl apply -f {kube_dir} -n challenges'.split())
@@ -445,7 +445,7 @@ def gen(ctx, competition_folder, reg_url, base_url, local, verbose, generate_all
             else:
                 ctfg_url = 'http://127.0.0.1:8000'
         else:
-            ctfg_url = 'https://ctfg.chals.mcpshsf.com'
+            ctfg_url = f'https://ctf.{base_url}'
         full_text += f"\nCTFg: [bold][bright_white]{ctfg_url}[/bright_white][/bold]"
 
         if local:

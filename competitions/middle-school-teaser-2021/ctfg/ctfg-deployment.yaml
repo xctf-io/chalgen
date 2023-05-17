@@ -39,11 +39,11 @@ spec:
               value: postgres
             - name: PORT
               value: "8000"
-          image: ctfg
+          image: gcr.io/mcps-hsf-316519/ctfg:latest
           name: ctfg
           ports:
             - containerPort: 8000
-          imagePullPolicy: Never
+          imagePullPolicy: Always
       imagePullSecrets:
         - name: ghcr-pull-secret
       restartPolicy: Always

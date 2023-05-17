@@ -25,7 +25,7 @@ class ChallengeEnvironment(GeneratedChallenge):
         self.chal_path_lookup = {}
         self.challenge_types = None
 
-    def gen_chals(self, local, chals_lock={}):
+    def gen_chals(self, local, base_url, chals_lock={}):
         self._chal_lookup = {}
         cached = True
         if self.config is None:
@@ -57,12 +57,12 @@ class ChallengeEnvironment(GeneratedChallenge):
                 chal_gen.chal_host = self.chal_host
                 chal_gen.chal_path_lookup = self.chal_path_lookup
                 chal_gen.challenge_types = self.challenge_types
-                chal_children, chals_cached = chal_gen.gen_chals(local, chals_lock=chals_lock)
-                chal_gen.do_gen(chal_path, local, (use_cache and chals_cached), attr, self.chal_host)
+                chal_children, chals_cached = chal_gen.gen_chals(local, base_url, chals_lock=chals_lock)
+                chal_gen.do_gen(chal_path, local, (use_cache and chals_cached), attr, self.chal_host, base_url)
 
                 tree["children"].append(chal_children)
             else:
-                chal_gen.do_gen(chal_path, local, use_cache, attr, self.chal_host)
+                chal_gen.do_gen(chal_path, local, use_cache, attr, self.chal_host, base_url)
 
                 tree["children"].append({
                     "name": chal_gen.name,

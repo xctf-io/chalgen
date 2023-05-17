@@ -13,6 +13,7 @@ from rich.status import Status
 
 yaml = ruamel.yaml.YAML()
 
+
 def mkdir_p(path):
     try:
         os.makedirs(path)
@@ -89,7 +90,7 @@ def get_kube_deployment(chal, local, namespace='challenges'):
         spec['containers'][0]['securityContext'] = {'runAsUser': 0}
     if chal['chroot']:
         spec['containers'][0]['securityContext']['privileged'] = True
-        
+
     return {
         'apiVersion': 'apps/v1',
         'kind': 'Deployment',
@@ -121,12 +122,6 @@ def get_kube_deployment(chal, local, namespace='challenges'):
 
 def get_kube_ingress(chals, namespace='challenges'):
     rules = []
-    chals.append({
-        'name': 'ctfg',
-        'service_name': 'ctf',
-        'url': 'ctf.mcpshsf.com',
-        'out_port': 80
-    })
     hosts = []
     for chal in chals:
         service_name = chal['service_name']
@@ -179,12 +174,12 @@ def get_kube_ingress(chals, namespace='challenges'):
     }
 
 
-def chal_to_kube_config(chal, registry_base_url, local, port_num, chroot):
+def chal_to_kube_config(chal, registry_base_url, local, port_num, chroot, base_url):
     chal_name = slugify(chal.name)
     service_name = f'{chal_name}-svc'
     registry_url = f'{registry_base_url}{chal_name}:latest'
     out_port = 80
-    url = f'{chal_name}.chals.mcpshsf.com'
+    url = f'{chal_name}.chals.{base_url}'
     if local:
         out_port = port_num
         registry_url = chal.container_id
@@ -206,12 +201,14 @@ def chal_to_kube_config(chal, registry_base_url, local, port_num, chroot):
 
 
 def push_container(chal_config):
-    os.system(f'docker tag {chal_config["container_id"]} {chal_config["registry_url"]}')
+    os.system(
+        f'docker tag {chal_config["container_id"]} {chal_config["registry_url"]}')
     os.system(f'docker push {chal_config["registry_url"]}')
-    subprocess.check_output(f'docker rmi {chal_config["container_id"]}'.split())
+    subprocess.check_output(
+        f'docker rmi {chal_config["container_id"]}'.split())
 
 
-def gen_kube(kube_dir, chal_kube_configs, local):
+def gen_kube(kube_dir, chal_kube_configs, local, base_url):
     yaml = ruamel.yaml.YAML()
     for chal_kube_config in chal_kube_configs:
         kube_config_out = os.path.join(
@@ -225,8 +222,14 @@ def gen_kube(kube_dir, chal_kube_configs, local):
 
         if not local:
             push_container(chal_kube_config)
-        
+
     if not local:
+        chal_kube_configs.append({
+            'name': 'ctfg',
+            'service_name': 'ctfg',
+            'url': f'ctf.{base_url}',
+            'out_port': 80
+        })
         ingress_config = get_kube_ingress(chal_kube_configs)
         kube_ingress_out = os.path.join(kube_dir, 'ingress.yaml')
         with open(kube_ingress_out, 'w') as out:
@@ -248,7 +251,7 @@ class ChallengeHost(object):
         self.chals.append(file)
         filename = os.path.basename(file)
         return f'{self.url}/{filename}'
-    
+
     def remove_chal(self, file):
         self.chals.remove(file)
         filename = os.path.basename(file)
@@ -262,7 +265,7 @@ class ChallengeHost(object):
 
         if os.path.isdir(self.host_dir):
             rmtree(self.host_dir)
-        
+
         copytree(template_dir, self.host_dir)
 
         for chal in self.chals:
@@ -301,21 +304,25 @@ class GeneratedChallenge(object):
         self.chal_dir = "not set"
         self.local = False
 
-    def do_gen(self, chal_dir, local, cached, attr, chal_host):
+    def do_gen(self, chal_dir, local, cached, attr, chal_host, base_url):
         self.chal_dir = chal_dir
         self.container_id = None
         self.target_port = 80
         self.local = local
         self.attr = attr
+        self.display_port = 80
+        self.base_url = base_url
         if cached:
-            print(f'[white]Using cached [/white]{self.__class__} [white]{self.name}[/white]')
+            print(
+                f'[white]Using cached [/white]{self.__class__} [white]{self.name}[/white]')
             if attr:
                 if 'container_id' in attr:
                     self.container_id = attr['container_id']
                     self.target_port = attr['target_port']
                     self.display = attr['display']
                     if 'CODESPACE_NAME' in os.environ.keys():
-                        self.display_port = int(attr['display'].split('-')[-1][:4])
+                        self.display_port = int(
+                            attr['display'].split('-')[-1][:4])
                     else:
                         self.display_port = int(attr['display'].split(':')[-1])
                 elif 'display' in attr:
@@ -329,7 +336,8 @@ class GeneratedChallenge(object):
                         for file in self.chal_file:
                             chal_host.add_chal(join(self.chal_dir, file))
         else:
-            print(f'[white]Generating [/white]{self.__class__} [white]{self.name}[/white]')
+            print(
+                f'[white]Generating [/white]{self.__class__} [white]{self.name}[/white]')
             self.gen(chal_dir)
 
     def gen(self, chal_dir):
@@ -357,15 +365,17 @@ class GeneratedChallenge(object):
     def get_file(self, filename):
         with open(self.get_file_path(filename), 'rb') as f:
             return f.read()
-    
+
     def set_display(self):
-        display_url = f'http://{slugify(self.name)}.chals.mcpshsf.com'
+        display_url = f'http://{slugify(self.name)}.chals.{self.base_url}'
         if self.local:
             if self.attr != None:
                 if 'CODESPACE_NAME' in os.environ.keys():
-                    self.display_port = int(self.attr['display'].split('-')[-1][:4])
+                    self.display_port = int(
+                        self.attr['display'].split('-')[-1][:4])
                 else:
-                    self.display_port = int(self.attr['display'].split(':')[-1])
+                    self.display_port = int(
+                        self.attr['display'].split(':')[-1])
             else:
                 port = get_open_port()
             display_url = f'http://127.0.0.1:{port}'
