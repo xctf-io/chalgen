@@ -453,6 +453,8 @@ def gen(ctx, competition_folder, reg_url, base_url, local, verbose, generate_all
         with WorkDir(join('competition_infra', 'ctfg')):
             email = comp_config['admin_email']
             password = comp_config['admin_password']
+            if 'CODESPACE_NAME' in os.environ.keys():
+                ctfg_url = 'http://127.0.0.1:8000'
             subprocess.run(f'go run cmd/manage/main.go --url {ctfg_url} --email {email} --password {password} flags sync {competition_folder}/chals', shell=True, capture_output=(not verbose))
 
         if local:
