@@ -4,3 +4,4 @@ env
 .pytest_cache/
 workspace.code-workspace
 .idea/
+.DS_Store
