@@ -405,7 +405,7 @@ def gen(ctx, competition_folder, reg_url, base_url, local, verbose, generate_all
         create_ctfg(competition_folder, reg_url,
                     comp_config['admin_email'], comp_config['admin_password'], local)
         fwrite(competition_folder, comp_config['homepage'], join(
-            'competition_infra', 'ctfg', 'client', 'src', 'routes'), 'Home.mdx')
+            'competition_infra', 'ctfg', 'client', 'src', 'routes'), 'Home.md')
         configs = generate_kube_deploy(kube_dir, chal_trees, local, reg_url, base_url)
         with Status("[bold blue] Applying Kubernetes files", spinner="line", spinner_style="blue"):
             subprocess.check_output(
@@ -445,7 +445,7 @@ def gen(ctx, competition_folder, reg_url, base_url, local, verbose, generate_all
             else:
                 ctfg_url = 'http://127.0.0.1:8000'
         else:
-            ctfg_url = f'https://ctf.{base_url}'
+            ctfg_url = f'https://ctf.chals.{base_url}'
         full_text += f"\nCTFg: [bold][bright_white]{ctfg_url}[/bright_white][/bold]"
 
         if local:

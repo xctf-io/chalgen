@@ -1,7 +1,7 @@
 {
     "Fesbuc": {
-        "hash": "791c3fd18dcaa2c7b5cfdbcae8f123201838ce5edd1adda3be038be84bfa7f50",
-        "container_id": "facebook-django-317590381",
+        "hash": "2c876e0f3a32bd0c6a36d35d990435fc3f956e6ef2ca219a63574c03013ca571",
+        "container_id": "facebook-django-312225445",
         "target_port": 8000,
         "display": "http://fesbuc.chals.mcpshsf.com"
     },
@@ -18,14 +18,14 @@
         "display": "s mkx dokmr iye wybo sp iye gyevn vsuo, led iye kbo qysxq dy rkfo dy zki... pvkq{coowc_vsuo_iye_uxyg_iyeb_mc}"
     },
     "RobotsChallenge": {
-        "hash": "dade5e4ffacdddfb1c344a1b5062a5439d82fc3952e97d6aa60929dee4af8f6e",
-        "container_id": "robots_txt-317604717",
+        "hash": "f85fa10a714c333c5ab986bf1bdf65f80ec4d0d9157aa8495f8975366d9d8341",
+        "container_id": "robots_txt-312237253",
         "target_port": 80,
         "display": "http://robotschallenge.chals.mcpshsf.com"
     },
     "Fred Shared Server": {
-        "hash": "08ccbf43df9660233168ce6a35068f3e614a6bfd417d2ceb7242252c206ed780",
-        "container_id": "shell_server-317615129",
+        "hash": "94beb46954d54368f54e8c3aa6cbecf4758c965c7b2254f389a9a8519140393a",
+        "container_id": "shell_server-312225721",
         "target_port": 8080,
         "display": "http://fred-shared-server.chals.mcpshsf.com"
     },

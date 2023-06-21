@@ -4,4 +4,4 @@ entrypoint:
   - Police Interview
 admin_email: admin@admin.com
 admin_password: password
-homepage: Home.mdx
+homepage: Home.md
