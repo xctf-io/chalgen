@@ -1,5 +1,5 @@
 - !caesar_cipher
-  name: CodingChallengeCaserCipher
+  name: CaesarCipher
   flag: "flag{seems_like_you_know_your_cs}"
   config:
     shift: 10

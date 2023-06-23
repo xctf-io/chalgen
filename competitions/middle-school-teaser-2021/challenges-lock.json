@@ -1,7 +1,7 @@
 {
     "Fesbuc": {
-        "hash": "2c876e0f3a32bd0c6a36d35d990435fc3f956e6ef2ca219a63574c03013ca571",
-        "container_id": "facebook-django-312225445",
+        "hash": "1024c9f39775612afd66ce89aaef0dc93d6cc4175ba7a64f2a0ef2f3877cf9d6",
+        "container_id": "facebook-django-306015941",
         "target_port": 8000,
         "display": "http://fesbuc.chals.mcpshsf.com"
     },
@@ -9,31 +9,38 @@
         "hash": "ed503a2dc15b8a7c26aa60e243e26ec4a4ef68dacc3c52149d52dee61847f818",
         "chal_file": "BoardingPass.png"
     },
-    "CabinImageExif": {
-        "hash": "44fb610cc3d9f28adca3e292b536758d5ab9215691fed6ba8162851982ce89a3",
+    "CabinImage": {
+        "hash": "061606502f4a9d4b0083bcd582d97c4233e60b166c3010f241da352342e3b72a",
         "chal_file": "chal_img.jpeg"
     },
-    "CodingChallengeCaserCipher": {
-        "hash": "c9973ee096b67126303fa6f13da0b15133714435de5bca86d34492ff84e86ece",
+    "CaesarCipher": {
+        "hash": "93be39dab6910485d134d898ee1deef22cf412af3f2efa82e93dee80b89f72cd",
         "display": "s mkx dokmr iye wybo sp iye gyevn vsuo, led iye kbo qysxq dy rkfo dy zki... pvkq{coowc_vsuo_iye_uxyg_iyeb_mc}"
     },
     "RobotsChallenge": {
-        "hash": "f85fa10a714c333c5ab986bf1bdf65f80ec4d0d9157aa8495f8975366d9d8341",
-        "container_id": "robots_txt-312237253",
+        "hash": "0350a4d3b749075a61418a86bd45c52f26bc160b7c7ead059eca6ec13fcdd59b",
+        "container_id": "robots_txt-306027949",
         "target_port": 80,
         "display": "http://robotschallenge.chals.mcpshsf.com"
     },
     "Fred Shared Server": {
-        "hash": "94beb46954d54368f54e8c3aa6cbecf4758c965c7b2254f389a9a8519140393a",
-        "container_id": "shell_server-312225721",
+        "hash": "d26dd90b6061edb6a2005fbb4d1b19226f3a3408637e06910c4d886d2202c987",
+        "container_id": "shell_server-306029593",
         "target_port": 8080,
         "display": "http://fred-shared-server.chals.mcpshsf.com"
     },
     "Police Interview": {
-        "hash": "bd6583cfa5e0ff0a9773add8d6baf919fe6f86029c46b97c8d930f59c9b79d4b",
+        "hash": "40379eddd8ea148b3d051b44ca785995ab999d9e40f47e26b1891071ee82e6bf",
         "chal_file": "PoliceInterview.docx"
     },
+    "Inn Website": {
+        "hash": "116f62fc28e924d3b2586fb7f1b654ed69afd2436ab9046522a0e23ba18cc1e1",
+        "container_id": "static_site-306012093",
+        "target_port": 80,
+        "display": "http://inn-website.chals.mcpshsf.com"
+    },
     "display_ports": [
+        80,
         80,
         80,
         80

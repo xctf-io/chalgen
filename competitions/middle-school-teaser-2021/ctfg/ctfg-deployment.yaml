@@ -32,7 +32,7 @@ spec:
             - name: CTFG_ADMIN_EMAIL
               value: admin@admin.com
             - name: CTFG_ADMIN_PASSWORD
-              value: password
+              value: CyberC4mp2023!!
             - name: DB_DSN
               value: host=postgres user=postgres password=password sslmode=disable
             - name: DB_TYPE

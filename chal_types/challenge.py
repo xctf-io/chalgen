@@ -227,7 +227,7 @@ def gen_kube(kube_dir, chal_kube_configs, local, base_url):
         chal_kube_configs.append({
             'name': 'ctfg',
             'service_name': 'ctfg',
-            'url': f'ctf.{base_url}',
+            'url': f'ctf.chals.{base_url}',
             'out_port': 80
         })
         ingress_config = get_kube_ingress(chal_kube_configs)

@@ -402,10 +402,10 @@ def gen(ctx, competition_folder, reg_url, base_url, local, verbose, generate_all
         if os.path.exists(kube_dir):
             shutil.rmtree(kube_dir)
         mkdir_p(kube_dir)
+        fwrite(competition_folder, comp_config['homepage'], join(
+            'competition_infra', 'ctfg'), 'Home.md', jinja=True)
         create_ctfg(competition_folder, reg_url,
                     comp_config['admin_email'], comp_config['admin_password'], local)
-        fwrite(competition_folder, comp_config['homepage'], join(
-            'competition_infra', 'ctfg', 'client', 'src', 'routes'), 'Home.md')
         configs = generate_kube_deploy(kube_dir, chal_trees, local, reg_url, base_url)
         with Status("[bold blue] Applying Kubernetes files", spinner="line", spinner_style="blue"):
             subprocess.check_output(

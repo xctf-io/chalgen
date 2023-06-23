@@ -15,6 +15,7 @@ spec:
     - fesbuc.chals.mcpshsf.com
     - robotschallenge.chals.mcpshsf.com
     - fred-shared-server.chals.mcpshsf.com
+    - inn-website.chals.mcpshsf.com
     - chal-host.chals.mcpshsf.com
     - ctf.chals.mcpshsf.com
     secretName: chalgen-cert-secret
@@ -47,6 +48,16 @@ spec:
         backend:
           service:
             name: fred-shared-server-svc
+            port:
+              number: 80
+  - host: inn-website.chals.mcpshsf.com
+    http:
+      paths:
+      - pathType: ImplementationSpecific
+        path: /
+        backend:
+          service:
+            name: inn-website-svc
             port:
               number: 80
   - host: chal-host.chals.mcpshsf.com

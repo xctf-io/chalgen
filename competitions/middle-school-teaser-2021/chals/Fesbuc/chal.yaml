@@ -23,7 +23,7 @@
     posts:
       - text: Come stay at the Last Place on Earth! You will fall in love with how dark it gets here! No one is around for miles :)
         author: carmen
-        chal: CabinImageExif
+        chal: CabinImage
         likers: [alex, bill]
       - text: "***WEATHER ALERT*** A severe winter storm has hit Albany and the surrounding area. Seek shelter immediately."
         author: news9
@@ -33,7 +33,7 @@
         likers: [alex]
       - text: "9 out of 10 people can't solve this. Do you know enough Computer Science to get this one? If you are struggling, I provide tutoring ... for a price."
         author: fred
-        chal: CodingChallengeCaserCipher
+        chal: CaesarCipher
       - text: Going into town to pick up some furniture. Husband is driving me insane!
         author: daisy
         likers: [ethan]
@@ -63,6 +63,6 @@
         text: we are sorry sir, there is nothing that we can do sir
     chals:
       - Boarding Pass 
-      - CabinImageExif
-      - CodingChallengeCaserCipher
+      - CabinImage
+      - CaesarCipher
       - RobotsChallenge

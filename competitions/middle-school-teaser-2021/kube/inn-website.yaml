@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: inn-website-svc
+  namespace: challenges
+  labels:
+    app: inn-website
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: inn-website
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inn-website-svc
+  namespace: challenges
+  labels:
+    app: inn-website
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inn-website
+  template:
+    metadata:
+      labels:
+        app: inn-website
+    spec:
+      containers:
+      - name: inn-website
+        image: gcr.io/mcps-hsf-316519/inn-website:latest
+        ports:
+        - containerPort: 80
+        imagePullPolicy: Always
+        securityContext:
+          readOnlyRootFilesystem: false
+      imagePullSecrets:
+      - name: regcred

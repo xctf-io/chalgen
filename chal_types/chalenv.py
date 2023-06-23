@@ -74,8 +74,6 @@ class ChallengeEnvironment(GeneratedChallenge):
         return tree, cached
 
 class StaticSite(ChallengeEnvironment):
-    security = 'readonly'
-
     yaml_tag = u'!static_site'
     __doc__ = """
     Static Site

@@ -1,5 +1,5 @@
 - !image_exif
-  name: CabinImageExif
+  name: CabinImage
   flag: "flag{great_what_a_creepy_looking_cabin}"
   config:
     orig_img: cabin.jpeg
