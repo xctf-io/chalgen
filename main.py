@@ -15,7 +15,6 @@ from os.path import join
 from chal_types import challenge_types, load_chal_from_config, chal_to_kube_config, gen_kube, mkdir_p, logger
 from chal_types import GeneratedChallenge, ChallengeHost, ChallengeEnvironment
 from chal_types.web import TemplateInjection
-#from gui import App
 
 import rich_click as click
 from rich import print
@@ -531,6 +530,7 @@ def solve(ctx, chal_config):
 @click.pass_context
 @click.option('--competition-folder', '-f', required=True)
 def gui(ctx, competition_folder):
+    from gui import App
     App(competition_folder).mainloop()
 
 
