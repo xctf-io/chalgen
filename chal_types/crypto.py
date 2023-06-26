@@ -242,7 +242,7 @@ class XorChallenge(GeneratedChallenge):
             # if config_text is not None:
             #text = config_text + "\n\n" + self.flag
 
-            chal_txt = encryptDecrypt(text + self.get_value("addl_text"), key)
+            chal_txt = encryptDecrypt(text + self.get_value("text"), key)
             f.write(chal_txt)
             self.display = chal_txt
 

@@ -15,7 +15,7 @@ from os.path import join
 from chal_types import challenge_types, load_chal_from_config, chal_to_kube_config, gen_kube, mkdir_p, logger
 from chal_types import GeneratedChallenge, ChallengeHost, ChallengeEnvironment
 from chal_types.web import TemplateInjection
-from gui import App
+#from gui import App
 
 import rich_click as click
 from rich import print
@@ -243,7 +243,7 @@ def gen(ctx, config, competition_folder, verbose):
     if verbose:
         logger.setLevel(logging.INFO)
 
-    print_env_vars()
+    # print_env_vars()
 
     chal_dir = os.path.abspath(os.path.dirname(config))
 

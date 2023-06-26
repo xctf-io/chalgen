@@ -161,6 +161,7 @@ def encryptDecrypt(inpString, xorKey):
     # perform XOR operation of key
     # with every caracter in string
     for i in range(length):
+        # TODO breadchris this code only works for a single byte key right now
         inpString = (inpString[:i] +
                      chr(ord(inpString[i]) ^ ord(xorKey)) +
                      inpString[i + 1:])
