@@ -5,6 +5,7 @@ from distutils.dir_util import copy_tree
 from .challenge import GeneratedChallenge
 from .utils import WorkDir, fwrite
 from slugify import slugify
+from .ai_generation import gen_full_site
 
 robots_format = '''User-agent: *
 Disallow: {flag}
@@ -22,6 +23,7 @@ class RobotsTxtChallenge(GeneratedChallenge):
     Config:
     
         index - Custom index.html page
+        prompt - Custom AI powered generation instructions for a website. (Ex. Make a cooking website...)
         text - Optional additional information
     """
 
@@ -38,6 +40,7 @@ class RobotsTxtChallenge(GeneratedChallenge):
                             'templates/static_site')
         makefile_dir = join(dirname(abspath(__file__)),
                             'templates/docker_make')
+        prompt = self.get_value('prompt', required=False)
         index_page = self.get_value('index', required=False)
         text = self.get_value('text', required=False)
 
@@ -45,6 +48,9 @@ class RobotsTxtChallenge(GeneratedChallenge):
         if index_page is None:
             copyfile(join(template_dir, 'index.html'),
                      join(chal_dir, 'index.html'))
+        
+        if prompt is not None:
+            gen_full_site(prompt, join(chal_dir, 'img_links.txt'), join(chal_dir, 'index.html'))
 
         with open(join(chal_dir, 'robots.txt'), 'w') as f:
             f.write(robots_format.format(flag=self.flag))
