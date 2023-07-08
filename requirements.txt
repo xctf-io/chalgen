@@ -26,3 +26,4 @@ pygraphviz
 pyzipper
 scapy
 dirhash
+openai
