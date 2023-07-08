@@ -50,6 +50,7 @@ class RobotsTxtChallenge(GeneratedChallenge):
                      join(chal_dir, 'index.html'))
         
         if prompt is not None:
+            prompt += "Fill in any 'Lorem Ipsum' placeholder text with unique text. There must NOT be any lorem ipsum. You should include css in this html file, and any image references should be set to '[PLACEHOLDER]'."
             gen_full_site(prompt, join(chal_dir, 'img_links.txt'), join(chal_dir, 'index.html'))
 
         with open(join(chal_dir, 'robots.txt'), 'w') as f:

@@ -1,6 +1,7 @@
 import openai
 import random
 
+# Queries ChatGPT to generate a website
 def gen_html(prompt):
     openai.api_key = '<YOUR-API-KEY-HERE>'
     
@@ -18,25 +19,22 @@ def gen_html(prompt):
 
     return response.choices[0].text.strip()
 
+# Adds all links in a file to a useable array
 def format_links(file):
     formatted_links = []
     x = open(file, "r")
 
     links = x.readlines()
-    i = 0
     for l in links:
-        if(l != "\n"):
-            formatted_links.append(l.strip("\n"))
-            i+=1
+        formatted_links.append(l)
+
     return formatted_links
 
 def add_imgs(html, links):
-    while True:
-        if "[PLACEHOLDER]" in html:
+    # Note that this is currently the most optimal way to implement image generation. Attempts to generate via jinja templates confuse ChatGPT, (because there are multiple requests being made at once, ex. json input, jinja template, etc.) generating suboptimal results.
+    while "[PLACEHOLDER]" in html:
             currlink = random.choice(links)
             html = html.replace("[PLACEHOLDER]", currlink, 1)
-        else:
-            break
     return html
 
 def gen_full_site(prompt, links, save_file):
