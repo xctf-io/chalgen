@@ -1,9 +1,13 @@
 import openai
-import random
+import os
+from os.path import join
+import re
+import urllib
 
-def gen_html(prompt):
-    openai.api_key = '<YOUR-API-KEY-HERE>'
-    
+openai.api_key = '<YOUR-OPENAI-API-KEY-HERE>'
+
+# Queries ChatGPT to generate a website
+def gen_html(prompt):    
     response = openai.Completion.create(
         engine='text-davinci-003',
         prompt=prompt,
@@ -18,33 +22,57 @@ def gen_html(prompt):
 
     return response.choices[0].text.strip()
 
-def format_links(file):
-    formatted_links = []
-    x = open(file, "r")
+# Queries DALL E to generate images.
+def generate_ai_img(prompt, i, chal_dir):
+    response = openai.Image.create(
+        prompt=prompt,
+        n=1,
+        size="256x256",
+    )
+    
+    web_data = urllib.request.urlopen(response["data"][0]["url"])
+    file_data = web_data.read()
+    
+    filename = f"ai_img_{i}.png"
+    
+    with open(join(chal_dir, filename), "wb") as file:
+        file.write(file_data)
+    
+    return filename
 
-    links = x.readlines()
-    i = 0
-    for l in links:
-        if(l != "\n"):
-            formatted_links.append(l.strip("\n"))
-            i+=1
-    return formatted_links
 
-def add_imgs(html, links):
-    while True:
-        if "[PLACEHOLDER]" in html:
-            currlink = random.choice(links)
-            html = html.replace("[PLACEHOLDER]", currlink, 1)
-        else:
-            break
+def add_ai_imgs(html, chal_dir):
+    
+    descriptions = re.findall(r'\[(.*?)\]', html)
+    generated_images = []
+    i = 1
+    for desc in descriptions:
+        img_name = generate_ai_img(desc, i, chal_dir)
+        generated_images.append(img_name)
+        i += 1
+
+    for match in descriptions:
+        html = html.replace(f"[{match}]", generated_images.pop(0), 1)
+
     return html
 
-def gen_full_site(prompt, links, save_file):
-    # Generate HTML
-    html_code = gen_html(prompt)
-    links = format_links(links)
-    html_code = add_imgs(html_code, links)
+def remove_ai_imgs(directory):
+    files = os.listdir(directory)
+    for file in files:
+        if file.endswith('.png') and 'ai_img' in file:
+            file_path = os.path.join(directory, file)
+            os.remove(file_path)
 
-    # Save the generated HTML
-    html_file = open(save_file, "w")
-    html_file.write(html_code)
+def gen_full_site(prompt, save_file, chal_dir):
+    try:
+        remove_ai_imgs(chal_dir)
+
+        # Generate HTML
+        html_code = gen_html(prompt)
+        html_code = add_ai_imgs(html_code, chal_dir)
+
+        # Save the generated HTML
+        html_file = open(join(chal_dir, save_file), "w")
+        html_file.write(html_code)
+    except:
+        print("Generation failed. Please try again.")
