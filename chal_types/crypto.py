@@ -5,6 +5,10 @@ from .text_transforms import *
 from os.path import join, abspath, dirname, exists
 from shutil import copytree, rmtree, copyfile
 from hashlib import sha1
+from Crypto.Cipher import AES
+from Crypto.Random import get_random_bytes
+# from Cryptodome.Cipher import AES
+# from Cryptodome.Random import get_random_bytes
 
 '''
 class SubstitutionChallenge(GeneratedChallenge):
@@ -254,6 +258,7 @@ class XorChallenge(GeneratedChallenge):
 class ECBBlockDuplication(GeneratedChallenge):
     yaml_tag = u'!ecb_block'
     __doc__ = """
+    A simple ECB block duplication challenge
 
     Config:
 
@@ -262,7 +267,13 @@ class ECBBlockDuplication(GeneratedChallenge):
     """
 
     def gen(self, chal_dir):
-        pass
+        key = self.get_value("key").encode('utf-8')
+        with open(join(chal_dir,'challenge.txt'),'w') as f:
+            cipher = AES.new(key, AES.MODE_ECB)
+            to_encrypt = self.get_value("secret") + self.flag
+            chal_txt = cipher.encrypt(to_encrypt.encode('utf-8'))
+            f.write(chal_txt.hex())
+            self.display = chal_txt
 
 
 class CBCPaddingOracle(GeneratedChallenge):

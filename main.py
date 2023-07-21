@@ -16,7 +16,8 @@ from chal_types import challenge_types, load_chal_from_config, chal_to_kube_conf
 from chal_types import GeneratedChallenge, ChallengeHost, ChallengeEnvironment
 from chal_types.web import TemplateInjection
 
-import rich_click as click
+from . import rich_click as click
+from . import rich
 from rich import print
 from rich.status import Status
 from rich.panel import Panel

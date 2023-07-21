@@ -1,0 +1,6 @@
+- !ecb_block
+    name: ECB Block Duplication
+    flag: flag{what_even_}flag{what_even_}
+    config:
+      key: "smoressmorescool"
+      secret: ""
