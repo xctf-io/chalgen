@@ -5,6 +5,7 @@ from .chalenv import *
 from .utils import *
 from .web import *
 from .phishing import *
+from .reversing import *
 
 challenge_types = {}
 for c in GeneratedChallenge.__subclasses__():
