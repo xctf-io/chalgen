@@ -50,7 +50,8 @@ class RobotsTxtChallenge(GeneratedChallenge):
                      join(chal_dir, 'index.html'))
         
         if prompt is not None:
-            gen_full_site(prompt, join(chal_dir, 'img_links.txt'), join(chal_dir, 'index.html'))
+            prompt += " Create unique text to fill the webpage. You should include css in this html file, and any image src= references should be set to a unique vivid description of what the image should be, encapsulated by []."
+            gen_full_site(prompt, 'index.html', chal_dir)
 
         with open(join(chal_dir, 'robots.txt'), 'w') as f:
             f.write(robots_format.format(flag=self.flag))
