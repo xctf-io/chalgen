@@ -8,7 +8,7 @@ chalgen generates challenges and evidence for CTFs using a tree based format
 
 | Competition | Writeup | Source Code |
 | --- | --- | --- |
-| MCPS HSF 2023 | [Writeup](https://lukegriffith.me/posts/writeups/mcpshsf/) | [Source Code](/competitions/mcpshsf-2023/) |
+| MCPS HSF 2023 | [Writeup](https://justluk.dev/posts/writeups/mcpshsf/) | [Source Code](/competitions/mcpshsf-2023/) |
 
 ## Prerequisites
 Note: This is **not required** for Github Codespaces. Everything will be installed automatically.
