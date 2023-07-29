@@ -20,6 +20,8 @@ Note: This is **not required** for Github Codespaces. Everything will be install
 - Install minikube from [here](https://minikube.sigs.k8s.io/docs/start/) (only required for local testing)
 - Install python3 from [here](https://www.python.org/downloads/)
 - Install go from [here](https://golang.org/doc/install)
+- Clone xCTF into competition_infa by running `git clone https://github.com/CTFg/ctfg competition_infra/ctfg`
+    - Note: This will not be required in the future, but for now it is required to run the competition
 ```
 pip install -r requirements.txt
 ```
