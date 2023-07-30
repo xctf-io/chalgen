@@ -1,0 +1,7 @@
+- !htpasswd
+   name: htpasswd
+   flag: "flag{test}"
+   config:
+      prompt: Create a website for foods that don't exist.
+      username: john
+      encrypt: Y

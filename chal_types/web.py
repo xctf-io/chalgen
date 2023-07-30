@@ -6,13 +6,9 @@ from .challenge import GeneratedChallenge
 from .utils import WorkDir, fwrite
 from slugify import slugify
 from .ai_generation import gen_full_site
-
-robots_format = '''User-agent: *
-Disallow: {flag}
-'''
-robots_setup = """ADD robots.txt $webroot/robots.txt
-ADD index.html $webroot/index.html
-"""
+from .ai_generation import get_img_names
+from re import search
+from .docker_builder import DockerBuilder
 
 
 class RobotsTxtChallenge(GeneratedChallenge):
@@ -28,6 +24,15 @@ class RobotsTxtChallenge(GeneratedChallenge):
     """
 
     def gen(self, chal_dir):
+        robots_format = '''User-agent: *
+        Disallow: {flag}
+        '''
+
+        robots_setup = """
+        ADD robots.txt $webroot/robots.txt
+        ADD index.html $webroot/index.html
+        """
+
         """
         TODO (breadchris) cleanup here
         - this is mostly just for getting down ideas, please refactor
@@ -52,6 +57,11 @@ class RobotsTxtChallenge(GeneratedChallenge):
         if prompt is not None:
             prompt += " Create unique text to fill the webpage. You should include css in this html file, and any image src= references should be set to a unique vivid description of what the image should be, encapsulated by []."
             gen_full_site(prompt, 'index.html', chal_dir)
+            ai_imgs = get_img_names()
+            for img in ai_imgs:
+                robots_setup += f"ADD {img} $webroot/{img}\n"
+
+
 
         with open(join(chal_dir, 'robots.txt'), 'w') as f:
             f.write(robots_format.format(flag=self.flag))
@@ -65,6 +75,78 @@ class RobotsTxtChallenge(GeneratedChallenge):
                chal_name=self.container_id, chal_run_options=f'-p 8080:{self.target_port}')
 
         self.build_docker(chal_dir)
+
+class HtpasswdChallenge(GeneratedChallenge):
+
+    yaml_tag = u'!htpasswd'
+    __doc__ = """
+    Flag is located in the .htpasswd file
+
+    Config:
+        index - Custom index.html page
+        prompt - Custom AI powered generation instructions for a website. (Ex. Make a cooking website...)
+        username - Username paired with flag as a password in the htpasswd file.
+        encrypted: Y/N to hashing for the flag.
+    """
+
+    def gen(self, chal_dir):
+
+        htpasswd_setup = """
+        ADD .htpasswd $webroot/.htpasswd
+        ADD index.html $webroot/index.html
+        """
+
+        flag_txt = search(r'\{([^}]+)\}', self.flag).group(1)
+
+        self.set_display()
+
+        template_dir = join(dirname(abspath(__file__)),
+                            'templates/static_site')
+        makefile_dir = join(dirname(abspath(__file__)),
+                            'templates/docker_make')
+        prompt = self.get_value('prompt', required=False)
+        index_page = self.get_value('index', required=False)
+        encrypt = self.get_value('encrypt', required=False)== "Y"
+        username = self.get_value('username', required=True)
+
+        # if an index.html page has not been configured, add the default one
+        if index_page is None:
+            copyfile(join(template_dir, 'index.html'),
+                     join(chal_dir, 'index.html'))
+        
+        if prompt is not None:
+            prompt += " Create unique text to fill the webpage. You should include css in this html file, and any image src= references should be set to a unique vivid description of what the image should be, encapsulated by []."
+            gen_full_site(prompt, 'index.html', chal_dir)
+            ai_imgs = get_img_names()
+            for img in ai_imgs:
+                htpasswd_setup += f"ADD {img} $webroot/{img}\n"
+
+        builder = DockerBuilder(
+            # TODO Replace with a base image that has htpasswd pre-installed.
+            base_img="ubuntu",
+            input_dir="input",
+            output_files=[".htpasswd"],
+            outdir=chal_dir
+        )
+
+        with builder as b:
+            if encrypt:
+                # Only text within curly brackets is grabbed because it will make it far easier to crack the hash.
+                b.run("apt-get update && apt-get install -y apache2-utils")
+                b.run(f"/usr/bin/htpasswd -bc .htpasswd {username} {flag_txt}")
+                
+            else:
+                b.run("apt-get update && apt-get install -y apache2-utils")
+                b.run(f"/usr/bin/htpasswd -bcp .htpasswd {username} {self.flag}")
+
+        fwrite(template_dir, 'Dockerfile', chal_dir,
+               'Dockerfile', setup=htpasswd_setup)
+        self.container_id = f'htpasswd-{hash(self)}'
+        fwrite(makefile_dir, 'Makefile', chal_dir, 'Makefile',
+               chal_name=self.container_id, chal_run_options=f'-p 8080:{self.target_port}')
+
+        self.build_docker(chal_dir)
+
 
 
 class TemplateInjection(GeneratedChallenge):
