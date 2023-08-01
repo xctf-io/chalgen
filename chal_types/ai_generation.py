@@ -26,8 +26,15 @@ def gen_html(prompt):
 
     return response.choices[0].text.strip()
 
+img_names = None
+
+def get_img_names():
+    global img_names
+    return img_names
+
+
 # Queries DALL E to generate images.
-def generate_ai_img(prompt, i, chal_dir):
+def generate_ai_img(prompt, filename, chal_dir):
     response = openai.Image.create(
         prompt=prompt,
         n=1,
@@ -37,8 +44,6 @@ def generate_ai_img(prompt, i, chal_dir):
     web_data = urllib.request.urlopen(response["data"][0]["url"])
     file_data = web_data.read()
     
-    filename = f"ai_img_{i}.png"
-    
     with open(join(chal_dir, filename), "wb") as file:
         file.write(file_data)
     
@@ -46,14 +51,15 @@ def generate_ai_img(prompt, i, chal_dir):
 
 
 def add_ai_imgs(html, chal_dir):
-    
+    global img_names
     descriptions = re.findall(r'\[(.*?)\]', html)
     generated_images = []
-    i = 1
-    for desc in descriptions:
-        img_name = generate_ai_img(desc, i, chal_dir)
+    num_imgs = len(descriptions)
+    for i in range(num_imgs):
+        img_name = f"ai_img_{i + 1}.png"
+        generate_ai_img(descriptions[i], img_name, chal_dir)
         generated_images.append(img_name)
-        i += 1
+    img_names = generated_images.copy()
 
     for match in descriptions:
         html = html.replace(f"[{match}]", generated_images.pop(0), 1)
