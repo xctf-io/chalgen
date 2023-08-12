@@ -5,3 +5,4 @@
 [submodule "chal_types/chal_files/AndroRat"]
 	path = chal_types/chal_files/AndroRat
 	url = https://github.com/karma9874/AndroRAT/
+	ignore = dirty
