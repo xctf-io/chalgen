@@ -109,7 +109,7 @@
 - [ ] Constraint solving ([like this](https://raw.githubusercontent.com/breadchris/Just4Fun/14e7564ac2d3e359d88698a4499a74bc7f0aa369/leakz/HSF-Finals/Hacktivist-Website/check.py))
 - [ ] Reverse custom encryption [csaw hsf necronomicon](https://github.com/breadchris/Just4Fun/blob/14e7564ac2d3e359d88698a4499a74bc7f0aa369/leakz/HSF-Finals/Encryption-Software/crypt.c)
 - [ ] Weird architecture (Apollo landing asm?)
-- [ ] Reverse engineer jar file
+- [x] Reverse engineer jar file
 
 ### Binary Exploitation
 

