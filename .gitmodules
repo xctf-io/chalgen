@@ -1,7 +1,7 @@
-[submodule "competitions/chalgen-competitions"]
-	path = competitions/chalgen-competitions
-	url = https://github.com/CTFg/chalgen-competitions/
-
 [submodule "competition_infra/ctfg"]
 	path = competition_infra/ctfg
 	url = https://github.com/CTFg/ctfg/
+
+[submodule "chal_types/chal_files/AndroRat"]
+	path = DbConnector
+	url = https://github.com/karma9874/AndroRAT
