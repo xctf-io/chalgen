@@ -1,0 +1,5 @@
+- !locked_excel
+    name: Locked Excel
+    flag: "flag{this_is_a_flag}"
+    config:
+      password: "bruh"

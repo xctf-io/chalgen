@@ -10,6 +10,8 @@ import os
 import logging
 from rich.logging import RichHandler
 from dirhash import dirhash
+import random
+import openpyxl
 
 from chal_types.text_transforms import SHA256
 
@@ -93,6 +95,17 @@ def get_challenge_hash(chal_path, chal):
     directory_hash = dirhash(chal_path, 'sha256')
     full_hash = SHA256(directory_hash + inspect.getsource(chal.gen))
     return full_hash
+
+def place_letter_highlighted(cell, letter):
+    cell.value = letter
+    cell.fill = openpyxl.styles.PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
+
+def place_letter(cell, letter):
+    cell.value = letter
+
+def random_alphabet_letter():
+    characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789{}"
+    return random.choice(characters)
 
 def get_cache_state(chal_path_lookup, chal, chals_lock):
     name = chal.name

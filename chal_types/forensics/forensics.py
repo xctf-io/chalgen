@@ -13,6 +13,9 @@ from pydub import AudioSegment
 from pydub.generators import Sine
 from chal_types.chalenv import ChallengeEnvironment
 import pyzipper
+import openpyxl
+from openpyxl.utils import get_column_letter
+from ..utils import place_letter_highlighted, place_letter, random_alphabet_letter, WorkDir
 
 from chal_types.utils import text_to_wav
 
@@ -58,6 +61,47 @@ class URLEvidence(ChallengeEnvironment):
     def gen(self, chal_dir):
         self.display = self.get_value("url")
 
+class LockedExcel(GeneratedChallenge):
+    yaml_tag = u'!locked_excel'
+    __doc__ = """
+    Locked Excel
+    
+    Config:
+        password: Password to lock the excel file with (SHOULD NOT BE REVEALED DURING THE CHALLENGE! Competitors are to break into the excel file WITHOUT a password!)
+    """
+
+    def gen(self, chal_dir):
+        with WorkDir(chal_dir):
+            workbook = openpyxl.Workbook()
+
+            flag = self.flag
+
+            workbook.active.title = "Sheet1"
+            workbook.create_sheet(title="Sheet2")
+
+            sheet1 = workbook["Sheet1"]
+            sheet2 = workbook["Sheet2"]
+
+            for idx, letter in enumerate(flag):
+                row = random.randint(1, 10)
+                column = idx + 1  # Start from column A
+                place_letter_highlighted(sheet1.cell(row=row, column=column), letter)
+
+                iterations = random.randint(1, 5)
+                for _ in range(iterations):
+                    random_row = random.randint(1, 10)
+                    random_column = random.randint(1, len(flag))
+                    cell = sheet1.cell(row=random_row, column=random_column)
+                    if not cell.value:
+                        place_letter(cell, random_alphabet_letter())
+
+            sheet2["A1"] = "???"
+            sheet1.sheet_state = "hidden"
+
+            workbook.security.workbookPassword = self.get_value("password")
+            workbook.security.lockStructure = True
+
+            workbook.save("locked_workbook.xlsx")
 
 class LSB(GeneratedChallenge):
     yaml_tag = u'!lsb'

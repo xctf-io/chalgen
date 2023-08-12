@@ -1,0 +1,5 @@
+- !apk_trojan_re
+    name: Apk Trojan Reverse Engineering
+    flag: "flag{android_malware_is_fun}"
+    config:
+      culprit_ip: "192.168.3.186"
