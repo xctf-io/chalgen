@@ -1,5 +1,5 @@
-[submodule "competition_infra/ctfg"]
-	path = competition_infra/ctfg
+[submodule "competition_infra/xctf"]
+	path = competition_infra/xctf
 	url = https://github.com/xctf-io/xctf
 
 [submodule "chal_types/chal_files/AndroRat"]
