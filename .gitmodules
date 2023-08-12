@@ -3,5 +3,5 @@
 	url = https://github.com/CTFg/ctfg/
 
 [submodule "chal_types/chal_files/AndroRat"]
-	path = DbConnector
-	url = https://github.com/karma9874/AndroRAT
+	path = chal_types/chal_files/AndroRat
+	url = https://github.com/karma9874/AndroRAT/
