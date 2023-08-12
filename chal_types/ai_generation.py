@@ -6,10 +6,6 @@ import urllib
 
 openai.api_key = os.environ.get("OPENAI_API_KEY")
 
-if openai.api_key == None:
-    print("Please set your OPENAI_API_KEY environment variable.")
-    exit()
-
 # Queries ChatGPT to generate a website
 def gen_html(prompt):    
     response = openai.Completion.create(

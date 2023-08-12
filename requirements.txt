@@ -28,3 +28,4 @@ scapy
 dirhash
 openai
 openpyxl
+pyngrok
