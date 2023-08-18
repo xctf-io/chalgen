@@ -1,6 +1,0 @@
-- !git_exposed
-  name: git_exposed
-  flag: flag{this_is_a_test}
-  config:
-    file: normal_program.py
-    commit_msg: Updated my very normal program.
