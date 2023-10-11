@@ -1,0 +1,8 @@
+- !qrcode
+  name: Boarding Pass 
+  flag: flag{feels_good_to_go_on_vacation}
+  config:
+    background_image:
+      filename: BoardingPass.png
+      x_pos: 800
+      y_pos: 130

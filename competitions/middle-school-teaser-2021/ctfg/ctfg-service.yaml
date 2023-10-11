@@ -13,8 +13,8 @@ metadata:
 spec:
   ports:
     - name: "8000"
-      port: 80
+      port: {port}
       targetPort: 8000
   selector:
     io.kompose.service: ctfg
-  type: ClusterIP
+  type: {type}

@@ -1,0 +1,34 @@
+{
+    "Fesbuc": {
+        "hash": "7cc58a66f67e3c680703e992e3dc4d9ecb875e4fc72095df91025aef22ff37cb",
+        "container_id": "facebook-django-8739168207767",
+        "target_port": 8000,
+        "display": "https://supreme-eureka-gwg5795p55fw5rv-8002.app.github.dev"
+    },
+    "Boarding Pass": {
+        "hash": "ed503a2dc15b8a7c26aa60e243e26ec4a4ef68dacc3c52149d52dee61847f818",
+        "chal_file": "BoardingPass.png"
+    },
+    "CabinImage": {
+        "hash": "061606502f4a9d4b0083bcd582d97c4233e60b166c3010f241da352342e3b72a",
+        "chal_file": "chal_img.jpeg"
+    },
+    "CaesarCipher": {
+        "hash": "93be39dab6910485d134d898ee1deef22cf412af3f2efa82e93dee80b89f72cd",
+        "display": "s mkx dokmr iye wybo sp iye gyevn vsuo, led iye kbo qysxq dy rkfo dy zki... pvkq{coowc_vsuo_iye_uxyg_iyeb_mc}"
+    },
+    "RobotsChallenge": {
+        "hash": "a84a076f89c6bf3b9a38426d71ae07c07f2d8c2cd931d261c0ec604c9ff9adc1",
+        "container_id": "robots_txt-8739167580398",
+        "target_port": 80,
+        "display": "https://supreme-eureka-gwg5795p55fw5rv-8001.app.github.dev"
+    },
+    "Police Interview": {
+        "hash": "40379eddd8ea148b3d051b44ca785995ab999d9e40f47e26b1891071ee82e6bf",
+        "chal_file": "PoliceInterview.docx"
+    },
+    "display_ports": [
+        8002,
+        8001
+    ]
+}
