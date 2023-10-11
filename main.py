@@ -358,7 +358,7 @@ def gen(ctx, competition_folder, reg_url, base_url, local, verbose, generate_all
     if local:
         host_url = 'http://127.0.0.1:8200'
         if 'CODESPACE_NAME' in os.environ.keys():
-            host_url = f'https://{os.environ["CODESPACE_NAME"]}-8200.preview.app.github.dev'
+            host_url = f'https://{os.environ["CODESPACE_NAME"]}-8200.app.github.dev'
     chal_host = ChallengeHost(host_url, chals_folder)
 
     for entrypoint in entrypoints:
@@ -440,7 +440,7 @@ def gen(ctx, competition_folder, reg_url, base_url, local, verbose, generate_all
         ctfg_url = ""
         if local:
             if 'CODESPACE_NAME' in os.environ.keys():
-                ctfg_url = f'https://{os.environ["CODESPACE_NAME"]}-8000.preview.app.github.dev'
+                ctfg_url = f'https://{os.environ["CODESPACE_NAME"]}-8000.app.github.dev'
             else:
                 ctfg_url = 'http://127.0.0.1:8000'
         else:

@@ -1,0 +1,9 @@
+- !image_exif
+  name: CabinImage
+  flag: "flag{cool_gaming_setup}"
+  config:
+    orig_img: setup.jpg
+    out_img: chal_img.jpeg
+    metadata_key: 315
+    lat: 43.6536
+    lng: -79.3829

@@ -1,5 +1,5 @@
 build:
-	@docker build . -t {chal_name} -q
+	@docker build . -t {chal_name}
 
 run: build
 	@docker run {chal_run_options} {chal_name}

@@ -1,9 +1,9 @@
 {
     "Fesbuc": {
-        "hash": "1024c9f39775612afd66ce89aaef0dc93d6cc4175ba7a64f2a0ef2f3877cf9d6",
-        "container_id": "facebook-django-306015941",
+        "hash": "7cc58a66f67e3c680703e992e3dc4d9ecb875e4fc72095df91025aef22ff37cb",
+        "container_id": "facebook-django-8739168207767",
         "target_port": 8000,
-        "display": "http://fesbuc.chals.mcpshsf.com"
+        "display": "https://supreme-eureka-gwg5795p55fw5rv-8002.app.github.dev"
     },
     "Boarding Pass": {
         "hash": "ed503a2dc15b8a7c26aa60e243e26ec4a4ef68dacc3c52149d52dee61847f818",
@@ -18,31 +18,31 @@
         "display": "s mkx dokmr iye wybo sp iye gyevn vsuo, led iye kbo qysxq dy rkfo dy zki... pvkq{coowc_vsuo_iye_uxyg_iyeb_mc}"
     },
     "RobotsChallenge": {
-        "hash": "0350a4d3b749075a61418a86bd45c52f26bc160b7c7ead059eca6ec13fcdd59b",
-        "container_id": "robots_txt-306027949",
+        "hash": "a84a076f89c6bf3b9a38426d71ae07c07f2d8c2cd931d261c0ec604c9ff9adc1",
+        "container_id": "robots_txt-8739167580398",
         "target_port": 80,
-        "display": "http://robotschallenge.chals.mcpshsf.com"
+        "display": "https://supreme-eureka-gwg5795p55fw5rv-8001.app.github.dev"
     },
     "Fred Shared Server": {
-        "hash": "d26dd90b6061edb6a2005fbb4d1b19226f3a3408637e06910c4d886d2202c987",
-        "container_id": "shell_server-306029593",
+        "hash": "fb318bdf96b448d433dadd698598be8f25a0dc186cbf147b38cfa0e87e708206",
+        "container_id": "shell_server-8739167580539",
         "target_port": 8080,
-        "display": "http://fred-shared-server.chals.mcpshsf.com"
+        "display": "https://supreme-eureka-gwg5795p55fw5rv-8003.app.github.dev"
     },
     "Police Interview": {
         "hash": "40379eddd8ea148b3d051b44ca785995ab999d9e40f47e26b1891071ee82e6bf",
         "chal_file": "PoliceInterview.docx"
     },
     "Inn Website": {
-        "hash": "116f62fc28e924d3b2586fb7f1b654ed69afd2436ab9046522a0e23ba18cc1e1",
-        "container_id": "static_site-306012093",
+        "hash": "f1454589a02ccb64ff9f7079622b2b6c3c221c188619b328d4561a12aa689862",
+        "container_id": "static_site-8739167597827",
         "target_port": 80,
-        "display": "http://inn-website.chals.mcpshsf.com"
+        "display": "https://supreme-eureka-gwg5795p55fw5rv-8004.app.github.dev"
     },
     "display_ports": [
-        80,
-        80,
-        80,
-        80
+        8002,
+        8001,
+        8003,
+        8004
     ]
 }

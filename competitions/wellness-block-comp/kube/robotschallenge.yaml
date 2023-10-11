@@ -1,43 +1,43 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: chal-host-svc
+  name: robotschallenge-svc
   namespace: challenges
   labels:
-    app: chal-host
+    app: robotschallenge
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   ports:
-  - port: 80
+  - port: 8001
     targetPort: 80
     protocol: TCP
   selector:
-    app: chal-host
+    app: robotschallenge
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: chal-host-svc
+  name: robotschallenge-svc
   namespace: challenges
   labels:
-    app: chal-host
+    app: robotschallenge
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: chal-host
+      app: robotschallenge
   template:
     metadata:
       labels:
-        app: chal-host
+        app: robotschallenge
     spec:
       containers:
-      - name: chal-host
-        image: gcr.io/mcps-hsf-316519/chal-host:latest
+      - name: robotschallenge
+        image: robots_txt-8749441840621
         ports:
         - containerPort: 80
-        imagePullPolicy: Always
+        imagePullPolicy: Never
         securityContext:
-          readOnlyRootFilesystem: false
+          runAsUser: 0
       imagePullSecrets:
       - name: regcred
