@@ -39,8 +39,17 @@
   model: auth.user
   pk: 7
 - fields:
-    text: Come stay at the Last Place on Earth! You will fall in love with how dark
-      it gets here! No one is around for miles :) https://supreme-eureka-gwg5795p55fw5rv-8200.app.github.dev/chal_img.jpeg
+    username: unknown
+    password: pbkdf2_sha256$12000$AAAAAAAAA$FJlY6cWwQi79dordvpvRc/3GzUA/DJpfk50qyQggUz0=
+  model: auth.user
+  pk: 8
+- fields:
+    username: CISA
+    password: pbkdf2_sha256$12000$AAAAAAAAA$FJlY6cWwQi79dordvpvRc/3GzUA/DJpfk50qyQggUz0=
+  model: auth.user
+  pk: 9
+- fields:
+    text: Guys check out my new gaming setup! https://supreme-eureka-gwg5795p55fw5rv-8200.app.github.dev/chal_img.jpeg
     author: 2
     likers:
     - 0
@@ -49,48 +58,45 @@
   model: fb.userpost
   pk: 0
 - fields:
-    text: '***WEATHER ALERT*** A severe winter storm has hit Albany and the surrounding
-      area. Seek shelter immediately.'
+    text: ALERT! Unknown cybercriminal is stealing everyone's personal data!
     author: 6
     likers:
-    - 0
+    - 2
     date_added: '2020-03-06 00:00:00+00:00'
   model: fb.userpost
   pk: 1
 - fields:
-    text: All planes are grounded until further notice. Please stay safe.
-    author: 7
+    text: guys how does metasploit work?
+    author: 0
     likers:
-    - 0
+    - 1
+    - 2
     date_added: '2020-03-06 00:00:00+00:00'
   model: fb.userpost
   pk: 2
 - fields:
-    text: 9 out of 10 people can't solve this. Do you know enough Computer Science
-      to get this one? If you are struggling, I provide tutoring ... for a price.
-      s mkx dokmr iye wybo sp iye gyevn vsuo, led iye kbo qysxq dy rkfo dy zki...
-      pvkq{coowc_vsuo_iye_uxyg_iyeb_mc}
+    text: All my files got encrypted! Look what the attacker left on my pc! vyyuc
+      vsuo wbc ckx nsoqy scxd cy xsmo kxiwybo pvkq{xohd_dswo_rkfo_k_wybo_comebo_zkccgybn}
     author: 5
     date_added: '2020-03-06 00:00:00+00:00'
   model: fb.userpost
   pk: 3
 - fields:
-    text: Going into town to pick up some furniture. Husband is driving me insane!
-    author: 3
-    likers:
-    - 4
+    text: Someone stole my gmail account! HELP!
+    author: 4
     date_added: '2020-03-06 00:00:00+00:00'
   model: fb.userpost
   pk: 4
 - fields:
-    text: I love my wife! I love going on errands with her.
-    author: 4
+    text: Cybercriminal's server was found! Please tip us if you find further information
+      https://supreme-eureka-gwg5795p55fw5rv-8001.app.github.dev
+    author: 9
     date_added: '2020-03-06 00:00:00+00:00'
   model: fb.userpost
   pk: 5
 - fields:
-    text: Check out my first website! I am so proud of it! https://supreme-eureka-gwg5795p55fw5rv-8001.app.github.dev
-    author: 0
+    text: The criminal left me a voice message! https://supreme-eureka-gwg5795p55fw5rv-8200.app.github.dev/output.wav
+    author: 4
     date_added: '2020-03-06 00:00:00+00:00'
   model: fb.userpost
   pk: 6
@@ -98,31 +104,27 @@
     author: 1
     date_added: 2020-01-21 00:00:00+00:00
     post: 2
-    text: when will my flight be boarding then? I have my boarding pass attached here.
-      https://supreme-eureka-gwg5795p55fw5rv-8200.app.github.dev/BoardingPass.png
+    text: why do you wanna know how metasploit works?
   model: fb.userpostcomment
   pk: 0
 - fields:
-    author: 7
+    author: 0
     date_added: 2020-01-21 00:00:00+00:00
     post: 2
-    text: we unfortunately do not know when flights will be departing, please keep
-      watching this account for updates regarding all HighLyfe flights.
+    text: uhhhh... idk im just curious
   model: fb.userpostcomment
   pk: 1
 - fields:
     author: 1
     date_added: 2020-01-21 00:00:00+00:00
     post: 2
-    text: I really need to get out of here! I used every penny I had to get this ticket
-      and need a well deserved break from this place. I don't get that many chances
-      during the year.
+    text: okay man...
   model: fb.userpostcomment
   pk: 2
 - fields:
-    author: 7
+    author: 8
     date_added: 2020-01-21 00:00:00+00:00
-    post: 2
-    text: we are sorry sir, there is nothing that we can do sir
+    post: 5
+    text: lol u suck bWFwbGUgc3lydXAKZmxhZ3tiQTVlX3MxeHRZX2Y0dXJ9
   model: fb.userpostcomment
   pk: 3

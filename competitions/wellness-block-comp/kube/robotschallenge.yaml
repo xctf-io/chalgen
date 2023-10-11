@@ -33,7 +33,7 @@ spec:
     spec:
       containers:
       - name: robotschallenge
-        image: robots_txt-8739167580398
+        image: robots_txt-8749441840621
         ports:
         - containerPort: 80
         imagePullPolicy: Never

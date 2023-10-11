@@ -1,5 +1,5 @@
 build:
-	@docker build . -t chal_host -q
+	@docker build . -t chal_host
 
 run: build
 	@docker run  chal_host

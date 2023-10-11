@@ -346,8 +346,28 @@ class GeneratedChallenge(object):
 
     def build_docker(self, docker_dir):
         with WorkDir(docker_dir), Status(f"[cyan] Building Container for [bold]{self.name}[/bold]", spinner_style="cyan"):
-            subprocess.check_output(["make", "build"])
-        print(f":star2: Built Container for [bold]{self.name}[bold] :star2:")
+            try:
+                process = subprocess.Popen(["make", "build"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True, shell=True)
+                
+                # Read and print standard output line by line
+                for line in process.stdout:
+                    print("Standard Output:", line, end="")
+                
+                # Read and print standard error line by line
+                for line in process.stderr:
+                    print("Standard Error:", line, end="")
+                
+                # Wait for the command to finish
+                process.wait()
+                
+                # Check if the command was successful
+                if process.returncode == 0:
+                    print("Command completed successfully.")
+                else:
+                    print(f"Command failed with exit code {process.returncode}")
+            except Exception as e:
+                print(f"An error occurred: {str(e)}")
+                print(f":star2: Built Container for [bold]{self.name}[bold] :star2:")
 
     def get_value(self, key, required=True):
         if key not in self.config.keys():
@@ -376,6 +396,7 @@ class GeneratedChallenge(object):
                 else:
                     self.display_port = int(
                         self.attr['display'].split(':')[-1])
+                port = self.display_port
             else:
                 port = get_open_port()
             display_url = f'http://127.0.0.1:{port}'

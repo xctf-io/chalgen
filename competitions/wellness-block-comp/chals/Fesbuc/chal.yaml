@@ -20,6 +20,10 @@
         password: password138823892389127120password
       - username: highlyfe
         password: password138823892389127120password
+      - username: unknown
+        password: password138823892389127120password
+      - username: CISA
+        password: password138823892389127120password
     posts:
       - text: "Guys check out my new gaming setup!"
         author: carmen
@@ -39,27 +43,31 @@
       - text: "Cybercriminal's server was found! Please tip us if you find further information"
         author: CISA
         chal: RobotsChallenge
+      - text: "The criminal left me a voice message!"
+        author: ethan
+        chal: Spectrogram
     profiles:
     comments:
       - author: bill
         date_added: 2020-01-21 00:00:00.000000+00:00
-        post: 3
+        post: 2
         text: why do you wanna know how metasploit works?
       - author: alex
         date_added: 2020-01-21 00:00:00.000000+00:00
-        post: 3
+        post: 2
         text: uhhhh... idk im just curious
       - author: bill
         date_added: 2020-01-21 00:00:00.000000+00:00
-        post: 3
+        post: 2
         text: okay man...
       - author: unknown
         date_added: 2020-01-21 00:00:00.000000+00:00
-        post: 6
+        post: 5
         chal: Base64
-        text: L
+        text: lol u suck
     chals:
       - Base64
       - CabinImage
       - CaesarCipher
       - RobotsChallenge
+      - Spectrogram
