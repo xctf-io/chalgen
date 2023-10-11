@@ -1,14 +1,14 @@
 build:
-	@docker build . -t facebook-django-306015941 -q
+	@docker build . -t facebook-django-8739168207767 -q
 
 run: build
-	@docker run -p 8081:8000 facebook-django-306015941
+	@docker run -p 8081:8000 facebook-django-8739168207767
 
 clean:
-	@docker rm -f -v facebook-django-306015941
+	@docker rm -f -v facebook-django-8739168207767
 
 generate-img:
-	@docker run -d --name facebook-django-306015941 facebook-django-306015941:latest
-	@docker export facebook-django-306015941 -o vm.tar.gz
-	@docker rm facebook-django-306015941
-	@docker rmi facebook-django-306015941
+	@docker run -d --name facebook-django-8739168207767 facebook-django-8739168207767:latest
+	@docker export facebook-django-8739168207767 -o vm.tar.gz
+	@docker rm facebook-django-8739168207767
+	@docker rmi facebook-django-8739168207767

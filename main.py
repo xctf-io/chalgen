@@ -214,7 +214,7 @@ def create_ctfg(comp_folder, reg_url, admin_email, admin_password, local):
     out_port = 8000
     type = 'LoadBalancer'
     policy = 'Never'
-    with WorkDir(join('competition_infra', 'ctfg')), Status('[cyan] Building [bold]CTFg[/bold]', spinner_style="cyan"):
+    with WorkDir(join('competition_infra', 'xctf')), Status('[cyan] Building [bold]CTFg[/bold]', spinner_style="cyan"):
         if local:
             subprocess.check_output(
                 'docker build -q -t ctfg:latest .'.split())
@@ -358,7 +358,7 @@ def gen(ctx, competition_folder, reg_url, base_url, local, verbose, generate_all
     if local:
         host_url = 'http://127.0.0.1:8200'
         if 'CODESPACE_NAME' in os.environ.keys():
-            host_url = f'https://{os.environ["CODESPACE_NAME"]}-8200.preview.app.github.dev'
+            host_url = f'https://{os.environ["CODESPACE_NAME"]}-8200.app.github.dev'
     chal_host = ChallengeHost(host_url, chals_folder)
 
     for entrypoint in entrypoints:
@@ -402,7 +402,7 @@ def gen(ctx, competition_folder, reg_url, base_url, local, verbose, generate_all
             shutil.rmtree(kube_dir)
         mkdir_p(kube_dir)
         fwrite(competition_folder, comp_config['homepage'], join(
-            'competition_infra', 'ctfg'), 'Home.md', jinja=True)
+            'competition_infra', 'xctf'), 'Home.md', jinja=True)
         create_ctfg(competition_folder, reg_url,
                     comp_config['admin_email'], comp_config['admin_password'], local)
         configs = generate_kube_deploy(kube_dir, chal_trees, local, reg_url, base_url)
@@ -440,7 +440,7 @@ def gen(ctx, competition_folder, reg_url, base_url, local, verbose, generate_all
         ctfg_url = ""
         if local:
             if 'CODESPACE_NAME' in os.environ.keys():
-                ctfg_url = f'https://{os.environ["CODESPACE_NAME"]}-8000.preview.app.github.dev'
+                ctfg_url = f'https://{os.environ["CODESPACE_NAME"]}-8000.app.github.dev'
             else:
                 ctfg_url = 'http://127.0.0.1:8000'
         else:
@@ -470,7 +470,7 @@ def gen(ctx, competition_folder, reg_url, base_url, local, verbose, generate_all
         print(pan)
         print("")
 
-        with WorkDir(join('competition_infra', 'ctfg')):
+        with WorkDir(join('competition_infra', 'xctf')):
             email = comp_config['admin_email']
             password = comp_config['admin_password']
             if 'CODESPACE_NAME' in os.environ.keys():

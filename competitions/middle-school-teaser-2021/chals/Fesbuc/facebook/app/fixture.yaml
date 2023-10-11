@@ -40,7 +40,7 @@
   pk: 7
 - fields:
     text: Come stay at the Last Place on Earth! You will fall in love with how dark
-      it gets here! No one is around for miles :) http://chal-host.chals.mcpshsf.com/chal_img.jpeg
+      it gets here! No one is around for miles :) https://supreme-eureka-gwg5795p55fw5rv-8200.app.github.dev/chal_img.jpeg
     author: 2
     likers:
     - 0
@@ -89,7 +89,7 @@
   model: fb.userpost
   pk: 5
 - fields:
-    text: Check out my first website! I am so proud of it! http://robotschallenge.chals.mcpshsf.com
+    text: Check out my first website! I am so proud of it! https://supreme-eureka-gwg5795p55fw5rv-8001.app.github.dev
     author: 0
     date_added: '2020-03-06 00:00:00+00:00'
   model: fb.userpost
@@ -99,7 +99,7 @@
     date_added: 2020-01-21 00:00:00+00:00
     post: 2
     text: when will my flight be boarding then? I have my boarding pass attached here.
-      http://chal-host.chals.mcpshsf.com/BoardingPass.png
+      https://supreme-eureka-gwg5795p55fw5rv-8200.app.github.dev/BoardingPass.png
   model: fb.userpostcomment
   pk: 0
 - fields:

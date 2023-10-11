@@ -1,0 +1,34 @@
+{
+    "Fesbuc": {
+        "hash": "8e7120812fea82219a21f9abda0806c6f4fb9df5b7e70ddeb8d88b3d9d2fd8f3",
+        "container_id": "facebook-django-8751957575317",
+        "target_port": 8000,
+        "display": "https://supreme-eureka-gwg5795p55fw5rv-8002.app.github.dev"
+    },
+    "Base64": {
+        "hash": "1490f3f9c913238a126b7568e4c8a9f2af3afeb081b0ffc3f28df1b830ff71d8",
+        "display": "bWFwbGUgc3lydXAKZmxhZ3tiQTVlX3MxeHRZX2Y0dXJ9"
+    },
+    "CabinImage": {
+        "hash": "c83db2ca1c22a281633ed1e1c4e5645b0c006ba56ba65fbc8b5d53af9f02aefe",
+        "chal_file": "chal_img.jpeg"
+    },
+    "CaesarCipher": {
+        "hash": "fb10a46d224d3a9d9f9def6c6b10f435c0932493985c73c453933af878a32bb2",
+        "display": "vyyuc vsuo wbc ckx nsoqy scxd cy xsmo kxiwybo pvkq{xohd_dswo_rkfo_k_wybo_comebo_zkccgybn}"
+    },
+    "RobotsChallenge": {
+        "hash": "b22ddcac651e03b087e70badd3cdfcabe062a3be5546313e750b0c766f9f266f",
+        "container_id": "robots_txt-8749441840621",
+        "target_port": 80,
+        "display": "https://supreme-eureka-gwg5795p55fw5rv-8001.app.github.dev"
+    },
+    "Spectrogram": {
+        "hash": "1037189cfe4533ce752265aa17b7f9e68dfeab44fb92ae38556346ca1acd1de1",
+        "chal_file": "output.wav"
+    },
+    "display_ports": [
+        8002,
+        8001
+    ]
+}
