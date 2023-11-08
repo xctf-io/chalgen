@@ -1,0 +1,5 @@
+- !robots_txt
+  name: RobotsChallenge
+  flag: flag{my_ip_is_104.195.128.0}
+  config:
+    asdf: asdf
