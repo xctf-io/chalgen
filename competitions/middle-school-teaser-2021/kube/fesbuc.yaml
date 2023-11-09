@@ -8,7 +8,7 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - port: 8004
+  - port: 8002
     targetPort: 8000
     protocol: TCP
   selector:
@@ -33,7 +33,7 @@ spec:
     spec:
       containers:
       - name: fesbuc
-        image: facebook-django-379461261
+        image: facebook-django-377491353
         ports:
         - containerPort: 8000
         imagePullPolicy: Never

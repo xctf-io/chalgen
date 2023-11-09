@@ -1,41 +1,41 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: fesbuc-svc
+  name: fred-shared-server-svc
   namespace: challenges
   labels:
-    app: fesbuc
+    app: fred-shared-server
 spec:
   type: LoadBalancer
   ports:
-  - port: 8004
-    targetPort: 8000
+  - port: 8003
+    targetPort: 8080
     protocol: TCP
   selector:
-    app: fesbuc
+    app: fred-shared-server
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: fesbuc-svc
+  name: fred-shared-server-svc
   namespace: challenges
   labels:
-    app: fesbuc
+    app: fred-shared-server
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: fesbuc
+      app: fred-shared-server
   template:
     metadata:
       labels:
-        app: fesbuc
+        app: fred-shared-server
     spec:
       containers:
-      - name: fesbuc
-        image: facebook-django-379461261
+      - name: fred-shared-server
+        image: shell_server-377495549
         ports:
-        - containerPort: 8000
+        - containerPort: 8080
         imagePullPolicy: Never
         securityContext:
           runAsUser: 0

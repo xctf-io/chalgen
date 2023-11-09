@@ -1,41 +1,41 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: fesbuc-svc
+  name: robotschallenge-svc
   namespace: challenges
   labels:
-    app: fesbuc
+    app: robotschallenge
 spec:
   type: LoadBalancer
   ports:
-  - port: 8004
-    targetPort: 8000
+  - port: 8001
+    targetPort: 80
     protocol: TCP
   selector:
-    app: fesbuc
+    app: robotschallenge
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: fesbuc-svc
+  name: robotschallenge-svc
   namespace: challenges
   labels:
-    app: fesbuc
+    app: robotschallenge
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: fesbuc
+      app: robotschallenge
   template:
     metadata:
       labels:
-        app: fesbuc
+        app: robotschallenge
     spec:
       containers:
-      - name: fesbuc
-        image: facebook-django-379461261
+      - name: robotschallenge
+        image: robots_txt-377546445
         ports:
-        - containerPort: 8000
+        - containerPort: 80
         imagePullPolicy: Never
         securityContext:
           runAsUser: 0

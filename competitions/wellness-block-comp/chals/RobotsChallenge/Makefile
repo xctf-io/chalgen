@@ -1,14 +1,14 @@
 build:
-	@docker build . -t robots_txt-8749441840621 -q
+	@docker build . -t robots_txt-382981361
 
 run: build
-	@docker run -p 8080:80 robots_txt-8749441840621
+	@docker run -p 8080:80 robots_txt-382981361
 
 clean:
-	@docker rm -f -v robots_txt-8749441840621
+	@docker rm -f -v robots_txt-382981361
 
 generate-img:
-	@docker run -d --name robots_txt-8749441840621 robots_txt-8749441840621:latest
-	@docker export robots_txt-8749441840621 -o vm.tar.gz
-	@docker rm robots_txt-8749441840621
-	@docker rmi robots_txt-8749441840621
+	@docker run -d --name robots_txt-382981361 robots_txt-382981361:latest
+	@docker export robots_txt-382981361 -o vm.tar.gz
+	@docker rm robots_txt-382981361
+	@docker rmi robots_txt-382981361
