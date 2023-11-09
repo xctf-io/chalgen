@@ -185,7 +185,7 @@ def chal_to_kube_config(chal, registry_base_url, local, port_num, chroot, base_u
         out_port = port_num
         registry_url = chal.container_id
         if 'CODESPACE_NAME' in os.environ.keys():
-            url = f'https://{os.environ["CODESPACE_NAME"]}-{port_num}.preview.app.github.dev'
+            url = f'https://{os.environ["CODESPACE_NAME"]}-{port_num}.app.github.dev'
         else:
             url = f'http://127.0.0.1:{port_num}'
     return {
