@@ -30,20 +30,20 @@ spec:
       containers:
         - env:
             - name: CTFG_ADMIN_EMAIL
-              value: {email}
+              value: admin@admin.com
             - name: CTFG_ADMIN_PASSWORD
-              value: {password}
+              value: CyberC4mp2023!!
             - name: DB_DSN
               value: host=postgres user=postgres password=password sslmode=disable
             - name: DB_TYPE
               value: postgres
             - name: PORT
               value: "8000"
-          image: {image}
+          image: ctfg
           name: ctfg
           ports:
             - containerPort: 8000
-          imagePullPolicy: {policy}
+          imagePullPolicy: Never
       imagePullSecrets:
         - name: ghcr-pull-secret
       restartPolicy: Always

@@ -1,9 +1,9 @@
 {
     "Fesbuc": {
-        "hash": "7cc58a66f67e3c680703e992e3dc4d9ecb875e4fc72095df91025aef22ff37cb",
-        "container_id": "facebook-django-8739168207767",
+        "hash": "5cda2eaa182463eca4dcb5cf8db3142b46549452b61cdcd9d7bd24103815b1f7",
+        "container_id": "facebook-django-377491353",
         "target_port": 8000,
-        "display": "https://supreme-eureka-gwg5795p55fw5rv-8002.app.github.dev"
+        "display": "http://127.0.0.1:8002"
     },
     "Boarding Pass": {
         "hash": "ed503a2dc15b8a7c26aa60e243e26ec4a4ef68dacc3c52149d52dee61847f818",
@@ -18,26 +18,26 @@
         "display": "s mkx dokmr iye wybo sp iye gyevn vsuo, led iye kbo qysxq dy rkfo dy zki... pvkq{coowc_vsuo_iye_uxyg_iyeb_mc}"
     },
     "RobotsChallenge": {
-        "hash": "a84a076f89c6bf3b9a38426d71ae07c07f2d8c2cd931d261c0ec604c9ff9adc1",
-        "container_id": "robots_txt-8739167580398",
+        "hash": "e115d91c9ffcaa7cb37d5f9068c803c87a4ed41484c43061428466891477001e",
+        "container_id": "robots_txt-377546445",
         "target_port": 80,
-        "display": "https://supreme-eureka-gwg5795p55fw5rv-8001.app.github.dev"
+        "display": "http://127.0.0.1:8001"
     },
     "Fred Shared Server": {
-        "hash": "fb318bdf96b448d433dadd698598be8f25a0dc186cbf147b38cfa0e87e708206",
-        "container_id": "shell_server-8739167580539",
+        "hash": "01b6f73eafa75c58dc026e527a4f3920c528b5a6458cb7e91d77c7ebc2886b69",
+        "container_id": "shell_server-377495549",
         "target_port": 8080,
-        "display": "https://supreme-eureka-gwg5795p55fw5rv-8003.app.github.dev"
+        "display": "http://127.0.0.1:8003"
     },
     "Police Interview": {
         "hash": "40379eddd8ea148b3d051b44ca785995ab999d9e40f47e26b1891071ee82e6bf",
         "chal_file": "PoliceInterview.docx"
     },
     "Inn Website": {
-        "hash": "f1454589a02ccb64ff9f7079622b2b6c3c221c188619b328d4561a12aa689862",
-        "container_id": "static_site-8739167597827",
+        "hash": "8378c48f7e186e63a596d24aa0235b851a05d50506505b13cf07b20760a7c10b",
+        "container_id": "static_site-377556161",
         "target_port": 80,
-        "display": "https://supreme-eureka-gwg5795p55fw5rv-8004.app.github.dev"
+        "display": "http://127.0.0.1:8004"
     },
     "display_ports": [
         8002,

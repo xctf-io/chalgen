@@ -49,7 +49,7 @@
   model: auth.user
   pk: 9
 - fields:
-    text: Guys check out my new gaming setup! https://supreme-eureka-gwg5795p55fw5rv-8200.app.github.dev/chal_img.jpeg
+    text: Guys check out my new gaming setup! http://127.0.0.1:8200/chal_img.jpeg
     author: 2
     likers:
     - 0
@@ -89,13 +89,13 @@
   pk: 4
 - fields:
     text: Cybercriminal's server was found! Please tip us if you find further information
-      https://supreme-eureka-gwg5795p55fw5rv-8001.app.github.dev
+      http://127.0.0.1:8003
     author: 9
     date_added: '2020-03-06 00:00:00+00:00'
   model: fb.userpost
   pk: 5
 - fields:
-    text: The criminal left me a voice message! https://supreme-eureka-gwg5795p55fw5rv-8200.app.github.dev/output.wav
+    text: The criminal left me a voice message! http://127.0.0.1:8200/output.wav
     author: 4
     date_added: '2020-03-06 00:00:00+00:00'
   model: fb.userpost

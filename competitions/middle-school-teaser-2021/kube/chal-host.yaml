@@ -1,41 +1,41 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: fesbuc-svc
+  name: chal-host-svc
   namespace: challenges
   labels:
-    app: fesbuc
+    app: chal-host
 spec:
   type: LoadBalancer
   ports:
-  - port: 8004
-    targetPort: 8000
+  - port: 8200
+    targetPort: 80
     protocol: TCP
   selector:
-    app: fesbuc
+    app: chal-host
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: fesbuc-svc
+  name: chal-host-svc
   namespace: challenges
   labels:
-    app: fesbuc
+    app: chal-host
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: fesbuc
+      app: chal-host
   template:
     metadata:
       labels:
-        app: fesbuc
+        app: chal-host
     spec:
       containers:
-      - name: fesbuc
-        image: facebook-django-379461261
+      - name: chal-host
+        image: chal_host
         ports:
-        - containerPort: 8000
+        - containerPort: 80
         imagePullPolicy: Never
         securityContext:
           runAsUser: 0
