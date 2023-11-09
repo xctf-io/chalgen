@@ -1,7 +1,7 @@
 FROM python:2.7.17-buster as builder
 ADD app /app
 WORKDIR /app
-RUN pip install -r requirements.txt
+RUN pip install --no-build-isolation -r requirements.txt
 RUN echo no | python manage.py syncdb
 RUN python manage.py loaddata fixture.yaml
 
@@ -11,7 +11,7 @@ RUN mkdir /facebook
 WORKDIR /facebook
 
 ADD app/requirements.txt /facebook/requirements.txt
-RUN pip install -r requirements.txt
+RUN pip install --no-build-isolation -r requirements.txt
 
 ADD app/fb /facebook/fb
 ADD app/purepython /facebook/purepython

@@ -204,7 +204,7 @@ def create_lock(competition_folder, chal_lookup, chal_trees):
 
 def create_ctfg(comp_folder, reg_url, admin_email, admin_password, local):
     ctfg_folder = join(comp_folder, 'ctfg')
-    template_dir = join('competition_infra', 'ctfg_kube')
+    template_dir = join('competition_infra', 'xctf_kube')
 
     if os.path.exists(ctfg_folder):
         shutil.rmtree(ctfg_folder)
