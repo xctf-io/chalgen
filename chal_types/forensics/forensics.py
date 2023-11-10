@@ -62,25 +62,25 @@ class URLEvidence(ChallengeEnvironment):
         self.display = self.get_value("url")
 
 
-class BlankTextFile(GeneratedChallenge):
-    yaml_tag = u'!blank_text_file'
-    __doc__ = """
-    Blank Text File
+# class BlankTextFile(GeneratedChallenge):
+#     yaml_tag = u'!blank_text_file'
+#     __doc__ = """
+#     Blank Text File
 
-    Config:
-        None
-    """
+#     Config:
+#         None
+#     """
 
-    def gen(self, chal_dir):
-        binary_flag = binary_text(self.flag)
+#     def gen(self, chal_dir):
+#         binary_flag = binary_text(self.flag)
 
-        with WorkDir(chal_dir):
-            with open("empty.txt", "w", encoding="utf-8") as f:
-                for character in binary_flag:
-                    if character == '0':
-                        f.write(" ")
-                    elif character == '1':
-                        f.write(" ")
+#         with WorkDir(chal_dir):
+#             with open("empty.txt", "w", encoding="utf-8") as f:
+#                 for character in binary_flag:
+#                     if character == '0':
+#                         f.write(" ")
+#                     elif character == '1':
+#                         f.write(" ")
 
 class LockedExcel(GeneratedChallenge):
     yaml_tag = u'!locked_excel'
