@@ -83,7 +83,7 @@ python main.py comp gen -f <relative path of the competition> -r <registry to pu
 
 This command builds all of the Kubernetes files needed to deploy to a prexisting Kubernetes cluster. Upon completion, a graph of the challenges will be generated. The graph will be located at `evidence_graph.png` file in the competition folder.
 
-Note: If you are using an M1 or M2 Macbook, you must put `export DOCKER_DEFAULT_PLATFORM=linux/amd64` in your `~/.zshrc` or `~/.bashrc` file. This is because the docker images must be built for linux/amd64 and not arm64.
+Note: If you are using an M1 or M2 Macbook, you must put `export DOCKER_DEFAULT_PLATFORM=linux/amd64` in your `~/.zshrc` or `~/.bashrc` file. This is because the docker images must be built for linux/amd64 and not arm64. Change this to `export DOCKER_DEFAULT_PLATFORM=linux/arm64` if you are running locally.
 
 ### Build and run a competition locally
 

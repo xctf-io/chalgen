@@ -1,0 +1,3 @@
+
+tasks:
+  - init: bash scripts/install_gitpod.sh

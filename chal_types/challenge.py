@@ -10,6 +10,7 @@ from slugify import slugify
 from .utils import WorkDir, get_open_port, logger
 from rich import print
 from rich.status import Status
+from rich.panel import Panel
 
 yaml = ruamel.yaml.YAML()
 
@@ -184,7 +185,7 @@ def chal_to_kube_config(chal, registry_base_url, local, port_num, chroot, base_u
         out_port = port_num
         registry_url = chal.container_id
         if 'CODESPACE_NAME' in os.environ.keys():
-            url = f'https://{os.environ["CODESPACE_NAME"]}-{port_num}.preview.app.github.dev'
+            url = f'https://{os.environ["CODESPACE_NAME"]}-{port_num}.app.github.dev'
         else:
             url = f'http://127.0.0.1:{port_num}'
     return {
@@ -287,7 +288,7 @@ class ChallengeHost(object):
                 chal_name=self.container_id, chal_run_options=''))
 
         with WorkDir(self.host_dir), Status(f"[cyan] Building Challenge Host", spinner_style="cyan"):
-            subprocess.check_output(['make', 'build'])
+             process = subprocess.Popen(["make", "build"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True, shell=True)
         print(f":confetti_ball: Built Challenge Host :confetti_ball:")
 
 
@@ -348,15 +349,12 @@ class GeneratedChallenge(object):
         with WorkDir(docker_dir), Status(f"[cyan] Building Container for [bold]{self.name}[/bold]", spinner_style="cyan"):
             try:
                 process = subprocess.Popen(["make", "build"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True, shell=True)
-                
-                # Read and print standard output line by line
-                for line in process.stdout:
-                    print("Standard Output:", line, end="")
-                
                 # Read and print standard error line by line
+                out = ""
                 for line in process.stderr:
-                    print("Standard Error:", line, end="")
+                    out += line
                 
+                print(Panel(out, title="Build Output", border_style="cyan"))
                 # Wait for the command to finish
                 process.wait()
                 
@@ -365,9 +363,10 @@ class GeneratedChallenge(object):
                     print("Command completed successfully.")
                 else:
                     print(f"Command failed with exit code {process.returncode}")
+                print(f":star2: Built Container for [bold]{self.name}[bold] :star2:")
             except Exception as e:
                 print(f"An error occurred: {str(e)}")
-                print(f":star2: Built Container for [bold]{self.name}[bold] :star2:")
+                
 
     def get_value(self, key, required=True):
         if key not in self.config.keys():
