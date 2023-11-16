@@ -408,29 +408,8 @@ def gen(ctx, competition_folder, reg_url, base_url, local, verbose, generate_all
             shutil.rmtree(kube_dir)
         mkdir_p(kube_dir)
 
-        with open(competition_folder + '/Home.md', 'r+') as file:
-            text = file.read().replace('<ENTRY_POINT>','https://' + os.environ["CODESPACE_NAME"] + '-8002.app.github.dev')
-            file.truncate(0)
-            file.write(text)
-
-        fwrite(competition_folder, comp_config['homepage'], join(
-            'competition_infra', 'xctf'), 'Home.md', jinja=True)
-        create_ctfg(competition_folder, reg_url,
-                    comp_config['admin_email'], comp_config['admin_password'], local)
-        configs = generate_kube_deploy(kube_dir, chal_trees, local, reg_url, base_url)
-        with Status("[bold blue] Applying Kubernetes files", spinner="line", spinner_style="blue"):
-            subprocess.check_output(
-                f'kubectl apply -f {kube_dir} -n challenges'.split())
-            subprocess.check_output(
-                f'kubectl apply -f {join(competition_folder, "ctfg")} -n challenges'.split())
-            subprocess.run(
-                f'kubectl rollout restart -f {kube_dir} -n challenges'.split(), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-            subprocess.run(
-                f'kubectl rollout restart -f {join(competition_folder, "ctfg")} -n challenges'.split(), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-            generate_challenge_graph(chal_trees, competition_folder)
-
         name_to_index = {}
-        full_text = "Entrypoints\n"
+        entry_urls = []
         for i, config in enumerate(configs):
             name_to_index[config['name']] = i
         for entrypoint in entrypoints:
@@ -447,7 +426,29 @@ def gen(ctx, competition_folder, reg_url, base_url, local, verbose, generate_all
                 entry_url = host_url + '/' + chal_gen.get_value('file')
             else:
                 entry_url = configs[name_to_index[slug]]['url']
-            full_text += f" - {entrypoint}: [bold][bright_white]{entry_url}[/bright_white][/bold]\n"
+            entry_urls.append(entry_url)
+
+        entry_urls_str = "\n".join(entry_urls)[:-1]
+        fwrite(competition_folder, comp_config['homepage'], join(
+            'competition_infra', 'xctf'), 'Home.md', jinja=True, entrypoints=entry_urls_str)
+        create_ctfg(competition_folder, reg_url,
+                    comp_config['admin_email'], comp_config['admin_password'], local)
+        configs = generate_kube_deploy(kube_dir, chal_trees, local, reg_url, base_url)
+        
+        with Status("[bold blue] Applying Kubernetes files", spinner="line", spinner_style="blue"):
+            subprocess.check_output(
+                f'kubectl apply -f {kube_dir} -n challenges'.split())
+            subprocess.check_output(
+                f'kubectl apply -f {join(competition_folder, "ctfg")} -n challenges'.split())
+            subprocess.run(
+                f'kubectl rollout restart -f {kube_dir} -n challenges'.split(), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            subprocess.run(
+                f'kubectl rollout restart -f {join(competition_folder, "ctfg")} -n challenges'.split(), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            generate_challenge_graph(chal_trees, competition_folder)
+
+        full_text = "Entrypoints\n"
+        for entry_url in entry_urls:
+           full_text += f" - {entrypoint}: [bold][bright_white]{entry_url}[/bright_white][/bold]\n"
 
         ctfg_url = ""
         if local:
@@ -457,6 +458,7 @@ def gen(ctx, competition_folder, reg_url, base_url, local, verbose, generate_all
                 ctfg_url = 'http://127.0.0.1:8000'
         else:
             ctfg_url = f'https://ctf.chals.{base_url}'
+
         full_text += f"\nCTFg: [bold][bright_white]{ctfg_url}[/bright_white][/bold]"
 
         if local:
