@@ -6,9 +6,9 @@ metadata:
   labels:
     app: madlibs
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
-  - port: 8003
+  - port: 80
     targetPort: 8080
     protocol: TCP
   selector:
@@ -33,12 +33,12 @@ spec:
     spec:
       containers:
       - name: madlibs
-        image: temp_inj-8791128411323
+        image: gcr.io/mcps-hsf-316519/madlibs:latest
         ports:
         - containerPort: 8080
-        imagePullPolicy: Never
+        imagePullPolicy: Always
         securityContext:
-          runAsUser: 0
+          readOnlyRootFilesystem: false
           privileged: true
       imagePullSecrets:
       - name: regcred

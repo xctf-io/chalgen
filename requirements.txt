@@ -22,10 +22,8 @@ jinja2
 tk
 gtts
 pydub
-pygraphviz
 pyzipper
 scapy
 dirhash
 openai
 openpyxl
-pyngrok

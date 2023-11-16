@@ -32,4 +32,4 @@ SQLAlchemy==1.0.13        # via flask-sqlalchemy
 Werkzeug==0.11.10         # via flask, flask-wtf
 WTForms==2.1              # via flask-wtf
 
-pyyaml
+pyyaml==5.3.1

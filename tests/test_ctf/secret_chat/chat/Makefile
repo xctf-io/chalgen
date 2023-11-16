@@ -1,5 +1,5 @@
 build:
-	@docker build . -t secret_chat-8792829705541 -q
+	@docker build  --platform linux/amd64 . -t secret_chat-8792829705541 -q
 
 run: build
 	@docker run -p 8080:5000 secret_chat-8792829705541

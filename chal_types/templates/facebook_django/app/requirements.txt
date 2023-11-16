@@ -1,3 +1,3 @@
 django==1.6.2
 Pillow
-pyyaml
+pyyaml==5.3.1

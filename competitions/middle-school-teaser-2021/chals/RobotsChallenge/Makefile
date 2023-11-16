@@ -1,5 +1,9 @@
 build:
+<<<<<<< Updated upstream
 	@docker build . -t robots_txt-377546445
+=======
+	@docker build  --platform linux/amd64 . -t robots_txt-8739167580398 -q
+>>>>>>> Stashed changes
 
 run: build
 	@docker run -p 8080:80 robots_txt-377546445

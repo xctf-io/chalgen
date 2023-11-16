@@ -1,5 +1,5 @@
 build:
-	@docker build . -t chal_host
+	@docker build  --platform linux/amd64 . -t chal_host
 
 run: build
 	@docker run  chal_host

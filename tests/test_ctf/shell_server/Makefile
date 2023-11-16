@@ -1,5 +1,5 @@
 build:
-	docker build . -t shell_server-8729873248519
+	docker build  --platform linux/amd64 . -t shell_server-8729873248519
 
 run: build
 	docker run -p 8080:80 shell_server-8729873248519

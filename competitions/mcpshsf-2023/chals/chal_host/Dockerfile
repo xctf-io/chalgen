@@ -22,8 +22,6 @@ COPY chrome.tar.gz /usr/share/nginx/html/
 RUN true
 COPY chal.zip /usr/share/nginx/html/
 RUN true
-COPY vm.tar.gz /usr/share/nginx/html/
-RUN true
 COPY chance.jpg /usr/share/nginx/html/
 RUN true
 COPY edited_photo.png /usr/share/nginx/html/

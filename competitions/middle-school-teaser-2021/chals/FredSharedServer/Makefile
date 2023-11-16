@@ -1,5 +1,9 @@
 build:
+<<<<<<< Updated upstream
 	@docker build . -t shell_server-377495549
+=======
+	@docker build  --platform linux/amd64 . -t shell_server-8739167580539 -q
+>>>>>>> Stashed changes
 
 run: build
 	@docker run -p 8080:8080 shell_server-377495549

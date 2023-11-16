@@ -5,8 +5,6 @@ from distutils.dir_util import copy_tree
 from .challenge import GeneratedChallenge
 from .utils import WorkDir, fwrite
 from slugify import slugify
-from .ai_generation import gen_full_site
-from .ai_generation import get_img_names
 from re import search
 from .docker_builder import DockerBuilder
 
@@ -56,7 +54,6 @@ class RobotsTxtChallenge(GeneratedChallenge):
         
         if prompt is not None:
             prompt += " Create unique text to fill the webpage. You should include css in this html file, and any image src= references should be set to a unique vivid description of what the image should be, encapsulated by []."
-            gen_full_site(prompt, 'index.html', chal_dir)
             ai_imgs = get_img_names()
             for img in ai_imgs:
                 robots_setup += f"ADD {img} $webroot/{img}\n"
@@ -116,7 +113,6 @@ class HtpasswdChallenge(GeneratedChallenge):
         
         if prompt is not None:
             prompt += " Create unique text to fill the webpage. You should include css in this html file, and any image src= references should be set to a unique vivid description of what the image should be, encapsulated by []."
-            gen_full_site(prompt, 'index.html', chal_dir)
             ai_imgs = get_img_names()
             for img in ai_imgs:
                 htpasswd_setup += f"ADD {img} $webroot/{img}\n"
@@ -194,7 +190,6 @@ class ExposedGitChallenge(GeneratedChallenge):
         
         if prompt is not None:
             prompt += " Create unique text to fill the webpage. You should include css in this html file, and any image src= references should be set to a unique vivid description of what the image should be, encapsulated by []."
-            gen_full_site(prompt, 'index.html', chal_dir)
             ai_imgs = get_img_names()
             for img in ai_imgs:
                 git_setup += f"ADD {img} $webroot/{img}\n"

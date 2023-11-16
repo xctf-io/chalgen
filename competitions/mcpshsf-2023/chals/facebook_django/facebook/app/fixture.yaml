@@ -35,8 +35,7 @@
   pk: 6
 - fields:
     text: Viewer Discretion Advised! Chance has been found dead! Please contact the
-      authorities with relevant information. 
-      https://just-luk-crispy-space-couscous-jgp4j5qwrjpcq76-8200.preview.app.github.dev/chance.jpg
+      authorities with relevant information. http://chal-host.chals.mcpshsf.com/chance.jpg
     author: 6
     likers:
     - 4
@@ -48,8 +47,7 @@
     text: guys i just wanted to say that my boss is an awful human being he never
       does any of his own work so i do all the dirty work and ngl im lowkey glad he's
       gone. Here's his office it's so gross and he just left for another party and
-      i'm here cleaning it up. Thanks for listening to my ted talk. 
-      https://just-luk-crispy-space-couscous-jgp4j5qwrjpcq76-8200.preview.app.github.dev/edited_photo.png
+      i'm here cleaning it up. Thanks for listening to my ted talk. http://chal-host.chals.mcpshsf.com/edited_photo.png
     author: 1
     likers:
     - 3
@@ -69,8 +67,8 @@
   model: fb.userpost
   pk: 2
 - fields:
-    text: 'guys check out our new robot! isnt it amazing? https://just-luk-crispy-space-couscous-jgp4j5qwrjpcq76-8200.preview.app.github.dev/_robots.png
-      https://just-luk-crispy-space-couscous-jgp4j5qwrjpcq76-8200.preview.app.github.dev/chal.png '
+    text: 'guys check out our new robot! isnt it amazing? http://chal-host.chals.mcpshsf.com/_robots.png
+      http://chal-host.chals.mcpshsf.com/chal.png '
     author: 2
     likers:
     - 3
@@ -82,16 +80,14 @@
   pk: 3
 - fields:
     text: here's the link to my new project! (i have some encrypted files from the
-      ongoing murder investigation of chance, so pls dont share) 
-      https://just-luk-crispy-space-couscous-jgp4j5qwrjpcq76-8002.preview.app.github.dev
+      ongoing murder investigation of chance, so pls dont share) http://fileshare-flask.chals.mcpshsf.com
     author: 2
     date_added: '2020-03-06 00:00:00+00:00'
   model: fb.userpost
   pk: 4
 - fields:
     text: guys look at this Legendary Stupendous Beautiful frying pan i just bought
-      im so excited! 
-      https://just-luk-crispy-space-couscous-jgp4j5qwrjpcq76-8200.preview.app.github.dev/chal-img.png
+      im so excited! http://chal-host.chals.mcpshsf.com/chal-img.png
     author: 4
     likers:
     - 3
@@ -100,7 +96,7 @@
   pk: 5
 - fields:
     text: I made my first website! Go check it out and let me know if you like it
-      https://just-luk-crispy-space-couscous-jgp4j5qwrjpcq76-8003.preview.app.github.dev
+      http://madlibs.chals.mcpshsf.com
     author: 3
     likers:
     - 1

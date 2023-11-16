@@ -1,5 +1,5 @@
 build:
-	@docker build . -t jekyll-blog-8792530897949 -q
+	@docker build  --platform linux/amd64 . -t jekyll-blog-8792530897949 -q
 
 run: build
 	@docker run -p 8081:80 jekyll-blog-8792530897949

@@ -11,7 +11,6 @@ import logging
 from rich.logging import RichHandler
 from dirhash import dirhash
 import random
-import openpyxl
 
 from chal_types.text_transforms import SHA256
 

@@ -1,5 +1,5 @@
 build:
-	docker build . -t facebook-8778991352793
+	docker build  --platform linux/amd64 . -t facebook-8778991352793
 
 run: build
 	docker run -p 8081:8000 facebook-8778991352793

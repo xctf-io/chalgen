@@ -35,13 +35,13 @@ spec:
               value: /var/lib/postgresql/data/db
             - name: POSTGRES_PASSWORD
               value: password
-          image: postgres
+          image: postgres:15
           name: postgres
           ports:
             - containerPort: 5432
           resources: {}
           volumeMounts:
-            - mountPath: /var/lib/postgresql/data/db
+            - mountPath: /var/lib/postgresql/data/
               name: db
       restartPolicy: Always
       volumes:

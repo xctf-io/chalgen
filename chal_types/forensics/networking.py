@@ -12,7 +12,7 @@ from os.path import join, realpath, dirname, basename, exists
 import random
 from ..text_transforms import text_transforms
 
-from scapy.all import rdpcap, wrpcap
+#from scapy.all import rdpcap, wrpcap
 
 class PCAPLogin(GeneratedChallenge):
     yaml_tag = u'!pcap_login'

@@ -13,7 +13,6 @@ chalgen generates challenges and evidence for CTFs using a tree based format
 ## Prerequisites
 Note: This is **not required** for Github Codespaces. Everything will be installed automatically.
 
-- Follow the documentation [here](https://pygraphviz.github.io/documentation/stable/install.html) to install `pygraphviz` for your system
 - Install ffmpeg from [here](https://ffmpeg.org/download.html)
 - Install Docker from [here](https://docs.docker.com/engine/install/)
 - Install kubectl from [here](https://kubernetes.io/docs/tasks/tools/)
