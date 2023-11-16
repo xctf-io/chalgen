@@ -1,0 +1,6 @@
+- !caesar_cipher
+  name: CaesarCipher
+  flag: "flag{next_time_have_a_more_secure_password}"
+  config:
+    shift: 10
+    addl_text: "looks like mrs san diego isnt so nice anymore"

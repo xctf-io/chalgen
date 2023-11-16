@@ -1,0 +1,6 @@
+- !spectrogram
+  name: "Spectrogram"
+  flag: "flag{mus1c_m4j0r5_c4n_h4ck_t00}"
+  config:
+    orig_img: "flag.png"
+    output_wav: "output.wav"

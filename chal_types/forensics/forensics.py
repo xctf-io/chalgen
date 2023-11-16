@@ -61,6 +61,27 @@ class URLEvidence(ChallengeEnvironment):
     def gen(self, chal_dir):
         self.display = self.get_value("url")
 
+
+# class BlankTextFile(GeneratedChallenge):
+#     yaml_tag = u'!blank_text_file'
+#     __doc__ = """
+#     Blank Text File
+
+#     Config:
+#         None
+#     """
+
+#     def gen(self, chal_dir):
+#         binary_flag = binary_text(self.flag)
+
+#         with WorkDir(chal_dir):
+#             with open("empty.txt", "w", encoding="utf-8") as f:
+#                 for character in binary_flag:
+#                     if character == '0':
+#                         f.write(" ")
+#                     elif character == '1':
+#                         f.write(" ")
+
 class LockedExcel(GeneratedChallenge):
     yaml_tag = u'!locked_excel'
     __doc__ = """
@@ -84,7 +105,7 @@ class LockedExcel(GeneratedChallenge):
 
             for idx, letter in enumerate(flag):
                 row = random.randint(1, 10)
-                column = idx + 1  # Start from column A
+                column = idx + 1
                 place_letter_highlighted(sheet1.cell(row=row, column=column), letter)
 
                 iterations = random.randint(1, 5)

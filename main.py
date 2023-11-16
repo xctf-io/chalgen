@@ -407,6 +407,12 @@ def gen(ctx, competition_folder, reg_url, base_url, local, verbose, generate_all
         if os.path.exists(kube_dir):
             shutil.rmtree(kube_dir)
         mkdir_p(kube_dir)
+
+        with open(competition_folder + '/Home.md', 'r+') as file:
+            text = file.read().replace('<ENTRY_POINT>','https://' + os.environ["CODESPACE_NAME"] + '-8002.app.github.dev')
+            file.truncate(0)
+            file.write(text)
+
         fwrite(competition_folder, comp_config['homepage'], join(
             'competition_infra', 'xctf'), 'Home.md', jinja=True)
         create_ctfg(competition_folder, reg_url,
