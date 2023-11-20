@@ -1,5 +1,9 @@
 build:
+<<<<<<< Updated upstream
 	@docker build . -t facebook-django-377491353
+=======
+	@docker build  --platform linux/amd64 . -t facebook-django-8739168207767 -q
+>>>>>>> Stashed changes
 
 run: build
 	@docker run -p 8081:8000 facebook-django-377491353

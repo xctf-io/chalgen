@@ -1,6 +1,6 @@
 - !xor
   name: Multi Byte Xor
-  flag: flag{this_is_a_test}
+  flag: flag{this_is_a_flag}
   config:
-    key: 736f5f636f6f6c5f796f
-    text: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam elementum nulla sit amet orci efficitur tempor. Vestibulum imperdiet dictum sapien, ut bibendum ipsum faucibus sed. In hac habitasse platea dictumst. Etiam iaculis maximus orci, a accumsan metus. Suspendisse gravida sit amet massa id accumsan. Aenean vitae tortor iaculis, dictum nunc et, vestibulum augue. Integer in tellus quis massa faucibus consectetur sed aliquet ligula. Nam nec nulla vitae enim pharetra bibendum. Sed rhoncus, augue eget fringilla pharetra, lectus enim aliquet lorem, at porta odio est tempor turpis. Morbi in mattis justo. Fusce eget diam et nunc lacinia pulvinar. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi ut nulla quis neque pharetra iaculis. Nulla iaculis sagittis ex, vitae tincidunt lacus semper tincidunt. Curabitur odio nulla, finibus sit amet leo quis, feugiat auctor justo.
+    key: c4tz
+    text: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam elementum nulla sit amet orci efficitur tempor. Vestibulum imperdiet dictum sapien, ut bibendum ipsum faucibus sed. In hac habitasse platea dictumst. Etiam iaculis maximus orci, a accumsan metus.

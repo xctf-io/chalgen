@@ -1,5 +1,5 @@
 build:
-	docker build . -t hash_ext-89788385615
+	docker build  --platform linux/amd64 . -t hash_ext-89788385615
 
 run: build
 	docker run -p 8080:80 hash_ext-89788385615

@@ -1,6 +1,6 @@
 - !vigenere
         name: Vigenere
-        flag: "flag{cr3d5_4r3_u53fu1_w0w}"
+        flag: "flag{you_solved_the_vigenere_challenge}"
         config:
           key: "smores"
-          addl_text: "u = preetho, pass = sm0r3s_w4rs!!"
+          addl_text: "a more challenging cipher"

@@ -1,5 +1,5 @@
 build:
-	docker build . -t chal_host-8778991352829
+	docker build  --platform linux/amd64 . -t chal_host-8778991352829
 
 run: build
 	docker run  chal_host-8778991352829

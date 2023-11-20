@@ -5,7 +5,6 @@ import os
 import signal
 import time
 import ruamel.yaml
-import pygraphviz as pgv
 import shutil
 from slugify import slugify
 from chal_types.utils import WorkDir, fwrite, get_cache_state, get_challenge_hash, set_used_ports
@@ -97,9 +96,9 @@ def generate_challenge_graph(trees, competition_folder):
 
     formatted_edges = "\n".join(edges)
     graph = f'digraph {{\n{formatted_edges}\n}}'
-    G = pgv.AGraph(graph, strict=True, rankdir="LR")
-    G.layout(prog='dot')
-    G.draw(join(competition_folder, 'evidence_graph.png'))
+    # G = pgv.AGraph(graph, strict=True, rankdir="LR")
+    # G.layout(prog='dot')
+    # G.draw(join(competition_folder, 'evidence_graph.png'))
 
 
 def get_chal_path_lookup(chals_folder):
@@ -217,14 +216,14 @@ def create_ctfg(comp_folder, reg_url, admin_email, admin_password, local):
     with WorkDir(join('competition_infra', 'xctf')), Status('[cyan] Building [bold]CTFg[/bold]', spinner_style="cyan"):
         if local:
             subprocess.check_output(
-                'docker build -q -t ctfg:latest .'.split())
+                'docker build  --platform linux/amd64 -q -t ctfg:latest .'.split())
         else:
             image = f'{reg_url}ctfg:latest'
             out_port = 80
             type = 'ClusterIP'
             policy = 'Always'
             subprocess.check_output(
-                f'docker build -t {reg_url}ctfg:latest -q .'.split())
+                f'docker build  --platform linux/amd64 -t {reg_url}ctfg:latest -q .'.split())
             subprocess.check_output(
                 f'docker push {reg_url}ctfg:latest'.split())
     fwrite(template_dir, 'ctfg-deployment.yaml', ctfg_folder, 'ctfg-deployment.yaml',

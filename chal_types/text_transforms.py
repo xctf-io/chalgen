@@ -171,7 +171,7 @@ def encryptDecrypt(inpString, xorKey):
 
 
 def xor_text(string, key):
-    return "".join([chr(ord(c1) ^ ord(c2)) for c1, c2 in zip(string, key*(len(string) / len(key) + 1))])
+    return "".join([chr(ord(c1) ^ ord(c2)) for c1, c2 in zip(string, key*int(len(string) / len(key) + 1))])
 
 def pad(s, block_size):
     return s + (block_size - len(s) % block_size) * chr(block_size - len(s) % block_size)

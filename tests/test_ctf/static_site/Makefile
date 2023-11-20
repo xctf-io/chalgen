@@ -1,5 +1,5 @@
 build:
-	docker build . -t static_site-8728970303067
+	docker build  --platform linux/amd64 . -t static_site-8728970303067
 
 run: build
 	docker run -p 8080:80 static_site-8728970303067

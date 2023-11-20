@@ -6,9 +6,9 @@ metadata:
   labels:
     app: corncobs-sus-website
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
-  - port: 8001
+  - port: 80
     targetPort: 80
     protocol: TCP
   selector:
@@ -33,11 +33,11 @@ spec:
     spec:
       containers:
       - name: corncobs-sus-website
-        image: robots_txt-8791128532041
+        image: gcr.io/mcps-hsf-316519/corncobs-sus-website:latest
         ports:
         - containerPort: 80
-        imagePullPolicy: Never
+        imagePullPolicy: Always
         securityContext:
-          runAsUser: 0
+          readOnlyRootFilesystem: false
       imagePullSecrets:
       - name: regcred

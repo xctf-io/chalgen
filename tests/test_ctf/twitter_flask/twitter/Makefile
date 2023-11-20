@@ -1,5 +1,5 @@
 build:
-	docker build . -t twitter-8786330985069
+	docker build  --platform linux/amd64 . -t twitter-8786330985069
 
 run: build
 	docker run  twitter-8786330985069

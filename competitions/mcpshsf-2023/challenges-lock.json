@@ -1,16 +1,16 @@
 {
     "Twitter Flask": {
-        "hash": "d7403c179f0914f67320ecb6d0f966e2734e8f909330afd2362a116a774af9bb",
-        "container_id": "twitter-8791129116084",
+        "hash": "1068f979d099d9c04c5052e358f4e9d997d691a52b0d217b71929e3e8e025d45",
+        "container_id": "twitter-343512469",
         "target_port": 5000,
-        "display": "https://just-luk-crispy-space-couscous-jgp4j5qwrjpcq76-8014.preview.app.github.dev"
+        "display": "http://twitter-flask.chals.mcpshsf.com"
     },
     "Caesar Cipher": {
         "hash": "c1861e553194dfea86821f4321627d1bc1cb49a682184e6caeb036937b27da6d",
         "display": "sw mywsxq kpdob iye pvkq{k_fobi_lkcsm_mkockb_mszrob}"
     },
     "Single Byte Xor": {
-        "hash": "52b10ca7e40565547cd713255f5b437ab3dd6f879c38e04e37a95947fdc7969a",
+        "hash": "2239d1e771f868e2a83d4d3964f8483caf81c81fdb98cff616b3730fbe418741",
         "display": "08020f09151d5d0a5f035d001a5a1c17311c5e0d051300011e0b424e030f170c0b4e060be281b71d4e041b1d1a4e1e020f170700094e260b0f1c1a061c010d054e190607020b4e27e281b7034e060b1c0b4e0a010700094e0f02024e06071d4e19011c054e08011c4e060703"
     },
     "Base64": {
@@ -18,19 +18,19 @@
         "display": "dSA9IGthcnN0LCBwYXNzID0gRVNTX2Ywcl90aDNfdzFuCmZsYWd7Y3IzZDVfNHIzX3U1M2Z1MV93MHd9"
     },
     "Corncobs Sus Website": {
-        "hash": "601800e13f8361fbbd42052a72c9b5cc7396facbdb0e4fc6a7c54f49de7c5216",
-        "container_id": "robots_txt-8791128532041",
+        "hash": "1c64618d8d31acc4011ba8dc673df743b32bfcf7f9fe5b315f8b21dd49e89b41",
+        "container_id": "robots_txt-343488805",
         "target_port": 80,
-        "display": "https://just-luk-crispy-space-couscous-jgp4j5qwrjpcq76-8001.preview.app.github.dev"
+        "display": "http://corncobs-sus-website.chals.mcpshsf.com"
     },
     "facebook django": {
-        "hash": "2cf6aa320360775d1b9840b2137451ee5e6a06544a0bd073fa5ff1be82ac5a12",
-        "container_id": "facebook-django-8791128483339",
+        "hash": "88e0314631d95b50da4cb5f02a3d3e4115b0784097464b1761273cbd249ea5ff",
+        "container_id": "facebook-django-343478729",
         "target_port": 8000,
-        "display": "https://just-luk-crispy-space-couscous-jgp4j5qwrjpcq76-8004.preview.app.github.dev"
+        "display": "http://facebook-django.chals.mcpshsf.com"
     },
     "Dead Chance Exif": {
-        "hash": "b9a50e75c61ada0012f5b97eb27394bb42c3345632b0a69a68f3ff30f7574e79",
+        "hash": "5226544345cde7713d8ac16d4d104b55b190f09ec667c3b2d3cacd6a633d566d",
         "chal_file": "chance.jpg"
     },
     "Open Image in Notepad": {
@@ -49,10 +49,10 @@
         ]
     },
     "Fileshare Flask": {
-        "hash": "da857fd3585d36c88bd7f99ef6b0557ff7eb088f8e4d003eefd24563d3a85b30",
-        "container_id": "fileshare-flask-8791128532902",
+        "hash": "b93729490915fb139984401f4b3aa745c8b5bea156c7f82970a26cc6cd95e33d",
+        "container_id": "fileshare-flask-343629477",
         "target_port": 8000,
-        "display": "https://just-luk-crispy-space-couscous-jgp4j5qwrjpcq76-8002.preview.app.github.dev"
+        "display": "http://fileshare-flask.chals.mcpshsf.com"
     },
     "Encrypted Zip": {
         "hash": "b8bc1b7c3dbe2cbd95a5d52807179bc7211cfe3d8ce7ee9b5df9ecfab8ddbdb0",
@@ -71,7 +71,7 @@
         "chal_file": "edited_photo.png"
     },
     "Virtual Machine": {
-        "hash": "f08346fc7e41046dd342c7443d0511a2348b426cff50fded298c1a54f92bf1cd",
+        "hash": "8b61e08e2f8da23fae38bb0de999fce1f8629788303fcf572cfa11c08c1973e2",
         "chal_file": "vm.tar.gz"
     },
     "Chromium History": {
@@ -83,16 +83,16 @@
         "chal_file": "chal.zip"
     },
     "MadLibs": {
-        "hash": "a413b671219a35e3cce9a692a9edc8e2a0186a242768a2d96357a43d564c633b",
-        "container_id": "temp_inj-8791128411323",
+        "hash": "27822c50a53cd8f485d4fc9adc2509ad2c61a97e9b835830e6bc47e72596799a",
+        "container_id": "temp_inj-343488773",
         "target_port": 8080,
-        "display": "https://just-luk-crispy-space-couscous-jgp4j5qwrjpcq76-8003.preview.app.github.dev"
+        "display": "http://madlibs.chals.mcpshsf.com"
     },
     "Jekyll Blog": {
-        "hash": "34fdaaf98b030848c5cdc5d669355482dd467c0ee0e0cf2b2ebbdc1a83032148",
-        "container_id": "jekyll-blog-8791128436280",
+        "hash": "c679d7b0ff6b0e031e03be0b9ba420b3a30259403889af618b90ab2592afdbd9",
+        "container_id": "jekyll-blog-343637601",
         "target_port": 80,
-        "display": "https://just-luk-crispy-space-couscous-jgp4j5qwrjpcq76-8005.preview.app.github.dev"
+        "display": "http://jekyll-blog.chals.mcpshsf.com"
     },
     "Lock Challenge": {
         "hash": "7d3b711b4d139d83cfed68d3d310a8f5a8f8f712cef1183a206a66d6093f2476"
@@ -110,14 +110,14 @@
         "chal_file": "access.log"
     },
     "Vacation Image Exif": {
-        "hash": "56d764eeb4a51387804476c96e80d67ef50e72f9b335571932ee878ef8eb7c1e",
+        "hash": "2b006c29ff90c9d6cba0f038eb75d90deb898362e606faa0ab6e10cc58a2f120",
         "chal_file": "vacation.jpg"
     },
     "Secret Chat": {
-        "hash": "1a71d58c938142ff58e4e059ba93ea1a0d3fe12bd4bae208bb2b567f7794e90c",
-        "container_id": "secret_chat-8791128532449",
+        "hash": "2fd6154d2016c198a4366115e4dfaf421ebfcd7d8120eeea3afc3f61f380f955",
+        "container_id": "secret_chat-343739761",
         "target_port": 5000,
-        "display": "https://just-luk-crispy-space-couscous-jgp4j5qwrjpcq76-8006.preview.app.github.dev"
+        "display": "http://secret-chat.chals.mcpshsf.com"
     },
     "Invisible Message": {
         "hash": "b71f28a2952c20119e7d62e8ce917d25a4cd0d6d5f98add2aab705604734ebe9",
@@ -132,12 +132,12 @@
         "display": "https://drive.google.com/file/d/1Twp_wsiyxExlnY7qKvWnJh0w2qRQ4wND/view?usp=sharing"
     },
     "display_ports": [
-        8014,
-        8001,
-        8004,
-        8002,
-        8003,
-        8005,
-        8006
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80
     ]
 }

@@ -93,7 +93,7 @@ class DockerBuilder(object):
     def __enter__(self):
         with FixMinikube(), tempfile.TemporaryDirectory() as temp_dir, console.status("[bold green]Creating Docker Environment", spinner_style="green"):
             self.build(temp_dir)
-            subprocess.check_output(f"docker build -q {temp_dir} -t {self.name}".split())
+            subprocess.check_output(f"docker build  --platform linux/amd64 -q {temp_dir} -t {self.name}".split())
             subprocess.check_output(f'docker run -d --name {self.name} {self.name}'.split())
             proc = Process(f'docker exec -it {self.name} /bin/sh', "container", self.color)
         stat.start()

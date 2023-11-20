@@ -1,5 +1,5 @@
 build:
-	docker build . -t temp_inj-120902214753
+	docker build  --platform linux/amd64 . -t temp_inj-120902214753
 
 run: build
 	docker run -p 8080:8080 --cap-drop all --cap-add chown --cap-add setuid --cap-add setgid         --cap-add sys_admin --security-opt apparmor=unconfined --security-opt seccomp=unconfined temp_inj-120902214753

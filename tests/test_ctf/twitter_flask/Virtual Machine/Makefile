@@ -1,5 +1,5 @@
 build:
-	docker build . -t alpine_vm-8786335639682
+	docker build  --platform linux/amd64 . -t alpine_vm-8786335639682
 
 run: build
 	docker run  alpine_vm-8786335639682

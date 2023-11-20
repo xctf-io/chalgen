@@ -1,5 +1,5 @@
 build:
-	docker build . -t robots_txt-146373278769
+	docker build  --platform linux/amd64 . -t robots_txt-146373278769
 
 run: build
 	docker run -p 8080:80 robots_txt-146373278769
