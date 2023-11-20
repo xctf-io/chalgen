@@ -489,7 +489,7 @@ def gen(ctx, competition_folder, reg_url, base_url, local, verbose, generate_all
             if 'CODESPACE_NAME' in os.environ.keys():
                 ctfg_url = 'http://127.0.0.1:8000'
             subprocess.run(
-                f'go run cmd/manage/main.go --url {ctfg_url} --email {email} --password {password} flags sync {competition_folder}/chals', shell=True, capture_output=(not verbose))
+                f'go run main.go --url {ctfg_url}/api --email {email} --password {password} flags sync {competition_folder}/chals', shell=True, capture_output=(not verbose))
 
         if local:
             with Status("Running [bright_white italic]minikube tunnel --bind-address='127.0.0.1'[/bright_white italic] (press any key to stop)", spinner="point", spinner_style="bright_white"):
