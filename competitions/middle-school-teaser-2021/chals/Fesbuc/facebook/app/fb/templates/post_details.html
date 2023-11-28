@@ -31,10 +31,5 @@
   {% endfor %}
   </div>
   <br>
-  <form method="POST">
-    {% csrf_token %}
-    {{ form.text }}
-    <input type="submit" value="Post"/>
-  </form>
 
 {% endblock %}

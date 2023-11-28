@@ -181,7 +181,7 @@ def create_lock(competition_folder, chal_lookup, chal_trees):
             lock_json[name]['container_id'] = chal.container_id
             lock_json[name]['target_port'] = chal.target_port
             lock_json[name]['display'] = chal.display
-            display_ports.append(chal.display_port)
+            lock_json[name]['display_port'] = chal.display_port
         elif 'display' in chal.__dict__:
             lock_json[name]['display'] = chal.display
         elif 'chal_file' in chal.__dict__:
@@ -194,8 +194,6 @@ def create_lock(competition_folder, chal_lookup, chal_trees):
 
     for tree in chal_trees:
         traverse(tree)
-
-    lock_json['display_ports'] = display_ports
 
     with open(join(competition_folder, 'challenges-lock.json'), 'w') as f:
         json.dump(lock_json, f, indent=4)
@@ -344,7 +342,12 @@ def gen(ctx, competition_folder, reg_url, base_url, local, verbose, generate_all
     if os.path.exists(lock_file) and not generate_all:
         with open(lock_file, 'r') as f:
             chals_lock = json.load(f)
-        set_used_ports(chals_lock['display_ports'])
+        used_display_ports = {}
+        for chal in chals_lock:
+            challenge = chals_lock[chal]
+            if 'display_port' in challenge:
+                used_display_ports[chal] = challenge['display_port']
+        set_used_ports(used_display_ports)
     else:
         chals_lock = {}
 
@@ -408,7 +411,7 @@ def gen(ctx, competition_folder, reg_url, base_url, local, verbose, generate_all
         mkdir_p(kube_dir)
 
         name_to_index = {}
-        entry_urls = []
+        entry_urls = {}
 
         configs = generate_kube_deploy(kube_dir, chal_trees, local, reg_url, base_url)
 
@@ -428,7 +431,7 @@ def gen(ctx, competition_folder, reg_url, base_url, local, verbose, generate_all
                 entry_url = host_url + '/' + chal_gen.get_value('file')
             else:
                 entry_url = configs[name_to_index[slug]]['url']
-            entry_urls.append(entry_url)
+            entry_urls[entrypoint] = entry_url
 
         entry_urls_str = "\n".join(entry_urls)[:-1]
         fwrite(competition_folder, comp_config['homepage'], join(
@@ -448,8 +451,8 @@ def gen(ctx, competition_folder, reg_url, base_url, local, verbose, generate_all
             generate_challenge_graph(chal_trees, competition_folder)
 
         full_text = "Entrypoints\n"
-        for entry_url in entry_urls:
-           full_text += f" - {entrypoint}: [bold][bright_white]{entry_url}[/bright_white][/bold]\n"
+        for entrypoint in entry_urls:
+           full_text += f" - {entrypoint}: [bold][bright_white]{entry_urls[entrypoint]}[/bright_white][/bold]\n"
 
         ctfg_url = ""
         if local:

@@ -33,7 +33,7 @@ spec:
     spec:
       containers:
       - name: inn-website
-        image: static_site-377556161
+        image: static_site-8737150909203
         ports:
         - containerPort: 80
         imagePullPolicy: Never

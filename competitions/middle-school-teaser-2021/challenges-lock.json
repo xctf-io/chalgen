@@ -1,9 +1,10 @@
 {
     "Fesbuc": {
-        "hash": "5cda2eaa182463eca4dcb5cf8db3142b46549452b61cdcd9d7bd24103815b1f7",
-        "container_id": "facebook-django-377491353",
+        "hash": "84e6c7dc1c9e415aa4f2017cfc5064858d7b6a4cadf77c45fb3c003bfdf4f534",
+        "container_id": "facebook-django-8737151487862",
         "target_port": 8000,
-        "display": "http://127.0.0.1:8002"
+        "display": "https://legendary-spork-x4g95wvqw45fprp5-8002.app.github.dev",
+        "display_port": 8002
     },
     "Boarding Pass": {
         "hash": "ed503a2dc15b8a7c26aa60e243e26ec4a4ef68dacc3c52149d52dee61847f818",
@@ -18,31 +19,28 @@
         "display": "s mkx dokmr iye wybo sp iye gyevn vsuo, led iye kbo qysxq dy rkfo dy zki... pvkq{coowc_vsuo_iye_uxyg_iyeb_mc}"
     },
     "RobotsChallenge": {
-        "hash": "e115d91c9ffcaa7cb37d5f9068c803c87a4ed41484c43061428466891477001e",
-        "container_id": "robots_txt-377546445",
+        "hash": "31b5331c071efb56184a9b441d28f4e2d3071d71fda44498a48ddcb07690d543",
+        "container_id": "robots_txt-8737151509766",
         "target_port": 80,
-        "display": "http://127.0.0.1:8001"
+        "display": "https://legendary-spork-x4g95wvqw45fprp5-8001.app.github.dev",
+        "display_port": 8001
     },
     "Fred Shared Server": {
-        "hash": "01b6f73eafa75c58dc026e527a4f3920c528b5a6458cb7e91d77c7ebc2886b69",
-        "container_id": "shell_server-377495549",
+        "hash": "abd83f53206dea3b477770e29190205c97b29913f04671e0ca00c5303e5a3cf5",
+        "container_id": "shell_server-8737150909230",
         "target_port": 8080,
-        "display": "http://127.0.0.1:8003"
+        "display": "https://legendary-spork-x4g95wvqw45fprp5-8003.app.github.dev",
+        "display_port": 8003
     },
     "Police Interview": {
         "hash": "40379eddd8ea148b3d051b44ca785995ab999d9e40f47e26b1891071ee82e6bf",
         "chal_file": "PoliceInterview.docx"
     },
     "Inn Website": {
-        "hash": "8378c48f7e186e63a596d24aa0235b851a05d50506505b13cf07b20760a7c10b",
-        "container_id": "static_site-377556161",
+        "hash": "5c490f8fb71a67edf6c73a5f0523dcef402d7adf1784ea5f1012fe0483a8c8af",
+        "container_id": "static_site-8737150909203",
         "target_port": 80,
-        "display": "http://127.0.0.1:8004"
-    },
-    "display_ports": [
-        8002,
-        8001,
-        8003,
-        8004
-    ]
+        "display": "https://legendary-spork-x4g95wvqw45fprp5-8004.app.github.dev",
+        "display_port": 8004
+    }
 }
