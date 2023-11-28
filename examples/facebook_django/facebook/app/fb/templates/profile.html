@@ -17,9 +17,4 @@
       <td>{{ profile.gender }}</td>
     </tr>
   </table>
-
-  {% if user == profile.user %}
-    <a href="{% url 'edit_profile' profile.user.username %}">Edit</a>
-  {% endif %}
-
 {% endblock %}

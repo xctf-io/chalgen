@@ -1,19 +1,17 @@
 from django.forms import (
     Form, CharField, Textarea, PasswordInput, ChoiceField, DateField,
-    ImageField,
+    ImageField
 )
 
 from fb.models import UserProfile
 
-
 class UserPostForm(Form):
     text = CharField(widget=Textarea(
-        attrs={'rows': 1, 'cols': 40, 'class': 'form-control','placeholder': "What's on your mind?"}))
-
+        attrs={'readonly': True, 'rows': 1, 'cols': 40, 'class': 'form-control','placeholder': "What's on your mind?"}))
 
 class UserPostCommentForm(Form):
     text = CharField(widget=Textarea(
-        attrs={'rows': 1, 'cols': 50, 'class': 'form-control','placeholder': "Write a comment..."}))
+        attrs={'readonly': True, 'rows': 1, 'cols': 50, 'class': 'form-control','placeholder': "Write a comment..."}))
 
 
 class UserLogin(Form):
@@ -22,8 +20,8 @@ class UserLogin(Form):
 
 
 class UserProfileForm(Form):
-    first_name = CharField(max_length=100, required=False)
-    last_name = CharField(max_length=100, required=False)
-    gender = ChoiceField(choices=UserProfile.GENDERS, required=False)
-    date_of_birth = DateField(required=False)
-    avatar = ImageField(required=False)
+    first_name = CharField(max_length=100, required=False, widget=Textarea(attrs={'readonly': True}))
+    last_name = CharField(max_length=100, required=False, widget=Textarea(attrs={'readonly': True}))
+    gender = ChoiceField(choices=UserProfile.GENDERS, required=False, widget=Textarea(attrs={'readonly': True}))
+    date_of_birth = DateField(required=False, widget=Textarea(attrs={'readonly': True}))
+    avatar = ImageField(required=False, widget=Textarea(attrs={'readonly': True}))
