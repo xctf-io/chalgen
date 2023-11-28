@@ -409,6 +409,9 @@ def gen(ctx, competition_folder, reg_url, base_url, local, verbose, generate_all
 
         name_to_index = {}
         entry_urls = []
+
+        configs = generate_kube_deploy(kube_dir, chal_trees, local, reg_url, base_url)
+
         for i, config in enumerate(configs):
             name_to_index[config['name']] = i
         for entrypoint in entrypoints:
@@ -432,7 +435,6 @@ def gen(ctx, competition_folder, reg_url, base_url, local, verbose, generate_all
             'competition_infra', 'xctf'), 'Home.md', jinja=True, entrypoints=entry_urls_str)
         create_ctfg(competition_folder, reg_url,
                     comp_config['admin_email'], comp_config['admin_password'], local)
-        configs = generate_kube_deploy(kube_dir, chal_trees, local, reg_url, base_url)
         
         with Status("[bold blue] Applying Kubernetes files", spinner="line", spinner_style="blue"):
             subprocess.check_output(
